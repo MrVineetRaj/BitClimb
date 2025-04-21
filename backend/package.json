@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon --import ./sentry.js server.js"
+    "dev": "nodemon  server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,8 +18,14 @@
     "@prisma/client": "^6.6.0",
     "@sentry/cli": "^2.43.0",
     "@sentry/node": "^9.13.0",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mailgen": "^2.0.29",
+    "nodemailer": "^6.10.1",
     "prisma": "^6.6.0"
   }
 }
