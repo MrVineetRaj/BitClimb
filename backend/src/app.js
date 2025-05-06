@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 import authRoutes from "./routes/auth.routes.js";
+import problemsRoutes from "./routes/problems.routes.js";
 import { ApiError } from "./libs/helpers.js";
 
 let isProduction = process.env.NODE_ENV === "production";
@@ -31,6 +32,7 @@ if (isProduction) {
 }
 
 app.use("/api/v1/user", authRoutes);
+app.use("/api/v1/problems", problemsRoutes);
 
 // Optional fallthrough error handler
 app.use(function onError(err, req, res, next) {

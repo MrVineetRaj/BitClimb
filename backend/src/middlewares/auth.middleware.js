@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { ApiError, asyncHandler } from "../libs/helpers.js";
 import { db } from "../libs/db.js";
+import { UserRole } from "../generated/prisma/index.js";
 
 export const authMiddleware = asyncHandler(async (req, res, next) => {
   // Get token from cookies
@@ -25,5 +26,12 @@ export const authMiddleware = asyncHandler(async (req, res, next) => {
 
   req.user = user;
 
+  next();
+});
+
+export const adminAuthMiddleware = asyncHandler(async (req, res, next) => {
+  if (req.user.role !== UserRole.ADMIN) {
+    throw new ApiError(403, "Access Denied - Admins Only");
+  }
   next();
 });

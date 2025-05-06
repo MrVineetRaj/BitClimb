@@ -13,6 +13,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 enum UserRole {
   USER
   ADMIN
@@ -25,44 +26,40 @@ enum ProblemDifficulty {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String?
-  email     String  @unique
-  avatar     String?
-  role      UserRole @default(USER)
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  isEmailVerified Boolean @default(false)
-  emailVerificationToken String?
+  id                           String    @id @default(uuid())
+  name                         String?
+  email                        String    @unique
+  avatar                       String?
+  role                         UserRole  @default(USER)
+  password                     String
+  createdAt                    DateTime  @default(now())
+  updatedAt                    DateTime  @updatedAt
+  isEmailVerified              Boolean   @default(false)
+  emailVerificationToken       String?
   emailVerificationTokenExpiry DateTime?
-  forgotPasswordToken String?
-  forgotPasswordTokenExpiry DateTime?
+  forgotPasswordToken          String?
+  forgotPasswordTokenExpiry    DateTime?
 
   problems Problem[]
 }
 
-
 model Problem {
-  id String @id @default(uuid())
-  title String 
-  description String
-  difficulty ProblemDifficulty
-  tags String[]
-  userId String
-  examples Json
-  constraints String
-  hints String?
-  editorial String?
-  testCases Json
+  id                    String            @id @default(uuid())
+  title                 String
+  description           String
+  difficulty            ProblemDifficulty
+  tags                  String[]
+  userId                String
+  examples              Json
+  constraints           String
+  hints                 String?
+  editorial             String?
+  testCases             Json
   clientSideCodeSnippet Json
   serverSideCodeSnippet Json
-  referenceSolution Json
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  referenceSolution     Json
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  // submissions Submission[]
-
 }
