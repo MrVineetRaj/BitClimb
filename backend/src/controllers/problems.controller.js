@@ -33,7 +33,7 @@ export const createProblem = asyncHandler(async (req, res) => {
   }
 
   // todo : make you have to run judge0 on vps and then only use it
-  // try {
+
   //   for (const [lang, solutionCode] of Object.entries(referenceSolution)) {
   //     const langId = getJudge0LanguageId(lang);
 
@@ -72,47 +72,32 @@ export const createProblem = asyncHandler(async (req, res) => {
   //     );
 
   //     // Save the reference solution to the database
-  //     const newProblem = await db.problem.create({
-  //       data: {
-  //         title,
-  //         description,
-  //         difficulty,
-  //         tags: tags ? JSON.stringify(tags) : null,
-  //         examples: examples ? JSON.stringify(examples) : null,
-  //         constraints: constraints ? JSON.stringify(constraints) : null,
-  //         hints: hints ? JSON.stringify(hints) : null,
-  //         editorial: editorial ? JSON.stringify(editorial) : null,
-  //         testCases: testCases ? JSON.stringify(testCases) : null,
-  //         codeSnippets: codeSnippets ? JSON.stringify(codeSnippets) : null,
-  //         referenceSolution: referenceSolution,
-  //       },
-  //     });
-
-  //     return ApiResponse(
-  //       201,
-  //       newProblem,
-  //       "Problem created successfully with reference solution"
-  //     );
-  //   }
-  // } catch (error) {
-  //   throw new ApiError(
-  //     400,
-  //     `Error processing reference solution: ${error.message}`
-  //   );
-  // }
-
-  const problem = await db.problem.create({
+  const newProblem = await db.problem.create({
     data: {
       title,
       description,
       difficulty,
-      tags: tags ? JSON.stringify(tags) : null,
+      tags: tags || null,
+      examples: examples || null,
+      constraints: constraints || null,
+      hints: hints || null,
+      editorial: editorial || null,
+      testCases: testCases || null,
+      codeSnippets: codeSnippets || null,
+      referenceSolution: referenceSolution,
+      userId: req.user.id, // Assuming the user creating the problem is the one making the request
     },
   });
 
   res
     .status(201)
-    .json(new ApiResponse(201, problem, "Problem created successfully"));
+    .json(
+      new ApiResponse(
+        201,
+        newProblem,
+        "Problem created successfully with reference solution"
+      )
+    );
 });
 
 export const getAllProblems = asyncHandler(async (req, res) => {
@@ -129,6 +114,10 @@ export const getAllProblems = asyncHandler(async (req, res) => {
     skip: (page - 1) * limit,
     take: limit,
   });
+
+  if (!problems || problems.length === 0) {
+    return res.status(200).json(new ApiResponse(404, [], "No problems found"));
+  }
 
   const totalProblems = await db.problem.count();
   const totalPages = Math.ceil(totalProblems / limit);
@@ -149,6 +138,7 @@ export const getAllProblems = asyncHandler(async (req, res) => {
 
 export const getProblemById = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  console.log("Fetching problem with ID:", id);
   // Validate problem ID
   if (!id) {
     throw new ApiError(400, "Problem ID is required");
@@ -156,7 +146,7 @@ export const getProblemById = asyncHandler(async (req, res) => {
 
   const problem = await db.problem.findUnique({
     where: {
-      id: parseInt(id, 10),
+      id: id,
     },
   });
 
@@ -211,13 +201,21 @@ export const deleteProblem = asyncHandler(async (req, res) => {
 
   const problem = await db.problem.delete({
     where: {
-      id: parseInt(id, 10),
+      userId: req.user.id,
+      id: id,
     },
   });
 
+  if (!problem) {
+    throw new ApiError(
+      404,
+      "Problem not found or you are not authorized to delete it"
+    );
+  }
+
   res
     .status(200)
-    .json(new ApiResponse(200, problem, "Problem deleted successfully"));
+    .json(new ApiResponse(200, {}, "Problem deleted successfully"));
 });
 
 export const getSolvedProblems = asyncHandler(async (req, res) => {
