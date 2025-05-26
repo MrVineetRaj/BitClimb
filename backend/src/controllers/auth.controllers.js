@@ -19,7 +19,7 @@ import jwt from "jsonwebtoken";
 
 //info : done
 const registerUser = asyncHandler(async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, name, password, role } = req.body;
 
   const existingUSer = await db.user.findUnique({
     where: {
@@ -43,7 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       name,
       password: hashedPassword,
-      role: UserRole.USER,
+      role: role || UserRole.USER,
       emailVerificationToken: hashedToken,
       emailVerificationTokenExpiry: new Date(tokenExpiry),
     },
@@ -294,7 +294,6 @@ const logoutUser = asyncHandler(async (req, res) => {
   res.clearCookie(process.env.JWT_TOKEN_NAME, CookieOptions);
   res.status(200).json(new ApiResponse(200, {}, "Logged out successfully"));
 });
-
 
 export {
   registerUser,

@@ -1,13 +1,12 @@
-import { asyncHandler, ApiError, ApiResponse } from "../libs/helpers.js";
 import { db } from "../libs/db.js";
-import { UserRole } from "../generated/prisma/index.js";
-import { getJudge0LanguageId, submitBatch } from "../libs/judge0.lib.js";
+import { ApiError, ApiResponse, asyncHandler } from "../libs/helpers.js";
+import {
+  getJudge0LanguageId,
+  pollBatchResults,
+  submissionBatch,
+} from "../libs/judg0.lib.js";
 
-const createProblem = asyncHandler(async (req, res) => {
-  if (req.user.role !== UserRole.ADMIN) {
-    throw new ApiError(403, "Access Denied - Admins Only");
-  }
-
+export const createProblem = asyncHandler(async (req, res) => {
   const {
     title,
     description,
@@ -18,93 +17,237 @@ const createProblem = asyncHandler(async (req, res) => {
     hints,
     editorial,
     testCases,
-    clientSideCodeSnippet,
-    serverSideCodeSnippet,
+    codeSnippets,
     referenceSolution,
   } = req.body;
 
+  if (req.user.role !== "ADMIN") {
+    return res.status(403).json({
+      status: 403,
+      message: "You are not authorized to create a problem",
+    });
+  }
+  // Validate required fields
   if (!title || !description || !difficulty) {
-    throw new ApiError(400, "Title, description and difficulty are required");
+    throw new ApiError(400, "Title, description, and difficulty are required");
   }
 
-  if (title.length < 5) {
-    throw new ApiError(400, "Title must be at least 5 characters long");
-  }
+  // todo : make you have to run judge0 on vps and then only use it
+  // try {
+  //   for (const [lang, solutionCode] of Object.entries(referenceSolution)) {
+  //     const langId = getJudge0LanguageId(lang);
 
-  for (const [language, solutionCode] of Object.entries(referenceSolution)) {
-    const languageId = getJudge0LanguageId(language);
+  //     if (!langId) {
+  //       throw new ApiError(400, `Invalid language: ${lang}`);
+  //     }
 
-    if (!languageId) {
-      throw new ApiError(400, `Invalid language: ${language}`);
-    }
+  //     //
+  //     const submission = testCases.map(({ input, output }) => {
+  //       return {
+  //         source_code: solutionCode,
+  //         language_id: langId,
+  //         stdin: input,
+  //         expected_output: output,
+  //       };
+  //     });
 
-    if (!solutionCode) {
-      throw new ApiError(400, `Solution code for ${language} is required`);
-    }
+  //     const submissionResults = await submissionBatch(submission);
 
-    const submissions = testCases?.map(({ input, output }) => ({
-      source_code: solutionCode,
-      language_id: languageId,
-      stdin: input,
-      expected_output: output,
-    }));
+  //     const tokens = submissionResults.map((res) => res.token);
 
-    const submissionResults = await submitBatch(submissions);
+  //     const results = await pollBatchResults(tokens);
 
-    const tokens = submissionResults.map((result) => result.token);
+  //     for (const result of results) {
+  //       console.log(result);
+  //       if (result.status.id !== 3) {
+  //         throw new ApiError(
+  //           400,
+  //           `Reference solution failed for language ${lang}: ${result.status.description}`
+  //         );
+  //       }
+  //     }
 
-    const results = await pollBatchResults(tokens);
+  //     console.log(
+  //       `Reference solution for language ${lang} passed all test cases`
+  //     );
 
-    for (let i = 0; i < results.length; i++) {
-      const result = results[i];
+  //     // Save the reference solution to the database
+  //     const newProblem = await db.problem.create({
+  //       data: {
+  //         title,
+  //         description,
+  //         difficulty,
+  //         tags: tags ? JSON.stringify(tags) : null,
+  //         examples: examples ? JSON.stringify(examples) : null,
+  //         constraints: constraints ? JSON.stringify(constraints) : null,
+  //         hints: hints ? JSON.stringify(hints) : null,
+  //         editorial: editorial ? JSON.stringify(editorial) : null,
+  //         testCases: testCases ? JSON.stringify(testCases) : null,
+  //         codeSnippets: codeSnippets ? JSON.stringify(codeSnippets) : null,
+  //         referenceSolution: referenceSolution,
+  //       },
+  //     });
 
-      if (result.status?.id !== 3) {
-        throw new ApiError(
-          400,
-          `Test case ${i + 1} failed: ${
-            result.status.description
-          } for language : ${language}`
-        );
-      }
-    }
-  }
+  //     return ApiResponse(
+  //       201,
+  //       newProblem,
+  //       "Problem created successfully with reference solution"
+  //     );
+  //   }
+  // } catch (error) {
+  //   throw new ApiError(
+  //     400,
+  //     `Error processing reference solution: ${error.message}`
+  //   );
+  // }
 
   const problem = await db.problem.create({
     data: {
-      userId: req.user.id,
       title,
       description,
       difficulty,
-      tags: tags || [],
-      examples: examples || {},
-      constraints: constraints || "",
-      hints: hints || "",
-      editorial: editorial || "",
-      testCases: testCases || {},
-      clientSideCodeSnippet: clientSideCodeSnippet || {},
-      serverSideCodeSnippet: serverSideCodeSnippet || {},
-      referenceSolution: referenceSolution || {},
+      tags: tags ? JSON.stringify(tags) : null,
     },
   });
 
-  return ApiResponse(res, 201, "Problem created successfully", problem);
+  res
+    .status(201)
+    .json(new ApiResponse(201, problem, "Problem created successfully"));
 });
 
-const getProblems = asyncHandler(async (req, res) => {});
+export const getAllProblems = asyncHandler(async (req, res) => {
+  //todo : implement filtering based on company tags, difficulty, .
+  // pagination, etc.
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const difficultySort = req.query.difficultySort || "asc";
+  const difficultyFilter = req.query.difficulty || null;
+  const problems = await db.problem.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    skip: (page - 1) * limit,
+    take: limit,
+  });
 
-const getProblemById = asyncHandler(async (req, res) => {});
+  const totalProblems = await db.problem.count();
+  const totalPages = Math.ceil(totalProblems / limit);
 
-const updateProblem = asyncHandler(async (req, res) => {});
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        problems,
+        totalPages,
+        currentPage: page,
+        limit,
+      },
+      "Problems fetched successfully"
+    )
+  );
+});
 
-const deleteProblem = asyncHandler(async (req, res) => {});
+export const getProblemById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  // Validate problem ID
+  if (!id) {
+    throw new ApiError(400, "Problem ID is required");
+  }
 
-const getAllSolvedProblems = asyncHandler(async (req, res) => {});
+  const problem = await db.problem.findUnique({
+    where: {
+      id: parseInt(id, 10),
+    },
+  });
 
-export {
-  createProblem,
-  getProblems,
-  getProblemById,
-  updateProblem,
-  deleteProblem,
-  getAllSolvedProblems,
-};
+  if (!problem) {
+    throw new ApiError(404, "Problem not found");
+  }
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, problem, "Problem fetched successfully"));
+});
+
+//todo : need to work on this
+export const updateProblem = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { title, description, difficulty, tags } = req.body;
+
+  // Validate problem ID
+  if (!id) {
+    throw new ApiError(400, "Problem ID is required");
+  }
+
+  // Validate required fields
+  if (!title || !description || !difficulty) {
+    throw new ApiError(400, "Title, description, and difficulty are required");
+  }
+
+  const problem = await db.problem.update({
+    where: {
+      id: parseInt(id, 10),
+    },
+    data: {
+      title,
+      description,
+      difficulty,
+      tags: tags ? JSON.stringify(tags) : null,
+    },
+  });
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, problem, "Problem updated successfully"));
+});
+
+export const deleteProblem = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  // Validate problem ID
+  if (!id) {
+    throw new ApiError(400, "Problem ID is required");
+  }
+
+  const problem = await db.problem.delete({
+    where: {
+      id: parseInt(id, 10),
+    },
+  });
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, problem, "Problem deleted successfully"));
+});
+
+export const getSolvedProblems = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+
+  // Validate user ID
+  if (!userId) {
+    throw new ApiError(400, "User ID is required");
+  }
+
+  const solvedProblems = await db.problem.findMany({
+    where: {
+      solvedBy: {
+        some: {
+          userId: userId,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        solvedProblems,
+        "Solved problems fetched successfully"
+      )
+    );
+});

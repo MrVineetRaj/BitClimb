@@ -4,3 +4,19 @@ export const CookieOptions = {
   sameSite: "strict",
   secure: process.env.NODE_ENV !== "development",
 };
+
+
+export const CorsOptions = {
+  origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Accept",
+    "Origin",
+    "X-CSRF-Token",
+  ],
+};

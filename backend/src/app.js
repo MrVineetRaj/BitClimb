@@ -3,18 +3,21 @@ import * as Sentry from "@sentry/node";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 dotenv.config();
 
 import authRoutes from "./routes/auth.routes.js";
-import problemsRoutes from "./routes/problems.routes.js";
 import { ApiError } from "./libs/helpers.js";
+import { CorsOptions } from "./libs/constants.js";
+import problemRouter from "./routes/problems.route.js";
 
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors(CorsOptions));
 
 app.get("/", (req, res) => {
   res.json({
@@ -26,13 +29,12 @@ app.get("/debug-sentry", function mainHandler(req, res) {
   throw new Error("My first Sentry error!");
 });
 
-// The error handler must be registered before any other error middleware and after all controllers
 if (isProduction) {
   Sentry.setupExpressErrorHandler(app);
 }
 
 app.use("/api/v1/user", authRoutes);
-app.use("/api/v1/problems", problemsRoutes);
+app.use("/api/v1/problem",problemRouter);
 
 // Optional fallthrough error handler
 app.use(function onError(err, req, res, next) {

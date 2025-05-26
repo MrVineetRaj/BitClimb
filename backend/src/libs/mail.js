@@ -16,6 +16,16 @@ const sendMail = async (options) => {
   //info : Generate the plaintext version of the e-mail (for clients that do not support HTML)
   const emailText = mailGenerator.generatePlaintext(options.mailGenContent);
 
+  const mailOptions = {
+    from: `"CodeDrill" <${process.env.MAILTRAP_SMTP_EMAIL}>`, // sender address
+    to: options.email, // list of receivers
+    subject: options.subject, // Subject line
+    text: emailText, // plain text body
+    html: emailHTML, // html body
+  };
+
+  
+
   const transporter = nodemailer.createTransport({
     host: process.env.MAILTRAP_SMTP_HOST,
     port: process.env.MAILTRAP_SMTP_PORT,
@@ -26,13 +36,7 @@ const sendMail = async (options) => {
     },
   });
 
-  const mailOptions = {
-    from: `"CodeDrill" <${process.env.MAILTRAP_SMTP_EMAIL}>`, // sender address
-    to: options.email, // list of receivers
-    subject: options.subject, // Subject line
-    text: emailText, // plain text body
-    html: emailHTML, // html body
-  };
+  //info : Send the email using the transporter
 
   try {
     const info = await transporter.sendMail(mailOptions);

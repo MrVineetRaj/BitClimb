@@ -2,4 +2,6 @@ node_modules/
 
 .env*
 
-chsw*
+judge0-v1.13.1/
+
+sample.txt
