@@ -202,4 +202,3 @@ export const submitCode = asyncHandler(async (req, res) => {
     },
   });
 });
-separate;
