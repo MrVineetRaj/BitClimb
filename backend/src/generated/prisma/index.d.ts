@@ -8619,7 +8619,6 @@ export namespace Prisma {
   export type ProblemInProblemListMinAggregateOutputType = {
     id: string | null
     problemListId: string | null
-    problemListName: string | null
     problemId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8628,7 +8627,6 @@ export namespace Prisma {
   export type ProblemInProblemListMaxAggregateOutputType = {
     id: string | null
     problemListId: string | null
-    problemListName: string | null
     problemId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8637,7 +8635,6 @@ export namespace Prisma {
   export type ProblemInProblemListCountAggregateOutputType = {
     id: number
     problemListId: number
-    problemListName: number
     problemId: number
     createdAt: number
     updatedAt: number
@@ -8648,7 +8645,6 @@ export namespace Prisma {
   export type ProblemInProblemListMinAggregateInputType = {
     id?: true
     problemListId?: true
-    problemListName?: true
     problemId?: true
     createdAt?: true
     updatedAt?: true
@@ -8657,7 +8653,6 @@ export namespace Prisma {
   export type ProblemInProblemListMaxAggregateInputType = {
     id?: true
     problemListId?: true
-    problemListName?: true
     problemId?: true
     createdAt?: true
     updatedAt?: true
@@ -8666,7 +8661,6 @@ export namespace Prisma {
   export type ProblemInProblemListCountAggregateInputType = {
     id?: true
     problemListId?: true
-    problemListName?: true
     problemId?: true
     createdAt?: true
     updatedAt?: true
@@ -8748,7 +8742,6 @@ export namespace Prisma {
   export type ProblemInProblemListGroupByOutputType = {
     id: string
     problemListId: string
-    problemListName: string
     problemId: string
     createdAt: Date
     updatedAt: Date
@@ -8774,7 +8767,6 @@ export namespace Prisma {
   export type ProblemInProblemListSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     problemListId?: boolean
-    problemListName?: boolean
     problemId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8785,7 +8777,6 @@ export namespace Prisma {
   export type ProblemInProblemListSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     problemListId?: boolean
-    problemListName?: boolean
     problemId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8796,7 +8787,6 @@ export namespace Prisma {
   export type ProblemInProblemListSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     problemListId?: boolean
-    problemListName?: boolean
     problemId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8807,13 +8797,12 @@ export namespace Prisma {
   export type ProblemInProblemListSelectScalar = {
     id?: boolean
     problemListId?: boolean
-    problemListName?: boolean
     problemId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProblemInProblemListOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "problemListId" | "problemListName" | "problemId" | "createdAt" | "updatedAt", ExtArgs["result"]["problemInProblemList"]>
+  export type ProblemInProblemListOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "problemListId" | "problemId" | "createdAt" | "updatedAt", ExtArgs["result"]["problemInProblemList"]>
   export type ProblemInProblemListInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problemList?: boolean | ProblemListDefaultArgs<ExtArgs>
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
@@ -8836,7 +8825,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       problemListId: string
-      problemListName: string
       problemId: string
       createdAt: Date
       updatedAt: Date
@@ -9267,7 +9255,6 @@ export namespace Prisma {
   interface ProblemInProblemListFieldRefs {
     readonly id: FieldRef<"ProblemInProblemList", 'String'>
     readonly problemListId: FieldRef<"ProblemInProblemList", 'String'>
-    readonly problemListName: FieldRef<"ProblemInProblemList", 'String'>
     readonly problemId: FieldRef<"ProblemInProblemList", 'String'>
     readonly createdAt: FieldRef<"ProblemInProblemList", 'DateTime'>
     readonly updatedAt: FieldRef<"ProblemInProblemList", 'DateTime'>
@@ -9798,7 +9785,6 @@ export namespace Prisma {
   export const ProblemInProblemListScalarFieldEnum: {
     id: 'id',
     problemListId: 'problemListId',
-    problemListName: 'problemListName',
     problemId: 'problemId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -10469,7 +10455,6 @@ export namespace Prisma {
     NOT?: ProblemInProblemListWhereInput | ProblemInProblemListWhereInput[]
     id?: StringFilter<"ProblemInProblemList"> | string
     problemListId?: StringFilter<"ProblemInProblemList"> | string
-    problemListName?: StringFilter<"ProblemInProblemList"> | string
     problemId?: StringFilter<"ProblemInProblemList"> | string
     createdAt?: DateTimeFilter<"ProblemInProblemList"> | Date | string
     updatedAt?: DateTimeFilter<"ProblemInProblemList"> | Date | string
@@ -10480,7 +10465,6 @@ export namespace Prisma {
   export type ProblemInProblemListOrderByWithRelationInput = {
     id?: SortOrder
     problemListId?: SortOrder
-    problemListName?: SortOrder
     problemId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -10495,7 +10479,6 @@ export namespace Prisma {
     OR?: ProblemInProblemListWhereInput[]
     NOT?: ProblemInProblemListWhereInput | ProblemInProblemListWhereInput[]
     problemListId?: StringFilter<"ProblemInProblemList"> | string
-    problemListName?: StringFilter<"ProblemInProblemList"> | string
     problemId?: StringFilter<"ProblemInProblemList"> | string
     createdAt?: DateTimeFilter<"ProblemInProblemList"> | Date | string
     updatedAt?: DateTimeFilter<"ProblemInProblemList"> | Date | string
@@ -10506,7 +10489,6 @@ export namespace Prisma {
   export type ProblemInProblemListOrderByWithAggregationInput = {
     id?: SortOrder
     problemListId?: SortOrder
-    problemListName?: SortOrder
     problemId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -10521,7 +10503,6 @@ export namespace Prisma {
     NOT?: ProblemInProblemListScalarWhereWithAggregatesInput | ProblemInProblemListScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"ProblemInProblemList"> | string
     problemListId?: StringWithAggregatesFilter<"ProblemInProblemList"> | string
-    problemListName?: StringWithAggregatesFilter<"ProblemInProblemList"> | string
     problemId?: StringWithAggregatesFilter<"ProblemInProblemList"> | string
     createdAt?: DateTimeWithAggregatesFilter<"ProblemInProblemList"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProblemInProblemList"> | Date | string
@@ -11107,7 +11088,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListCreateInput = {
     id?: string
-    problemListName: string
     createdAt?: Date | string
     updatedAt?: Date | string
     problemList: ProblemListCreateNestedOneWithoutProblemsInput
@@ -11117,7 +11097,6 @@ export namespace Prisma {
   export type ProblemInProblemListUncheckedCreateInput = {
     id?: string
     problemListId: string
-    problemListName: string
     problemId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11125,7 +11104,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problemList?: ProblemListUpdateOneRequiredWithoutProblemsNestedInput
@@ -11135,7 +11113,6 @@ export namespace Prisma {
   export type ProblemInProblemListUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     problemListId?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     problemId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11144,7 +11121,6 @@ export namespace Prisma {
   export type ProblemInProblemListCreateManyInput = {
     id?: string
     problemListId: string
-    problemListName: string
     problemId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11152,7 +11128,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11160,7 +11135,6 @@ export namespace Prisma {
   export type ProblemInProblemListUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     problemListId?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     problemId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11701,7 +11675,6 @@ export namespace Prisma {
   export type ProblemInProblemListCountOrderByAggregateInput = {
     id?: SortOrder
     problemListId?: SortOrder
-    problemListName?: SortOrder
     problemId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11710,7 +11683,6 @@ export namespace Prisma {
   export type ProblemInProblemListMaxOrderByAggregateInput = {
     id?: SortOrder
     problemListId?: SortOrder
-    problemListName?: SortOrder
     problemId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11719,7 +11691,6 @@ export namespace Prisma {
   export type ProblemInProblemListMinOrderByAggregateInput = {
     id?: SortOrder
     problemListId?: SortOrder
-    problemListName?: SortOrder
     problemId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12998,7 +12969,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListCreateWithoutProblemInput = {
     id?: string
-    problemListName: string
     createdAt?: Date | string
     updatedAt?: Date | string
     problemList: ProblemListCreateNestedOneWithoutProblemsInput
@@ -13007,7 +12977,6 @@ export namespace Prisma {
   export type ProblemInProblemListUncheckedCreateWithoutProblemInput = {
     id?: string
     problemListId: string
-    problemListName: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13143,7 +13112,6 @@ export namespace Prisma {
     NOT?: ProblemInProblemListScalarWhereInput | ProblemInProblemListScalarWhereInput[]
     id?: StringFilter<"ProblemInProblemList"> | string
     problemListId?: StringFilter<"ProblemInProblemList"> | string
-    problemListName?: StringFilter<"ProblemInProblemList"> | string
     problemId?: StringFilter<"ProblemInProblemList"> | string
     createdAt?: DateTimeFilter<"ProblemInProblemList"> | Date | string
     updatedAt?: DateTimeFilter<"ProblemInProblemList"> | Date | string
@@ -13739,7 +13707,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListCreateWithoutProblemListInput = {
     id?: string
-    problemListName: string
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutProblemListsInput
@@ -13747,7 +13714,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListUncheckedCreateWithoutProblemListInput = {
     id?: string
-    problemListName: string
     problemId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14300,7 +14266,6 @@ export namespace Prisma {
   export type ProblemInProblemListCreateManyProblemInput = {
     id?: string
     problemListId: string
-    problemListName: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14403,7 +14368,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListUpdateWithoutProblemInput = {
     id?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problemList?: ProblemListUpdateOneRequiredWithoutProblemsNestedInput
@@ -14412,7 +14376,6 @@ export namespace Prisma {
   export type ProblemInProblemListUncheckedUpdateWithoutProblemInput = {
     id?: StringFieldUpdateOperationsInput | string
     problemListId?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14420,14 +14383,12 @@ export namespace Prisma {
   export type ProblemInProblemListUncheckedUpdateManyWithoutProblemInput = {
     id?: StringFieldUpdateOperationsInput | string
     problemListId?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProblemInProblemListCreateManyProblemListInput = {
     id?: string
-    problemListName: string
     problemId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14435,7 +14396,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListUpdateWithoutProblemListInput = {
     id?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutProblemListsNestedInput
@@ -14443,7 +14403,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListUncheckedUpdateWithoutProblemListInput = {
     id?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     problemId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14451,7 +14410,6 @@ export namespace Prisma {
 
   export type ProblemInProblemListUncheckedUpdateManyWithoutProblemListInput = {
     id?: StringFieldUpdateOperationsInput | string
-    problemListName?: StringFieldUpdateOperationsInput | string
     problemId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

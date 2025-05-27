@@ -154,12 +154,11 @@ model ProblemList {
 }
 
 model ProblemInProblemList {
-  id              String   @id @default(uuid())
-  problemListId   String
-  problemListName String
-  problemId       String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id            String   @id @default(uuid())
+  problemListId String
+  problemId     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   problemList ProblemList @relation(fields: [problemListId], references: [id], onDelete: Cascade)
   problem     Problem     @relation(fields: [problemId], references: [id], onDelete: Cascade)
