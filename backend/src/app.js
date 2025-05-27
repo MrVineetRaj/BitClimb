@@ -11,6 +11,7 @@ import authRoutes from "./routes/auth.routes.js";
 import { ApiError } from "./libs/helpers.js";
 import { CorsOptions } from "./libs/constants.js";
 import problemRouter from "./routes/problems.route.js";
+import executeCodeRouter from "./routes/execute-code.routes.js";
 
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
@@ -35,6 +36,7 @@ if (isProduction) {
 
 app.use("/api/v1/user", authRoutes);
 app.use("/api/v1/problem",problemRouter);
+app.use("/api/v1/execute", executeCodeRouter);
 
 // Optional fallthrough error handler
 app.use(function onError(err, req, res, next) {

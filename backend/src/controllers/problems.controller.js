@@ -34,44 +34,45 @@ export const createProblem = asyncHandler(async (req, res) => {
 
   // todo : make you have to run judge0 on vps and then only use it
 
-  //   for (const [lang, solutionCode] of Object.entries(referenceSolution)) {
-  //     const langId = getJudge0LanguageId(lang);
+  for (const [lang, solutionCode] of Object.entries(referenceSolution)) {
+    const langId = getJudge0LanguageId(lang);
 
-  //     if (!langId) {
-  //       throw new ApiError(400, `Invalid language: ${lang}`);
-  //     }
+    if (!langId) {
+      throw new ApiError(400, `Invalid language: ${lang}`);
+    }
 
-  //     //
-  //     const submission = testCases.map(({ input, output }) => {
-  //       return {
-  //         source_code: solutionCode,
-  //         language_id: langId,
-  //         stdin: input,
-  //         expected_output: output,
-  //       };
-  //     });
+    //
+    const submission = testCases.map(({ input, output }) => {
+      return {
+        source_code: solutionCode,
+        language_id: langId,
+        stdin: input,
+        expected_output: output,
+      };
+    });
 
-  //     const submissionResults = await submissionBatch(submission);
+    const submissionResults = await submissionBatch(submission);
 
-  //     const tokens = submissionResults.map((res) => res.token);
+    const tokens = submissionResults.map((res) => res.token);
 
-  //     const results = await pollBatchResults(tokens);
+    const results = await pollBatchResults(tokens);
 
-  //     for (const result of results) {
-  //       console.log(result);
-  //       if (result.status.id !== 3) {
-  //         throw new ApiError(
-  //           400,
-  //           `Reference solution failed for language ${lang}: ${result.status.description}`
-  //         );
-  //       }
-  //     }
+    for (const result of results) {
+      console.log(result);
+      if (result.status.id !== 3) {
+        throw new ApiError(
+          400,
+          `Reference solution failed for language ${lang}: ${result.status.description}`
+        );
+      }
+    }
 
-  //     console.log(
-  //       `Reference solution for language ${lang} passed all test cases`
-  //     );
+    console.log(
+      `Reference solution for language ${lang} passed all test cases`
+    );
+  }
 
-  //     // Save the reference solution to the database
+  // Save the reference solution to the database
   const newProblem = await db.problem.create({
     data: {
       title,

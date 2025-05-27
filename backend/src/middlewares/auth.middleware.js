@@ -30,6 +30,9 @@ export const authMiddleware = asyncHandler(async (req, res, next) => {
 });
 
 export const adminAuthMiddleware = asyncHandler(async (req, res, next) => {
+  if (req.user.isEmailVerified === false) {
+    throw new ApiError(403, "Email not verified");
+  }
   if (req.user.role !== UserRole.ADMIN) {
     throw new ApiError(403, "Access Denied - Admins Only");
   }
