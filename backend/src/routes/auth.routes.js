@@ -16,6 +16,8 @@ import {
   forgotPasswordRequest,
   getCurrentUser,
   updatePassword,
+  getSolvedProblemsByUser,
+  getListOfSolvedProblemsByUser,
   // updateUserName,
 } from "../controllers/auth.controllers.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
@@ -42,6 +44,10 @@ router
 //note :  unauthorized access not allowed
 router.route("/").get(authMiddleware, getCurrentUser);
 router.route("/logout").delete(authMiddleware, logoutUser);
+router.route("/solved-problems").get(authMiddleware, getSolvedProblemsByUser);
+router
+  .route("/solved-problems-list")
+  .get(authMiddleware, getListOfSolvedProblemsByUser);
 // router.route("/update-username").put(authMiddleware, updateUserName);
 
 export default router;

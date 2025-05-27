@@ -44,7 +44,7 @@ export const getSubmissionsByProblem = asyncHandler(async (req, res) => {
   const acceptedSubmissionsCnt = await db.submissions.count({
     where: {
       problemId: problemId,
-      status: "accepted",
+      status: "ACCEPTED",
     },
   });
   res.status(200).json(

@@ -181,20 +181,28 @@ exports.Prisma.TestCasesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TestCasesResultScalarFieldEnum = {
-  id: 'id',
-  submissionId: 'submissionId',
-  passed: 'passed',
-  stdout: 'stdout',
-  expectedOutput: 'expectedOutput',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.ProblemsSolvedScalarFieldEnum = {
   id: 'id',
   problemId: 'problemId',
   userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProblemListScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProblemInProblemListScalarFieldEnum = {
+  id: 'id',
+  problemListId: 'problemListId',
+  problemListName: 'problemListName',
+  problemId: 'problemId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -239,8 +247,9 @@ exports.Prisma.ModelName = {
   Problem: 'Problem',
   Submissions: 'Submissions',
   TestCases: 'TestCases',
-  TestCasesResult: 'TestCasesResult',
-  ProblemsSolved: 'ProblemsSolved'
+  ProblemsSolved: 'ProblemsSolved',
+  ProblemList: 'ProblemList',
+  ProblemInProblemList: 'ProblemInProblemList'
 };
 
 /**

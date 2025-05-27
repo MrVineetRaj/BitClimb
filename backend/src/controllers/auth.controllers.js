@@ -295,6 +295,69 @@ const logoutUser = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, {}, "Logged out successfully"));
 });
 
+const getSolvedProblemsByUser = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+
+  const solvedProblems = await db.problemsSolved.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        solvedProblems,
+        "Solved problems fetched successfully"
+      )
+    );
+});
+
+const getListOfSolvedProblemsByUser = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+
+  const solvedProblems = await db.problem.findMany({
+    where: {
+      solvedBy: {
+        some: {
+          userId: userId,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    skip: (page - 1) * limit,
+    take: limit,
+  });
+
+  const totalPages = Math.ceil(
+    (await db.problem.count({
+      where: {
+        solvedBy: {
+          some: {
+            userId: userId,
+          },
+        },
+      },
+    })) / limit
+  );
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { solvedProblems, totalPages, currentPage: page, limit },
+        "Solved problems fetched successfully"
+      )
+    );
+});
+
 export {
   registerUser,
   loginUser,
@@ -304,4 +367,6 @@ export {
   forgotPasswordRequest,
   getCurrentUser,
   updatePassword,
+  getSolvedProblemsByUser,
+  getListOfSolvedProblemsByUser,
 };
