@@ -10,6 +10,7 @@ export const useAuthStore = create((set) => ({
   isCheckingAuth: false,
   isVerifyingEmail: false,
   isResendingVerificationEmail: false,
+  isLoggingOut: false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
@@ -32,7 +33,7 @@ export const useAuthStore = create((set) => ({
         password,
       });
 
-      set({ authUser: response.data.user, isLoggingIn: false });
+      set({ authUser: response.data.data, isLoggingIn: false });
       return response.data.success;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -65,11 +66,14 @@ export const useAuthStore = create((set) => ({
         password,
         name,
       });
-      set({ authUser: response.data.user, isSigninUp: false });
+
+      console.log("Signup Response:", response);
+      set({ authUser: response.data.data, isSigninUp: false });
       toast.success("Signup Successful", {
         description: "Verification Email Sent",
         duration: 3000,
       });
+      return response.data.success;
     } catch (error) {
       if (error instanceof AxiosError) {
         const errorMessage = error.response?.data?.message || "Signup failed";
@@ -90,30 +94,37 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  logout: async () =>
-    axiosInstance
-      .delete("/auth/logout")
-      .then(() => {
-        set({ authUser: null });
-        toast.success("Logged out successfully", {
+  logout: async () => {
+    set({
+      isLoggingOut: true,
+    });
+
+    try {
+      const response = await axiosInstance.delete("/auth/logout");
+      set({ authUser: null, isLoggingOut: false });
+      toast.success("Logout Successful", {
+        duration: 3000,
+      });
+      return response.data.success;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorMessage = error.response?.data?.message || "Logout failed";
+        toast.error("Logout Failed", {
+          description: errorMessage,
           duration: 3000,
         });
-      })
-      .catch((error) => {
-        if (error instanceof AxiosError) {
-          const errorMessage = error.response?.data?.message || "Logout failed";
-          toast.error("Logout Failed", {
-            description: errorMessage,
-            duration: 3000,
-          });
-        } else {
-          toast.error("Logout Failed", {
-            description: "An unexpected error occurred",
-            duration: 3000,
-          });
-        }
-        set({ authUser: null });
-      }),
+      } else {
+        toast.error("Logout Failed", {
+          description: "An unexpected error occurred",
+          duration: 3000,
+        });
+      }
+      set({ authUser: null, isLoggingOut: false });
+      throw error;
+    } finally {
+      set({ isLoggingOut: false });
+    }
+  },
 
   verifyEmail: async (token) => {
     set({ isVerifyingEmail: true });

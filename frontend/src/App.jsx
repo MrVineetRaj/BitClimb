@@ -6,6 +6,10 @@ import LoginPage from "./pages/login";
 import { useAuthStore } from "./store/useAuthStore";
 import { Loader } from "lucide-react";
 import VerifyEmailPage from "./pages/verify-email";
+import Navbar from "./components/shared/navbar";
+import LandingPage from "./pages/landing-page";
+import HomePage from "./pages/home-page";
+import ContestPage from "./pages/contests-page";
 
 function App() {
   const {
@@ -33,6 +37,7 @@ function App() {
 
   return (
     <>
+      <Navbar />
       {authUser && !authUser.isEmailVerified && (
         <span className="w-full flex items-center justify-center bg-yellow-100 text-yellow-800 p-4">
           <span>
@@ -50,7 +55,9 @@ function App() {
       )}
 
       <Routes>
-        <Route path="/" element={<div>Home Page</div>} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/contest" element={<ContestPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
