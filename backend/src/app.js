@@ -35,7 +35,7 @@ if (isProduction) {
   Sentry.setupExpressErrorHandler(app);
 }
 
-app.use("/api/v1/user", authRoutes);
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/problem",problemRouter);
 app.use("/api/v1/execute", executeCodeRouter);
 app.use("/api/v1/problem-list", problemListRouter);

@@ -6,8 +6,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import CodeBackground from "@/components/shared/auth-image-pattern";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const SignupPage = () => {
+  const { isSigninUp, signup } = useAuthStore();
   const {
     register,
     handleSubmit,
@@ -23,7 +25,7 @@ const SignupPage = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("Form submitted:", data);
+    await signup(data.name, data.email, data.password);
   };
 
   return (
@@ -42,7 +44,7 @@ const SignupPage = () => {
               {...register("name")}
               error={errors.name?.message}
               required
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSigninUp}
             />
           </span>{" "}
           <span className="flex w-full  gap-2 items-center">
@@ -53,7 +55,7 @@ const SignupPage = () => {
               {...register("email")}
               error={errors.email?.message}
               required
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSigninUp}
             />
           </span>
           <span className="flex w-full  gap-2 items-center">
@@ -64,7 +66,7 @@ const SignupPage = () => {
               {...register("password")}
               error={errors.password?.message}
               required
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSigninUp}
             />
           </span>
           <span className="flex w-full  gap-2 items-center">
@@ -75,10 +77,16 @@ const SignupPage = () => {
               {...register("confirmPassword")}
               error={errors.confirmPassword?.message}
               required
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSigninUp}
             />
           </span>
-          <Button className={"w-full text-white font-semibold "}>SignUp</Button>
+          <Button
+            className={"w-full text-white font-semibold "}
+            disabled={isSubmitting || isSigninUp}
+            type="submit"
+          >
+            SignUp
+          </Button>
         </form>
       </div>
 

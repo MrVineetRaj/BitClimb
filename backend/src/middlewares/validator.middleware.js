@@ -2,6 +2,7 @@ import { validationResult } from "express-validator";
 import { ApiError } from "../libs/helpers.js";
 // import { ApiError } from "../utils/api.error.js";
 export const validate = (req, res, next) => {
+  console.log("Validating request data...", req.body);
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
@@ -17,6 +18,6 @@ export const validate = (req, res, next) => {
     })
   );
   console.log(extractedError);
-  
+
   next(new ApiError(400, "Received data is not valid !", extractedError));
 };

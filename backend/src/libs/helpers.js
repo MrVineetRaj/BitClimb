@@ -32,7 +32,7 @@ class ApiResponse {
     if (data) {
       this.data = data;
     }
-    this.statusCode = statusCode < 400;
+    this.success = statusCode < 400;
   }
 }
 

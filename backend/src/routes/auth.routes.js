@@ -18,6 +18,7 @@ import {
   updatePassword,
   getSolvedProblemsByUser,
   getListOfSolvedProblemsByUser,
+  checkAuth,
   // updateUserName,
 } from "../controllers/auth.controllers.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
@@ -49,5 +50,7 @@ router
   .route("/solved-problems-list")
   .get(authMiddleware, getListOfSolvedProblemsByUser);
 // router.route("/update-username").put(authMiddleware, updateUserName);
+
+router.get("/check", authMiddleware, checkAuth);
 
 export default router;

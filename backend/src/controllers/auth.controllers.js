@@ -63,17 +63,19 @@ const registerUser = asyncHandler(async (req, res) => {
     ),
   });
 
+
+  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+  // await user.save();
+
+  res.cookie(process.env.JWT_TOKEN_NAME, accessToken, CookieOptions);
   // res.cookie(process.env.ACCESS_TOKEN_NAME, token, CookieOptions);
   res.status(201).json(
     new ApiResponse(
       201,
       {
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-        },
+        user,
       },
       "Verification Mail Sent"
     )
@@ -135,7 +137,7 @@ const verifyEmail = asyncHandler(async (req, res) => {
   });
 
   if (!user) {
-    throw new ApiError(401, "Not Verified", [
+    throw new ApiError(401, "Token Expired, Try resending verification mail", [
       {
         token: "Token Expired",
       },
@@ -153,15 +155,7 @@ const verifyEmail = asyncHandler(async (req, res) => {
     },
   });
 
-  res.status(200).json(
-    new ApiResponse(
-      200,
-      {
-        user,
-      },
-      "Account Verified"
-    )
-  );
+  res.status(200).json(new ApiResponse(200, {}, "Account Verified"));
 });
 
 //info : done
@@ -358,6 +352,15 @@ const getListOfSolvedProblemsByUser = asyncHandler(async (req, res) => {
     );
 });
 
+const checkAuth = asyncHandler(async (req, res) => {
+  const user = req.user;
+
+  if (!user) {
+    throw new ApiError(401, "Not Authenticated");
+  }
+
+  res.status(200).json(new ApiResponse(200, user, "User is authenticated"));
+});
 export {
   registerUser,
   loginUser,
@@ -369,4 +372,5 @@ export {
   updatePassword,
   getSolvedProblemsByUser,
   getListOfSolvedProblemsByUser,
+  checkAuth,
 };

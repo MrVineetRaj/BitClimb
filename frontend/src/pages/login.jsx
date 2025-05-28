@@ -6,8 +6,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import CodeBackground from "@/components/shared/auth-image-pattern";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useNavigate } from "react-router";
 
 const LoginPage = () => {
+  const { login, isLoggingIn } = useAuthStore();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -21,7 +25,16 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("Form submitted:", data);
+    try {
+      const res = await login(data.email, data.password);
+      if (res) {
+        console.log("Login successful");
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      // Handle login failure
+    }
   };
 
   return (
@@ -39,7 +52,7 @@ const LoginPage = () => {
               {...register("email")}
               error={errors.email?.message}
               required
-              disabled={isSubmitting}
+              disabled={isSubmitting || isLoggingIn}
             />
           </span>
           <span className="flex w-full  gap-2 items-center">
@@ -50,7 +63,7 @@ const LoginPage = () => {
               {...register("password")}
               error={errors.password?.message}
               required
-              disabled={isSubmitting}
+              disabled={isSubmitting || isLoggingIn}
             />
           </span>
 

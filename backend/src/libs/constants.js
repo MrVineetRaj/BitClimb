@@ -5,9 +5,8 @@ export const CookieOptions = {
   secure: process.env.NODE_ENV !== "development",
 };
 
-
 export const CorsOptions = {
-  origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
