@@ -153,6 +153,22 @@ export const submitCode = asyncHandler(async (req, res) => {
   let totalTime = 0;
   let totalMemory = 0;
 
+  console.log("problemId : ", problemId);
+  // First check if the problem exists
+  const problemExists = await db.problem.findUnique({
+    where: {
+      id: problemId,
+    },
+    select: { id: true },
+  });
+
+  if (!problemExists) {
+    return res.status(404).json({
+      success: false,
+      message: "Problem not found",
+    });
+  }
+
   if (isAllPassed) {
     detailedResults.forEach((result) => {
       totalTime += Number(result.time);
@@ -173,7 +189,7 @@ export const submitCode = asyncHandler(async (req, res) => {
       },
     });
   }
-  await db.submissions.create({
+  const newSubmission = await db.submissions.create({
     data: {
       problemId,
       userId,
@@ -196,9 +212,9 @@ export const submitCode = asyncHandler(async (req, res) => {
   });
   res.status(200).json({
     success: true,
-    message: "Code executed successfully",
+    message: "Code Submitted successfully",
     data: {
-      detailedResults,
+      newSubmission,
     },
   });
 });

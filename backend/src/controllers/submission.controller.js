@@ -27,7 +27,7 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   res.status(200).json(
     new ApiResponse({
       statusCode: 200,
-      message: "Submissions fetched successfully",
+      message: "Submissions count fetched successfully",
       data: { submissions, totalPages, currentPage: page, limit },
     })
   );
@@ -46,13 +46,11 @@ export const getSubmissionsByProblemForUser = asyncHandler(async (req, res) => {
     },
   });
 
-  res.status(200).json(
-    new ApiResponse({
-      statusCode: 200,
-      message: "Submissions fetched successfully",
-      data: submissions,
-    })
-  );
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, submissions, "Submissions fetched successfully")
+    );
 });
 
 export const getSubmissionById = asyncHandler(async (req, res) => {

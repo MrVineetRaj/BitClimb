@@ -5,6 +5,7 @@ import { axiosInstance } from "@/lib/axios";
 
 export const useProblemStore = create((set) => ({
   isRunningCode: false,
+  isSubmittingCode: false,
 
   runCode: async ({
     source_code,
@@ -15,14 +16,15 @@ export const useProblemStore = create((set) => ({
   }) => {
     set({ isRunningCode: true });
     try {
-      const response = await axiosInstance.post(`/execute/run/:${problemId}`, {
+      const response = await axiosInstance.post(`/execute/run/${problemId}`, {
         source_code,
         language,
         stdin,
         expected_outputs,
       });
       set({ isRunningCode: false });
-      return response.data;
+      toast.success("Execution Successful");
+      return response.data.data;
     } catch (error) {
       set({ isRunningCode: false });
       if (error instanceof AxiosError) {
@@ -38,7 +40,50 @@ export const useProblemStore = create((set) => ({
           duration: 3000,
         });
       }
-      throw error;
+    } finally {
+      set({ isRunningCode: false });
+    }
+  },
+
+  submitCode: async ({
+    source_code,
+    language,
+    stdin,
+    expected_outputs,
+    problemId,
+  }) => {
+    set({ isSubmittingCode: true });
+    try {
+      const response = await axiosInstance.post(
+        `/execute/submit/${problemId}`,
+        {
+          source_code,
+          language,
+          stdin,
+          expected_outputs,
+        }
+      );
+      set({ isSubmitting: false });
+      toast.success("Submission Successful");
+      return response.data.data;
+    } catch (error) {
+      set({ isSubmitting: false });
+      if (error instanceof AxiosError) {
+        const errorMessage =
+          error.response?.data?.message || "Code execution failed";
+        toast.error("Execution Failed", {
+          description: errorMessage,
+          duration: 3000,
+        });
+      } else {
+        toast.error("Execution Failed", {
+          description: "An unexpected error occurred",
+          duration: 3000,
+        });
+      }
+      
+    } finally {
+      set({ isSubmittingCode: false });
     }
   },
 
@@ -71,6 +116,7 @@ export const useProblemStore = create((set) => ({
       const response = await axiosInstance.get(
         `/submission/problem/${problemId}`
       );
+      console.log("JJJJJJJJJ",response.data)
       return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {

@@ -12,9 +12,16 @@ import {
 } from "@/components/ui/select";
 
 import { Editor } from "@monaco-editor/react";
+import { useProblemStore } from "@/store/useProblemStore";
 
-const ProblemPageCodeContainer = ({ problem }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState("CPP");
+const ProblemPageCodeContainer = ({
+  problem,
+  setSourceCodeEnteredByUser,
+  sourceCodeEnteredByUser,
+  selectedLanguage,
+  setSelectedLanguage,
+  codeRunResult,
+}) => {
   return (
     <div>
       <Select
@@ -39,7 +46,7 @@ const ProblemPageCodeContainer = ({ problem }) => {
 
       <Editor
         key={selectedLanguage} // Add this to force re-rendering when language changes
-        height="500px"
+        height="550px"
         language={selectedLanguage.toLowerCase()} // Use language instead of defaultLanguage
         theme="hc-black"
         options={{
@@ -51,18 +58,33 @@ const ProblemPageCodeContainer = ({ problem }) => {
           wordWrap: "on",
           backgroundColor: "black",
         }}
-        value={problem?.codeSnippets?.[selectedLanguage] || ""} // Use value instead of defaultValue
+        value={sourceCodeEnteredByUser[selectedLanguage] || ""} // Use value instead of defaultValue
         onChange={(value) => {
-          // If you need to track changes to the editor content
-          console.log("Editor content changed:", value);
+          setSourceCodeEnteredByUser((prev) => ({
+            ...prev,
+            [selectedLanguage]: value,
+          }));
         }}
       />
 
       <Tabs defaultValue="test-1" className="mt-4">
-        <TabsList>
+        <TabsList className={"flex gap-4"}>
           {problem?.testCases?.map((_, idx) => (
-            <TabsTrigger key={idx} value={`test-${idx + 1}`}>
+            <TabsTrigger
+              key={idx}
+              value={`test-${idx + 1}`}
+              className={"relative"}
+            >
               Test Case {idx + 1}
+              {codeRunResult && codeRunResult.length > 0 && (
+                <span
+                  className={`absolute size-4 -top-2 -right-2 ${
+                    codeRunResult[idx].status === "Accepted"
+                      ? "bg-green-500"
+                      : "bg-red-500"
+                  } rounded-full`}
+                ></span>
+              )}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -72,10 +94,48 @@ const ProblemPageCodeContainer = ({ problem }) => {
             value={`test-${idx + 1}`}
             className="bg-primary/10 p-4"
           >
+            {codeRunResult &&
+              codeRunResult.length > 0 &&
+              codeRunResult[idx].status && (
+                <span
+                  className={`text-xl font-bold ${
+                    codeRunResult[idx].status === "Accepted"
+                      ? "text-green-400"
+                      : "text-red-500"
+                  }`}
+                >
+                  {codeRunResult[idx].status}
+                </span>
+              )}
             <span className="flex gap-2 ">
               <p className="font-bold">Input :</p>
               <span>{input?.split(" ").join("\t")}</span>
             </span>
+            {codeRunResult &&
+              codeRunResult.length > 0 &&
+              codeRunResult[idx].compile_output && (
+                <span className="grid grid-cols-2">
+                  <span className="text-xl font-semibold">Compile Output</span>
+                  <span>{compile_output}</span>
+                </span>
+              )}
+
+            {codeRunResult && codeRunResult.length > 0 && (
+              <span className="grid grid-cols-2 gap-4">
+                <span className="flex flex-col bg-black/30  p-4">
+                  <span className="text-xl font-semibold ">Your Output</span>
+                  <span className="block mt-4">
+                    {codeRunResult[idx].output}
+                  </span>
+                </span>
+                <span className="flex flex-col bg-black/30  p-4">
+                  <span className="text-xl font-semibold">Expected Output</span>
+                  <span className="block mt-4">
+                    {codeRunResult[idx].expected_output}
+                  </span>
+                </span>
+              </span>
+            )}
           </TabsContent>
         ))}
       </Tabs>

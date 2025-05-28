@@ -1,5 +1,13 @@
-import { BringToFront, Copy, Lightbulb, Lock } from "lucide-react";
-import React from "react";
+import {
+  BringToFront,
+  Calendar,
+  Copy,
+  Lightbulb,
+  Lock,
+  SquareArrowOutUpRight,
+  Stars,
+} from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -15,19 +23,61 @@ import { HoverCard } from "@radix-ui/react-hover-card";
 import { HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
 
-const ProblemPageDetailContainer = ({ problem, userSubmissions }) => {
+const ProblemPageDetailContainer = ({
+  problem,
+  userSubmissions,
+  submitCodeResult,
+}) => {
+  const [activeTab, setActiveTab] = useState("description");
+
+  useEffect(() => {
+    if (submitCodeResult) {
+      console.log("submitCodeResult trending : ", submitCodeResult);
+      setActiveTab("submissions");
+    }
+  }, [submitCodeResult]);
   return (
-    <Tabs defaultValue="submissions" className=" h-full">
+    <Tabs value={activeTab} className=" h-full">
       <TabsList className="">
-        <TabsTrigger value="description">Description</TabsTrigger>
+        <TabsTrigger
+          value="description"
+          onClick={() => {
+            setActiveTab("description");
+          }}
+        >
+          Description
+        </TabsTrigger>
         {problem && problem?.editorial && (
-          <TabsTrigger value="editorial">Editorial</TabsTrigger>
+          <TabsTrigger
+            value="editorial"
+            onClick={() => {
+              setActiveTab("editorial");
+            }}
+          >
+            Editorial
+          </TabsTrigger>
         )}
         {problem && problem?.referenceSolution && (
-          <TabsTrigger value="solution">Solution</TabsTrigger>
+          <TabsTrigger
+            value="solution"
+            onClick={() => {
+              setActiveTab("solution");
+            }}
+          >
+            Solution
+          </TabsTrigger>
         )}
 
-        {problem && <TabsTrigger value="submissions">Submissions</TabsTrigger>}
+        {problem && (
+          <TabsTrigger
+            value="submissions"
+            onClick={() => {
+              setActiveTab("submissions");
+            }}
+          >
+            Submissions
+          </TabsTrigger>
+        )}
       </TabsList>
 
       {
@@ -148,42 +198,6 @@ const ProblemPageDetailContainer = ({ problem, userSubmissions }) => {
         <TabsContent value="solution" className="h-full">
           <div className="p-4">
             <h2 className="text-2xl font-bold mb-4 ">Reference Solution</h2>
-            {/* {Object?.entries(problem?.referenceSolution)?.map(
-          ([lang, solution], idx) => (
-            <div
-              className="relative bg-gray-800 mt-4 p-2 rounded-md"
-              key={lang}
-            >
-              <span className="flex items-center justify-between mb-2">
-                <h3>{lang}</h3>
-                <Copy
-                  className="text-gray-400  size-4 cursor-pointer "
-                  onClick={() => {
-                    navigator.clipboard.writeText(text).then(() => {
-                      toast.success("Code copied successfully!");
-                    });
-                  }}
-                />
-              </span>
-              <Editor
-                height="400px"
-                defaultLanguage={lang?.toLowerCase()}
-                defaultValue={solution}
-                theme="hc-black"
-                options={{
-                  readOnly: true,
-                  minimap: { enabled: false },
-                  lineNumbers: "on",
-                  scrollBeyondLastLine: false,
-                  renderLineHighlight: "none",
-                  contextmenu: false,
-                  wordWrap: "on",
-                  backgroundColor: "black",
-                }}
-              />
-            </div>
-          )
-        )} */}
             <Tabs
               defaultValue={Object.keys(problem?.referenceSolution)[0]}
               className="w-full"
@@ -235,14 +249,145 @@ const ProblemPageDetailContainer = ({ problem, userSubmissions }) => {
         </TabsContent>
       )}
 
-      <TabsContent value="submissions" className=" bg-primary/10 rounded-xl">
-        <div className="p-4">
+      <TabsContent
+        value="submissions"
+        className=" bg-primary/10 rounded-xl p-4 overflow-y-scroll max-h-[700px] "
+      >
+        <div className="p-2">
           <h2 className="text-2xl font-bold ">Submissions</h2>
         </div>
-        <hr />
+        <hr className="mt-2" />
+        {submitCodeResult && submitCodeResult.status === "ACCEPTED" && (
+          <>
+            <h1 className="text-lg mt-4 font-bold text-center">
+              Current Submission
+            </h1>
+            <span className="flex gap-4 items-center my-4">
+              <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
+                {submitCodeResult?.time}
+              </span>
+              <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
+                {submitCodeResult?.memory}
+              </span>
+            </span>
 
+            <span className="w-full flex justify-around bg-black/30 p-4 rounded-2xl">
+              <span className="text-green-500 font-bold">
+                {submitCodeResult?.status}
+              </span>
+              <span>{submitCodeResult?.language}</span>
+              <span className="flex gap-2">
+                <Stars className="size-5" />
+                AI Analysis
+              </span>
+              <span className="flex gap-2">
+                <SquareArrowOutUpRight className="size-5" />
+                View Code
+              </span>
+            </span>
+          </>
+        )}
+        {submitCodeResult && submitCodeResult.status === "FAILED" && (
+          <>
+            <span className="flex items-center justify-between">
+              <h1 className="text-xl font-bold text-red-500">WRONG ANSWER</h1>
+              <span className="flex-1 py-4 flex justify-end  items-center gap-4 w-full">
+                <SquareArrowOutUpRight className="size-5" />
+                View Code
+              </span>
+            </span>
+            <span className="flex justify-between items-center">
+              <span className=" py-4 flex flex-col justify-end  items-start gap- w-full">
+                <span className="font-bold">For Input {":"}</span>
+                <span className="pl-4">{submitCodeResult?.stdin}</span>
+              </span>
+            </span>
+            <span className="flex gap-4 items-center">
+              <span className="flex-1 py-4 flex flex-col items-center bg-red-500/30">
+                <span className="font-bold">Your Output</span>
+                {submitCodeResult?.stdout}
+              </span>
+              <span className="flex-1 py-4 flex flex-col items-center bg-green-500/30">
+                <span className="font-bold">Expected Output</span>
+                {submitCodeResult?.expected_output || 0}
+              </span>
+            </span>
+          </>
+        )}
         {userSubmissions && userSubmissions.length > 0 ? (
-          <></>
+          userSubmissions?.map((submission, idx) => {
+            return (
+              <div
+                className="bg-primary/10 p-4 relative my-4"
+                key={submission?.id}
+              >
+                {submission?.status === "ACCEPTED" && (
+                  <>
+                    <span className="absolute right-1 top-1 text-gray-600 flex items-center gap-2 text-sm">
+                      <Calendar className="size-3" />{" "}
+                      {submission?.createdAt.split("T")[1].split(":")[0] +
+                        ":" +
+                        submission?.createdAt.split("T")[1].split(":")[1] +
+                        " " +
+                        submission?.createdAt.split("T")[0]}
+                    </span>
+                    <span className="flex gap-4 items-center my-4">
+                      <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
+                        {submission?.time}
+                      </span>
+                      <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
+                        {submission?.memory}
+                      </span>
+                    </span>
+
+                    <span className="w-full flex justify-around bg-black/30 p-4 rounded-2xl">
+                      <span className="text-green-500 font-bold">
+                        {submission?.status}
+                      </span>
+                      <span>{submission?.language}</span>
+                      <span className="flex gap-2">
+                        <Stars className="size-5" />
+                        AI Analysis
+                      </span>
+                      <span className="flex gap-2">
+                        <SquareArrowOutUpRight className="size-5" />
+                        View Code
+                      </span>
+                    </span>
+                  </>
+                )}
+                {submission?.status === "FAILED" && (
+                  <>
+                    <span className="flex items-center justify-between">
+                      <h1 className="text-xl font-bold text-red-500">
+                        WRONG ANSWER
+                      </h1>
+                      <span className="flex-1 py-4 flex justify-end  items-center gap-4 w-full">
+                        <SquareArrowOutUpRight className="size-5" />
+                        View Code
+                      </span>
+                    </span>
+                    <span className="flex justify-between items-center">
+                      <span className=" py-4 flex flex-col justify-end  items-start gap- w-full">
+                        <span className="font-bold">For Input {":"}</span>
+                        <span className="pl-4">{submission?.stdin}</span>
+                      </span>
+                    </span>
+                    <span className="flex gap-4 items-center">
+                      <span className="flex-1 py-4 flex flex-col items-center bg-red-500/30">
+                        <span className="font-bold">Your Output</span>
+                        {submission?.stdout}
+                      </span>
+                      <span className="flex-1 py-4 flex flex-col items-center bg-green-500/30">
+                        <span className="font-bold">Expected Output</span>
+                        {submission?.expected_output || 0}
+                      </span>
+                    </span>
+                  </>
+                )}
+              </div>
+            );
+          })
         ) : (
           <div className="flex flex-col items-center justify-center ">
             <BringToFront className="text-gray-500/20 size-50 mt-8" />
@@ -252,34 +397,6 @@ const ProblemPageDetailContainer = ({ problem, userSubmissions }) => {
           </div>
         )}
       </TabsContent>
-
-      {/* {problem?.testCases && (
-    <Tabs Content defaultValue="test-1" className="h-full">
-      <TabsList className="">
-        {problem?.testCases?.map((_, idx) => (
-          <TabsTrigger
-            key={idx}
-            value={`test-${idx + 1}`}
-            // className={""}
-          >
-            Test Case {idx + 1}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-      {problem?.testCases?.map(({ input, output }, idx) => (
-        <TabsContent key={idx} value={`test-${idx + 1}`} className={"bg-primary/10 p-4"}>
-          <span className="flex gap-2 ">
-            <p className="font-bold">Input :</p>
-            <span>{input?.split(" ").join("\t")}</span>
-          </span>
-          <span className="flex gap-2 mt-4">
-            <p className="font-bold">Output :</p>
-            <span>{output}</span>
-          </span>
-        </TabsContent>
-      ))}
-    </Tabs>
-  )} */}
     </Tabs>
   );
 };
