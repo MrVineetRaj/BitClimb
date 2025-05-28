@@ -1,68 +1,53 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
+@import "tw-animate-css";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@custom-variant dark (&:is(.dark *));
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@theme inline {
+  --color-background: oklch(0.145 0.06 262.9);
+  --color-foreground: oklch(0.97 0.02 252);
+  --color-card: oklch(0.145 0.06 262.9);
+  --color-card-foreground: oklch(0.97 0.02 252);
+  --color-popover: oklch(0.145 0.06 262.9);
+  --color-popover-foreground: oklch(0.97 0.02 252);
+  --color-primary: oklch(0.62 0.22 262.9);
+  --color-primary-foreground: oklch(0.266 0.113 262.9);
+  --color-secondary: oklch(0.31 0.06 260);
+  --color-secondary-foreground: oklch(0.97 0.02 252);
+  --color-muted: oklch(0.31 0.06 260);
+  --color-muted-foreground: oklch(0.72 0.04 258);
+  --color-accent: oklch(0.31 0.06 260);
+  --color-accent-foreground: oklch(0.97 0.02 252);
+  --color-destructive: oklch(0.45 0.19 25);
+  --color-destructive-foreground: oklch(0.97 0.02 252);
+  --color-border: oklch(0.31 0.06 260);
+  --color-input: oklch(0.31 0.06 260);
+  --color-ring: oklch(0.55 0.2 263.3);
+  --color-chart-1: oklch(0.55 0.2 263.3);
+  --color-chart-2: oklch(0.64 0.15 180);
+  --color-chart-3: oklch(0.75 0.19 53);
+  --color-chart-4: oklch(0.62 0.22 305);
+  --color-chart-5: oklch(0.65 0.25 10);
+  --color-sidebar: oklch(0.145 0.06 262.9);
+  --color-sidebar-foreground: oklch(0.97 0.02 252);
+  --color-sidebar-primary: oklch(0.62 0.22 262.9);
+  --color-sidebar-primary-foreground: oklch(0.97 0.02 252);
+  --color-sidebar-accent: oklch(0.31 0.06 260);
+  --color-sidebar-accent-foreground: oklch(0.97 0.02 252);
+  --color-sidebar-border: oklch(0.31 0.06 260);
+  --color-sidebar-ring: oklch(0.55 0.2 263.3);
+  --radius-xs: calc(0.3rem - 8px);
+  --radius-sm: calc(0.3rem- 4px);
+  --radius-md: calc(0.3rem - 2px);
+  --radius-lg: calc(0.3rem);
+  --radius-xl: calc(0.3rem + 4px);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  body {
+    @apply bg-background text-foreground;
   }
 }

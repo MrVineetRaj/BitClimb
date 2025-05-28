@@ -59,7 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
     subject: "Email Verification Mail",
     mailGenContent: emailVerificationMailContent(
       name,
-      `${process.env.BASE_URL}/api/v1/user/verify-email/${unHashedToken}`
+      `${process.env.FRONTEND_URL}/verify-email/${unHashedToken}`
     ),
   });
 
@@ -199,7 +199,7 @@ const resendVerificationEmail = asyncHandler(async (req, res) => {
     subject: "Email Verification Mail",
     mailGenContent: emailVerificationMailContent(
       user.username,
-      `${process.env.BASE_URL}/api/v1/user/verify-email/${unHashedToken}`
+      `${process.env.FRONTEND_URL}/verify-email/${unHashedToken}`
     ),
   });
 
@@ -238,7 +238,7 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
     subject: "Reset password mail",
     mailGenContent: forgotPasswordMailContent(
       user.username,
-      `${process.env.BASE_URL}/api/v1/user/forget-password/${unHashedToken}`
+      `${process.env.FRONTEND_URL}/forget-password/${unHashedToken}`
     ),
   });
 
