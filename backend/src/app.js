@@ -13,6 +13,7 @@ import { CorsOptions } from "./libs/constants.js";
 import problemRouter from "./routes/problems.route.js";
 import executeCodeRouter from "./routes/execute-code.routes.js";
 import problemListRouter from "./routes/problem-list.routes.js";
+import submissionRouter from "./routes/submission.routes.js";
 
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
@@ -36,9 +37,10 @@ if (isProduction) {
 }
 
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/problem",problemRouter);
+app.use("/api/v1/problem", problemRouter);
 app.use("/api/v1/execute", executeCodeRouter);
 app.use("/api/v1/problem-list", problemListRouter);
+app.use("/api/v1/submission", submissionRouter);
 
 // Optional fallthrough error handler
 app.use(function onError(err, req, res, next) {

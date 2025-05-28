@@ -58,7 +58,6 @@ export const createProblem = asyncHandler(async (req, res) => {
     const results = await pollBatchResults(tokens);
 
     for (const result of results) {
-      console.log(result);
       if (result.status.id !== 3) {
         throw new ApiError(
           400,
@@ -95,7 +94,7 @@ export const createProblem = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         201,
-        newProblem,
+        { problemId: newProblem.id },
         "Problem created successfully with reference solution"
       )
     );

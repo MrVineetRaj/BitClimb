@@ -21,12 +21,18 @@ export function UserAvatar() {
         />
       </HoverCardTrigger>
       <HoverCardContent className="w-60 flex flex-col gap-4">
+        {authUser?.role === "ADMIN" && (
+          <Link to={`/admin/panel`} className=" hover:text-primary ">
+            Admin Panel
+          </Link>
+        )}
         <Link to={`/profile/${authUser.id}`} className=" hover:text-primary ">
           Profile
         </Link>
         <Link to={`/profile/${authUser.id}`} className=" hover:text-primary ">
           Your Problem Lists
         </Link>
+
         <Button
           className="flex gap-2 items-center bg-transparent border-2 border-red-500 rounded-md text-red-500 font-semibold hover:bg-red-500 hover:text-white disabled:opacity-55 disabled:cursor-not-allowed"
           onClick={logout}

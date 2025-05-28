@@ -1,0 +1,43 @@
+{
+  "title": "Longest Consecutive Sequence",
+  "description": "Given an unsorted array of integers, find the length of the longest consecutive elements sequence. The sequence must be made up of consecutive numbers and can be in any order in the input.",
+  "difficulty": "MEDIUM",
+  "tags": ["array", "hashing", "set", "sorting"],
+  "examples": [
+    {
+      "input": "100 4 200 1 3 2",
+      "output": "4",
+      "explanation": "The longest consecutive sequence is [1, 2, 3, 4], so the answer is 4."
+    },
+    {
+      "input": "0 3 7 2 5 8 4 6 0 1",
+      "output": "9",
+      "explanation": "The longest consecutive sequence is [0, 1, 2, 3, 4, 5, 6, 7, 8], so the answer is 9."
+    }
+  ],
+  "constraints": "0 ≤ array length ≤ 10^5\n-10^9 ≤ array[i] ≤ 10^9",
+  "testCases": [
+    {
+      "input": "1 2 0 1",
+      "output": "3"
+    },
+    {
+      "input": "9 1 4 7 3 -1 0 5 8 -1 6",
+      "output": "7"
+    },
+    {
+      "input": "10",
+      "output": "1"
+    }
+  ],
+  "codeSnippets": {
+    "JAVASCRIPT": "function longestConsecutive(nums) {\n    if (nums.length === 0) return 0;\n    let st = new Set(nums);\n    let longest = 1;\n    for (let it of st) {\n        if (!st.has(it - 1)) {\n            let cnt = 1;\n            let x = it;\n            while (st.has(x + 1)) {\n                x = x + 1;\n                cnt = cnt + 1;\n            }\n            longest = Math.max(longest, cnt);\n        }\n    }\n    return longest;\n}\n\nlet input = '';\nprocess.stdin.on('data', function(chunk) {\n    input += chunk;\n});\nprocess.stdin.on('end', function() {\n    let nums = input.trim() ? input.trim().split(/\\s+/).map(Number) : [];\n    console.log(longestConsecutive(nums));\n});",
+    "PYTHON": "import sys\ninput_line = sys.stdin.read().strip()\nif input_line == \"\":\n    nums = []\nelse:\n    nums = list(map(int, input_line.split()))\ndef longestConsecutive(nums):\n    if not nums:\n        return 0\n    st = set(nums)\n    longest = 1\n    for it in st:\n        if it - 1 not in st:\n            cnt = 1\n            x = it\n            while x + 1 in st:\n                x += 1\n                cnt += 1\n            longest = max(longest, cnt)\n    return longest\nprint(longestConsecutive(nums))",
+    "CPP": "#include <iostream>\n#include <vector>\n#include <unordered_set>\n#include <sstream>\n#include <string>\nusing namespace std;\n\nint longestConsecutive(vector<int>& nums) {\n    if (nums.empty()) return 0;\n    unordered_set<int> st(nums.begin(), nums.end());\n    int longest = 1;\n    for (int num : st) {\n        if (st.find(num - 1) == st.end()) {\n            int cnt = 1;\n            int x = num;\n            while (st.find(x + 1) != st.end()) {\n                x++;\n                cnt++;\n            }\n            longest = max(longest, cnt);\n        }\n    }\n    return longest;\n}\n\nint main() {\n    string line;\n    getline(cin, line);\n\n    vector<int> nums;\n    if (!line.empty()) {\n        stringstream ss(line);\n        int x;\n        while (ss >> x) nums.push_back(x);\n    }\n\n    cout << longestConsecutive(nums) << endl;\n    return 0;\n}"
+  },
+  "referenceSolution": {
+    "JAVASCRIPT": "let input = '';\nprocess.stdin.on('data', function(chunk) {\n    input += chunk;\n});\nprocess.stdin.on('end', function() {\n    let nums = input.trim() ? input.trim().split(/\\s+/).map(Number) : [];\n    let st = new Set(nums);\n    let longest = nums.length === 0 ? 0 : 1;\n    for (let it of st) {\n        if (!st.has(it - 1)) {\n            let cnt = 1;\n            let x = it;\n            while (st.has(x + 1)) {\n                x = x + 1;\n                cnt = cnt + 1;\n            }\n            longest = Math.max(longest, cnt);\n        }\n    }\n    console.log(longest);\n});",
+    "PYTHON": "import sys\ninput_line = sys.stdin.read().strip()\nif input_line == \"\":\n    nums = []\nelse:\n    nums = list(map(int, input_line.split()))\nif not nums:\n    print(0)\nelse:\n    st = set(nums)\n    longest = 1\n    for it in st:\n        if it - 1 not in st:\n            cnt = 1\n            x = it\n            while x + 1 in st:\n                x += 1\n                cnt += 1\n            longest = max(longest, cnt)\n    print(longest)",
+    "CPP": "#include <iostream>\n#include <vector>\n#include <unordered_set>\n#include <sstream>\n#include <string>\nusing namespace std;\n\nint longestConsecutive(vector<int>& nums) {\n    if (nums.empty()) return 0;\n    unordered_set<int> st(nums.begin(), nums.end());\n    int longest = 1;\n    for (int num : st) {\n        if (st.find(num - 1) == st.end()) {\n            int cnt = 1;\n            int x = num;\n            while (st.find(x + 1) != st.end()) {\n                x++;\n                cnt++;\n            }\n            longest = max(longest, cnt);\n        }\n    }\n    return longest;\n}\n\nint main() {\n    string line;\n    getline(cin, line);\n\n    vector<int> nums;\n    if (!line.empty()) {\n        stringstream ss(line);\n        int x;\n        while (ss >> x) nums.push_back(x);\n    }\n\n    cout << longestConsecutive(nums) << endl;\n    return 0;\n}"
+  }
+}

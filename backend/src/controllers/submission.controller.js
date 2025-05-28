@@ -33,35 +33,31 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   );
 });
 
-export const getSubmissionsByProblem = asyncHandler(async (req, res) => {
+export const getSubmissionsByProblemForUser = asyncHandler(async (req, res) => {
   const { problemId } = req.params;
 
-  const submissionsCnt = await db.submissions.count({
+  const submissions = await db.submissions.findMany({
     where: {
       problemId: problemId,
+      userId: req.user.id,
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
-  const acceptedSubmissionsCnt = await db.submissions.count({
-    where: {
-      problemId: problemId,
-      status: "ACCEPTED",
-    },
-  });
+
   res.status(200).json(
     new ApiResponse({
       statusCode: 200,
       message: "Submissions fetched successfully",
-      data: {
-        submissionsCnt,
-        acceptedSubmissionsCnt,
-      },
+      data: submissions,
     })
   );
 });
 
 export const getSubmissionById = asyncHandler(async (req, res) => {
   const { submissionId } = req.params;
-  
+
   const userId = req.user.id; // Assuming user ID is available in req.user
   const submission = await db.submissions.findFirst({
     where: {

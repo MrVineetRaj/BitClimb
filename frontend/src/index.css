@@ -48,6 +48,6 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground max-w-[100svw] overflow-x-hidden;
   }
 }

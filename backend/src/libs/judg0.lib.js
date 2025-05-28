@@ -4,13 +4,14 @@ export const getJudge0LanguageId = (lang) => {
     python: 71,
     javascript: 63,
     java: 62,
+    cpp: 54,
   };
 
   return langMapping[lang.toLowerCase()] || null;
 };
 
 export const submissionBatch = async (submissions) => {
-  console.log("Submitting batch to Judge0 API:");
+  
   try {
     const { data } = await axios.post(
       `${process.env.JUDGE0_API_URL}/submissions/batch?base64_encoded=false`,

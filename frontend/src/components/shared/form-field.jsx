@@ -7,7 +7,7 @@ const FormField = forwardRef(
       type = "text",
       label,
       error = "",
-      required = true,
+      required ,
       disabled = false,
       containerStyles = "",
       onChange,
@@ -25,6 +25,10 @@ const FormField = forwardRef(
           <span
             className={`flex items-center relative gap-2 w-full ${containerStyles}`}
           >
+            <label
+              className="font-semibold text-sm  text-white  transition-all duration-200"
+              htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
+            ></label>
             <input
               ref={ref}
               name={name || label?.toLowerCase().replace(/\s+/g, "_")}
@@ -41,16 +45,10 @@ const FormField = forwardRef(
             valid:border-primary
             transition-all duration-200
               ${error ? "border-red-500" : ""}`}
-              required={required}
               disabled={disabled}
               {...rest}
             />
-            <label
-              className="absolute font-semibold top-2 left-4 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-primary text-gray-500 peer-valid:-top-4 peer-valid:text-sm peer-valid:left-0 peer-valid:text-primary transition-all duration-200"
-              htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
-            >
-              {label} {required && "*"}
-            </label>
+
             {showingPassword ? (
               <EyeClosed
                 className="cursor-pointer text-gray-500"
@@ -66,8 +64,79 @@ const FormField = forwardRef(
             )}
             {error && <p className="text-red-500 text-sm">{error}</p>}
           </span>
+        ) : type === "textarea" ? (
+          <span className={`relative w-full ${containerStyles}`}>
+            <label
+              className="font-semibold text-sm  text-white  transition-all duration-200"
+              htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
+            >
+              {label}
+            </label>
+            <textarea
+              ref={ref}
+              name={name || label?.toLowerCase().replace(/\s+/g, "_")}
+              onChange={onChange}
+              onBlur={onBlur}
+              className={`peer w-full px-4 py-2 outline-none
+            rounded-md border
+            bg-transparent
+            text-gray-100 
+            focus:border-primary focus:ring-0 focus:outline-none
+            transition-all duration-200
+              ${error ? "border-red-500" : ""}`}
+              disabled={disabled}
+              {...rest}
+            />
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+          </span>
+        ) : type === "select" ? (
+          <span className={`relative w-full ${containerStyles}`}>
+            <label
+              className="font-semibold text-sm  text-white  transition-all duration-200"
+              htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
+            >
+              {label}
+            </label>
+            <select
+              ref={ref}
+              name={name || label?.toLowerCase().replace(/\s+/g, "_")}
+              onChange={onChange}
+              onBlur={onBlur}
+              className={`peer w-full px-4 py-2 outline-none
+            rounded-md border 
+            bg-transparent 
+            text-gray-100 
+            focus:border-primary focus:ring-0 focus:outline-none
+            
+            transition-all duration-200
+              ${error ? "border-red-500" : ""}`}
+              disabled={disabled}
+              {...rest}
+            >
+              <option value="" className="bg-primary/20" disabled>
+                {label} 
+              </option>
+              {rest.options?.map((option) => (
+                <option
+                  key={option.value}
+                  className="bg-primary/20"
+                  value={option.value}
+                >
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+          </span>
         ) : (
           <span className={`relative w-full ${containerStyles}`}>
+            <label
+              className="font-semibold text-sm  text-white  transition-all duration-200"
+              htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
+            >
+              {label} 
+            </label>
             <input
               ref={ref}
               name={name || label?.toLowerCase().replace(/\s+/g, "_")}
@@ -79,19 +148,13 @@ const FormField = forwardRef(
             bg-transparent 
             text-gray-100 
             focus:border-primary focus:ring-0 focus:outline-none
-            valid:border-primary
+            
             transition-all duration-200
               ${error ? "border-red-500" : ""}`}
-              required={required}
               disabled={disabled}
               {...rest}
             />
-            <label
-              className="absolute font-semibold top-2 left-4 peer-focus:-top-4 peer-focus:left-0 peer-focus:text-sm peer-focus:text-primary text-gray-500 peer-valid:-top-4 peer-valid:text-sm peer-valid:left-0 peer-valid:text-primary transition-all duration-200"
-              htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
-            >
-              {label} {required && "*"}
-            </label>
+
             {error && <p className="text-red-500 text-sm">{error}</p>}
           </span>
         )}
