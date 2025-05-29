@@ -15,6 +15,9 @@ import executeCodeRouter from "./routes/execute-code.routes.js";
 import problemListRouter from "./routes/problem-list.routes.js";
 import submissionRouter from "./routes/submission.routes.js";
 import adminRouter from "./routes/admin.routes.js";
+import streakRouter from "./routes/streak.routes.js";
+import axios from "axios";
+import { addNewDailyChallenge } from "./controllers/streak.controllers.js";
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
 
@@ -42,6 +45,7 @@ app.use("/api/v1/execute", executeCodeRouter);
 app.use("/api/v1/problem-list", problemListRouter);
 app.use("/api/v1/submission", submissionRouter);
 app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/streak", streakRouter);
 
 // Optional fallthrough error handler
 app.use(function onError(err, req, res, next) {
@@ -67,5 +71,9 @@ app.use(function onError(err, req, res, next) {
     sentryCode: res.sentry,
   });
 });
+
+setInterval(async () => {
+  await addNewDailyChallenge();
+}, 1000 * 60 * 60 * 2);
 
 export default app;

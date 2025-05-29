@@ -48,6 +48,16 @@ export type ProblemList = $Result.DefaultSelection<Prisma.$ProblemListPayload>
  * 
  */
 export type ProblemInProblemList = $Result.DefaultSelection<Prisma.$ProblemInProblemListPayload>
+/**
+ * Model DailyChallenge
+ * 
+ */
+export type DailyChallenge = $Result.DefaultSelection<Prisma.$DailyChallengePayload>
+/**
+ * Model UserDailyChallengeSubmission
+ * 
+ */
+export type UserDailyChallengeSubmission = $Result.DefaultSelection<Prisma.$UserDailyChallengeSubmissionPayload>
 
 /**
  * Enums
@@ -273,6 +283,26 @@ export class PrismaClient<
     * ```
     */
   get problemInProblemList(): Prisma.ProblemInProblemListDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dailyChallenge`: Exposes CRUD operations for the **DailyChallenge** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DailyChallenges
+    * const dailyChallenges = await prisma.dailyChallenge.findMany()
+    * ```
+    */
+  get dailyChallenge(): Prisma.DailyChallengeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userDailyChallengeSubmission`: Exposes CRUD operations for the **UserDailyChallengeSubmission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserDailyChallengeSubmissions
+    * const userDailyChallengeSubmissions = await prisma.userDailyChallengeSubmission.findMany()
+    * ```
+    */
+  get userDailyChallengeSubmission(): Prisma.UserDailyChallengeSubmissionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -719,7 +749,9 @@ export namespace Prisma {
     TestCases: 'TestCases',
     ProblemsSolved: 'ProblemsSolved',
     ProblemList: 'ProblemList',
-    ProblemInProblemList: 'ProblemInProblemList'
+    ProblemInProblemList: 'ProblemInProblemList',
+    DailyChallenge: 'DailyChallenge',
+    UserDailyChallengeSubmission: 'UserDailyChallengeSubmission'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -738,7 +770,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "problem" | "submissions" | "testCases" | "problemsSolved" | "problemList" | "problemInProblemList"
+      modelProps: "user" | "problem" | "submissions" | "testCases" | "problemsSolved" | "problemList" | "problemInProblemList" | "dailyChallenge" | "userDailyChallengeSubmission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1260,6 +1292,154 @@ export namespace Prisma {
           }
         }
       }
+      DailyChallenge: {
+        payload: Prisma.$DailyChallengePayload<ExtArgs>
+        fields: Prisma.DailyChallengeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DailyChallengeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DailyChallengeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>
+          }
+          findFirst: {
+            args: Prisma.DailyChallengeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DailyChallengeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>
+          }
+          findMany: {
+            args: Prisma.DailyChallengeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>[]
+          }
+          create: {
+            args: Prisma.DailyChallengeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>
+          }
+          createMany: {
+            args: Prisma.DailyChallengeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DailyChallengeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>[]
+          }
+          delete: {
+            args: Prisma.DailyChallengeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>
+          }
+          update: {
+            args: Prisma.DailyChallengeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>
+          }
+          deleteMany: {
+            args: Prisma.DailyChallengeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DailyChallengeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DailyChallengeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>[]
+          }
+          upsert: {
+            args: Prisma.DailyChallengeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyChallengePayload>
+          }
+          aggregate: {
+            args: Prisma.DailyChallengeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDailyChallenge>
+          }
+          groupBy: {
+            args: Prisma.DailyChallengeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DailyChallengeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DailyChallengeCountArgs<ExtArgs>
+            result: $Utils.Optional<DailyChallengeCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserDailyChallengeSubmission: {
+        payload: Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>
+        fields: Prisma.UserDailyChallengeSubmissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserDailyChallengeSubmissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserDailyChallengeSubmissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>
+          }
+          findFirst: {
+            args: Prisma.UserDailyChallengeSubmissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserDailyChallengeSubmissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>
+          }
+          findMany: {
+            args: Prisma.UserDailyChallengeSubmissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>[]
+          }
+          create: {
+            args: Prisma.UserDailyChallengeSubmissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>
+          }
+          createMany: {
+            args: Prisma.UserDailyChallengeSubmissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserDailyChallengeSubmissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>[]
+          }
+          delete: {
+            args: Prisma.UserDailyChallengeSubmissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>
+          }
+          update: {
+            args: Prisma.UserDailyChallengeSubmissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDailyChallengeSubmissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserDailyChallengeSubmissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserDailyChallengeSubmissionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserDailyChallengeSubmissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyChallengeSubmissionPayload>
+          }
+          aggregate: {
+            args: Prisma.UserDailyChallengeSubmissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserDailyChallengeSubmission>
+          }
+          groupBy: {
+            args: Prisma.UserDailyChallengeSubmissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserDailyChallengeSubmissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserDailyChallengeSubmissionCountArgs<ExtArgs>
+            result: $Utils.Optional<UserDailyChallengeSubmissionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1351,6 +1531,8 @@ export namespace Prisma {
     problemsSolved?: ProblemsSolvedOmit
     problemList?: ProblemListOmit
     problemInProblemList?: ProblemInProblemListOmit
+    dailyChallenge?: DailyChallengeOmit
+    userDailyChallengeSubmission?: UserDailyChallengeSubmissionOmit
   }
 
   /* Types for Logging */
@@ -1450,6 +1632,7 @@ export namespace Prisma {
     testCases: number
     problemSolved: number
     problemLists: number
+    dailyProblems: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1458,6 +1641,7 @@ export namespace Prisma {
     testCases?: boolean | UserCountOutputTypeCountTestCasesArgs
     problemSolved?: boolean | UserCountOutputTypeCountProblemSolvedArgs
     problemLists?: boolean | UserCountOutputTypeCountProblemListsArgs
+    dailyProblems?: boolean | UserCountOutputTypeCountDailyProblemsArgs
   }
 
   // Custom InputTypes
@@ -1506,6 +1690,13 @@ export namespace Prisma {
     where?: ProblemListWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDailyProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserDailyChallengeSubmissionWhereInput
+  }
+
 
   /**
    * Count Type ProblemCountOutputType
@@ -1516,6 +1707,7 @@ export namespace Prisma {
     hiddenTestCases: number
     problemSolved: number
     problemLists: number
+    dailyProblems: number
   }
 
   export type ProblemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1523,6 +1715,7 @@ export namespace Prisma {
     hiddenTestCases?: boolean | ProblemCountOutputTypeCountHiddenTestCasesArgs
     problemSolved?: boolean | ProblemCountOutputTypeCountProblemSolvedArgs
     problemLists?: boolean | ProblemCountOutputTypeCountProblemListsArgs
+    dailyProblems?: boolean | ProblemCountOutputTypeCountDailyProblemsArgs
   }
 
   // Custom InputTypes
@@ -1562,6 +1755,44 @@ export namespace Prisma {
    */
   export type ProblemCountOutputTypeCountProblemListsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProblemInProblemListWhereInput
+  }
+
+  /**
+   * ProblemCountOutputType without action
+   */
+  export type ProblemCountOutputTypeCountDailyProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DailyChallengeWhereInput
+  }
+
+
+  /**
+   * Count Type SubmissionsCountOutputType
+   */
+
+  export type SubmissionsCountOutputType = {
+    dailyChallenge: number
+  }
+
+  export type SubmissionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dailyChallenge?: boolean | SubmissionsCountOutputTypeCountDailyChallengeArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SubmissionsCountOutputType without action
+   */
+  export type SubmissionsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubmissionsCountOutputType
+     */
+    select?: SubmissionsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SubmissionsCountOutputType without action
+   */
+  export type SubmissionsCountOutputTypeCountDailyChallengeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserDailyChallengeSubmissionWhereInput
   }
 
 
@@ -1833,6 +2064,7 @@ export namespace Prisma {
     testCases?: boolean | User$testCasesArgs<ExtArgs>
     problemSolved?: boolean | User$problemSolvedArgs<ExtArgs>
     problemLists?: boolean | User$problemListsArgs<ExtArgs>
+    dailyProblems?: boolean | User$dailyProblemsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1891,6 +2123,7 @@ export namespace Prisma {
     testCases?: boolean | User$testCasesArgs<ExtArgs>
     problemSolved?: boolean | User$problemSolvedArgs<ExtArgs>
     problemLists?: boolean | User$problemListsArgs<ExtArgs>
+    dailyProblems?: boolean | User$dailyProblemsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1904,6 +2137,7 @@ export namespace Prisma {
       testCases: Prisma.$TestCasesPayload<ExtArgs>[]
       problemSolved: Prisma.$ProblemsSolvedPayload<ExtArgs>[]
       problemLists: Prisma.$ProblemListPayload<ExtArgs>[]
+      dailyProblems: Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2318,6 +2552,7 @@ export namespace Prisma {
     testCases<T extends User$testCasesArgs<ExtArgs> = {}>(args?: Subset<T, User$testCasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestCasesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemSolved<T extends User$problemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, User$problemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemsSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemLists<T extends User$problemListsArgs<ExtArgs> = {}>(args?: Subset<T, User$problemListsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dailyProblems<T extends User$dailyProblemsArgs<ExtArgs> = {}>(args?: Subset<T, User$dailyProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2868,6 +3103,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.dailyProblems
+   */
+  export type User$dailyProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    where?: UserDailyChallengeSubmissionWhereInput
+    orderBy?: UserDailyChallengeSubmissionOrderByWithRelationInput | UserDailyChallengeSubmissionOrderByWithRelationInput[]
+    cursor?: UserDailyChallengeSubmissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserDailyChallengeSubmissionScalarFieldEnum | UserDailyChallengeSubmissionScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3111,6 +3370,7 @@ export namespace Prisma {
     hiddenTestCases?: boolean | Problem$hiddenTestCasesArgs<ExtArgs>
     problemSolved?: boolean | Problem$problemSolvedArgs<ExtArgs>
     problemLists?: boolean | Problem$problemListsArgs<ExtArgs>
+    dailyProblems?: boolean | Problem$dailyProblemsArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["problem"]>
 
@@ -3177,6 +3437,7 @@ export namespace Prisma {
     hiddenTestCases?: boolean | Problem$hiddenTestCasesArgs<ExtArgs>
     problemSolved?: boolean | Problem$problemSolvedArgs<ExtArgs>
     problemLists?: boolean | Problem$problemListsArgs<ExtArgs>
+    dailyProblems?: boolean | Problem$dailyProblemsArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProblemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3194,6 +3455,7 @@ export namespace Prisma {
       hiddenTestCases: Prisma.$TestCasesPayload<ExtArgs>[]
       problemSolved: Prisma.$ProblemsSolvedPayload<ExtArgs>[]
       problemLists: Prisma.$ProblemInProblemListPayload<ExtArgs>[]
+      dailyProblems: Prisma.$DailyChallengePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3610,6 +3872,7 @@ export namespace Prisma {
     hiddenTestCases<T extends Problem$hiddenTestCasesArgs<ExtArgs> = {}>(args?: Subset<T, Problem$hiddenTestCasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestCasesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemSolved<T extends Problem$problemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, Problem$problemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemsSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemLists<T extends Problem$problemListsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$problemListsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemInProblemListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dailyProblems<T extends Problem$dailyProblemsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$dailyProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4146,6 +4409,30 @@ export namespace Prisma {
   }
 
   /**
+   * Problem.dailyProblems
+   */
+  export type Problem$dailyProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    where?: DailyChallengeWhereInput
+    orderBy?: DailyChallengeOrderByWithRelationInput | DailyChallengeOrderByWithRelationInput[]
+    cursor?: DailyChallengeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DailyChallengeScalarFieldEnum | DailyChallengeScalarFieldEnum[]
+  }
+
+  /**
    * Problem without action
    */
   export type ProblemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4402,6 +4689,8 @@ export namespace Prisma {
     updatedAt?: boolean
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    dailyChallenge?: boolean | Submissions$dailyChallengeArgs<ExtArgs>
+    _count?: boolean | SubmissionsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submissions"]>
 
   export type SubmissionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4463,6 +4752,8 @@ export namespace Prisma {
   export type SubmissionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    dailyChallenge?: boolean | Submissions$dailyChallengeArgs<ExtArgs>
+    _count?: boolean | SubmissionsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SubmissionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
@@ -4478,6 +4769,7 @@ export namespace Prisma {
     objects: {
       problem: Prisma.$ProblemPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
+      dailyChallenge: Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4890,6 +5182,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     problem<T extends ProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProblemDefaultArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    dailyChallenge<T extends Submissions$dailyChallengeArgs<ExtArgs> = {}>(args?: Subset<T, Submissions$dailyChallengeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5326,6 +5619,30 @@ export namespace Prisma {
      * Limit how many Submissions to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Submissions.dailyChallenge
+   */
+  export type Submissions$dailyChallengeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    where?: UserDailyChallengeSubmissionWhereInput
+    orderBy?: UserDailyChallengeSubmissionOrderByWithRelationInput | UserDailyChallengeSubmissionOrderByWithRelationInput[]
+    cursor?: UserDailyChallengeSubmissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserDailyChallengeSubmissionScalarFieldEnum | UserDailyChallengeSubmissionScalarFieldEnum[]
   }
 
   /**
@@ -9673,6 +9990,2143 @@ export namespace Prisma {
 
 
   /**
+   * Model DailyChallenge
+   */
+
+  export type AggregateDailyChallenge = {
+    _count: DailyChallengeCountAggregateOutputType | null
+    _min: DailyChallengeMinAggregateOutputType | null
+    _max: DailyChallengeMaxAggregateOutputType | null
+  }
+
+  export type DailyChallengeMinAggregateOutputType = {
+    id: string | null
+    problemId: string | null
+    date: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DailyChallengeMaxAggregateOutputType = {
+    id: string | null
+    problemId: string | null
+    date: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DailyChallengeCountAggregateOutputType = {
+    id: number
+    problemId: number
+    date: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DailyChallengeMinAggregateInputType = {
+    id?: true
+    problemId?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DailyChallengeMaxAggregateInputType = {
+    id?: true
+    problemId?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DailyChallengeCountAggregateInputType = {
+    id?: true
+    problemId?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DailyChallengeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DailyChallenge to aggregate.
+     */
+    where?: DailyChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyChallenges to fetch.
+     */
+    orderBy?: DailyChallengeOrderByWithRelationInput | DailyChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DailyChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyChallenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyChallenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DailyChallenges
+    **/
+    _count?: true | DailyChallengeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DailyChallengeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DailyChallengeMaxAggregateInputType
+  }
+
+  export type GetDailyChallengeAggregateType<T extends DailyChallengeAggregateArgs> = {
+        [P in keyof T & keyof AggregateDailyChallenge]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDailyChallenge[P]>
+      : GetScalarType<T[P], AggregateDailyChallenge[P]>
+  }
+
+
+
+
+  export type DailyChallengeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DailyChallengeWhereInput
+    orderBy?: DailyChallengeOrderByWithAggregationInput | DailyChallengeOrderByWithAggregationInput[]
+    by: DailyChallengeScalarFieldEnum[] | DailyChallengeScalarFieldEnum
+    having?: DailyChallengeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DailyChallengeCountAggregateInputType | true
+    _min?: DailyChallengeMinAggregateInputType
+    _max?: DailyChallengeMaxAggregateInputType
+  }
+
+  export type DailyChallengeGroupByOutputType = {
+    id: string
+    problemId: string
+    date: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: DailyChallengeCountAggregateOutputType | null
+    _min: DailyChallengeMinAggregateOutputType | null
+    _max: DailyChallengeMaxAggregateOutputType | null
+  }
+
+  type GetDailyChallengeGroupByPayload<T extends DailyChallengeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DailyChallengeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DailyChallengeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DailyChallengeGroupByOutputType[P]>
+            : GetScalarType<T[P], DailyChallengeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DailyChallengeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    problemId?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyChallenge"]>
+
+  export type DailyChallengeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    problemId?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyChallenge"]>
+
+  export type DailyChallengeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    problemId?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dailyChallenge"]>
+
+  export type DailyChallengeSelectScalar = {
+    id?: boolean
+    problemId?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DailyChallengeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "problemId" | "date" | "createdAt" | "updatedAt", ExtArgs["result"]["dailyChallenge"]>
+  export type DailyChallengeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+  export type DailyChallengeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+  export type DailyChallengeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+
+  export type $DailyChallengePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DailyChallenge"
+    objects: {
+      problem: Prisma.$ProblemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      problemId: string
+      date: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dailyChallenge"]>
+    composites: {}
+  }
+
+  type DailyChallengeGetPayload<S extends boolean | null | undefined | DailyChallengeDefaultArgs> = $Result.GetResult<Prisma.$DailyChallengePayload, S>
+
+  type DailyChallengeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DailyChallengeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DailyChallengeCountAggregateInputType | true
+    }
+
+  export interface DailyChallengeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DailyChallenge'], meta: { name: 'DailyChallenge' } }
+    /**
+     * Find zero or one DailyChallenge that matches the filter.
+     * @param {DailyChallengeFindUniqueArgs} args - Arguments to find a DailyChallenge
+     * @example
+     * // Get one DailyChallenge
+     * const dailyChallenge = await prisma.dailyChallenge.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DailyChallengeFindUniqueArgs>(args: SelectSubset<T, DailyChallengeFindUniqueArgs<ExtArgs>>): Prisma__DailyChallengeClient<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DailyChallenge that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DailyChallengeFindUniqueOrThrowArgs} args - Arguments to find a DailyChallenge
+     * @example
+     * // Get one DailyChallenge
+     * const dailyChallenge = await prisma.dailyChallenge.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DailyChallengeFindUniqueOrThrowArgs>(args: SelectSubset<T, DailyChallengeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DailyChallengeClient<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DailyChallenge that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyChallengeFindFirstArgs} args - Arguments to find a DailyChallenge
+     * @example
+     * // Get one DailyChallenge
+     * const dailyChallenge = await prisma.dailyChallenge.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DailyChallengeFindFirstArgs>(args?: SelectSubset<T, DailyChallengeFindFirstArgs<ExtArgs>>): Prisma__DailyChallengeClient<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DailyChallenge that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyChallengeFindFirstOrThrowArgs} args - Arguments to find a DailyChallenge
+     * @example
+     * // Get one DailyChallenge
+     * const dailyChallenge = await prisma.dailyChallenge.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DailyChallengeFindFirstOrThrowArgs>(args?: SelectSubset<T, DailyChallengeFindFirstOrThrowArgs<ExtArgs>>): Prisma__DailyChallengeClient<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DailyChallenges that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyChallengeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DailyChallenges
+     * const dailyChallenges = await prisma.dailyChallenge.findMany()
+     * 
+     * // Get first 10 DailyChallenges
+     * const dailyChallenges = await prisma.dailyChallenge.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dailyChallengeWithIdOnly = await prisma.dailyChallenge.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DailyChallengeFindManyArgs>(args?: SelectSubset<T, DailyChallengeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DailyChallenge.
+     * @param {DailyChallengeCreateArgs} args - Arguments to create a DailyChallenge.
+     * @example
+     * // Create one DailyChallenge
+     * const DailyChallenge = await prisma.dailyChallenge.create({
+     *   data: {
+     *     // ... data to create a DailyChallenge
+     *   }
+     * })
+     * 
+     */
+    create<T extends DailyChallengeCreateArgs>(args: SelectSubset<T, DailyChallengeCreateArgs<ExtArgs>>): Prisma__DailyChallengeClient<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DailyChallenges.
+     * @param {DailyChallengeCreateManyArgs} args - Arguments to create many DailyChallenges.
+     * @example
+     * // Create many DailyChallenges
+     * const dailyChallenge = await prisma.dailyChallenge.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DailyChallengeCreateManyArgs>(args?: SelectSubset<T, DailyChallengeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DailyChallenges and returns the data saved in the database.
+     * @param {DailyChallengeCreateManyAndReturnArgs} args - Arguments to create many DailyChallenges.
+     * @example
+     * // Create many DailyChallenges
+     * const dailyChallenge = await prisma.dailyChallenge.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DailyChallenges and only return the `id`
+     * const dailyChallengeWithIdOnly = await prisma.dailyChallenge.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DailyChallengeCreateManyAndReturnArgs>(args?: SelectSubset<T, DailyChallengeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DailyChallenge.
+     * @param {DailyChallengeDeleteArgs} args - Arguments to delete one DailyChallenge.
+     * @example
+     * // Delete one DailyChallenge
+     * const DailyChallenge = await prisma.dailyChallenge.delete({
+     *   where: {
+     *     // ... filter to delete one DailyChallenge
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DailyChallengeDeleteArgs>(args: SelectSubset<T, DailyChallengeDeleteArgs<ExtArgs>>): Prisma__DailyChallengeClient<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DailyChallenge.
+     * @param {DailyChallengeUpdateArgs} args - Arguments to update one DailyChallenge.
+     * @example
+     * // Update one DailyChallenge
+     * const dailyChallenge = await prisma.dailyChallenge.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DailyChallengeUpdateArgs>(args: SelectSubset<T, DailyChallengeUpdateArgs<ExtArgs>>): Prisma__DailyChallengeClient<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DailyChallenges.
+     * @param {DailyChallengeDeleteManyArgs} args - Arguments to filter DailyChallenges to delete.
+     * @example
+     * // Delete a few DailyChallenges
+     * const { count } = await prisma.dailyChallenge.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DailyChallengeDeleteManyArgs>(args?: SelectSubset<T, DailyChallengeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DailyChallenges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyChallengeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DailyChallenges
+     * const dailyChallenge = await prisma.dailyChallenge.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DailyChallengeUpdateManyArgs>(args: SelectSubset<T, DailyChallengeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DailyChallenges and returns the data updated in the database.
+     * @param {DailyChallengeUpdateManyAndReturnArgs} args - Arguments to update many DailyChallenges.
+     * @example
+     * // Update many DailyChallenges
+     * const dailyChallenge = await prisma.dailyChallenge.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DailyChallenges and only return the `id`
+     * const dailyChallengeWithIdOnly = await prisma.dailyChallenge.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DailyChallengeUpdateManyAndReturnArgs>(args: SelectSubset<T, DailyChallengeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DailyChallenge.
+     * @param {DailyChallengeUpsertArgs} args - Arguments to update or create a DailyChallenge.
+     * @example
+     * // Update or create a DailyChallenge
+     * const dailyChallenge = await prisma.dailyChallenge.upsert({
+     *   create: {
+     *     // ... data to create a DailyChallenge
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DailyChallenge we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DailyChallengeUpsertArgs>(args: SelectSubset<T, DailyChallengeUpsertArgs<ExtArgs>>): Prisma__DailyChallengeClient<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DailyChallenges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyChallengeCountArgs} args - Arguments to filter DailyChallenges to count.
+     * @example
+     * // Count the number of DailyChallenges
+     * const count = await prisma.dailyChallenge.count({
+     *   where: {
+     *     // ... the filter for the DailyChallenges we want to count
+     *   }
+     * })
+    **/
+    count<T extends DailyChallengeCountArgs>(
+      args?: Subset<T, DailyChallengeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DailyChallengeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DailyChallenge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyChallengeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DailyChallengeAggregateArgs>(args: Subset<T, DailyChallengeAggregateArgs>): Prisma.PrismaPromise<GetDailyChallengeAggregateType<T>>
+
+    /**
+     * Group by DailyChallenge.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DailyChallengeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DailyChallengeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DailyChallengeGroupByArgs['orderBy'] }
+        : { orderBy?: DailyChallengeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DailyChallengeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDailyChallengeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DailyChallenge model
+   */
+  readonly fields: DailyChallengeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DailyChallenge.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DailyChallengeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    problem<T extends ProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProblemDefaultArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DailyChallenge model
+   */
+  interface DailyChallengeFieldRefs {
+    readonly id: FieldRef<"DailyChallenge", 'String'>
+    readonly problemId: FieldRef<"DailyChallenge", 'String'>
+    readonly date: FieldRef<"DailyChallenge", 'DateTime'>
+    readonly createdAt: FieldRef<"DailyChallenge", 'DateTime'>
+    readonly updatedAt: FieldRef<"DailyChallenge", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DailyChallenge findUnique
+   */
+  export type DailyChallengeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyChallenge to fetch.
+     */
+    where: DailyChallengeWhereUniqueInput
+  }
+
+  /**
+   * DailyChallenge findUniqueOrThrow
+   */
+  export type DailyChallengeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyChallenge to fetch.
+     */
+    where: DailyChallengeWhereUniqueInput
+  }
+
+  /**
+   * DailyChallenge findFirst
+   */
+  export type DailyChallengeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyChallenge to fetch.
+     */
+    where?: DailyChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyChallenges to fetch.
+     */
+    orderBy?: DailyChallengeOrderByWithRelationInput | DailyChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DailyChallenges.
+     */
+    cursor?: DailyChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyChallenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyChallenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyChallenges.
+     */
+    distinct?: DailyChallengeScalarFieldEnum | DailyChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * DailyChallenge findFirstOrThrow
+   */
+  export type DailyChallengeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyChallenge to fetch.
+     */
+    where?: DailyChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyChallenges to fetch.
+     */
+    orderBy?: DailyChallengeOrderByWithRelationInput | DailyChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DailyChallenges.
+     */
+    cursor?: DailyChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyChallenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyChallenges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DailyChallenges.
+     */
+    distinct?: DailyChallengeScalarFieldEnum | DailyChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * DailyChallenge findMany
+   */
+  export type DailyChallengeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * Filter, which DailyChallenges to fetch.
+     */
+    where?: DailyChallengeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DailyChallenges to fetch.
+     */
+    orderBy?: DailyChallengeOrderByWithRelationInput | DailyChallengeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DailyChallenges.
+     */
+    cursor?: DailyChallengeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DailyChallenges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DailyChallenges.
+     */
+    skip?: number
+    distinct?: DailyChallengeScalarFieldEnum | DailyChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * DailyChallenge create
+   */
+  export type DailyChallengeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DailyChallenge.
+     */
+    data: XOR<DailyChallengeCreateInput, DailyChallengeUncheckedCreateInput>
+  }
+
+  /**
+   * DailyChallenge createMany
+   */
+  export type DailyChallengeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DailyChallenges.
+     */
+    data: DailyChallengeCreateManyInput | DailyChallengeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DailyChallenge createManyAndReturn
+   */
+  export type DailyChallengeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * The data used to create many DailyChallenges.
+     */
+    data: DailyChallengeCreateManyInput | DailyChallengeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DailyChallenge update
+   */
+  export type DailyChallengeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DailyChallenge.
+     */
+    data: XOR<DailyChallengeUpdateInput, DailyChallengeUncheckedUpdateInput>
+    /**
+     * Choose, which DailyChallenge to update.
+     */
+    where: DailyChallengeWhereUniqueInput
+  }
+
+  /**
+   * DailyChallenge updateMany
+   */
+  export type DailyChallengeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DailyChallenges.
+     */
+    data: XOR<DailyChallengeUpdateManyMutationInput, DailyChallengeUncheckedUpdateManyInput>
+    /**
+     * Filter which DailyChallenges to update
+     */
+    where?: DailyChallengeWhereInput
+    /**
+     * Limit how many DailyChallenges to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyChallenge updateManyAndReturn
+   */
+  export type DailyChallengeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * The data used to update DailyChallenges.
+     */
+    data: XOR<DailyChallengeUpdateManyMutationInput, DailyChallengeUncheckedUpdateManyInput>
+    /**
+     * Filter which DailyChallenges to update
+     */
+    where?: DailyChallengeWhereInput
+    /**
+     * Limit how many DailyChallenges to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DailyChallenge upsert
+   */
+  export type DailyChallengeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DailyChallenge to update in case it exists.
+     */
+    where: DailyChallengeWhereUniqueInput
+    /**
+     * In case the DailyChallenge found by the `where` argument doesn't exist, create a new DailyChallenge with this data.
+     */
+    create: XOR<DailyChallengeCreateInput, DailyChallengeUncheckedCreateInput>
+    /**
+     * In case the DailyChallenge was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DailyChallengeUpdateInput, DailyChallengeUncheckedUpdateInput>
+  }
+
+  /**
+   * DailyChallenge delete
+   */
+  export type DailyChallengeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+    /**
+     * Filter which DailyChallenge to delete.
+     */
+    where: DailyChallengeWhereUniqueInput
+  }
+
+  /**
+   * DailyChallenge deleteMany
+   */
+  export type DailyChallengeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DailyChallenges to delete
+     */
+    where?: DailyChallengeWhereInput
+    /**
+     * Limit how many DailyChallenges to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DailyChallenge without action
+   */
+  export type DailyChallengeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DailyChallenge
+     */
+    select?: DailyChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DailyChallenge
+     */
+    omit?: DailyChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DailyChallengeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserDailyChallengeSubmission
+   */
+
+  export type AggregateUserDailyChallengeSubmission = {
+    _count: UserDailyChallengeSubmissionCountAggregateOutputType | null
+    _min: UserDailyChallengeSubmissionMinAggregateOutputType | null
+    _max: UserDailyChallengeSubmissionMaxAggregateOutputType | null
+  }
+
+  export type UserDailyChallengeSubmissionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    date: Date | null
+    submissionId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserDailyChallengeSubmissionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    date: Date | null
+    submissionId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserDailyChallengeSubmissionCountAggregateOutputType = {
+    id: number
+    userId: number
+    date: number
+    submissionId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserDailyChallengeSubmissionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    submissionId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserDailyChallengeSubmissionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    submissionId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserDailyChallengeSubmissionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    submissionId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserDailyChallengeSubmissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserDailyChallengeSubmission to aggregate.
+     */
+    where?: UserDailyChallengeSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDailyChallengeSubmissions to fetch.
+     */
+    orderBy?: UserDailyChallengeSubmissionOrderByWithRelationInput | UserDailyChallengeSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserDailyChallengeSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDailyChallengeSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDailyChallengeSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserDailyChallengeSubmissions
+    **/
+    _count?: true | UserDailyChallengeSubmissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserDailyChallengeSubmissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserDailyChallengeSubmissionMaxAggregateInputType
+  }
+
+  export type GetUserDailyChallengeSubmissionAggregateType<T extends UserDailyChallengeSubmissionAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserDailyChallengeSubmission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserDailyChallengeSubmission[P]>
+      : GetScalarType<T[P], AggregateUserDailyChallengeSubmission[P]>
+  }
+
+
+
+
+  export type UserDailyChallengeSubmissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserDailyChallengeSubmissionWhereInput
+    orderBy?: UserDailyChallengeSubmissionOrderByWithAggregationInput | UserDailyChallengeSubmissionOrderByWithAggregationInput[]
+    by: UserDailyChallengeSubmissionScalarFieldEnum[] | UserDailyChallengeSubmissionScalarFieldEnum
+    having?: UserDailyChallengeSubmissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserDailyChallengeSubmissionCountAggregateInputType | true
+    _min?: UserDailyChallengeSubmissionMinAggregateInputType
+    _max?: UserDailyChallengeSubmissionMaxAggregateInputType
+  }
+
+  export type UserDailyChallengeSubmissionGroupByOutputType = {
+    id: string
+    userId: string
+    date: Date
+    submissionId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: UserDailyChallengeSubmissionCountAggregateOutputType | null
+    _min: UserDailyChallengeSubmissionMinAggregateOutputType | null
+    _max: UserDailyChallengeSubmissionMaxAggregateOutputType | null
+  }
+
+  type GetUserDailyChallengeSubmissionGroupByPayload<T extends UserDailyChallengeSubmissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserDailyChallengeSubmissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserDailyChallengeSubmissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserDailyChallengeSubmissionGroupByOutputType[P]>
+            : GetScalarType<T[P], UserDailyChallengeSubmissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserDailyChallengeSubmissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    submissionId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userDailyChallengeSubmission"]>
+
+  export type UserDailyChallengeSubmissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    submissionId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userDailyChallengeSubmission"]>
+
+  export type UserDailyChallengeSubmissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    submissionId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userDailyChallengeSubmission"]>
+
+  export type UserDailyChallengeSubmissionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    submissionId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserDailyChallengeSubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "date" | "submissionId" | "createdAt" | "updatedAt", ExtArgs["result"]["userDailyChallengeSubmission"]>
+  export type UserDailyChallengeSubmissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }
+  export type UserDailyChallengeSubmissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }
+  export type UserDailyChallengeSubmissionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }
+
+  export type $UserDailyChallengeSubmissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserDailyChallengeSubmission"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      submission: Prisma.$SubmissionsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      date: Date
+      submissionId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userDailyChallengeSubmission"]>
+    composites: {}
+  }
+
+  type UserDailyChallengeSubmissionGetPayload<S extends boolean | null | undefined | UserDailyChallengeSubmissionDefaultArgs> = $Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload, S>
+
+  type UserDailyChallengeSubmissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserDailyChallengeSubmissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserDailyChallengeSubmissionCountAggregateInputType | true
+    }
+
+  export interface UserDailyChallengeSubmissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserDailyChallengeSubmission'], meta: { name: 'UserDailyChallengeSubmission' } }
+    /**
+     * Find zero or one UserDailyChallengeSubmission that matches the filter.
+     * @param {UserDailyChallengeSubmissionFindUniqueArgs} args - Arguments to find a UserDailyChallengeSubmission
+     * @example
+     * // Get one UserDailyChallengeSubmission
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserDailyChallengeSubmissionFindUniqueArgs>(args: SelectSubset<T, UserDailyChallengeSubmissionFindUniqueArgs<ExtArgs>>): Prisma__UserDailyChallengeSubmissionClient<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserDailyChallengeSubmission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserDailyChallengeSubmissionFindUniqueOrThrowArgs} args - Arguments to find a UserDailyChallengeSubmission
+     * @example
+     * // Get one UserDailyChallengeSubmission
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserDailyChallengeSubmissionFindUniqueOrThrowArgs>(args: SelectSubset<T, UserDailyChallengeSubmissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserDailyChallengeSubmissionClient<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserDailyChallengeSubmission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyChallengeSubmissionFindFirstArgs} args - Arguments to find a UserDailyChallengeSubmission
+     * @example
+     * // Get one UserDailyChallengeSubmission
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserDailyChallengeSubmissionFindFirstArgs>(args?: SelectSubset<T, UserDailyChallengeSubmissionFindFirstArgs<ExtArgs>>): Prisma__UserDailyChallengeSubmissionClient<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserDailyChallengeSubmission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyChallengeSubmissionFindFirstOrThrowArgs} args - Arguments to find a UserDailyChallengeSubmission
+     * @example
+     * // Get one UserDailyChallengeSubmission
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserDailyChallengeSubmissionFindFirstOrThrowArgs>(args?: SelectSubset<T, UserDailyChallengeSubmissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserDailyChallengeSubmissionClient<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserDailyChallengeSubmissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyChallengeSubmissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserDailyChallengeSubmissions
+     * const userDailyChallengeSubmissions = await prisma.userDailyChallengeSubmission.findMany()
+     * 
+     * // Get first 10 UserDailyChallengeSubmissions
+     * const userDailyChallengeSubmissions = await prisma.userDailyChallengeSubmission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userDailyChallengeSubmissionWithIdOnly = await prisma.userDailyChallengeSubmission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserDailyChallengeSubmissionFindManyArgs>(args?: SelectSubset<T, UserDailyChallengeSubmissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserDailyChallengeSubmission.
+     * @param {UserDailyChallengeSubmissionCreateArgs} args - Arguments to create a UserDailyChallengeSubmission.
+     * @example
+     * // Create one UserDailyChallengeSubmission
+     * const UserDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.create({
+     *   data: {
+     *     // ... data to create a UserDailyChallengeSubmission
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserDailyChallengeSubmissionCreateArgs>(args: SelectSubset<T, UserDailyChallengeSubmissionCreateArgs<ExtArgs>>): Prisma__UserDailyChallengeSubmissionClient<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserDailyChallengeSubmissions.
+     * @param {UserDailyChallengeSubmissionCreateManyArgs} args - Arguments to create many UserDailyChallengeSubmissions.
+     * @example
+     * // Create many UserDailyChallengeSubmissions
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserDailyChallengeSubmissionCreateManyArgs>(args?: SelectSubset<T, UserDailyChallengeSubmissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserDailyChallengeSubmissions and returns the data saved in the database.
+     * @param {UserDailyChallengeSubmissionCreateManyAndReturnArgs} args - Arguments to create many UserDailyChallengeSubmissions.
+     * @example
+     * // Create many UserDailyChallengeSubmissions
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserDailyChallengeSubmissions and only return the `id`
+     * const userDailyChallengeSubmissionWithIdOnly = await prisma.userDailyChallengeSubmission.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserDailyChallengeSubmissionCreateManyAndReturnArgs>(args?: SelectSubset<T, UserDailyChallengeSubmissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserDailyChallengeSubmission.
+     * @param {UserDailyChallengeSubmissionDeleteArgs} args - Arguments to delete one UserDailyChallengeSubmission.
+     * @example
+     * // Delete one UserDailyChallengeSubmission
+     * const UserDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.delete({
+     *   where: {
+     *     // ... filter to delete one UserDailyChallengeSubmission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserDailyChallengeSubmissionDeleteArgs>(args: SelectSubset<T, UserDailyChallengeSubmissionDeleteArgs<ExtArgs>>): Prisma__UserDailyChallengeSubmissionClient<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserDailyChallengeSubmission.
+     * @param {UserDailyChallengeSubmissionUpdateArgs} args - Arguments to update one UserDailyChallengeSubmission.
+     * @example
+     * // Update one UserDailyChallengeSubmission
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserDailyChallengeSubmissionUpdateArgs>(args: SelectSubset<T, UserDailyChallengeSubmissionUpdateArgs<ExtArgs>>): Prisma__UserDailyChallengeSubmissionClient<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserDailyChallengeSubmissions.
+     * @param {UserDailyChallengeSubmissionDeleteManyArgs} args - Arguments to filter UserDailyChallengeSubmissions to delete.
+     * @example
+     * // Delete a few UserDailyChallengeSubmissions
+     * const { count } = await prisma.userDailyChallengeSubmission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserDailyChallengeSubmissionDeleteManyArgs>(args?: SelectSubset<T, UserDailyChallengeSubmissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserDailyChallengeSubmissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyChallengeSubmissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserDailyChallengeSubmissions
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserDailyChallengeSubmissionUpdateManyArgs>(args: SelectSubset<T, UserDailyChallengeSubmissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserDailyChallengeSubmissions and returns the data updated in the database.
+     * @param {UserDailyChallengeSubmissionUpdateManyAndReturnArgs} args - Arguments to update many UserDailyChallengeSubmissions.
+     * @example
+     * // Update many UserDailyChallengeSubmissions
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserDailyChallengeSubmissions and only return the `id`
+     * const userDailyChallengeSubmissionWithIdOnly = await prisma.userDailyChallengeSubmission.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserDailyChallengeSubmissionUpdateManyAndReturnArgs>(args: SelectSubset<T, UserDailyChallengeSubmissionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserDailyChallengeSubmission.
+     * @param {UserDailyChallengeSubmissionUpsertArgs} args - Arguments to update or create a UserDailyChallengeSubmission.
+     * @example
+     * // Update or create a UserDailyChallengeSubmission
+     * const userDailyChallengeSubmission = await prisma.userDailyChallengeSubmission.upsert({
+     *   create: {
+     *     // ... data to create a UserDailyChallengeSubmission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserDailyChallengeSubmission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserDailyChallengeSubmissionUpsertArgs>(args: SelectSubset<T, UserDailyChallengeSubmissionUpsertArgs<ExtArgs>>): Prisma__UserDailyChallengeSubmissionClient<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserDailyChallengeSubmissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyChallengeSubmissionCountArgs} args - Arguments to filter UserDailyChallengeSubmissions to count.
+     * @example
+     * // Count the number of UserDailyChallengeSubmissions
+     * const count = await prisma.userDailyChallengeSubmission.count({
+     *   where: {
+     *     // ... the filter for the UserDailyChallengeSubmissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserDailyChallengeSubmissionCountArgs>(
+      args?: Subset<T, UserDailyChallengeSubmissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserDailyChallengeSubmissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserDailyChallengeSubmission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyChallengeSubmissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserDailyChallengeSubmissionAggregateArgs>(args: Subset<T, UserDailyChallengeSubmissionAggregateArgs>): Prisma.PrismaPromise<GetUserDailyChallengeSubmissionAggregateType<T>>
+
+    /**
+     * Group by UserDailyChallengeSubmission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyChallengeSubmissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserDailyChallengeSubmissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserDailyChallengeSubmissionGroupByArgs['orderBy'] }
+        : { orderBy?: UserDailyChallengeSubmissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserDailyChallengeSubmissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserDailyChallengeSubmissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserDailyChallengeSubmission model
+   */
+  readonly fields: UserDailyChallengeSubmissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserDailyChallengeSubmission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserDailyChallengeSubmissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    submission<T extends SubmissionsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubmissionsDefaultArgs<ExtArgs>>): Prisma__SubmissionsClient<$Result.GetResult<Prisma.$SubmissionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserDailyChallengeSubmission model
+   */
+  interface UserDailyChallengeSubmissionFieldRefs {
+    readonly id: FieldRef<"UserDailyChallengeSubmission", 'String'>
+    readonly userId: FieldRef<"UserDailyChallengeSubmission", 'String'>
+    readonly date: FieldRef<"UserDailyChallengeSubmission", 'DateTime'>
+    readonly submissionId: FieldRef<"UserDailyChallengeSubmission", 'String'>
+    readonly createdAt: FieldRef<"UserDailyChallengeSubmission", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserDailyChallengeSubmission", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserDailyChallengeSubmission findUnique
+   */
+  export type UserDailyChallengeSubmissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyChallengeSubmission to fetch.
+     */
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+  }
+
+  /**
+   * UserDailyChallengeSubmission findUniqueOrThrow
+   */
+  export type UserDailyChallengeSubmissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyChallengeSubmission to fetch.
+     */
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+  }
+
+  /**
+   * UserDailyChallengeSubmission findFirst
+   */
+  export type UserDailyChallengeSubmissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyChallengeSubmission to fetch.
+     */
+    where?: UserDailyChallengeSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDailyChallengeSubmissions to fetch.
+     */
+    orderBy?: UserDailyChallengeSubmissionOrderByWithRelationInput | UserDailyChallengeSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserDailyChallengeSubmissions.
+     */
+    cursor?: UserDailyChallengeSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDailyChallengeSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDailyChallengeSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserDailyChallengeSubmissions.
+     */
+    distinct?: UserDailyChallengeSubmissionScalarFieldEnum | UserDailyChallengeSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * UserDailyChallengeSubmission findFirstOrThrow
+   */
+  export type UserDailyChallengeSubmissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyChallengeSubmission to fetch.
+     */
+    where?: UserDailyChallengeSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDailyChallengeSubmissions to fetch.
+     */
+    orderBy?: UserDailyChallengeSubmissionOrderByWithRelationInput | UserDailyChallengeSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserDailyChallengeSubmissions.
+     */
+    cursor?: UserDailyChallengeSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDailyChallengeSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDailyChallengeSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserDailyChallengeSubmissions.
+     */
+    distinct?: UserDailyChallengeSubmissionScalarFieldEnum | UserDailyChallengeSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * UserDailyChallengeSubmission findMany
+   */
+  export type UserDailyChallengeSubmissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyChallengeSubmissions to fetch.
+     */
+    where?: UserDailyChallengeSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDailyChallengeSubmissions to fetch.
+     */
+    orderBy?: UserDailyChallengeSubmissionOrderByWithRelationInput | UserDailyChallengeSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserDailyChallengeSubmissions.
+     */
+    cursor?: UserDailyChallengeSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDailyChallengeSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDailyChallengeSubmissions.
+     */
+    skip?: number
+    distinct?: UserDailyChallengeSubmissionScalarFieldEnum | UserDailyChallengeSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * UserDailyChallengeSubmission create
+   */
+  export type UserDailyChallengeSubmissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserDailyChallengeSubmission.
+     */
+    data: XOR<UserDailyChallengeSubmissionCreateInput, UserDailyChallengeSubmissionUncheckedCreateInput>
+  }
+
+  /**
+   * UserDailyChallengeSubmission createMany
+   */
+  export type UserDailyChallengeSubmissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserDailyChallengeSubmissions.
+     */
+    data: UserDailyChallengeSubmissionCreateManyInput | UserDailyChallengeSubmissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserDailyChallengeSubmission createManyAndReturn
+   */
+  export type UserDailyChallengeSubmissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserDailyChallengeSubmissions.
+     */
+    data: UserDailyChallengeSubmissionCreateManyInput | UserDailyChallengeSubmissionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserDailyChallengeSubmission update
+   */
+  export type UserDailyChallengeSubmissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserDailyChallengeSubmission.
+     */
+    data: XOR<UserDailyChallengeSubmissionUpdateInput, UserDailyChallengeSubmissionUncheckedUpdateInput>
+    /**
+     * Choose, which UserDailyChallengeSubmission to update.
+     */
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+  }
+
+  /**
+   * UserDailyChallengeSubmission updateMany
+   */
+  export type UserDailyChallengeSubmissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserDailyChallengeSubmissions.
+     */
+    data: XOR<UserDailyChallengeSubmissionUpdateManyMutationInput, UserDailyChallengeSubmissionUncheckedUpdateManyInput>
+    /**
+     * Filter which UserDailyChallengeSubmissions to update
+     */
+    where?: UserDailyChallengeSubmissionWhereInput
+    /**
+     * Limit how many UserDailyChallengeSubmissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserDailyChallengeSubmission updateManyAndReturn
+   */
+  export type UserDailyChallengeSubmissionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * The data used to update UserDailyChallengeSubmissions.
+     */
+    data: XOR<UserDailyChallengeSubmissionUpdateManyMutationInput, UserDailyChallengeSubmissionUncheckedUpdateManyInput>
+    /**
+     * Filter which UserDailyChallengeSubmissions to update
+     */
+    where?: UserDailyChallengeSubmissionWhereInput
+    /**
+     * Limit how many UserDailyChallengeSubmissions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserDailyChallengeSubmission upsert
+   */
+  export type UserDailyChallengeSubmissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserDailyChallengeSubmission to update in case it exists.
+     */
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+    /**
+     * In case the UserDailyChallengeSubmission found by the `where` argument doesn't exist, create a new UserDailyChallengeSubmission with this data.
+     */
+    create: XOR<UserDailyChallengeSubmissionCreateInput, UserDailyChallengeSubmissionUncheckedCreateInput>
+    /**
+     * In case the UserDailyChallengeSubmission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserDailyChallengeSubmissionUpdateInput, UserDailyChallengeSubmissionUncheckedUpdateInput>
+  }
+
+  /**
+   * UserDailyChallengeSubmission delete
+   */
+  export type UserDailyChallengeSubmissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter which UserDailyChallengeSubmission to delete.
+     */
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+  }
+
+  /**
+   * UserDailyChallengeSubmission deleteMany
+   */
+  export type UserDailyChallengeSubmissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserDailyChallengeSubmissions to delete
+     */
+    where?: UserDailyChallengeSubmissionWhereInput
+    /**
+     * Limit how many UserDailyChallengeSubmissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserDailyChallengeSubmission without action
+   */
+  export type UserDailyChallengeSubmissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyChallengeSubmission
+     */
+    select?: UserDailyChallengeSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyChallengeSubmission
+     */
+    omit?: UserDailyChallengeSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyChallengeSubmissionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9791,6 +12245,29 @@ export namespace Prisma {
   };
 
   export type ProblemInProblemListScalarFieldEnum = (typeof ProblemInProblemListScalarFieldEnum)[keyof typeof ProblemInProblemListScalarFieldEnum]
+
+
+  export const DailyChallengeScalarFieldEnum: {
+    id: 'id',
+    problemId: 'problemId',
+    date: 'date',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DailyChallengeScalarFieldEnum = (typeof DailyChallengeScalarFieldEnum)[keyof typeof DailyChallengeScalarFieldEnum]
+
+
+  export const UserDailyChallengeSubmissionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    date: 'date',
+    submissionId: 'submissionId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserDailyChallengeSubmissionScalarFieldEnum = (typeof UserDailyChallengeSubmissionScalarFieldEnum)[keyof typeof UserDailyChallengeSubmissionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9954,6 +12431,7 @@ export namespace Prisma {
     testCases?: TestCasesListRelationFilter
     problemSolved?: ProblemsSolvedListRelationFilter
     problemLists?: ProblemListListRelationFilter
+    dailyProblems?: UserDailyChallengeSubmissionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9975,6 +12453,7 @@ export namespace Prisma {
     testCases?: TestCasesOrderByRelationAggregateInput
     problemSolved?: ProblemsSolvedOrderByRelationAggregateInput
     problemLists?: ProblemListOrderByRelationAggregateInput
+    dailyProblems?: UserDailyChallengeSubmissionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9999,6 +12478,7 @@ export namespace Prisma {
     testCases?: TestCasesListRelationFilter
     problemSolved?: ProblemsSolvedListRelationFilter
     problemLists?: ProblemListListRelationFilter
+    dailyProblems?: UserDailyChallengeSubmissionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -10063,6 +12543,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesListRelationFilter
     problemSolved?: ProblemsSolvedListRelationFilter
     problemLists?: ProblemInProblemListListRelationFilter
+    dailyProblems?: DailyChallengeListRelationFilter
   }
 
   export type ProblemOrderByWithRelationInput = {
@@ -10086,6 +12567,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesOrderByRelationAggregateInput
     problemSolved?: ProblemsSolvedOrderByRelationAggregateInput
     problemLists?: ProblemInProblemListOrderByRelationAggregateInput
+    dailyProblems?: DailyChallengeOrderByRelationAggregateInput
   }
 
   export type ProblemWhereUniqueInput = Prisma.AtLeast<{
@@ -10112,6 +12594,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesListRelationFilter
     problemSolved?: ProblemsSolvedListRelationFilter
     problemLists?: ProblemInProblemListListRelationFilter
+    dailyProblems?: DailyChallengeListRelationFilter
   }, "id">
 
   export type ProblemOrderByWithAggregationInput = {
@@ -10176,6 +12659,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Submissions"> | Date | string
     problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    dailyChallenge?: UserDailyChallengeSubmissionListRelationFilter
   }
 
   export type SubmissionsOrderByWithRelationInput = {
@@ -10195,6 +12679,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     problem?: ProblemOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
+    dailyChallenge?: UserDailyChallengeSubmissionOrderByRelationAggregateInput
   }
 
   export type SubmissionsWhereUniqueInput = Prisma.AtLeast<{
@@ -10217,6 +12702,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Submissions"> | Date | string
     problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    dailyChallenge?: UserDailyChallengeSubmissionListRelationFilter
   }, "id">
 
   export type SubmissionsOrderByWithAggregationInput = {
@@ -10508,6 +12994,124 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"ProblemInProblemList"> | Date | string
   }
 
+  export type DailyChallengeWhereInput = {
+    AND?: DailyChallengeWhereInput | DailyChallengeWhereInput[]
+    OR?: DailyChallengeWhereInput[]
+    NOT?: DailyChallengeWhereInput | DailyChallengeWhereInput[]
+    id?: StringFilter<"DailyChallenge"> | string
+    problemId?: StringFilter<"DailyChallenge"> | string
+    date?: DateTimeFilter<"DailyChallenge"> | Date | string
+    createdAt?: DateTimeFilter<"DailyChallenge"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyChallenge"> | Date | string
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+  }
+
+  export type DailyChallengeOrderByWithRelationInput = {
+    id?: SortOrder
+    problemId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    problem?: ProblemOrderByWithRelationInput
+  }
+
+  export type DailyChallengeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DailyChallengeWhereInput | DailyChallengeWhereInput[]
+    OR?: DailyChallengeWhereInput[]
+    NOT?: DailyChallengeWhereInput | DailyChallengeWhereInput[]
+    problemId?: StringFilter<"DailyChallenge"> | string
+    date?: DateTimeFilter<"DailyChallenge"> | Date | string
+    createdAt?: DateTimeFilter<"DailyChallenge"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyChallenge"> | Date | string
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+  }, "id">
+
+  export type DailyChallengeOrderByWithAggregationInput = {
+    id?: SortOrder
+    problemId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DailyChallengeCountOrderByAggregateInput
+    _max?: DailyChallengeMaxOrderByAggregateInput
+    _min?: DailyChallengeMinOrderByAggregateInput
+  }
+
+  export type DailyChallengeScalarWhereWithAggregatesInput = {
+    AND?: DailyChallengeScalarWhereWithAggregatesInput | DailyChallengeScalarWhereWithAggregatesInput[]
+    OR?: DailyChallengeScalarWhereWithAggregatesInput[]
+    NOT?: DailyChallengeScalarWhereWithAggregatesInput | DailyChallengeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DailyChallenge"> | string
+    problemId?: StringWithAggregatesFilter<"DailyChallenge"> | string
+    date?: DateTimeWithAggregatesFilter<"DailyChallenge"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"DailyChallenge"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DailyChallenge"> | Date | string
+  }
+
+  export type UserDailyChallengeSubmissionWhereInput = {
+    AND?: UserDailyChallengeSubmissionWhereInput | UserDailyChallengeSubmissionWhereInput[]
+    OR?: UserDailyChallengeSubmissionWhereInput[]
+    NOT?: UserDailyChallengeSubmissionWhereInput | UserDailyChallengeSubmissionWhereInput[]
+    id?: StringFilter<"UserDailyChallengeSubmission"> | string
+    userId?: StringFilter<"UserDailyChallengeSubmission"> | string
+    date?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+    submissionId?: StringFilter<"UserDailyChallengeSubmission"> | string
+    createdAt?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    submission?: XOR<SubmissionsScalarRelationFilter, SubmissionsWhereInput>
+  }
+
+  export type UserDailyChallengeSubmissionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    submissionId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    submission?: SubmissionsOrderByWithRelationInput
+  }
+
+  export type UserDailyChallengeSubmissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: UserDailyChallengeSubmissionWhereInput | UserDailyChallengeSubmissionWhereInput[]
+    OR?: UserDailyChallengeSubmissionWhereInput[]
+    NOT?: UserDailyChallengeSubmissionWhereInput | UserDailyChallengeSubmissionWhereInput[]
+    date?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+    submissionId?: StringFilter<"UserDailyChallengeSubmission"> | string
+    createdAt?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    submission?: XOR<SubmissionsScalarRelationFilter, SubmissionsWhereInput>
+  }, "id" | "userId">
+
+  export type UserDailyChallengeSubmissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    submissionId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserDailyChallengeSubmissionCountOrderByAggregateInput
+    _max?: UserDailyChallengeSubmissionMaxOrderByAggregateInput
+    _min?: UserDailyChallengeSubmissionMinOrderByAggregateInput
+  }
+
+  export type UserDailyChallengeSubmissionScalarWhereWithAggregatesInput = {
+    AND?: UserDailyChallengeSubmissionScalarWhereWithAggregatesInput | UserDailyChallengeSubmissionScalarWhereWithAggregatesInput[]
+    OR?: UserDailyChallengeSubmissionScalarWhereWithAggregatesInput[]
+    NOT?: UserDailyChallengeSubmissionScalarWhereWithAggregatesInput | UserDailyChallengeSubmissionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserDailyChallengeSubmission"> | string
+    userId?: StringWithAggregatesFilter<"UserDailyChallengeSubmission"> | string
+    date?: DateTimeWithAggregatesFilter<"UserDailyChallengeSubmission"> | Date | string
+    submissionId?: StringWithAggregatesFilter<"UserDailyChallengeSubmission"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserDailyChallengeSubmission"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserDailyChallengeSubmission"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -10527,6 +13131,7 @@ export namespace Prisma {
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10548,6 +13153,7 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -10569,6 +13175,7 @@ export namespace Prisma {
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10590,6 +13197,7 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10660,6 +13268,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateInput = {
@@ -10682,6 +13291,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUpdateInput = {
@@ -10704,6 +13314,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateInput = {
@@ -10726,6 +13337,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemCreateManyInput = {
@@ -10796,6 +13408,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
     user: UserCreateNestedOneWithoutSubmissionInput
+    dailyChallenge?: UserDailyChallengeSubmissionCreateNestedManyWithoutSubmissionInput
   }
 
   export type SubmissionsUncheckedCreateInput = {
@@ -10813,6 +13426,7 @@ export namespace Prisma {
     time?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
   }
 
   export type SubmissionsUpdateInput = {
@@ -10830,6 +13444,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
     user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
+    dailyChallenge?: UserDailyChallengeSubmissionUpdateManyWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateInput = {
@@ -10847,6 +13462,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
   }
 
   export type SubmissionsCreateManyInput = {
@@ -11140,6 +13756,122 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DailyChallengeCreateInput = {
+    id?: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problem: ProblemCreateNestedOneWithoutDailyProblemsInput
+  }
+
+  export type DailyChallengeUncheckedCreateInput = {
+    id?: string
+    problemId: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyChallengeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problem?: ProblemUpdateOneRequiredWithoutDailyProblemsNestedInput
+  }
+
+  export type DailyChallengeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyChallengeCreateManyInput = {
+    id?: string
+    problemId: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyChallengeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyChallengeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyChallengeSubmissionCreateInput = {
+    id?: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutDailyProblemsInput
+    submission: SubmissionsCreateNestedOneWithoutDailyChallengeInput
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    date?: Date | string
+    submissionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyChallengeSubmissionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDailyProblemsNestedInput
+    submission?: SubmissionsUpdateOneRequiredWithoutDailyChallengeNestedInput
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyChallengeSubmissionCreateManyInput = {
+    id?: string
+    userId: string
+    date?: Date | string
+    submissionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyChallengeSubmissionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11234,6 +13966,12 @@ export namespace Prisma {
     none?: ProblemListWhereInput
   }
 
+  export type UserDailyChallengeSubmissionListRelationFilter = {
+    every?: UserDailyChallengeSubmissionWhereInput
+    some?: UserDailyChallengeSubmissionWhereInput
+    none?: UserDailyChallengeSubmissionWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11256,6 +13994,10 @@ export namespace Prisma {
   }
 
   export type ProblemListOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserDailyChallengeSubmissionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11438,7 +14180,17 @@ export namespace Prisma {
     none?: ProblemInProblemListWhereInput
   }
 
+  export type DailyChallengeListRelationFilter = {
+    every?: DailyChallengeWhereInput
+    some?: DailyChallengeWhereInput
+    none?: DailyChallengeWhereInput
+  }
+
   export type ProblemInProblemListOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DailyChallengeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11696,6 +14448,62 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type DailyChallengeCountOrderByAggregateInput = {
+    id?: SortOrder
+    problemId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyChallengeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    problemId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DailyChallengeMinOrderByAggregateInput = {
+    id?: SortOrder
+    problemId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SubmissionsScalarRelationFilter = {
+    is?: SubmissionsWhereInput
+    isNot?: SubmissionsWhereInput
+  }
+
+  export type UserDailyChallengeSubmissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    submissionId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserDailyChallengeSubmissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    submissionId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserDailyChallengeSubmissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    submissionId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type ProblemCreateNestedManyWithoutUserInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -11731,6 +14539,13 @@ export namespace Prisma {
     connect?: ProblemListWhereUniqueInput | ProblemListWhereUniqueInput[]
   }
 
+  export type UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserDailyChallengeSubmissionCreateWithoutUserInput, UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput> | UserDailyChallengeSubmissionCreateWithoutUserInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput | UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput[]
+    createMany?: UserDailyChallengeSubmissionCreateManyUserInputEnvelope
+    connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+  }
+
   export type ProblemUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -11764,6 +14579,13 @@ export namespace Prisma {
     connectOrCreate?: ProblemListCreateOrConnectWithoutUserInput | ProblemListCreateOrConnectWithoutUserInput[]
     createMany?: ProblemListCreateManyUserInputEnvelope
     connect?: ProblemListWhereUniqueInput | ProblemListWhereUniqueInput[]
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserDailyChallengeSubmissionCreateWithoutUserInput, UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput> | UserDailyChallengeSubmissionCreateWithoutUserInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput | UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput[]
+    createMany?: UserDailyChallengeSubmissionCreateManyUserInputEnvelope
+    connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11860,6 +14682,20 @@ export namespace Prisma {
     deleteMany?: ProblemListScalarWhereInput | ProblemListScalarWhereInput[]
   }
 
+  export type UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserDailyChallengeSubmissionCreateWithoutUserInput, UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput> | UserDailyChallengeSubmissionCreateWithoutUserInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput | UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput[]
+    upsert?: UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutUserInput | UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserDailyChallengeSubmissionCreateManyUserInputEnvelope
+    set?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    disconnect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    delete?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    update?: UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutUserInput | UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserDailyChallengeSubmissionUpdateManyWithWhereWithoutUserInput | UserDailyChallengeSubmissionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
+  }
+
   export type ProblemUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -11930,6 +14766,20 @@ export namespace Prisma {
     deleteMany?: ProblemListScalarWhereInput | ProblemListScalarWhereInput[]
   }
 
+  export type UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserDailyChallengeSubmissionCreateWithoutUserInput, UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput> | UserDailyChallengeSubmissionCreateWithoutUserInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput | UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput[]
+    upsert?: UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutUserInput | UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserDailyChallengeSubmissionCreateManyUserInputEnvelope
+    set?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    disconnect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    delete?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    update?: UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutUserInput | UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserDailyChallengeSubmissionUpdateManyWithWhereWithoutUserInput | UserDailyChallengeSubmissionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
+  }
+
   export type ProblemCreatetagsInput = {
     set: string[]
   }
@@ -11972,6 +14822,13 @@ export namespace Prisma {
     connect?: ProblemInProblemListWhereUniqueInput | ProblemInProblemListWhereUniqueInput[]
   }
 
+  export type DailyChallengeCreateNestedManyWithoutProblemInput = {
+    create?: XOR<DailyChallengeCreateWithoutProblemInput, DailyChallengeUncheckedCreateWithoutProblemInput> | DailyChallengeCreateWithoutProblemInput[] | DailyChallengeUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: DailyChallengeCreateOrConnectWithoutProblemInput | DailyChallengeCreateOrConnectWithoutProblemInput[]
+    createMany?: DailyChallengeCreateManyProblemInputEnvelope
+    connect?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+  }
+
   export type SubmissionsUncheckedCreateNestedManyWithoutProblemInput = {
     create?: XOR<SubmissionsCreateWithoutProblemInput, SubmissionsUncheckedCreateWithoutProblemInput> | SubmissionsCreateWithoutProblemInput[] | SubmissionsUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: SubmissionsCreateOrConnectWithoutProblemInput | SubmissionsCreateOrConnectWithoutProblemInput[]
@@ -11998,6 +14855,13 @@ export namespace Prisma {
     connectOrCreate?: ProblemInProblemListCreateOrConnectWithoutProblemInput | ProblemInProblemListCreateOrConnectWithoutProblemInput[]
     createMany?: ProblemInProblemListCreateManyProblemInputEnvelope
     connect?: ProblemInProblemListWhereUniqueInput | ProblemInProblemListWhereUniqueInput[]
+  }
+
+  export type DailyChallengeUncheckedCreateNestedManyWithoutProblemInput = {
+    create?: XOR<DailyChallengeCreateWithoutProblemInput, DailyChallengeUncheckedCreateWithoutProblemInput> | DailyChallengeCreateWithoutProblemInput[] | DailyChallengeUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: DailyChallengeCreateOrConnectWithoutProblemInput | DailyChallengeCreateOrConnectWithoutProblemInput[]
+    createMany?: DailyChallengeCreateManyProblemInputEnvelope
+    connect?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
   }
 
   export type EnumProblemDifficultyFieldUpdateOperationsInput = {
@@ -12078,6 +14942,20 @@ export namespace Prisma {
     deleteMany?: ProblemInProblemListScalarWhereInput | ProblemInProblemListScalarWhereInput[]
   }
 
+  export type DailyChallengeUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<DailyChallengeCreateWithoutProblemInput, DailyChallengeUncheckedCreateWithoutProblemInput> | DailyChallengeCreateWithoutProblemInput[] | DailyChallengeUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: DailyChallengeCreateOrConnectWithoutProblemInput | DailyChallengeCreateOrConnectWithoutProblemInput[]
+    upsert?: DailyChallengeUpsertWithWhereUniqueWithoutProblemInput | DailyChallengeUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: DailyChallengeCreateManyProblemInputEnvelope
+    set?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+    disconnect?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+    delete?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+    connect?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+    update?: DailyChallengeUpdateWithWhereUniqueWithoutProblemInput | DailyChallengeUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: DailyChallengeUpdateManyWithWhereWithoutProblemInput | DailyChallengeUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: DailyChallengeScalarWhereInput | DailyChallengeScalarWhereInput[]
+  }
+
   export type SubmissionsUncheckedUpdateManyWithoutProblemNestedInput = {
     create?: XOR<SubmissionsCreateWithoutProblemInput, SubmissionsUncheckedCreateWithoutProblemInput> | SubmissionsCreateWithoutProblemInput[] | SubmissionsUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: SubmissionsCreateOrConnectWithoutProblemInput | SubmissionsCreateOrConnectWithoutProblemInput[]
@@ -12134,6 +15012,20 @@ export namespace Prisma {
     deleteMany?: ProblemInProblemListScalarWhereInput | ProblemInProblemListScalarWhereInput[]
   }
 
+  export type DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<DailyChallengeCreateWithoutProblemInput, DailyChallengeUncheckedCreateWithoutProblemInput> | DailyChallengeCreateWithoutProblemInput[] | DailyChallengeUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: DailyChallengeCreateOrConnectWithoutProblemInput | DailyChallengeCreateOrConnectWithoutProblemInput[]
+    upsert?: DailyChallengeUpsertWithWhereUniqueWithoutProblemInput | DailyChallengeUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: DailyChallengeCreateManyProblemInputEnvelope
+    set?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+    disconnect?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+    delete?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+    connect?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+    update?: DailyChallengeUpdateWithWhereUniqueWithoutProblemInput | DailyChallengeUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: DailyChallengeUpdateManyWithWhereWithoutProblemInput | DailyChallengeUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: DailyChallengeScalarWhereInput | DailyChallengeScalarWhereInput[]
+  }
+
   export type ProblemCreateNestedOneWithoutSubmissionInput = {
     create?: XOR<ProblemCreateWithoutSubmissionInput, ProblemUncheckedCreateWithoutSubmissionInput>
     connectOrCreate?: ProblemCreateOrConnectWithoutSubmissionInput
@@ -12144,6 +15036,20 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutSubmissionInput, UserUncheckedCreateWithoutSubmissionInput>
     connectOrCreate?: UserCreateOrConnectWithoutSubmissionInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type UserDailyChallengeSubmissionCreateNestedManyWithoutSubmissionInput = {
+    create?: XOR<UserDailyChallengeSubmissionCreateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput> | UserDailyChallengeSubmissionCreateWithoutSubmissionInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput[]
+    connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput | UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput[]
+    createMany?: UserDailyChallengeSubmissionCreateManySubmissionInputEnvelope
+    connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput = {
+    create?: XOR<UserDailyChallengeSubmissionCreateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput> | UserDailyChallengeSubmissionCreateWithoutSubmissionInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput[]
+    connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput | UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput[]
+    createMany?: UserDailyChallengeSubmissionCreateManySubmissionInputEnvelope
+    connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
   }
 
   export type ProblemUpdateOneRequiredWithoutSubmissionNestedInput = {
@@ -12160,6 +15066,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSubmissionInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubmissionInput, UserUpdateWithoutSubmissionInput>, UserUncheckedUpdateWithoutSubmissionInput>
+  }
+
+  export type UserDailyChallengeSubmissionUpdateManyWithoutSubmissionNestedInput = {
+    create?: XOR<UserDailyChallengeSubmissionCreateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput> | UserDailyChallengeSubmissionCreateWithoutSubmissionInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput[]
+    connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput | UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput[]
+    upsert?: UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutSubmissionInput | UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutSubmissionInput[]
+    createMany?: UserDailyChallengeSubmissionCreateManySubmissionInputEnvelope
+    set?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    disconnect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    delete?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    update?: UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutSubmissionInput | UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutSubmissionInput[]
+    updateMany?: UserDailyChallengeSubmissionUpdateManyWithWhereWithoutSubmissionInput | UserDailyChallengeSubmissionUpdateManyWithWhereWithoutSubmissionInput[]
+    deleteMany?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput = {
+    create?: XOR<UserDailyChallengeSubmissionCreateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput> | UserDailyChallengeSubmissionCreateWithoutSubmissionInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput[]
+    connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput | UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput[]
+    upsert?: UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutSubmissionInput | UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutSubmissionInput[]
+    createMany?: UserDailyChallengeSubmissionCreateManySubmissionInputEnvelope
+    set?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    disconnect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    delete?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+    update?: UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutSubmissionInput | UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutSubmissionInput[]
+    updateMany?: UserDailyChallengeSubmissionUpdateManyWithWhereWithoutSubmissionInput | UserDailyChallengeSubmissionUpdateManyWithWhereWithoutSubmissionInput[]
+    deleteMany?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
   }
 
   export type ProblemCreateNestedOneWithoutHiddenTestCasesInput = {
@@ -12300,6 +15234,48 @@ export namespace Prisma {
     upsert?: ProblemUpsertWithoutProblemListsInput
     connect?: ProblemWhereUniqueInput
     update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutProblemListsInput, ProblemUpdateWithoutProblemListsInput>, ProblemUncheckedUpdateWithoutProblemListsInput>
+  }
+
+  export type ProblemCreateNestedOneWithoutDailyProblemsInput = {
+    create?: XOR<ProblemCreateWithoutDailyProblemsInput, ProblemUncheckedCreateWithoutDailyProblemsInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutDailyProblemsInput
+    connect?: ProblemWhereUniqueInput
+  }
+
+  export type ProblemUpdateOneRequiredWithoutDailyProblemsNestedInput = {
+    create?: XOR<ProblemCreateWithoutDailyProblemsInput, ProblemUncheckedCreateWithoutDailyProblemsInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutDailyProblemsInput
+    upsert?: ProblemUpsertWithoutDailyProblemsInput
+    connect?: ProblemWhereUniqueInput
+    update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutDailyProblemsInput, ProblemUpdateWithoutDailyProblemsInput>, ProblemUncheckedUpdateWithoutDailyProblemsInput>
+  }
+
+  export type UserCreateNestedOneWithoutDailyProblemsInput = {
+    create?: XOR<UserCreateWithoutDailyProblemsInput, UserUncheckedCreateWithoutDailyProblemsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyProblemsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SubmissionsCreateNestedOneWithoutDailyChallengeInput = {
+    create?: XOR<SubmissionsCreateWithoutDailyChallengeInput, SubmissionsUncheckedCreateWithoutDailyChallengeInput>
+    connectOrCreate?: SubmissionsCreateOrConnectWithoutDailyChallengeInput
+    connect?: SubmissionsWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutDailyProblemsNestedInput = {
+    create?: XOR<UserCreateWithoutDailyProblemsInput, UserUncheckedCreateWithoutDailyProblemsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyProblemsInput
+    upsert?: UserUpsertWithoutDailyProblemsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDailyProblemsInput, UserUpdateWithoutDailyProblemsInput>, UserUncheckedUpdateWithoutDailyProblemsInput>
+  }
+
+  export type SubmissionsUpdateOneRequiredWithoutDailyChallengeNestedInput = {
+    create?: XOR<SubmissionsCreateWithoutDailyChallengeInput, SubmissionsUncheckedCreateWithoutDailyChallengeInput>
+    connectOrCreate?: SubmissionsCreateOrConnectWithoutDailyChallengeInput
+    upsert?: SubmissionsUpsertWithoutDailyChallengeInput
+    connect?: SubmissionsWhereUniqueInput
+    update?: XOR<XOR<SubmissionsUpdateToOneWithWhereWithoutDailyChallengeInput, SubmissionsUpdateWithoutDailyChallengeInput>, SubmissionsUncheckedUpdateWithoutDailyChallengeInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12525,6 +15501,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutUserInput = {
@@ -12546,6 +15523,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutUserInput = {
@@ -12572,6 +15550,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
+    dailyChallenge?: UserDailyChallengeSubmissionCreateNestedManyWithoutSubmissionInput
   }
 
   export type SubmissionsUncheckedCreateWithoutUserInput = {
@@ -12588,6 +15567,7 @@ export namespace Prisma {
     time?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
   }
 
   export type SubmissionsCreateOrConnectWithoutUserInput = {
@@ -12677,6 +15657,32 @@ export namespace Prisma {
 
   export type ProblemListCreateManyUserInputEnvelope = {
     data: ProblemListCreateManyUserInput | ProblemListCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserDailyChallengeSubmissionCreateWithoutUserInput = {
+    id?: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    submission: SubmissionsCreateNestedOneWithoutDailyChallengeInput
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput = {
+    id?: string
+    date?: Date | string
+    submissionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput = {
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+    create: XOR<UserDailyChallengeSubmissionCreateWithoutUserInput, UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserDailyChallengeSubmissionCreateManyUserInputEnvelope = {
+    data: UserDailyChallengeSubmissionCreateManyUserInput | UserDailyChallengeSubmissionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -12837,6 +15843,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProblemList"> | Date | string
   }
 
+  export type UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+    update: XOR<UserDailyChallengeSubmissionUpdateWithoutUserInput, UserDailyChallengeSubmissionUncheckedUpdateWithoutUserInput>
+    create: XOR<UserDailyChallengeSubmissionCreateWithoutUserInput, UserDailyChallengeSubmissionUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+    data: XOR<UserDailyChallengeSubmissionUpdateWithoutUserInput, UserDailyChallengeSubmissionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserDailyChallengeSubmissionUpdateManyWithWhereWithoutUserInput = {
+    where: UserDailyChallengeSubmissionScalarWhereInput
+    data: XOR<UserDailyChallengeSubmissionUpdateManyMutationInput, UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserDailyChallengeSubmissionScalarWhereInput = {
+    AND?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
+    OR?: UserDailyChallengeSubmissionScalarWhereInput[]
+    NOT?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
+    id?: StringFilter<"UserDailyChallengeSubmission"> | string
+    userId?: StringFilter<"UserDailyChallengeSubmission"> | string
+    date?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+    submissionId?: StringFilter<"UserDailyChallengeSubmission"> | string
+    createdAt?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
+  }
+
   export type UserCreateWithoutProblemsInput = {
     id?: string
     name?: string | null
@@ -12855,6 +15889,7 @@ export namespace Prisma {
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProblemsInput = {
@@ -12875,6 +15910,7 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProblemsInput = {
@@ -12896,6 +15932,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutSubmissionInput
+    dailyChallenge?: UserDailyChallengeSubmissionCreateNestedManyWithoutSubmissionInput
   }
 
   export type SubmissionsUncheckedCreateWithoutProblemInput = {
@@ -12912,6 +15949,7 @@ export namespace Prisma {
     time?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
   }
 
   export type SubmissionsCreateOrConnectWithoutProblemInput = {
@@ -13000,6 +16038,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DailyChallengeCreateWithoutProblemInput = {
+    id?: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyChallengeUncheckedCreateWithoutProblemInput = {
+    id?: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DailyChallengeCreateOrConnectWithoutProblemInput = {
+    where: DailyChallengeWhereUniqueInput
+    create: XOR<DailyChallengeCreateWithoutProblemInput, DailyChallengeUncheckedCreateWithoutProblemInput>
+  }
+
+  export type DailyChallengeCreateManyProblemInputEnvelope = {
+    data: DailyChallengeCreateManyProblemInput | DailyChallengeCreateManyProblemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutProblemsInput = {
     update: XOR<UserUpdateWithoutProblemsInput, UserUncheckedUpdateWithoutProblemsInput>
     create: XOR<UserCreateWithoutProblemsInput, UserUncheckedCreateWithoutProblemsInput>
@@ -13029,6 +16091,7 @@ export namespace Prisma {
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProblemsInput = {
@@ -13049,6 +16112,7 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SubmissionsUpsertWithWhereUniqueWithoutProblemInput = {
@@ -13126,6 +16190,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProblemInProblemList"> | Date | string
   }
 
+  export type DailyChallengeUpsertWithWhereUniqueWithoutProblemInput = {
+    where: DailyChallengeWhereUniqueInput
+    update: XOR<DailyChallengeUpdateWithoutProblemInput, DailyChallengeUncheckedUpdateWithoutProblemInput>
+    create: XOR<DailyChallengeCreateWithoutProblemInput, DailyChallengeUncheckedCreateWithoutProblemInput>
+  }
+
+  export type DailyChallengeUpdateWithWhereUniqueWithoutProblemInput = {
+    where: DailyChallengeWhereUniqueInput
+    data: XOR<DailyChallengeUpdateWithoutProblemInput, DailyChallengeUncheckedUpdateWithoutProblemInput>
+  }
+
+  export type DailyChallengeUpdateManyWithWhereWithoutProblemInput = {
+    where: DailyChallengeScalarWhereInput
+    data: XOR<DailyChallengeUpdateManyMutationInput, DailyChallengeUncheckedUpdateManyWithoutProblemInput>
+  }
+
+  export type DailyChallengeScalarWhereInput = {
+    AND?: DailyChallengeScalarWhereInput | DailyChallengeScalarWhereInput[]
+    OR?: DailyChallengeScalarWhereInput[]
+    NOT?: DailyChallengeScalarWhereInput | DailyChallengeScalarWhereInput[]
+    id?: StringFilter<"DailyChallenge"> | string
+    problemId?: StringFilter<"DailyChallenge"> | string
+    date?: DateTimeFilter<"DailyChallenge"> | Date | string
+    createdAt?: DateTimeFilter<"DailyChallenge"> | Date | string
+    updatedAt?: DateTimeFilter<"DailyChallenge"> | Date | string
+  }
+
   export type ProblemCreateWithoutSubmissionInput = {
     id?: string
     title: string
@@ -13145,6 +16236,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutSubmissionInput = {
@@ -13166,6 +16258,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutSubmissionInput = {
@@ -13191,6 +16284,7 @@ export namespace Prisma {
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubmissionInput = {
@@ -13211,11 +16305,38 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubmissionInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutSubmissionInput, UserUncheckedCreateWithoutSubmissionInput>
+  }
+
+  export type UserDailyChallengeSubmissionCreateWithoutSubmissionInput = {
+    id?: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutDailyProblemsInput
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput = {
+    id?: string
+    userId: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput = {
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+    create: XOR<UserDailyChallengeSubmissionCreateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput>
+  }
+
+  export type UserDailyChallengeSubmissionCreateManySubmissionInputEnvelope = {
+    data: UserDailyChallengeSubmissionCreateManySubmissionInput | UserDailyChallengeSubmissionCreateManySubmissionInput[]
+    skipDuplicates?: boolean
   }
 
   export type ProblemUpsertWithoutSubmissionInput = {
@@ -13248,6 +16369,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutSubmissionInput = {
@@ -13269,6 +16391,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type UserUpsertWithoutSubmissionInput = {
@@ -13300,6 +16423,7 @@ export namespace Prisma {
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmissionInput = {
@@ -13320,6 +16444,23 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutSubmissionInput = {
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+    update: XOR<UserDailyChallengeSubmissionUpdateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedUpdateWithoutSubmissionInput>
+    create: XOR<UserDailyChallengeSubmissionCreateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput>
+  }
+
+  export type UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutSubmissionInput = {
+    where: UserDailyChallengeSubmissionWhereUniqueInput
+    data: XOR<UserDailyChallengeSubmissionUpdateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedUpdateWithoutSubmissionInput>
+  }
+
+  export type UserDailyChallengeSubmissionUpdateManyWithWhereWithoutSubmissionInput = {
+    where: UserDailyChallengeSubmissionScalarWhereInput
+    data: XOR<UserDailyChallengeSubmissionUpdateManyMutationInput, UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionInput>
   }
 
   export type ProblemCreateWithoutHiddenTestCasesInput = {
@@ -13341,6 +16482,7 @@ export namespace Prisma {
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutHiddenTestCasesInput = {
@@ -13362,6 +16504,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutHiddenTestCasesInput = {
@@ -13387,6 +16530,7 @@ export namespace Prisma {
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTestCasesInput = {
@@ -13407,6 +16551,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTestCasesInput = {
@@ -13444,6 +16589,7 @@ export namespace Prisma {
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutHiddenTestCasesInput = {
@@ -13465,6 +16611,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type UserUpsertWithoutTestCasesInput = {
@@ -13496,6 +16643,7 @@ export namespace Prisma {
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTestCasesInput = {
@@ -13516,6 +16664,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProblemSolvedInput = {
@@ -13536,6 +16685,7 @@ export namespace Prisma {
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProblemSolvedInput = {
@@ -13556,6 +16706,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProblemSolvedInput = {
@@ -13582,6 +16733,7 @@ export namespace Prisma {
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutProblemSolvedInput = {
@@ -13603,6 +16755,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutProblemSolvedInput = {
@@ -13639,6 +16792,7 @@ export namespace Prisma {
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProblemSolvedInput = {
@@ -13659,6 +16813,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProblemUpsertWithoutProblemSolvedInput = {
@@ -13691,6 +16846,7 @@ export namespace Prisma {
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutProblemSolvedInput = {
@@ -13712,6 +16868,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemInProblemListCreateWithoutProblemListInput = {
@@ -13756,6 +16913,7 @@ export namespace Prisma {
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProblemListsInput = {
@@ -13776,6 +16934,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProblemListsInput = {
@@ -13828,6 +16987,7 @@ export namespace Prisma {
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProblemListsInput = {
@@ -13848,6 +17008,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProblemListCreateWithoutProblemsInput = {
@@ -13892,6 +17053,7 @@ export namespace Prisma {
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutProblemListsInput = {
@@ -13913,6 +17075,7 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutProblemListsInput = {
@@ -13979,6 +17142,7 @@ export namespace Prisma {
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutProblemListsInput = {
@@ -14000,6 +17164,295 @@ export namespace Prisma {
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemCreateWithoutDailyProblemsInput = {
+    id?: string
+    title: string
+    description: string
+    difficulty: $Enums.ProblemDifficulty
+    tags?: ProblemCreatetagsInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints: string
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    testCases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolution: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutProblemsInput
+    submission?: SubmissionsCreateNestedManyWithoutProblemInput
+    hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
+    problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
+    problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemUncheckedCreateWithoutDailyProblemsInput = {
+    id?: string
+    title: string
+    description: string
+    difficulty: $Enums.ProblemDifficulty
+    tags?: ProblemCreatetagsInput | string[]
+    userId: string
+    examples: JsonNullValueInput | InputJsonValue
+    constraints: string
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    testCases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolution: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
+    hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
+    problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
+    problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemCreateOrConnectWithoutDailyProblemsInput = {
+    where: ProblemWhereUniqueInput
+    create: XOR<ProblemCreateWithoutDailyProblemsInput, ProblemUncheckedCreateWithoutDailyProblemsInput>
+  }
+
+  export type ProblemUpsertWithoutDailyProblemsInput = {
+    update: XOR<ProblemUpdateWithoutDailyProblemsInput, ProblemUncheckedUpdateWithoutDailyProblemsInput>
+    create: XOR<ProblemCreateWithoutDailyProblemsInput, ProblemUncheckedCreateWithoutDailyProblemsInput>
+    where?: ProblemWhereInput
+  }
+
+  export type ProblemUpdateToOneWithWhereWithoutDailyProblemsInput = {
+    where?: ProblemWhereInput
+    data: XOR<ProblemUpdateWithoutDailyProblemsInput, ProblemUncheckedUpdateWithoutDailyProblemsInput>
+  }
+
+  export type ProblemUpdateWithoutDailyProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficulty?: EnumProblemDifficultyFieldUpdateOperationsInput | $Enums.ProblemDifficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: StringFieldUpdateOperationsInput | string
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    testCases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolution?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProblemsNestedInput
+    submission?: SubmissionsUpdateManyWithoutProblemNestedInput
+    hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
+    problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
+    problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemUncheckedUpdateWithoutDailyProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficulty?: EnumProblemDifficultyFieldUpdateOperationsInput | $Enums.ProblemDifficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    userId?: StringFieldUpdateOperationsInput | string
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: StringFieldUpdateOperationsInput | string
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    testCases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolution?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
+    hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
+    problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
+    problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
+  }
+
+  export type UserCreateWithoutDailyProblemsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    avatar?: string | null
+    role?: $Enums.UserRole
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationTokenExpiry?: Date | string | null
+    forgotPasswordToken?: string | null
+    forgotPasswordTokenExpiry?: Date | string | null
+    problems?: ProblemCreateNestedManyWithoutUserInput
+    submission?: SubmissionsCreateNestedManyWithoutUserInput
+    testCases?: TestCasesCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
+    problemLists?: ProblemListCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDailyProblemsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    avatar?: string | null
+    role?: $Enums.UserRole
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationTokenExpiry?: Date | string | null
+    forgotPasswordToken?: string | null
+    forgotPasswordTokenExpiry?: Date | string | null
+    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
+    submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
+    testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
+    problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDailyProblemsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDailyProblemsInput, UserUncheckedCreateWithoutDailyProblemsInput>
+  }
+
+  export type SubmissionsCreateWithoutDailyChallengeInput = {
+    id?: string
+    sourceCode: string
+    language: string
+    stdin?: string | null
+    stdout?: string | null
+    stdError?: string | null
+    compileOutput?: string | null
+    status: string
+    memory?: string | null
+    time?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problem: ProblemCreateNestedOneWithoutSubmissionInput
+    user: UserCreateNestedOneWithoutSubmissionInput
+  }
+
+  export type SubmissionsUncheckedCreateWithoutDailyChallengeInput = {
+    id?: string
+    userId: string
+    problemId: string
+    sourceCode: string
+    language: string
+    stdin?: string | null
+    stdout?: string | null
+    stdError?: string | null
+    compileOutput?: string | null
+    status: string
+    memory?: string | null
+    time?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubmissionsCreateOrConnectWithoutDailyChallengeInput = {
+    where: SubmissionsWhereUniqueInput
+    create: XOR<SubmissionsCreateWithoutDailyChallengeInput, SubmissionsUncheckedCreateWithoutDailyChallengeInput>
+  }
+
+  export type UserUpsertWithoutDailyProblemsInput = {
+    update: XOR<UserUpdateWithoutDailyProblemsInput, UserUncheckedUpdateWithoutDailyProblemsInput>
+    create: XOR<UserCreateWithoutDailyProblemsInput, UserUncheckedCreateWithoutDailyProblemsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDailyProblemsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDailyProblemsInput, UserUncheckedUpdateWithoutDailyProblemsInput>
+  }
+
+  export type UserUpdateWithoutDailyProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    problems?: ProblemUpdateManyWithoutUserNestedInput
+    submission?: SubmissionsUpdateManyWithoutUserNestedInput
+    testCases?: TestCasesUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
+    problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDailyProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
+    submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
+    testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
+    problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type SubmissionsUpsertWithoutDailyChallengeInput = {
+    update: XOR<SubmissionsUpdateWithoutDailyChallengeInput, SubmissionsUncheckedUpdateWithoutDailyChallengeInput>
+    create: XOR<SubmissionsCreateWithoutDailyChallengeInput, SubmissionsUncheckedCreateWithoutDailyChallengeInput>
+    where?: SubmissionsWhereInput
+  }
+
+  export type SubmissionsUpdateToOneWithWhereWithoutDailyChallengeInput = {
+    where?: SubmissionsWhereInput
+    data: XOR<SubmissionsUpdateWithoutDailyChallengeInput, SubmissionsUncheckedUpdateWithoutDailyChallengeInput>
+  }
+
+  export type SubmissionsUpdateWithoutDailyChallengeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceCode?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    stdin?: NullableStringFieldUpdateOperationsInput | string | null
+    stdout?: NullableStringFieldUpdateOperationsInput | string | null
+    stdError?: NullableStringFieldUpdateOperationsInput | string | null
+    compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    memory?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
+    user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
+  }
+
+  export type SubmissionsUncheckedUpdateWithoutDailyChallengeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    sourceCode?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    stdin?: NullableStringFieldUpdateOperationsInput | string | null
+    stdout?: NullableStringFieldUpdateOperationsInput | string | null
+    stdError?: NullableStringFieldUpdateOperationsInput | string | null
+    compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    memory?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProblemCreateManyUserInput = {
@@ -14059,6 +17512,14 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type UserDailyChallengeSubmissionCreateManyUserInput = {
+    id?: string
+    date?: Date | string
+    submissionId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ProblemUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -14078,6 +17539,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutUserInput = {
@@ -14099,6 +17561,7 @@ export namespace Prisma {
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateManyWithoutUserInput = {
@@ -14132,6 +17595,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
+    dailyChallenge?: UserDailyChallengeSubmissionUpdateManyWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateWithoutUserInput = {
@@ -14148,6 +17612,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateManyWithoutUserInput = {
@@ -14240,6 +17705,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserDailyChallengeSubmissionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submission?: SubmissionsUpdateOneRequiredWithoutDailyChallengeNestedInput
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SubmissionsCreateManyProblemInput = {
     id?: string
     userId: string
@@ -14279,6 +17768,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type DailyChallengeCreateManyProblemInput = {
+    id?: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type SubmissionsUpdateWithoutProblemInput = {
     id?: StringFieldUpdateOperationsInput | string
     sourceCode?: StringFieldUpdateOperationsInput | string
@@ -14293,6 +17789,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
+    dailyChallenge?: UserDailyChallengeSubmissionUpdateManyWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateWithoutProblemInput = {
@@ -14309,6 +17806,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateManyWithoutProblemInput = {
@@ -14392,6 +17890,59 @@ export namespace Prisma {
   export type ProblemInProblemListUncheckedUpdateManyWithoutProblemInput = {
     id?: StringFieldUpdateOperationsInput | string
     problemListId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyChallengeUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyChallengeUncheckedUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DailyChallengeUncheckedUpdateManyWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyChallengeSubmissionCreateManySubmissionInput = {
+    id?: string
+    userId: string
+    date?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyChallengeSubmissionUpdateWithoutSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDailyProblemsNestedInput
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedUpdateWithoutSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

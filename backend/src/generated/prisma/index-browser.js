@@ -206,6 +206,23 @@ exports.Prisma.ProblemInProblemListScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DailyChallengeScalarFieldEnum = {
+  id: 'id',
+  problemId: 'problemId',
+  date: 'date',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserDailyChallengeSubmissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  submissionId: 'submissionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -248,7 +265,9 @@ exports.Prisma.ModelName = {
   TestCases: 'TestCases',
   ProblemsSolved: 'ProblemsSolved',
   ProblemList: 'ProblemList',
-  ProblemInProblemList: 'ProblemInProblemList'
+  ProblemInProblemList: 'ProblemInProblemList',
+  DailyChallenge: 'DailyChallenge',
+  UserDailyChallengeSubmission: 'UserDailyChallengeSubmission'
 };
 
 /**

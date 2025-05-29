@@ -72,13 +72,12 @@ const ProblemsContainer = () => {
           console.error("Error fetching problems:", error);
         });
     };
-
     fetchProblems();
   }, [limit, page]);
 
   return (
     <>
-      <h1 className="text-2xl font-bold mt-8">Problems</h1>
+      <h1 className="text-2xl font-bold ">Problems</h1>
       {problems && problems.length > 0 ? (
         <div className="w-full gap-4">
           {problems.map((problem, index) => (

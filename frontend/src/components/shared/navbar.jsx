@@ -6,7 +6,8 @@ import { Button } from "../ui/button";
 import { UserAvatar } from "./user-avatar";
 
 const Navbar = () => {
-  const { authUser } = useAuthStore();
+  const { authUser, isResendingVerificationEmail, resendVerificationEmail } =
+    useAuthStore();
   const [streak, setStreak] = useState(0);
   const nav_menu = [
     {
@@ -61,6 +62,21 @@ const Navbar = () => {
           )}
         </span>
       </div>
+      {authUser && !authUser.isEmailVerified && (
+        <span className="w-full flex items-center justify-center bg-yellow-100 text-yellow-800 p-4">
+          <span>
+            Unverified email ! So your are restricted to 10 submissions and 1
+            contest ( submissions during contest counted )
+          </span>
+          <Button
+            className="ml-4 text-white"
+            onClick={() => resendVerificationEmail(authUser.email)}
+            disabled={isResendingVerificationEmail}
+          >
+            Resend Verification Email
+          </Button>
+        </span>
+      )}
     </div>
   );
 };

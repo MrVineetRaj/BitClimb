@@ -45,23 +45,7 @@ function App() {
       <Navbar />
 
       <div className="w-[100svw] flex flex-col items-center justify-center mt-4">
-        <div className="w-[95%] flex items-center justify-between ">
-          {authUser && !authUser.isEmailVerified && (
-            <span className="w-full flex items-center justify-center bg-yellow-100 text-yellow-800 p-4">
-              <span>
-                Your email is not verified. Please check your inbox for the
-                verification link.
-              </span>
-              <Button
-                className="ml-4 text-white"
-                onClick={() => resendVerificationEmail(authUser.email)}
-                disabled={isResendingVerificationEmail}
-              >
-                Resend Verification Email
-              </Button>
-            </span>
-          )}
-
+        <div className="w-[95%] flex flex-col items-center justify-between ">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/home" element={<HomePage />} />
@@ -69,6 +53,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
+            
             <Route path="/problem/:problemId" element={<ProblemPage />} />
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/" element={<AdminPanel />} />
