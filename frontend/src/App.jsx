@@ -14,6 +14,7 @@ import AdminPanel from "./pages/admin-panel";
 import AdminLayout from "./layouts/admin-layout";
 import CreateProblem from "./pages/admin/create-problem";
 import ProblemPage from "./pages/problem";
+import CreateContextPage from "./pages/admin/create-contest";
 
 function App() {
   const {
@@ -74,6 +75,10 @@ function App() {
               <Route
                 path="/admin/panel/create-problem"
                 element={<CreateProblem />}
+              />
+              <Route
+                path="/admin/panel/create-contest"
+                element={<CreateContextPage />} // Placeholder for Create Contest Page
               />
             </Route>
           </Routes>

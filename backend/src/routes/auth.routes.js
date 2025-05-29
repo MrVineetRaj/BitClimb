@@ -20,8 +20,13 @@ import {
   getListOfSolvedProblemsByUser,
   checkAuth,
   // updateUserName,
+
+  getRecentRegistrations,
 } from "../controllers/auth.controllers.js";
-import { authMiddleware } from "../middlewares/auth.middleware.js";
+import {
+  adminAuthMiddleware,
+  authMiddleware,
+} from "../middlewares/auth.middleware.js";
 const router = Router();
 
 //note : Allowed unauthorized access
@@ -52,5 +57,11 @@ router
 // router.route("/update-username").put(authMiddleware, updateUserName);
 
 router.get("/check", authMiddleware, checkAuth);
+router.get(
+  "/recent-registrations",
+  authMiddleware,
+  adminAuthMiddleware,
+  getRecentRegistrations
+);
 
 export default router;

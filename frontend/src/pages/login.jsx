@@ -38,7 +38,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="h-screen grid lg:grid-cols-2">
+    <div className="h-screen grid lg:grid-cols-2 w-full">
       <div className="flex flex-col justify-center items-center gap-8px">
         <form
           className="flex gap-8 flex-col justify-center items-center p-4"

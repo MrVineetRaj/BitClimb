@@ -1,5 +1,5 @@
-import React from "react";
-import { LayoutDashboard } from "lucide-react";
+import React, { useState } from "react";
+import { Flame, LayoutDashboard } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { Link } from "react-router";
 import { Button } from "../ui/button";
@@ -7,6 +7,7 @@ import { UserAvatar } from "./user-avatar";
 
 const Navbar = () => {
   const { authUser } = useAuthStore();
+  const [streak, setStreak] = useState(0);
   const nav_menu = [
     {
       name: "Home",
@@ -22,7 +23,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="w-[100svw] flex flex-col items-center justify-center bg-black/30 p-2">
+    <div className="w-[100svw] flex flex-col items-center justify-center bg-black/30 p-2 sticky top-0 z-50">
       <div className="w-[95%] md:w-[80%] lg:w-[60%] flex items-center justify-between ">
         <span className="flex items-center gap-2">
           <LayoutDashboard className="text-primary size-10" />
@@ -35,6 +36,16 @@ const Navbar = () => {
               {name}
             </Link>
           ))}
+
+          {authUser && (
+            <Link
+              to="/problem/17dd90d1-bc6e-4871-b882-be50d728f563"
+              className="flex "
+            >
+              <Flame className="text-primary size-5 inline-block" />
+              {streak}
+            </Link>
+          )}
 
           {authUser ? (
             <UserAvatar />

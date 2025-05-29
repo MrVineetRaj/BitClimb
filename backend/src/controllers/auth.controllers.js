@@ -63,7 +63,6 @@ const registerUser = asyncHandler(async (req, res) => {
     ),
   });
 
-
   const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
@@ -361,6 +360,24 @@ const checkAuth = asyncHandler(async (req, res) => {
 
   res.status(200).json(new ApiResponse(200, user, "User is authenticated"));
 });
+
+const getRecentRegistrations = asyncHandler(async (req, res) => {
+  const userCount = await db.user.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      name: true,
+    },
+    skip:0,
+    take: 10,
+  });
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, { userCount }, "Recent users fetched successfully")
+    );
+});
 export {
   registerUser,
   loginUser,
@@ -373,4 +390,5 @@ export {
   getSolvedProblemsByUser,
   getListOfSolvedProblemsByUser,
   checkAuth,
+  getRecentRegistrations,
 };

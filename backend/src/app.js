@@ -14,7 +14,7 @@ import problemRouter from "./routes/problems.route.js";
 import executeCodeRouter from "./routes/execute-code.routes.js";
 import problemListRouter from "./routes/problem-list.routes.js";
 import submissionRouter from "./routes/submission.routes.js";
-
+import adminRouter from "./routes/admin.routes.js";
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
 
@@ -41,6 +41,7 @@ app.use("/api/v1/problem", problemRouter);
 app.use("/api/v1/execute", executeCodeRouter);
 app.use("/api/v1/problem-list", problemListRouter);
 app.use("/api/v1/submission", submissionRouter);
+app.use("/api/v1/admin", adminRouter);
 
 // Optional fallthrough error handler
 app.use(function onError(err, req, res, next) {
