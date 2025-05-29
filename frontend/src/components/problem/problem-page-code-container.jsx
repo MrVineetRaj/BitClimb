@@ -114,9 +114,9 @@ const ProblemPageCodeContainer = ({
             {codeRunResult &&
               codeRunResult.length > 0 &&
               codeRunResult[idx].compile_output && (
-                <span className="grid grid-cols-2">
-                  <span className="text-xl font-semibold">Compile Output</span>
-                  <span>{compile_output}</span>
+                <span className="flex flex-col my-4">
+                  <span className="text-lg font-semibold text-gray">Execution description</span>
+                  <span>{codeRunResult[idx].compile_output}</span>
                 </span>
               )}
 

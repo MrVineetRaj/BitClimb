@@ -11,12 +11,21 @@ export const useAuthStore = create((set) => ({
   isVerifyingEmail: false,
   isResendingVerificationEmail: false,
   isLoggingOut: false,
+  isLoadingPublicProfile: false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
     try {
       const response = await axiosInstance.get("/auth/check");
-      set({ authUser: response.data.data, isCheckingAuth: false });
+      set({
+        authUser: {
+          ...response.data.data,
+          avatar:
+            response.data.data.avatar ||
+            "https://avatar.iran.liara.run/public/boy",
+        },
+        isCheckingAuth: false,
+      });
       console.log("Auth User:", response);
     } catch (error) {
       set({ authUser: null, isCheckingAuth: false });
@@ -185,6 +194,30 @@ export const useAuthStore = create((set) => ({
       throw error;
     } finally {
       set({ isResendingVerificationEmail: false });
+    }
+  },
+
+  getPublicUserProfile: async (profileId) => {
+    set({ isLoadingPublicProfile: true });
+    try {
+      const response = await axiosInstance.get(
+        `/auth/public-profile/${profileId}`
+      );
+      set({ isLoadingPublicProfile: false });
+      return response.data.data;
+    } catch (error) {
+      set({ isLoadingPublicProfile: false });
+      if (error instanceof AxiosError) {
+        const errorMessage =
+          error.response?.data?.message || "Failed to fetch profile";
+        toast.error("Profile Fetch Failed", {
+          description: errorMessage,
+          duration: 3000,
+        });
+      }
+      return null;
+    } finally {
+      set({ isLoadingPublicProfile: false });
     }
   },
 }));

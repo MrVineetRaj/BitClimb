@@ -369,7 +369,7 @@ const getRecentRegistrations = asyncHandler(async (req, res) => {
     select: {
       name: true,
     },
-    skip:0,
+    skip: 0,
     take: 10,
   });
   res
@@ -377,6 +377,86 @@ const getRecentRegistrations = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(200, { userCount }, "Recent users fetched successfully")
     );
+});
+
+const getPublicUserProfile = asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+
+  const user = await db.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      id: true,
+      name: true,
+      createdAt: true,
+    },
+  });
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  const totalHardQuestions = await db.problem.count({
+    where: {
+      difficulty: "HARD",
+    },
+  });
+
+  const totalMediumQuestions = await db.problem.count({
+    where: {
+      difficulty: "MEDIUM",
+    },
+  });
+  const totalEasyQuestions = await db.problem.count({
+    where: {
+      difficulty: "EASY",
+    },
+  });
+
+  const totalHardSolved = await db.problemsSolved.count({
+    where: {
+      userId: userId,
+      problem: {
+        difficulty: "HARD",
+      },
+    },
+  });
+  const totalMediumSolved = await db.problemsSolved.count({
+    where: {
+      userId: userId,
+      problem: {
+        difficulty: "MEDIUM",
+      },
+    },
+  });
+  const totalEasySolved = await db.problemsSolved.count({
+    where: {
+      userId: userId,
+      problem: {
+        difficulty: "EASY",
+      },
+    },
+  });
+
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        user,
+        totalHardQuestions,
+        totalMediumQuestions,
+        totalEasyQuestions,
+        totalHardSolved,
+        totalMediumSolved,
+        totalEasySolved,
+        totalSolved: totalHardSolved + totalMediumSolved + totalEasySolved,
+        totalQuestions:
+          totalHardQuestions + totalMediumQuestions + totalEasyQuestions,
+      },
+      "User profile fetched"
+    )
+  );
 });
 export {
   registerUser,
@@ -391,4 +471,5 @@ export {
   getListOfSolvedProblemsByUser,
   checkAuth,
   getRecentRegistrations,
+  getPublicUserProfile,
 };

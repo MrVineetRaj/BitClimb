@@ -2,15 +2,35 @@ import { db } from "../libs/db.js";
 
 import { ApiResponse, asyncHandler } from "../libs/helpers.js";
 export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
-  const { userId } = req.query;
+  const { userId, isAccepted } = req.query;
   const limit = parseInt(req.query.limit) || 10;
   const page = parseInt(req.query.page) || 1;
+
+  let whereCondition = {
+    userId: userId,
+  };
+
+  if (isAccepted) {
+    whereCondition = {
+      ...whereCondition,
+      status: "ACCEPTED",
+    };
+  }
+
   const submissions = await db.submissions.findMany({
     where: {
       userId: userId,
     },
     orderBy: {
       createdAt: "desc",
+    },
+    include: {
+      problem: {
+        select: {
+          title: true,
+          difficulty: true,
+        },
+      },
     },
     skip: (page - 1) * limit,
     take: limit,
@@ -24,13 +44,15 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
     })) / limit
   );
 
-  res.status(200).json(
-    new ApiResponse({
-      statusCode: 200,
-      message: "Submissions count fetched successfully",
-      data: { submissions, totalPages, currentPage: page, limit },
-    })
-  );
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { submissions, totalPages, currentPage: page, limit },
+        "Submissions count fetched successfully"
+      )
+    );
 });
 
 export const getSubmissionsByProblemForUser = asyncHandler(async (req, res) => {

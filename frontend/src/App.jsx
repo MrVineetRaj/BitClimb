@@ -15,6 +15,7 @@ import AdminLayout from "./layouts/admin-layout";
 import CreateProblem from "./pages/admin/create-problem";
 import ProblemPage from "./pages/problem";
 import CreateContextPage from "./pages/admin/create-contest";
+import ProfilePage from "./pages/profile-page";
 
 function App() {
   const {
@@ -53,7 +54,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
-            
+            <Route path="/profile/:profileId" element={<ProfilePage />} />
             <Route path="/problem/:problemId" element={<ProblemPage />} />
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/" element={<AdminPanel />} />

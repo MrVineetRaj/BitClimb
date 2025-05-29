@@ -20,8 +20,8 @@ import {
   getListOfSolvedProblemsByUser,
   checkAuth,
   // updateUserName,
-
   getRecentRegistrations,
+  getPublicUserProfile,
 } from "../controllers/auth.controllers.js";
 import {
   adminAuthMiddleware,
@@ -63,5 +63,7 @@ router.get(
   adminAuthMiddleware,
   getRecentRegistrations
 );
+
+router.get("/public-profile/:userId", getPublicUserProfile);
 
 export default router;

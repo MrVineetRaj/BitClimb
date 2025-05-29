@@ -22,6 +22,7 @@ export const useProblemStore = create((set) => ({
         stdin,
         expected_outputs,
       });
+
       set({ isRunningCode: false });
       toast.success("Execution Successful");
       return response.data.data;
@@ -153,6 +154,31 @@ export const useProblemStore = create((set) => ({
         });
       } else {
         toast.error("Fetch Problems Failed", {
+          description: "An unexpected error occurred",
+          duration: 3000,
+        });
+      }
+      throw error;
+    }
+  },
+
+  getAllUserSubmissions: async (userId, limit = 10, page = 1, isAccepted) => {
+    try {
+      const response = await axiosInstance.get(
+        `/submission/user?userId=${userId}&limit=${limit}&page=${page}&isAccepted=${isAccepted}`
+      );
+      console.log("User Submissions Response:", response.data);
+      return response.data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorMessage =
+          error.response?.data?.message || "Failed to fetch user submissions";
+        toast.error("Fetch User Submissions Failed", {
+          description: errorMessage,
+          duration: 3000,
+        });
+      } else {
+        toast.error("Fetch User Submissions Failed", {
           description: "An unexpected error occurred",
           duration: 3000,
         });

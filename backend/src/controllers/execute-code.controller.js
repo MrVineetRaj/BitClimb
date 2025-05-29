@@ -55,11 +55,33 @@ export const runCode = asyncHandler(async (req, res) => {
   const tokens = submissionsResult.map((res) => res.token);
 
   // step 4: poll for results
-  const results = await pollBatchResults(tokens);
+  const pollingResults = await pollBatchResults(tokens);
 
+  console.log("Results from Judge0 API:", pollingResults);
+
+  const finalResults = pollingResults.map((result) => {
+    return {
+      ...result,
+      stdout: result.stdout
+        ? Buffer.from(result.stdout, "base64").toString("utf-8")
+        : "",
+      compile_output: result.compile_output
+        ? Buffer.from(result.compile_output, "base64").toString("utf-8")
+        : "",
+      message: result.message
+        ? Buffer.from(result.message, "base64").toString("utf-8")
+        : "",
+      stderr: result.stderr
+        ? Buffer.from(result.stderr, "base64").toString("utf-8")
+        : "",
+    };
+  });
+
+  // console.log("Final results after processing:", finalResults);
   let isAllPassed = true;
-  const detailedResults = results.map((res, idx) => {
-    const { stdout, status, compile_output } = res;
+  const detailedResults = finalResults.map((res, idx) => {
+    const { stdout, status, compile_output, message } = res;
+    console.log(compile_output);
     const isPassed = status.id === 3;
 
     if (!isPassed) {
@@ -71,7 +93,7 @@ export const runCode = asyncHandler(async (req, res) => {
       expected_output: expected_outputs[idx] || "",
       output: stdout.trim(),
       status: status.description,
-      compile_output: compile_output || "",
+      compile_output: compile_output ? compile_output : message ? message : "",
     };
   });
 
@@ -124,11 +146,29 @@ export const submitCode = asyncHandler(async (req, res) => {
   const tokens = submissionsResult.map((res) => res.token);
 
   // step 4: poll for results
-  const results = await pollBatchResults(tokens);
+  const pollingResults = await pollBatchResults(tokens);
+
+  const results = pollingResults.map((result) => {
+    return {
+      ...result,
+      stdout: result.stdout
+        ? Buffer.from(result.stdout, "base64").toString("utf-8")
+        : "",
+      compile_output: result.compile_output
+        ? Buffer.from(result.compile_output, "base64").toString("utf-8")
+        : "",
+      message: result.message
+        ? Buffer.from(result.message, "base64").toString("utf-8")
+        : "",
+      stderr: result.stderr
+        ? Buffer.from(result.stderr, "base64").toString("utf-8")
+        : "",
+    };
+  });
 
   let isAllPassed = true;
   const detailedResults = results.map((res, idx) => {
-    const { stdout, status, time, memory, compile_output } = res;
+    const { stdout, status, time, memory, compile_output, message } = res;
     const isPassed = status.id === 3;
 
     if (!isPassed) {
@@ -142,7 +182,7 @@ export const submitCode = asyncHandler(async (req, res) => {
       status: status.description,
       time: time,
       memory: memory,
-      compile_output: compile_output || "",
+      compile_output: compile_output ? compile_output : message ? message : "",
     };
   });
 

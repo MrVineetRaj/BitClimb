@@ -253,166 +253,184 @@ const ProblemPageDetailContainer = ({
 
       <TabsContent
         value="submissions"
-        className=" bg-primary/10 rounded-xl p-4 overflow-y-scroll max-h-[700px] "
+        className=" bg-primary/10 rounded-xl p-4 pr-2 max-h-[700px] "
       >
-        <div className="p-2">
-          <h2 className="text-2xl font-bold ">Submissions</h2>
-        </div>
-        <hr className="mt-2" />
-        {submitCodeResult && submitCodeResult.status === "ACCEPTED" && (
-          <>
-            <h1 className="text-lg mt-4 font-bold text-center">
-              Current Submission
-            </h1>
-            <span className="flex gap-4 items-center my-4">
-              <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
-                {submitCodeResult?.time}
-              </span>
-              <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
-                {submitCodeResult?.memory}
-              </span>
-            </span>
-
-            <span className="w-full flex justify-around bg-black/30 p-4 rounded-2xl">
-              <span className="text-green-500 font-bold">
-                {submitCodeResult?.status}
-              </span>
-              <span>{submitCodeResult?.language}</span>
-              <span className="flex gap-2">
-                <Stars className="size-5" />
-                AI Analysis
-              </span>
-              <span className="flex gap-2">
-                <SquareArrowOutUpRight className="size-5" />
-                View Code
-              </span>
-            </span>
-          </>
-        )}
-        {submitCodeResult && submitCodeResult.status === "FAILED" && (
-          <>
-            <span className="flex items-center justify-between">
-              <h1 className="text-xl font-bold text-red-500">WRONG ANSWER</h1>
-              <span className="flex-1 py-4 flex justify-end  items-center gap-4 w-full">
-                <SquareArrowOutUpRight className="size-5" />
-                View Code
-              </span>
-            </span>
-            <span className="flex justify-between items-center">
-              <span className=" py-4 flex flex-col justify-end  items-start gap- w-full">
-                <span className="font-bold">For Input {":"}</span>
-                <span className="pl-4">{submitCodeResult?.stdin}</span>
-              </span>
-            </span>
-            <span className="flex gap-4 items-center">
-              <span className="flex-1 py-4 flex flex-col items-center bg-red-500/30">
-                <span className="font-bold">Your Output</span>
-                {submitCodeResult?.stdout}
-              </span>
-              <span className="flex-1 py-4 flex flex-col items-center bg-green-500/30">
-                <span className="font-bold">Expected Output</span>
-                {submitCodeResult?.expected_output || 0}
-              </span>
-            </span>
-          </>
-        )}
-        {userSubmissions && userSubmissions.length > 0 ? (
-          userSubmissions?.map((submission, idx) => {
-            return (
-              <div
-                className="bg-primary/10 p-4 relative my-4"
-                key={submission?.id}
-              >
-                {submission?.status === "ACCEPTED" && (
-                  <>
-                    <span className="absolute right-1 top-1 text-gray-600 flex items-center gap-2 text-sm">
-                      <Calendar className="size-3" />{" "}
-                      {submission?.createdAt.split("T")[1].split(":")[0] +
-                        ":" +
-                        submission?.createdAt.split("T")[1].split(":")[1] +
-                        " " +
-                        submission?.createdAt.split("T")[0]}
-                    </span>
-                    <span className="flex gap-4 items-center my-4">
-                      <span className="flex-1 py-4 flex  justify-center items-center bg-black/30 rounded-xl">
-                        <span className="flex gap-2">
-                          <Clock className="size-5" />
-                          {submission?.time}
-                        </span>
-                      </span>
-
-                      <span className="flex-1 py-4 flex gap-2 justify-center items-center bg-black/30 rounded-xl">
-                        <span className="flex gap-2">
-                          <MemoryStick className="size-5" />
-                          {submission?.memory}
-                        </span>
-                      </span>
-                    </span>
-
-                    <span className="w-full flex justify-around bg-black/30 p-4 rounded-2xl">
-                      <span className="text-green-500 font-bold">
-                        {submission?.status}
-                      </span>
-                      <span>{submission?.language}</span>
-                      <span className="flex gap-2 cursor-pointer">
-                        <Stars className="size-5" />
-                        Analyze
-                      </span>
-                      <span className="flex gap-2 cursor-pointer">
-                        <SquareArrowOutUpRight className="size-5" />
-                        View Code
-                      </span>
-                    </span>
-                  </>
-                )}
-                {submission?.status === "FAILED" && (
-                  <>
-                    <span className="absolute right-1 top-1 text-gray-600 flex items-center gap-2 text-sm">
-                      <Calendar className="size-3" />{" "}
-                      {submission?.createdAt.split("T")[1].split(":")[0] +
-                        ":" +
-                        submission?.createdAt.split("T")[1].split(":")[1] +
-                        " " +
-                        submission?.createdAt.split("T")[0]}
-                    </span>
-                    <span className="flex items-center justify-between">
-                      <h1 className="text-xl font-bold text-red-500">
-                        WRONG ANSWER
-                      </h1>
-                      <span className="flex-1 py-4 flex justify-end  items-center gap-4 w-full">
-                        <SquareArrowOutUpRight className="size-5" />
-                        View Code
-                      </span>
-                    </span>
-                    <span className="flex justify-between items-center">
-                      <span className=" py-4 flex flex-col justify-end  items-start gap- w-full">
-                        <span className="font-bold">For Input {":"}</span>
-                        <span className="pl-4">{submission?.stdin}</span>
-                      </span>
-                    </span>
-                    <span className="flex gap-4 items-center">
-                      <span className="flex-1 py-4 flex flex-col items-center bg-red-500/30">
-                        <span className="font-bold">Your Output</span>
-                        {submission?.stdout}
-                      </span>
-                      <span className="flex-1 py-4 flex flex-col items-center bg-green-500/30">
-                        <span className="font-bold">Expected Output</span>
-                        {submission?.expected_output || 0}
-                      </span>
-                    </span>
-                  </>
-                )}
-              </div>
-            );
-          })
-        ) : (
-          <div className="flex flex-col items-center justify-center ">
-            <BringToFront className="text-gray-500/20 size-50 mt-8" />
-            <h1 className="text-2xl font-bold text-gray-600">
-              Nothing To Display
-            </h1>
+        <div
+          className="w-full h-full overflow-y-scroll pr-2"
+          style={{ scrollbarWidth: "thin", scrollbarColor: "#ccc transparent" }}
+        >
+          <div className="p-2">
+            <h2 className="text-2xl font-bold ">Submissions</h2>
           </div>
-        )}
+          <hr className="mt-2" />
+          {submitCodeResult && submitCodeResult.status === "ACCEPTED" && (
+            <>
+              <h1 className="text-lg mt-4 font-bold text-center">
+                Current Submission
+              </h1>
+              <span className="flex gap-4 items-center my-4">
+                <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
+                  {submitCodeResult?.time}
+                </span>
+                <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
+                  {submitCodeResult?.memory}
+                </span>
+              </span>
+
+              <span className="w-full flex justify-around bg-black/30 p-4 rounded-2xl">
+                <span className="text-green-500 font-bold">
+                  {submitCodeResult?.status}
+                </span>
+                <span>{submitCodeResult?.language}</span>
+                <span className="flex gap-2">
+                  <Stars className="size-5" />
+                  AI Analysis
+                </span>
+                <span className="flex gap-2">
+                  <SquareArrowOutUpRight className="size-5" />
+                  View Code
+                </span>
+              </span>
+            </>
+          )}
+          {submitCodeResult && submitCodeResult.status === "FAILED" && (
+            <>
+              <span className="flex items-center justify-between">
+                <h1 className="text-xl font-bold text-red-500">WRONG ANSWER</h1>
+                <span className="flex-1 py-4 flex justify-end  items-center gap-4 w-full">
+                  <SquareArrowOutUpRight className="size-5" />
+                  View Code
+                </span>
+              </span>
+              <span className="flex justify-between items-center">
+                <span className=" py-4 flex flex-col justify-end  items-start gap- w-full">
+                  <span className="font-bold">For Input {":"}</span>
+                  <span className="pl-4">{submitCodeResult?.stdin}</span>
+                </span>
+              </span>
+              <span className="flex gap-4 items-center">
+                <span className="flex-1 py-4 flex flex-col items-center bg-red-500/30">
+                  <span className="font-bold">Your Output</span>
+                  {submitCodeResult?.stdout}
+                </span>
+                <span className="flex-1 py-4 flex flex-col items-center bg-green-500/30">
+                  <span className="font-bold">Expected Output</span>
+                  {submitCodeResult?.expected_output || 0}
+                </span>
+              </span>
+            </>
+          )}
+
+          {userSubmissions && userSubmissions.length > 0 ? (
+            userSubmissions?.map((submission, idx) => {
+              return (
+                <div
+                  className="bg-primary/10 p-4 relative my-4"
+                  key={submission?.id}
+                >
+                  {submission?.status === "ACCEPTED" && (
+                    <>
+                      <span className="absolute right-1 top-1 text-gray-600 flex items-center gap-2 text-sm">
+                        <Calendar className="size-3" />{" "}
+                        {submission?.createdAt.split("T")[1].split(":")[0] +
+                          ":" +
+                          submission?.createdAt.split("T")[1].split(":")[1] +
+                          " " +
+                          submission?.createdAt.split("T")[0]}
+                      </span>
+                      <span className="flex gap-4 items-center my-4">
+                        <span className="flex-1 py-4 flex  justify-center items-center bg-black/30 rounded-xl">
+                          <span className="flex gap-2">
+                            <Clock className="size-5" />
+                            {submission?.time}
+                          </span>
+                        </span>
+
+                        <span className="flex-1 py-4 flex gap-2 justify-center items-center bg-black/30 rounded-xl">
+                          <span className="flex gap-2">
+                            <MemoryStick className="size-5" />
+                            {submission?.memory}
+                          </span>
+                        </span>
+                      </span>
+
+                      <span className="w-full flex justify-around bg-black/30 p-4 rounded-2xl">
+                        <span className="text-green-500 font-bold">
+                          {submission?.status}
+                        </span>
+                        <span>{submission?.language}</span>
+                        <span className="flex gap-2 cursor-pointer">
+                          <Stars className="size-5" />
+                          Analyze
+                        </span>
+                        <span className="flex gap-2 cursor-pointer">
+                          <SquareArrowOutUpRight className="size-5" />
+                          View Code
+                        </span>
+                      </span>
+                    </>
+                  )}
+                  {submission?.status === "FAILED" && (
+                    <>
+                      <span className="absolute right-1 top-1 text-gray-600 flex items-center gap-2 text-sm">
+                        <Calendar className="size-3" />{" "}
+                        {submission?.createdAt.split("T")[1].split(":")[0] +
+                          ":" +
+                          submission?.createdAt.split("T")[1].split(":")[1] +
+                          " " +
+                          submission?.createdAt.split("T")[0]}
+                      </span>
+                      <span className="flex items-center justify-between">
+                        <h1 className="text-xl font-bold text-red-500">
+                          WRONG ANSWER
+                        </h1>
+                        <span className="flex-1 py-4 flex justify-end  items-center gap-4 w-full">
+                          <SquareArrowOutUpRight className="size-5" />
+                          View Code
+                        </span>
+                      </span>
+                      <span className="flex justify-between items-center">
+                        <span className=" py-4 flex flex-col justify-end  items-start gap- w-full">
+                          <span className="font-bold">For Input {":"}</span>
+                          <span className="pl-4">{submission?.stdin}</span>
+                        </span>
+                      </span>
+                      {submission?.compileOutput && (
+                        <span className="flex justify-between items-center overflow-x-hidden">
+                          <span className=" py-4 flex flex-col justify-end  items-start gap- w-full">
+                            <span className="font-bold">
+                              Execution description {":"}
+                            </span>
+                            <span className="pl-4 text-wrap">
+                              {submission?.compileOutput}
+                            </span>
+                          </span>
+                        </span>
+                      )}
+                      <span className="flex gap-4 items-center">
+                        <span className="flex-1 py-4 flex flex-col items-center bg-red-500/30">
+                          <span className="font-bold">Your Output</span>
+                          {submission?.stdout || "-"}
+                        </span>
+                        <span className="flex-1 py-4 flex flex-col items-center bg-green-500/30">
+                          <span className="font-bold">Expected Output</span>
+                          {submission?.expected_output || 0}
+                        </span>
+                      </span>
+                    </>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <div className="flex flex-col items-center justify-center ">
+              <BringToFront className="text-gray-500/20 size-50 mt-8" />
+              <h1 className="text-2xl font-bold text-gray-600">
+                Nothing To Display
+              </h1>
+            </div>
+          )}
+        </div>
       </TabsContent>
     </Tabs>
   );

@@ -38,7 +38,7 @@ export const pollBatchResults = async (tokens) => {
       const { data } = await axios.get(
         `${process.env.JUDGE0_API_URL}/submissions/batch?tokens=${tokens.join(
           ","
-        )}&base64_encoded=false`
+        )}&base64_encoded=true`
       );
 
       // Check if all results are ready
