@@ -81,7 +81,6 @@ export const useProblemStore = create((set) => ({
           duration: 3000,
         });
       }
-      
     } finally {
       set({ isSubmittingCode: false });
     }
@@ -116,7 +115,7 @@ export const useProblemStore = create((set) => ({
       const response = await axiosInstance.get(
         `/submission/problem/${problemId}`
       );
-      console.log("JJJJJJJJJ",response.data)
+      console.log("JJJJJJJJJ", response.data);
       return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -136,5 +135,29 @@ export const useProblemStore = create((set) => ({
     }
 
     // get
+  },
+
+  getAllProblems: async (limit = 10, page = 1) => {
+    try {
+      const response = await axiosInstance.get(
+        `/problem/get-problems?limit=${limit}&page=${page}`
+      );
+      return response.data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorMessage =
+          error.response?.data?.message || "Failed to fetch problems";
+        toast.error("Fetch Problems Failed", {
+          description: errorMessage,
+          duration: 3000,
+        });
+      } else {
+        toast.error("Fetch Problems Failed", {
+          description: "An unexpected error occurred",
+          duration: 3000,
+        });
+      }
+      throw error;
+    }
   },
 }));

@@ -5,6 +5,7 @@ import {
   pollBatchResults,
   submissionBatch,
 } from "../libs/judg0.lib.js";
+import { getUserIdIfAuthenticated } from "../libs/utils.js";
 
 export const createProblem = asyncHandler(async (req, res) => {
   const {
@@ -107,6 +108,7 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
   const difficultySort = req.query.difficultySort || "asc";
   const difficultyFilter = req.query.difficulty || null;
+
   const problems = await db.problem.findMany({
     orderBy: {
       createdAt: "desc",
@@ -122,11 +124,46 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   const totalProblems = await db.problem.count();
   const totalPages = Math.ceil(totalProblems / limit);
 
+  const userId = await getUserIdIfAuthenticated(req);
+
+  if (!userId) {
+    res.status(200).json(
+      new ApiResponse(
+        200,
+        {
+          problems,
+          totalPages,
+          currentPage: page,
+          limit,
+        },
+        "Problems fetched successfully"
+      )
+    );
+    return;
+  }
+
+  const SolvedProblems = Promise.all(
+    problems.map(async (problem) => {
+      const solved = await db.problemsSolved.findFirst({
+        where: {
+          userId: userId,
+          problemId: problem.id,
+        },
+      });
+      return {
+        ...problem,
+        solved: !!solved,
+      };
+    })
+  );
+
+  const problemsWithSolvedStatus = await SolvedProblems;
+
   res.status(200).json(
     new ApiResponse(
       200,
       {
-        problems,
+        problems: problemsWithSolvedStatus,
         totalPages,
         currentPage: page,
         limit,

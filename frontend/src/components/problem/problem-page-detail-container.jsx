@@ -1,9 +1,11 @@
 import {
   BringToFront,
   Calendar,
+  Clock,
   Copy,
   Lightbulb,
   Lock,
+  MemoryStick,
   SquareArrowOutUpRight,
   Stars,
 } from "lucide-react";
@@ -332,11 +334,18 @@ const ProblemPageDetailContainer = ({
                         submission?.createdAt.split("T")[0]}
                     </span>
                     <span className="flex gap-4 items-center my-4">
-                      <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
-                        {submission?.time}
+                      <span className="flex-1 py-4 flex  justify-center items-center bg-black/30 rounded-xl">
+                        <span className="flex gap-2">
+                          <Clock className="size-5" />
+                          {submission?.time}
+                        </span>
                       </span>
-                      <span className="flex-1 py-4 flex justify-center items-center bg-black/30 rounded-xl">
-                        {submission?.memory}
+
+                      <span className="flex-1 py-4 flex gap-2 justify-center items-center bg-black/30 rounded-xl">
+                        <span className="flex gap-2">
+                          <MemoryStick className="size-5" />
+                          {submission?.memory}
+                        </span>
                       </span>
                     </span>
 
@@ -345,11 +354,11 @@ const ProblemPageDetailContainer = ({
                         {submission?.status}
                       </span>
                       <span>{submission?.language}</span>
-                      <span className="flex gap-2">
+                      <span className="flex gap-2 cursor-pointer">
                         <Stars className="size-5" />
-                        AI Analysis
+                        Analyze
                       </span>
-                      <span className="flex gap-2">
+                      <span className="flex gap-2 cursor-pointer">
                         <SquareArrowOutUpRight className="size-5" />
                         View Code
                       </span>
@@ -358,6 +367,14 @@ const ProblemPageDetailContainer = ({
                 )}
                 {submission?.status === "FAILED" && (
                   <>
+                    <span className="absolute right-1 top-1 text-gray-600 flex items-center gap-2 text-sm">
+                      <Calendar className="size-3" />{" "}
+                      {submission?.createdAt.split("T")[1].split(":")[0] +
+                        ":" +
+                        submission?.createdAt.split("T")[1].split(":")[1] +
+                        " " +
+                        submission?.createdAt.split("T")[0]}
+                    </span>
                     <span className="flex items-center justify-between">
                       <h1 className="text-xl font-bold text-red-500">
                         WRONG ANSWER
