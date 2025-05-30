@@ -5,7 +5,6 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   const { userId, isAccepted } = req.query;
   const limit = parseInt(req.query.limit) || 10;
   const page = parseInt(req.query.page) || 1;
- 
 
   let whereCondition = {
     userId: userId,
@@ -14,7 +13,7 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   if (isAccepted === "true") {
     whereCondition = {
       ...whereCondition,
-      status: "ACCEPTED",
+      status: "Accepted",
     };
   }
 
@@ -36,11 +35,10 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   });
 
   const submissionsCnt = await db.submissions.count({
-    where: whereCondition
+    where: whereCondition,
   });
 
   const totalPages = Math.ceil(submissionsCnt / limit);
-  
 
   res
     .status(200)
@@ -101,3 +99,37 @@ export const getSubmissionById = asyncHandler(async (req, res) => {
     })
   );
 });
+
+export const getSubmissionsCntPerYearForPublicProfile = asyncHandler(
+  async (req, res) => {
+    const { userId } = req.params;
+    const { year } = req.query;
+
+    const result = await db.$queryRaw`
+    SELECT 
+      DATE("createdAt") AS date, 
+      COUNT(*) AS count 
+    FROM "Submissions"
+    WHERE "userId" = ${userId}
+      AND EXTRACT(YEAR FROM "createdAt") = ${Number(year)}
+    GROUP BY DATE("createdAt")
+    ORDER BY date ASC;
+  `;
+    // Convert BigInt count to Number
+    const safeResult = result.map((entry) => ({
+      date: entry.date,
+      count: Number(entry.count),
+    }));
+
+    console.log("Result:", safeResult);
+    res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          { result: safeResult },
+          "Submissions per year fetched successfully"
+        )
+      );
+  }
+);

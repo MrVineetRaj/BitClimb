@@ -5,6 +5,7 @@ import {
   getSubmissionById,
   getSubmissionsByProblemForUser,
   getAllSubmissionsOfUser,
+  getSubmissionsCntPerYearForPublicProfile,
 } from "../controllers/submission.controller.js";
 
 const submissionRouter = express.Router();
@@ -16,5 +17,7 @@ submissionRouter.get("/problem/:problemId",authMiddleware, getSubmissionsByProbl
 
 // Route to get a submission by its ID
 submissionRouter.get("/:submissionId", authMiddleware, getSubmissionById);
+
+submissionRouter.get("/heatmap-submission-count/:userId", getSubmissionsCntPerYearForPublicProfile);
 
 export default submissionRouter;

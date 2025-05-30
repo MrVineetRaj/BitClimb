@@ -16,7 +16,6 @@ import problemListRouter from "./routes/problem-list.routes.js";
 import submissionRouter from "./routes/submission.routes.js";
 import adminRouter from "./routes/admin.routes.js";
 import streakRouter from "./routes/streak.routes.js";
-import axios from "axios";
 import { addNewDailyChallenge } from "./controllers/streak.controllers.js";
 import aiRouter from "./routes/ai.routes.js";
 let isProduction = process.env.NODE_ENV === "production";
@@ -76,6 +75,6 @@ app.use(function onError(err, req, res, next) {
 
 setInterval(async () => {
   await addNewDailyChallenge();
-}, 1000 * 60 * 60 * 2);
+}, 1000 * 60*10);
 
 export default app;

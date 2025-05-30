@@ -187,4 +187,28 @@ export const useProblemStore = create((set) => ({
       throw error;
     }
   },
+
+  getUserHeatMap: async (userId, year) => {
+    try {
+      const response = await axiosInstance.get(
+        `/submission/heatmap-submission-count/${userId}?year=${year}`
+      );
+      return response.data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorMessage =
+          error.response?.data?.message || "Failed to fetch heatmap data";
+        toast.error("Fetch Heatmap Failed", {
+          description: errorMessage,
+          duration: 3000,
+        });
+      } else {
+        toast.error("Fetch Heatmap Failed", {
+          description: "An unexpected error occurred",
+          duration: 3000,
+        });
+      }
+      throw error;
+    }
+  },
 }));

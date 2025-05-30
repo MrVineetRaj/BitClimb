@@ -316,29 +316,18 @@ const SubmissionContainerForProfile = ({ profileId }) => {
         </TabsContent>
 
         <TabsContent value="accepted-submissions" className="">
-          <div className="">
+          <div className="flex flex-col gap-6 mt-4">
             {acceptedSubmissions &&
             acceptedSubmissions.length &&
             acceptedSubmissions.length > 0 ? (
               acceptedSubmissions?.map((submission, idx) => (
-                // <>
-                <span
-                  className={`flex items-center justify-between p-2 hover:bg-primary/20 transition-all duration-200 cursor-pointer ${
-                    idx % 2 == 0 ? "bg-primary/10" : ""
-                  }`}
-                  key={idx * 100}
-                >
-                  <span>{submission?.problem?.title}</span>
-                  <span
-                    className={`${
-                      submission?.status === "ACCEPTED"
-                        ? "text-green-500"
-                        : "text-red-500"
-                    } font-bold`}
-                  >
-                    {submission?.status}
-                  </span>
-                </span>
+                <AcceptedSubmission
+                  submission={submission}
+                  idx={idx}
+                  problemDescription={submission?.problem?.description}
+                  fetchSubmissionsByProblem={() => {}}
+                  key={submission?.id}
+                />
               ))
             ) : (
               <p>No submissions found.</p>
