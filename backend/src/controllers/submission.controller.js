@@ -34,6 +34,7 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
     skip: (page - 1) * limit,
     take: limit,
   });
+
   const submissionsCnt = await db.submissions.count({
     where: whereCondition
   });

@@ -11,11 +11,8 @@ export const runCode = asyncHandler(async (req, res) => {
   const { problemId } = req.params;
   const { source_code, language, stdin, expected_outputs } = req.body;
 
-
-  
   const code = source_code.trim();
-  
-  
+
   if (expected_outputs.length !== stdin.length) {
     return res.status(400).json({
       success: false,
@@ -30,7 +27,7 @@ export const runCode = asyncHandler(async (req, res) => {
       stdin: input,
       base64_encoded: false,
       wait: false,
-      expected_output: expected_outputs[idx] || "", 
+      expected_output: expected_outputs[idx] || "",
     };
   });
 
@@ -216,8 +213,8 @@ export const submitCode = asyncHandler(async (req, res) => {
         : detailedResults[firstIndexWhereFailed]?.status
         ? JSON.stringify(detailedResults[firstIndexWhereFailed]?.status)
         : "Unknown Error",
-      time: isAllPassed ? `${totalTime} s` : null,
-      memory: isAllPassed ? `${totalMemory} KB` : null,
+      time: isAllPassed ? `${totalTime.toFixed(3)} s` : null,
+      memory: isAllPassed ? `${(totalMemory / 1024).toFixed(2)} MB` : null,
       message: detailedResults[firstIndexWhereFailed]?.message
         ? JSON.stringify(detailedResults[firstIndexWhereFailed]?.message)
         : null,
@@ -228,8 +225,12 @@ export const submitCode = asyncHandler(async (req, res) => {
 
   console.log("New submission created:", newSubmission);
   res.status(200).json(
-    new ApiResponse(200, "Code submitted successfully", {
-      submission: newSubmission,
-    })
+    new ApiResponse(
+      200,
+      {
+        submission: newSubmission,
+      },
+      "Code submitted successfully"
+    )
   );
 });

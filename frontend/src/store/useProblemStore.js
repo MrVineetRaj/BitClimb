@@ -65,6 +65,7 @@ export const useProblemStore = create((set) => ({
         }
       );
       set({ isSubmitting: false });
+      console.log("Submission Response:", response.data);
       toast.success("Submission Successful");
       return response.data.data;
     } catch (error) {
@@ -116,7 +117,7 @@ export const useProblemStore = create((set) => ({
       const response = await axiosInstance.get(
         `/submission/problem/${problemId}`
       );
-      
+
       return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -164,12 +165,10 @@ export const useProblemStore = create((set) => ({
 
   getAllUserSubmissions: async (userId, limit = 10, page = 1, isAccepted) => {
     try {
-      
       const response = await axiosInstance.get(
         `/submission/user?userId=${userId}&limit=${limit}&page=${page}&isAccepted=${isAccepted}`
       );
-      
-      
+
       return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {

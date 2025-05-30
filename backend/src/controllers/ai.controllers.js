@@ -3,7 +3,7 @@ import { db } from "../libs/db.js";
 import { ApiResponse, asyncHandler } from "../libs/helpers.js";
 
 export const reviewCodeController = asyncHandler(async (req, res) => {
-  const { problemId } = req.params;
+  const { submission_id } = req.params;
   const { source_code, problem_description, verdict } = req.body;
   if (!source_code || !problem_description || !verdict) {
     return res
@@ -14,22 +14,20 @@ export const reviewCodeController = asyncHandler(async (req, res) => {
   // Simulate a code review process
   const resp = await reviewCode(source_code, problem_description, verdict);
 
-  if (!resp?.review || !res?.time_complexity || !res.space_complexity) {
-    return res
-      .status(500)
-      .json({ error: "Failed to generate code review. Please try again." });
-  }
-  
-  await db.submissions.updateOne(
-    { problemId },
-    {
-      $set: {
-        review: resp.review,
-        time_complexity: resp.time_complexity,
-        space_complexity: resp.space_complexity,
-      },
-    }
-  );
+
+
+  console.log("Code Review Response:", resp);
+
+  const submission = await db.submissions.update({
+    where: {
+      id: submission_id,
+    },
+    data: {
+      codeReview: resp,
+    },
+  });
+
+  console.log("Updated Submission:", submission);
 
   res
     .status(200)

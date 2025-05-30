@@ -18,13 +18,11 @@ export const reviewCode = async (source_code, problem_description, verdict) => {
     },
   ];
   const completion = await client.chat.completions.create({
-    response_format: { type: "json_object" },
-    model: "gpt-4.1-nano",
+    model: "gpt-4.1-mini",
     messages: messages,
   });
 
-  let resp = JSON.parse(completion.choices[0].message.content);
-
+  let resp = completion.choices[0].message.content;
 
   return resp;
 };

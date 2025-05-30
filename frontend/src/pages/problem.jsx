@@ -24,13 +24,22 @@ const ProblemPage = () => {
   const [codeRunResult, setCodeRunResult] = useState(null);
   const [submitCodeResult, setSubmitCodeResult] = useState(null);
 
+  const fetchSubmissionsByProblem = async () => {
+    try {
+      const res = await getUserSubmissionsPerProblem(problemId);
+
+      setUserSubmissions(res);
+    } catch (error) {
+      console.error("Error fetching problem:", error);
+    }
+  };
   useEffect(() => {
     const fetchProblem = async () => {
       try {
         const res = await getProblemById(problemId);
 
         setProblem(res);
-        
+
         setSourceCodeEnteredByUser(
           res.codeSnippets || {
             CPP: "",
@@ -46,16 +55,6 @@ const ProblemPage = () => {
     fetchProblem();
   }, [getProblemById, problemId]);
   useEffect(() => {
-    const fetchSubmissionsByProblem = async () => {
-      try {
-        const res = await getUserSubmissionsPerProblem(problemId);
-        
-        setUserSubmissions(res);
-      } catch (error) {
-        console.error("Error fetching problem:", error);
-      }
-    };
-
     fetchSubmissionsByProblem();
   }, [getUserSubmissionsPerProblem, problemId]);
 
@@ -83,7 +82,6 @@ const ProblemPage = () => {
                   expected_outputs: expected_outputs,
                   problemId: problemId,
                 }).then((res) => {
-                  
                   setCodeRunResult(res.detailedResults);
                 });
               }}
@@ -108,8 +106,8 @@ const ProblemPage = () => {
                   expected_outputs: expected_outputs,
                   problemId: problemId,
                 }).then((res) => {
-                  
-                  setSubmitCodeResult(res.newSubmission);
+                  setSubmitCodeResult(res.submission);
+                  fetchSubmissionsByProblem();
                 });
               }}
             >
@@ -125,6 +123,7 @@ const ProblemPage = () => {
             problem={problem}
             userSubmissions={userSubmissions}
             submitCodeResult={submitCodeResult}
+            fetchSubmissionsByProblem={fetchSubmissionsByProblem}
           />
         </div>
         <div className="col-span-1 w-full min-h-[600px]">
