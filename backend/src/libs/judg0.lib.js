@@ -31,7 +31,7 @@ export const submissionBatch = async (submissions) => {
 };
 
 export const pollBatchResults = async (tokens) => {
-  console.log("Polling Judge0 API for results for tokens", tokens);
+  
   while (true) {
     try {
       const { data } = await axios.get(
@@ -48,7 +48,7 @@ export const pollBatchResults = async (tokens) => {
       // Wait before polling again
       await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (error) {
-      console.log("Error polling Judge0 API:", error);
+      
       if (error instanceof axios.AxiosError) {
         throw new Error(
           `Judge0 API error: ${error.response?.data?.message || error.message}`

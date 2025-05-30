@@ -19,7 +19,7 @@ const SubmissionContainerForProfile = ({ profileId }) => {
   const fetchSubmissions = async (page) => {
     try {
       const resp = await getAllUserSubmissions(profileId, 10, page, false);
-      console.log("All Submissions:", resp);
+      
       setSubmissions(resp.submissions);
       setSubmissionsPage({
         currPage: resp.currentPage,
@@ -121,7 +121,7 @@ const SubmissionContainerForProfile = ({ profileId }) => {
                     ...submissionsPage,
                     currPage: val,
                   });
-                  console.log(val);
+                  
                   handleChangeSubmissionsPage(val);
                 }}
                 totalPages={submissionsPage?.totalPage}

@@ -30,9 +30,7 @@ const Navbar = () => {
     },
   ];
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
+  
   return (
     <div className="w-[100svw] flex flex-col items-center justify-center bg-black/30 p-2 sticky top-0 z-50">
       <div className="w-[95%] md:w-[80%] lg:w-[60%] flex items-center justify-between ">

@@ -11,18 +11,11 @@ const asyncHandler = (requestHandler) => {
   // info : i assume that this will be used with express controllers so req,res,next will be injected by express
   return (req, res, next) => {
     Promise.resolve(requestHandler(req, res, next)).catch((err) => {
-      // console.log(err);
+   
       next(err);
     });
   };
-  // return async (req, res, next) => {
-  //   try {
-  //     await requestHandler(req, res, next);
-  //   } catch (err) {
-  //     console.log("Here");
-  //     next(err);
-  //   }
-  // };
+
 };
 
 class ApiResponse {

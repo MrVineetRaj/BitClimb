@@ -11,21 +11,11 @@ export const runCode = asyncHandler(async (req, res) => {
   const { problemId } = req.params;
   const { source_code, language, stdin, expected_outputs } = req.body;
 
-  // console.log(
-  //   "Executing code for problem:",
-  //   problemId,
-  //   "\n",
-  //   "user:",
-  //   req.user?.id
-  // );
 
-  // const userId = req.user.id; // Assuming user ID is available in the request object
+  
   const code = source_code.trim();
-  // Simulate code execution
-  // In a real application, you would use a service to execute the code securely
-  const result = `Executed ${language} code: ${code}`;
-
-  //validate testcases
+  
+  
   if (expected_outputs.length !== stdin.length) {
     return res.status(400).json({
       success: false,
@@ -33,7 +23,6 @@ export const runCode = asyncHandler(async (req, res) => {
     });
   }
 
-  // step 2: prepare each testcases for judge0 batch request
   const submissions = stdin.map((input, idx) => {
     return {
       source_code: source_code,
@@ -41,24 +30,15 @@ export const runCode = asyncHandler(async (req, res) => {
       stdin: input,
       base64_encoded: false,
       wait: false,
-      expected_output: expected_outputs[idx] || "", // Use empty string if no expected output is provided
+      expected_output: expected_outputs[idx] || "", 
     };
   });
 
-  // step 3: submit batch to judge0 api
-
   const submissionsResult = await submissionBatch(submissions);
 
-  // console.log(
-  //   "Submitting batch to Judge0 API with submissions:",
-  //   submissionsResult
-  // );
   const tokens = submissionsResult.map((res) => res.token);
 
-  // step 4: poll for results
   const pollingResults = await pollBatchResults(tokens);
-
-  // console.log("Results from Judge0 API:", pollingResults);
 
   const finalResults = pollingResults.map((result) => {
     return {
@@ -80,7 +60,6 @@ export const runCode = asyncHandler(async (req, res) => {
 
   const detailedResults = finalResults.map((res, idx) => {
     const { stdout, status, compile_output, message, stderr } = res;
-    // console.log(compile_output);
 
     return {
       input: stdin[idx],
@@ -174,7 +153,6 @@ export const submitCode = asyncHandler(async (req, res) => {
     };
   });
 
-  console.log("detailedResults:", detailedResults);
   let firstIndexWhereFailed = detailedResults.findIndex(
     (result) => result.status !== "Accepted"
   );
@@ -182,8 +160,6 @@ export const submitCode = asyncHandler(async (req, res) => {
   let totalTime = 0;
   let totalMemory = 0;
 
-  // console.log("problemId : ", problemId);
-  // First check if the problem exists
   const problemExists = await db.problem.findUnique({
     where: {
       id: problemId,
@@ -204,22 +180,20 @@ export const submitCode = asyncHandler(async (req, res) => {
       totalMemory += Number(result.memory);
     });
 
-    // await db.problemsSolved.upsert({
-    //   where: {
-    //     userId_problemId: {
-    //       userId,
-    //       problemId,
-    //     },
-    //   },
-    //   update: {},
-    //   create: {
-    //     userId,
-    //     problemId,
-    //   },
-    // });
+    await db.problemsSolved.upsert({
+      where: {
+        userId_problemId: {
+          userId,
+          problemId,
+        },
+      },
+      update: {},
+      create: {
+        userId,
+        problemId,
+      },
+    });
   }
-
-  // console.log(detailedResults, firstIndexWhereFailed);
 
   const newSubmission = await db.submissions.create({
     data: {

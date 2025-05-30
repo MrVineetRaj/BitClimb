@@ -22,7 +22,6 @@ export const addNewDailyChallenge = async () => {
     });
 
     if (todayChallenge) {
-      console.log("Challenge was already created for today", todayChallenge.id);
       return;
     }
 
@@ -38,7 +37,6 @@ export const addNewDailyChallenge = async () => {
     `;
 
     if (newProblem.length === 0) {
-      console.log("No new problem available for daily challenge");
       return;
     }
     await db.dailyChallenge.create({
@@ -48,7 +46,6 @@ export const addNewDailyChallenge = async () => {
       },
     });
 
-    console.log("New problem selected:", newProblem[0].id);
   } catch (error) {
     console.log(error.message);
   }

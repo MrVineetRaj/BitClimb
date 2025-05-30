@@ -16,7 +16,7 @@ export const validate = (req, res, next) => {
       [err.path]: err.msg,
     })
   );
-  console.log(extractedError);
+  
 
   next(new ApiError(400, "Received data is not valid !", extractedError));
 };

@@ -10,7 +10,7 @@ const VerifyEmailPage = () => {
   const handleVerification = async () => {
     if (token) {
       const res = await verifyEmail(token);
-      console.log("Verification Response:", res);
+      
       if (res && res.success) {
         setIsVerified(true);
         navigate("/");

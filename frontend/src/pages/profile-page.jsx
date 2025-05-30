@@ -18,7 +18,7 @@ const ProfilePage = () => {
       try {
         const profileData = await getPublicUserProfile(profileId);
         setPublicProfile(profileData);
-        console.log("Public Profile Data:", profileData);
+        
       } catch (error) {
         console.error("Failed to fetch public profile:", error);
       }
@@ -26,7 +26,7 @@ const ProfilePage = () => {
 
     fetchPublicProfile();
 
-    // console.log(authUser);
+    
   }, [profileId, getPublicUserProfile]);
   return (
     <div className="w-full md:w-[90%] xl:w-[60%]  ">

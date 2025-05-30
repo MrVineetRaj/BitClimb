@@ -96,7 +96,7 @@ const CreateProblem = () => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true);
-      console.log("Form data:", data);
+      
       // Add your API call here
       const res = await axiosInstance.post("/problem/create-problem", data);
       if (res.data.success) {

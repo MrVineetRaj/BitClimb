@@ -5,7 +5,7 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   const { userId, isAccepted } = req.query;
   const limit = parseInt(req.query.limit) || 10;
   const page = parseInt(req.query.page) || 1;
-  console.log(typeof isAccepted);
+ 
 
   let whereCondition = {
     userId: userId,
@@ -39,7 +39,7 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   });
 
   const totalPages = Math.ceil(submissionsCnt / limit);
-  if(isAccepted) console.log("submissionsCnt",submissionsCnt,totalPages);
+  
 
   res
     .status(200)

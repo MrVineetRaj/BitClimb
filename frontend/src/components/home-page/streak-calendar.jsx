@@ -68,7 +68,7 @@ const StreakCalendar = () => {
     const today = new Date();
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     const startDay = startOfMonth.getDay();
-    console.log("Start Day Index:", startDay);
+    
     setStartIdx(startDay);
 
     if (streakSubmissions?.length > 0) {

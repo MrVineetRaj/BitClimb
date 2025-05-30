@@ -36,7 +36,7 @@ const ProfilePageHeatMap = ({ publicProfile }) => {
         <Select
           defaultValue={chosenYear}
           onValueChange={(value) => {
-            console.log("Selected value:", value);
+            setChosenYear(parseInt(value));
           }}
           className="w-[180px] mb-4"
         >

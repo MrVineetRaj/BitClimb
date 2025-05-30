@@ -26,7 +26,7 @@ export const useAuthStore = create((set) => ({
         },
         isCheckingAuth: false,
       });
-      console.log("Auth User:", response);
+      
     } catch (error) {
       set({ authUser: null, isCheckingAuth: false });
     } finally {
@@ -76,7 +76,7 @@ export const useAuthStore = create((set) => ({
         name,
       });
 
-      console.log("Signup Response:", response);
+      
       set({ authUser: response.data.data, isSigninUp: false });
       toast.success("Signup Successful", {
         description: "Verification Email Sent",

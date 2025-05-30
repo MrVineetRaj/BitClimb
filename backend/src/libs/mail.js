@@ -40,7 +40,7 @@ const sendMail = async (options) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    // console.log(info);
+    
     return info;
   } catch (err) {
     throw new ApiError(500, "Error Sending the mail", err);

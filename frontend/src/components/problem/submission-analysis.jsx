@@ -6,9 +6,6 @@ const SubmissionAnalysis = ({ submission }) => {
   const [analyzing, setAnalyzing] = useState(false);
   const [tabOpen, setTabOpen] = useState(false);
 
-  useEffect(() => {
-    console.log("Submission Analysis Component Mounted", submission);
-  }, []);
 
   const handleAnalyze = () => {};
   return (

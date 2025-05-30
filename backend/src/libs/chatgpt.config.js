@@ -25,7 +25,6 @@ export const reviewCode = async (source_code, problem_description, verdict) => {
 
   let resp = JSON.parse(completion.choices[0].message.content);
 
-  // console.log("Response from AI:", resp);
 
   return resp;
 };

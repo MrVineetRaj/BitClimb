@@ -67,9 +67,6 @@ export const createProblem = asyncHandler(async (req, res) => {
       }
     }
 
-    // console.log(
-    //   `Reference solution for language ${lang} passed all test cases`
-    // );
   }
 
   // Save the reference solution to the database

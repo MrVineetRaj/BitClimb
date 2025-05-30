@@ -35,7 +35,6 @@ const ProblemPageDetailContainer = ({
 
   useEffect(() => {
     if (submitCodeResult) {
-      console.log("submitCodeResult trending : ", submitCodeResult);
       setActiveTab("submissions");
     }
   }, [submitCodeResult]);

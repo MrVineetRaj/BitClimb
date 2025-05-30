@@ -34,7 +34,7 @@ const AdminPanel = () => {
       if (authUser && !isChecking) {
         loadMetrics()
           .then((data) => {
-            console.log("Metrics loaded:", data);
+            
             setMetricData([
               { title: "Total Problems", value: data.problems },
               { title: "Total Contests", value: 50 },
@@ -51,7 +51,7 @@ const AdminPanel = () => {
     const handleLoadUsers = () => {
       getRecentRegistrations()
         .then((data) => {
-          console.log("Recent Registrations:", data);
+          
           setRecentRegistrations(data.userCount);
         })
         .catch((error) => {

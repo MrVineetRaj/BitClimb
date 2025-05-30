@@ -36,7 +36,7 @@ export const useAdminStore = create((set) => ({
     set({ isLoadingUsers: true });
     try {
       const response = await axiosInstance.get("/auth/recent-registrations");
-      console.log("Recent Registrations:", response.data.data);
+      
       return response.data.data;
     } catch (error) {
       set({ recentRegistrations: null, isLoadingUsers: false });

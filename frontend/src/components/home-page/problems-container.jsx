@@ -63,14 +63,9 @@ const ProblemsContainer = () => {
   useEffect(() => {
     // Simulating an API call to fetch problems
     const fetchProblems = async () => {
-      getAllProblems(limit, page)
-        .then((data) => {
-          console.log("Fetched problems:", data);
-          setProblems(data.problems);
-        })
-        .catch((error) => {
-          console.error("Error fetching problems:", error);
-        });
+      getAllProblems(limit, page).then((data) => {
+        setProblems(data.problems);
+      });
     };
     fetchProblems();
   }, [limit, page]);

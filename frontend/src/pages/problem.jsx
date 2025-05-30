@@ -30,7 +30,7 @@ const ProblemPage = () => {
         const res = await getProblemById(problemId);
 
         setProblem(res);
-        console.log("Coding snippets:", res.codeSnippets);
+        
         setSourceCodeEnteredByUser(
           res.codeSnippets || {
             CPP: "",
@@ -49,7 +49,7 @@ const ProblemPage = () => {
     const fetchSubmissionsByProblem = async () => {
       try {
         const res = await getUserSubmissionsPerProblem(problemId);
-        console.log("submissions fetched:", res);
+        
         setUserSubmissions(res);
       } catch (error) {
         console.error("Error fetching problem:", error);
@@ -83,7 +83,7 @@ const ProblemPage = () => {
                   expected_outputs: expected_outputs,
                   problemId: problemId,
                 }).then((res) => {
-                  console.log("Code run result:", res);
+                  
                   setCodeRunResult(res.detailedResults);
                 });
               }}
@@ -108,7 +108,7 @@ const ProblemPage = () => {
                   expected_outputs: expected_outputs,
                   problemId: problemId,
                 }).then((res) => {
-                  console.log("Code Submit result:", res);
+                  
                   setSubmitCodeResult(res.newSubmission);
                 });
               }}
