@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Flame, LayoutDashboard } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Button } from "../ui/button";
 import { UserAvatar } from "./user-avatar";
 
 const Navbar = () => {
+  const location = useLocation();
   const { authUser, isResendingVerificationEmail, resendVerificationEmail } =
     useAuthStore();
+
   const [streak, setStreak] = useState(0);
   const nav_menu = [
     {
@@ -22,18 +24,32 @@ const Navbar = () => {
       name: "Contest",
       url: "/contest",
     },
+    {
+      name: "Problem Lists",
+      url: "/problem-lists",
+    },
   ];
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
   return (
     <div className="w-[100svw] flex flex-col items-center justify-center bg-black/30 p-2 sticky top-0 z-50">
       <div className="w-[95%] md:w-[80%] lg:w-[60%] flex items-center justify-between ">
-        <span className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <LayoutDashboard className="text-primary size-10" />
-          <h3 className=" font-bold text-2xl">BitClimb</h3>
-        </span>
+          <h3 className=" font-bold text-2xl hidden sm:block">BitClimb</h3>
+        </Link>
 
         <span className="flex items-center gap-4 font-bold">
           {nav_menu?.map(({ name, url }) => (
-            <Link to={url} key={url} className="px-4 py-2 hover:text-primary ">
+            <Link
+              to={url}
+              key={url}
+              className={` hover:text-primary ${
+                location?.pathname === url ? "text-primary" : "text-gray-200"
+              }`}
+            >
               {name}
             </Link>
           ))}

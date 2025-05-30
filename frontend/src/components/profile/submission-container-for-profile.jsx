@@ -1,43 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { useProblemStore } from "@/store/useProblemStore";
 import { Badge } from "../ui/badge";
+import Pagination from "../shared/pagination";
 
 const SubmissionContainerForProfile = ({ profileId }) => {
-  const [acceptedSubmissions, setAcceptedSubmissions] = React.useState([]);
-  const [submissions, setSubmissions] = React.useState([]);
-  const [acceptedPage, setAcceptedPage] = React.useState(1);
-  const [submissionsPage, setSubmissionsPage] = React.useState(1);
+  const [acceptedSubmissions, setAcceptedSubmissions] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
+  const [acceptedPage, setAcceptedPage] = useState({
+    currPage: 1,
+    totalPage: 1,
+  });
+  const [submissionsPage, setSubmissionsPage] = useState({
+    currPage: 1,
+    totalPage: 5,
+  });
   const { getAllUserSubmissions } = useProblemStore();
+  const fetchSubmissions = async (page) => {
+    try {
+      const resp = await getAllUserSubmissions(profileId, 10, page, false);
+      console.log("All Submissions:", resp);
+      setSubmissions(resp.submissions);
+      setSubmissionsPage({
+        currPage: resp.currentPage,
+        totalPage: resp.totalPages,
+      });
+    } catch (error) {
+      console.error("Failed to fetch submissions:", error);
+    }
+  };
 
+  const fetchAcceptedSubmissions = async (page) => {
+    try {
+      const resp = await getAllUserSubmissions(profileId, 10, page, true);
+
+      setAcceptedSubmissions(resp.submissions);
+      setAcceptedPage({
+        currPage: resp.currentPage,
+        totalPage: resp.totalPages,
+      });
+    } catch (error) {
+      console.error("Failed to fetch accepted submissions:", error);
+    }
+  };
   useEffect(() => {
-    const fetchSubmissions = async () => {
-      try {
-        const resp = await getAllUserSubmissions(
-          profileId,
-          10,
-          submissionsPage,
-          false
-        );
-        console.log("All Submissions:", resp);
-        setSubmissions(resp.submissions);
-      } catch (error) {
-        console.error("Failed to fetch submissions:", error);
-      }
-    };
+    fetchSubmissions(submissionsPage.currPage);
+    fetchAcceptedSubmissions(acceptedPage.currPage);
+  }, [getAllUserSubmissions]);
 
-    const fetchAcceptedSubmissions = async () => {
-      try {
-        const resp = await getAllUserSubmissions(null, 10, acceptedPage, true);
-        setAcceptedSubmissions(resp.submissions);
-      } catch (error) {
-        console.error("Failed to fetch accepted submissions:", error);
-      }
-    };
-
-    fetchSubmissions();
-    fetchAcceptedSubmissions();
-  }, [getAllUserSubmissions, acceptedPage, submissionsPage]);
+  const handleChangeSubmissionsPage = (page) => {
+    fetchSubmissions(page);
+  };
+  const handleChangeAcceptedSubmissionsPage = (page) => {
+    fetchAcceptedSubmissions(page);
+  };
   return (
     <div>
       <Tabs defaultValue="submissions" className="mt-8 mb-12">
@@ -45,7 +61,7 @@ const SubmissionContainerForProfile = ({ profileId }) => {
           <TabsTrigger value="submissions" className="w-full">
             Submissions
           </TabsTrigger>
-          <TabsTrigger value="contest-submissions" className="w-full">
+          <TabsTrigger value="accepted-submissions" className="w-full">
             Accepted Submissions
           </TabsTrigger>
         </TabsList>
@@ -68,12 +84,12 @@ const SubmissionContainerForProfile = ({ profileId }) => {
                       className={`
                           hidden sm:inline-block
                         ${
-                        submission?.problem?.difficulty === "EASY"
-                          ? "bg-green-500"
-                          : submission?.problem?.difficulty === "MEDIUM"
-                          ? "bg-orange-500"
-                          : "bg-red-500"
-                      } text-white`}
+                          submission?.problem?.difficulty === "EASY"
+                            ? "bg-green-500"
+                            : submission?.problem?.difficulty === "MEDIUM"
+                            ? "bg-orange-500"
+                            : "bg-red-500"
+                        } text-white`}
                     >
                       {" "}
                       {submission?.problem?.difficulty}
@@ -83,10 +99,10 @@ const SubmissionContainerForProfile = ({ profileId }) => {
                     className={`
                         text-sm md:text-base
                       ${
-                      submission?.status === "ACCEPTED"
-                        ? "text-green-500"
-                        : "text-red-500"
-                    } font-bold`}
+                        submission?.status === "ACCEPTED"
+                          ? "text-green-500"
+                          : "text-red-500"
+                      } font-bold`}
                   >
                     {submission?.status}
                   </span>
@@ -96,20 +112,36 @@ const SubmissionContainerForProfile = ({ profileId }) => {
               <p>No submissions found.</p>
             )}
           </div>
+          {submissionsPage?.totalPage > 1 && (
+            <div className="flex justify-end w-full mt-4">
+              <Pagination
+                currPage={submissionsPage?.currPage}
+                setCurrPage={(val) => {
+                  setSubmissionsPage({
+                    ...submissionsPage,
+                    currPage: val,
+                  });
+                  console.log(val);
+                  handleChangeSubmissionsPage(val);
+                }}
+                totalPages={submissionsPage?.totalPage}
+              />
+            </div>
+          )}
         </TabsContent>
 
-        <TabsContent value="contest-submissions" className="">
-          {/* Render contest submissions here */}
+        <TabsContent value="accepted-submissions" className="">
           <div className="">
             {acceptedSubmissions &&
             acceptedSubmissions.length &&
             acceptedSubmissions.length > 0 ? (
               acceptedSubmissions?.map((submission, idx) => (
+                // <>
                 <span
                   className={`flex items-center justify-between p-2 hover:bg-primary/20 transition-all duration-200 cursor-pointer ${
                     idx % 2 == 0 ? "bg-primary/10" : ""
                   }`}
-                  key={idx}
+                  key={idx * 100}
                 >
                   <span>{submission?.problem?.title}</span>
                   <span
@@ -127,6 +159,21 @@ const SubmissionContainerForProfile = ({ profileId }) => {
               <p>No submissions found.</p>
             )}
           </div>
+          {acceptedPage?.totalPage > 1 && (
+            <div className="flex justify-end w-full mt-4">
+              <Pagination
+                currPage={acceptedPage?.currPage}
+                setCurrPage={(val) => {
+                  setAcceptedPage({
+                    ...acceptedPage,
+                    currPage: val,
+                  });
+                  handleChangeAcceptedSubmissionsPage(val);
+                }}
+                totalPages={acceptedPage?.totalPage}
+              />
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>

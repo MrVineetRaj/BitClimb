@@ -4471,9 +4471,14 @@ export namespace Prisma {
     stdout: string | null
     stdError: string | null
     compileOutput: string | null
+    message: string | null
     status: string | null
     memory: string | null
     time: string | null
+    codeReview: string | null
+    timeComplexity: string | null
+    spaceComplexity: string | null
+    isAccepted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4488,9 +4493,14 @@ export namespace Prisma {
     stdout: string | null
     stdError: string | null
     compileOutput: string | null
+    message: string | null
     status: string | null
     memory: string | null
     time: string | null
+    codeReview: string | null
+    timeComplexity: string | null
+    spaceComplexity: string | null
+    isAccepted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4505,9 +4515,14 @@ export namespace Prisma {
     stdout: number
     stdError: number
     compileOutput: number
+    message: number
     status: number
     memory: number
     time: number
+    codeReview: number
+    timeComplexity: number
+    spaceComplexity: number
+    isAccepted: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4524,9 +4539,14 @@ export namespace Prisma {
     stdout?: true
     stdError?: true
     compileOutput?: true
+    message?: true
     status?: true
     memory?: true
     time?: true
+    codeReview?: true
+    timeComplexity?: true
+    spaceComplexity?: true
+    isAccepted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4541,9 +4561,14 @@ export namespace Prisma {
     stdout?: true
     stdError?: true
     compileOutput?: true
+    message?: true
     status?: true
     memory?: true
     time?: true
+    codeReview?: true
+    timeComplexity?: true
+    spaceComplexity?: true
+    isAccepted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4558,9 +4583,14 @@ export namespace Prisma {
     stdout?: true
     stdError?: true
     compileOutput?: true
+    message?: true
     status?: true
     memory?: true
     time?: true
+    codeReview?: true
+    timeComplexity?: true
+    spaceComplexity?: true
+    isAccepted?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4648,9 +4678,14 @@ export namespace Prisma {
     stdout: string | null
     stdError: string | null
     compileOutput: string | null
+    message: string | null
     status: string
     memory: string | null
     time: string | null
+    codeReview: string | null
+    timeComplexity: string | null
+    spaceComplexity: string | null
+    isAccepted: boolean
     createdAt: Date
     updatedAt: Date
     _count: SubmissionsCountAggregateOutputType | null
@@ -4682,9 +4717,14 @@ export namespace Prisma {
     stdout?: boolean
     stdError?: boolean
     compileOutput?: boolean
+    message?: boolean
     status?: boolean
     memory?: boolean
     time?: boolean
+    codeReview?: boolean
+    timeComplexity?: boolean
+    spaceComplexity?: boolean
+    isAccepted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
@@ -4703,9 +4743,14 @@ export namespace Prisma {
     stdout?: boolean
     stdError?: boolean
     compileOutput?: boolean
+    message?: boolean
     status?: boolean
     memory?: boolean
     time?: boolean
+    codeReview?: boolean
+    timeComplexity?: boolean
+    spaceComplexity?: boolean
+    isAccepted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
@@ -4722,9 +4767,14 @@ export namespace Prisma {
     stdout?: boolean
     stdError?: boolean
     compileOutput?: boolean
+    message?: boolean
     status?: boolean
     memory?: boolean
     time?: boolean
+    codeReview?: boolean
+    timeComplexity?: boolean
+    spaceComplexity?: boolean
+    isAccepted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
@@ -4741,14 +4791,19 @@ export namespace Prisma {
     stdout?: boolean
     stdError?: boolean
     compileOutput?: boolean
+    message?: boolean
     status?: boolean
     memory?: boolean
     time?: boolean
+    codeReview?: boolean
+    timeComplexity?: boolean
+    spaceComplexity?: boolean
+    isAccepted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SubmissionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "problemId" | "sourceCode" | "language" | "stdin" | "stdout" | "stdError" | "compileOutput" | "status" | "memory" | "time" | "createdAt" | "updatedAt", ExtArgs["result"]["submissions"]>
+  export type SubmissionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "problemId" | "sourceCode" | "language" | "stdin" | "stdout" | "stdError" | "compileOutput" | "message" | "status" | "memory" | "time" | "codeReview" | "timeComplexity" | "spaceComplexity" | "isAccepted" | "createdAt" | "updatedAt", ExtArgs["result"]["submissions"]>
   export type SubmissionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4781,9 +4836,14 @@ export namespace Prisma {
       stdout: string | null
       stdError: string | null
       compileOutput: string | null
+      message: string | null
       status: string
       memory: string | null
       time: string | null
+      codeReview: string | null
+      timeComplexity: string | null
+      spaceComplexity: string | null
+      isAccepted: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["submissions"]>
@@ -5221,9 +5281,14 @@ export namespace Prisma {
     readonly stdout: FieldRef<"Submissions", 'String'>
     readonly stdError: FieldRef<"Submissions", 'String'>
     readonly compileOutput: FieldRef<"Submissions", 'String'>
+    readonly message: FieldRef<"Submissions", 'String'>
     readonly status: FieldRef<"Submissions", 'String'>
     readonly memory: FieldRef<"Submissions", 'String'>
     readonly time: FieldRef<"Submissions", 'String'>
+    readonly codeReview: FieldRef<"Submissions", 'String'>
+    readonly timeComplexity: FieldRef<"Submissions", 'String'>
+    readonly spaceComplexity: FieldRef<"Submissions", 'String'>
+    readonly isAccepted: FieldRef<"Submissions", 'Boolean'>
     readonly createdAt: FieldRef<"Submissions", 'DateTime'>
     readonly updatedAt: FieldRef<"Submissions", 'DateTime'>
   }
@@ -12190,9 +12255,14 @@ export namespace Prisma {
     stdout: 'stdout',
     stdError: 'stdError',
     compileOutput: 'compileOutput',
+    message: 'message',
     status: 'status',
     memory: 'memory',
     time: 'time',
+    codeReview: 'codeReview',
+    timeComplexity: 'timeComplexity',
+    spaceComplexity: 'spaceComplexity',
+    isAccepted: 'isAccepted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -12652,9 +12722,14 @@ export namespace Prisma {
     stdout?: StringNullableFilter<"Submissions"> | string | null
     stdError?: StringNullableFilter<"Submissions"> | string | null
     compileOutput?: StringNullableFilter<"Submissions"> | string | null
+    message?: StringNullableFilter<"Submissions"> | string | null
     status?: StringFilter<"Submissions"> | string
     memory?: StringNullableFilter<"Submissions"> | string | null
     time?: StringNullableFilter<"Submissions"> | string | null
+    codeReview?: StringNullableFilter<"Submissions"> | string | null
+    timeComplexity?: StringNullableFilter<"Submissions"> | string | null
+    spaceComplexity?: StringNullableFilter<"Submissions"> | string | null
+    isAccepted?: BoolFilter<"Submissions"> | boolean
     createdAt?: DateTimeFilter<"Submissions"> | Date | string
     updatedAt?: DateTimeFilter<"Submissions"> | Date | string
     problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
@@ -12672,9 +12747,14 @@ export namespace Prisma {
     stdout?: SortOrderInput | SortOrder
     stdError?: SortOrderInput | SortOrder
     compileOutput?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
     status?: SortOrder
     memory?: SortOrderInput | SortOrder
     time?: SortOrderInput | SortOrder
+    codeReview?: SortOrderInput | SortOrder
+    timeComplexity?: SortOrderInput | SortOrder
+    spaceComplexity?: SortOrderInput | SortOrder
+    isAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     problem?: ProblemOrderByWithRelationInput
@@ -12695,9 +12775,14 @@ export namespace Prisma {
     stdout?: StringNullableFilter<"Submissions"> | string | null
     stdError?: StringNullableFilter<"Submissions"> | string | null
     compileOutput?: StringNullableFilter<"Submissions"> | string | null
+    message?: StringNullableFilter<"Submissions"> | string | null
     status?: StringFilter<"Submissions"> | string
     memory?: StringNullableFilter<"Submissions"> | string | null
     time?: StringNullableFilter<"Submissions"> | string | null
+    codeReview?: StringNullableFilter<"Submissions"> | string | null
+    timeComplexity?: StringNullableFilter<"Submissions"> | string | null
+    spaceComplexity?: StringNullableFilter<"Submissions"> | string | null
+    isAccepted?: BoolFilter<"Submissions"> | boolean
     createdAt?: DateTimeFilter<"Submissions"> | Date | string
     updatedAt?: DateTimeFilter<"Submissions"> | Date | string
     problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
@@ -12715,9 +12800,14 @@ export namespace Prisma {
     stdout?: SortOrderInput | SortOrder
     stdError?: SortOrderInput | SortOrder
     compileOutput?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
     status?: SortOrder
     memory?: SortOrderInput | SortOrder
     time?: SortOrderInput | SortOrder
+    codeReview?: SortOrderInput | SortOrder
+    timeComplexity?: SortOrderInput | SortOrder
+    spaceComplexity?: SortOrderInput | SortOrder
+    isAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SubmissionsCountOrderByAggregateInput
@@ -12738,9 +12828,14 @@ export namespace Prisma {
     stdout?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
     stdError?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
     compileOutput?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
+    message?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
     status?: StringWithAggregatesFilter<"Submissions"> | string
     memory?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
     time?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
+    codeReview?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
+    timeComplexity?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
+    spaceComplexity?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
+    isAccepted?: BoolWithAggregatesFilter<"Submissions"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Submissions"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Submissions"> | Date | string
   }
@@ -13401,9 +13496,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
@@ -13421,9 +13521,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
@@ -13437,9 +13542,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
@@ -13457,9 +13567,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
@@ -13475,9 +13590,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13490,9 +13610,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13507,9 +13632,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14287,9 +14417,14 @@ export namespace Prisma {
     stdout?: SortOrder
     stdError?: SortOrder
     compileOutput?: SortOrder
+    message?: SortOrder
     status?: SortOrder
     memory?: SortOrder
     time?: SortOrder
+    codeReview?: SortOrder
+    timeComplexity?: SortOrder
+    spaceComplexity?: SortOrder
+    isAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14304,9 +14439,14 @@ export namespace Prisma {
     stdout?: SortOrder
     stdError?: SortOrder
     compileOutput?: SortOrder
+    message?: SortOrder
     status?: SortOrder
     memory?: SortOrder
     time?: SortOrder
+    codeReview?: SortOrder
+    timeComplexity?: SortOrder
+    spaceComplexity?: SortOrder
+    isAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14321,9 +14461,14 @@ export namespace Prisma {
     stdout?: SortOrder
     stdError?: SortOrder
     compileOutput?: SortOrder
+    message?: SortOrder
     status?: SortOrder
     memory?: SortOrder
     time?: SortOrder
+    codeReview?: SortOrder
+    timeComplexity?: SortOrder
+    spaceComplexity?: SortOrder
+    isAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -15544,9 +15689,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
@@ -15562,9 +15712,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
@@ -15752,9 +15907,14 @@ export namespace Prisma {
     stdout?: StringNullableFilter<"Submissions"> | string | null
     stdError?: StringNullableFilter<"Submissions"> | string | null
     compileOutput?: StringNullableFilter<"Submissions"> | string | null
+    message?: StringNullableFilter<"Submissions"> | string | null
     status?: StringFilter<"Submissions"> | string
     memory?: StringNullableFilter<"Submissions"> | string | null
     time?: StringNullableFilter<"Submissions"> | string | null
+    codeReview?: StringNullableFilter<"Submissions"> | string | null
+    timeComplexity?: StringNullableFilter<"Submissions"> | string | null
+    spaceComplexity?: StringNullableFilter<"Submissions"> | string | null
+    isAccepted?: BoolFilter<"Submissions"> | boolean
     createdAt?: DateTimeFilter<"Submissions"> | Date | string
     updatedAt?: DateTimeFilter<"Submissions"> | Date | string
   }
@@ -15926,9 +16086,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutSubmissionInput
@@ -15944,9 +16109,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
@@ -17326,9 +17496,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
@@ -17345,9 +17520,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17429,9 +17609,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
@@ -17448,9 +17633,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17481,9 +17671,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17589,9 +17784,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
@@ -17607,9 +17807,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
@@ -17624,9 +17829,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17738,9 +17948,14 @@ export namespace Prisma {
     stdout?: string | null
     stdError?: string | null
     compileOutput?: string | null
+    message?: string | null
     status: string
     memory?: string | null
     time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17783,9 +17998,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
@@ -17801,9 +18021,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
@@ -17818,9 +18043,14 @@ export namespace Prisma {
     stdout?: NullableStringFieldUpdateOperationsInput | string | null
     stdError?: NullableStringFieldUpdateOperationsInput | string | null
     compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     memory?: NullableStringFieldUpdateOperationsInput | string | null
     time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

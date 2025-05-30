@@ -215,7 +215,7 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
 
   const { unHashedToken, hashedToken, tokenExpiry } = generateTemporaryToken();
 
-  console.log("unHashedToken", unHashedToken);
+  // console.log("unHashedToken", unHashedToken);
   await db.user.update({
     where: {
       email,
@@ -235,7 +235,7 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
     ),
   });
 
-  console.log(mailInfo);
+  // console.log(mailInfo);
   res.status(200).json(new ApiResponse(200, {}, "Forgot password link send"));
 });
 

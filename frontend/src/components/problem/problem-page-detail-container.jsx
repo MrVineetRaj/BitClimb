@@ -24,6 +24,7 @@ import { toast } from "sonner";
 import { HoverCard } from "@radix-ui/react-hover-card";
 import { HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
+import SubmissionAnalysis from "./submission-analysis";
 
 const ProblemPageDetailContainer = ({
   problem,
@@ -359,10 +360,7 @@ const ProblemPageDetailContainer = ({
                           {submission?.status}
                         </span>
                         <span>{submission?.language}</span>
-                        <span className="flex gap-2 cursor-pointer">
-                          <Stars className="size-5" />
-                          Analyze
-                        </span>
+                        <SubmissionAnalysis submission={submission} />
                         <span className="flex gap-2 cursor-pointer">
                           <SquareArrowOutUpRight className="size-5" />
                           View Code

@@ -5,12 +5,13 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   const { userId, isAccepted } = req.query;
   const limit = parseInt(req.query.limit) || 10;
   const page = parseInt(req.query.page) || 1;
+  console.log(typeof isAccepted);
 
   let whereCondition = {
     userId: userId,
   };
 
-  if (isAccepted) {
+  if (isAccepted === "true") {
     whereCondition = {
       ...whereCondition,
       status: "ACCEPTED",
@@ -18,9 +19,7 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
   }
 
   const submissions = await db.submissions.findMany({
-    where: {
-      userId: userId,
-    },
+    where: whereCondition,
     orderBy: {
       createdAt: "desc",
     },
@@ -35,14 +34,12 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
     skip: (page - 1) * limit,
     take: limit,
   });
+  const submissionsCnt = await db.submissions.count({
+    where: whereCondition
+  });
 
-  const totalPages = Math.ceil(
-    (await db.submissions.count({
-      where: {
-        userId: userId,
-      },
-    })) / limit
-  );
+  const totalPages = Math.ceil(submissionsCnt / limit);
+  if(isAccepted) console.log("submissionsCnt",submissionsCnt,totalPages);
 
   res
     .status(200)

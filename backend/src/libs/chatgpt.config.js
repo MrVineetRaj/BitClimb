@@ -1,0 +1,31 @@
+import OpenAI from "openai";
+import { SYSTEM_PROMPTS } from "./chatgpt-system-prompts.js";
+const client = new OpenAI();
+
+export const reviewCode = async (source_code, problem_description, verdict) => {
+  let messages = [
+    {
+      role: "system",
+      content: SYSTEM_PROMPTS.CODE_REVIEWER,
+    },
+    {
+      role: "user",
+      content: JSON.stringify({
+        problem_description: problem_description,
+        source_code: source_code,
+        verdict: verdict,
+      }),
+    },
+  ];
+  const completion = await client.chat.completions.create({
+    response_format: { type: "json_object" },
+    model: "gpt-4.1-nano",
+    messages: messages,
+  });
+
+  let resp = JSON.parse(completion.choices[0].message.content);
+
+  // console.log("Response from AI:", resp);
+
+  return resp;
+};

@@ -67,9 +67,9 @@ export const createProblem = asyncHandler(async (req, res) => {
       }
     }
 
-    console.log(
-      `Reference solution for language ${lang} passed all test cases`
-    );
+    // console.log(
+    //   `Reference solution for language ${lang} passed all test cases`
+    // );
   }
 
   // Save the reference solution to the database
@@ -175,7 +175,7 @@ export const getAllProblems = asyncHandler(async (req, res) => {
 
 export const getProblemById = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  console.log("Fetching problem with ID:", id);
+  // console.log("Fetching problem with ID:", id);
   // Validate problem ID
   if (!id) {
     throw new ApiError(400, "Problem ID is required");
