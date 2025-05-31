@@ -88,6 +88,7 @@ const FormField = forwardRef(
               ${error ? "border-red-500" : ""}`}
               disabled={disabled}
               {...rest}
+              rows={7}
             />
 
             {error && <p className="text-red-500 text-sm">{error}</p>}

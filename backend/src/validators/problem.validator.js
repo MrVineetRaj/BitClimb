@@ -11,7 +11,7 @@ const createProblemValidator = () => {
       .trim()
       .notEmpty()
       .withMessage("Problem difficulty is required"),
-    body("examples").trim().notEmpty().withMessage("Examples are required"),
+    body("examples").notEmpty().withMessage("Examples are required"),
     body("tags").optional().isArray().withMessage("Tags must be an array"),
     body("constraints").optional(),
     body("hints").optional().isArray().withMessage("Hints must be an array"),

@@ -11,17 +11,18 @@ export const getJudge0LanguageId = (lang) => {
 };
 
 export const submissionBatch = async (submissions) => {
+  
   try {
     const { data } = await axios.post(
-      `${process.env.JUDGE0_API_URL}/submissions/batch?base64_encoded=false`,
-      {
-        submissions,
-      }
+      `${process.env.JUDGE0_API_URL}/submissions?base64_encoded=false&wait=false`,
+      submissions
     );
-
+    
     return data;
   } catch (error) {
+    console.error(`Error submitting batch to Judge0 API: ${error}`);
     if (error instanceof axios.AxiosError) {
+      console.error(error?.response?.data);
       throw new Error(
         `Judge0 API error: ${error.response?.data?.message || error.message}`
       );
@@ -30,25 +31,26 @@ export const submissionBatch = async (submissions) => {
   }
 };
 
-export const pollBatchResults = async (tokens) => {
-  
+export const pollBatchResults = async (token) => {
+  const currTime = Date.now();
   while (true) {
     try {
+      console.log(`Polling results for tokens: ${token}`);
       const { data } = await axios.get(
-        `${process.env.JUDGE0_API_URL}/submissions/batch?tokens=${tokens.join(
-          ","
-        )}&base64_encoded=true`
+        `${process.env.JUDGE0_API_URL}/submissions/${token}?base64_encoded=true`
       );
 
       // Check if all results are ready
-      if (data.submissions.every((result) => result.status.id >= 3)) {
-        return data.submissions;
+      if (data.status.id >= 3) {
+        console.log(
+          `All results ready after ${Math.floor(Date.now() - currTime)} seconds`
+        );
+        return data;
       }
 
       // Wait before polling again
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1500)); // 500ms delay
     } catch (error) {
-      
       if (error instanceof axios.AxiosError) {
         throw new Error(
           `Judge0 API error: ${error.response?.data?.message || error.message}`

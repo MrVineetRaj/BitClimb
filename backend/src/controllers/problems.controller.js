@@ -27,6 +27,8 @@ export const createProblem = asyncHandler(async (req, res) => {
     referenceSolutionFooter,
   } = req.body;
 
+  // console.log("Creating problem with data:", req.body);
+
   if (req.user.role !== "ADMIN") {
     return res.status(403).json({
       status: 403,
@@ -54,29 +56,36 @@ export const createProblem = asyncHandler(async (req, res) => {
       throw new ApiError(400, `Invalid language: ${lang}`);
     }
 
-    const submission = testCases.map(({ input, output }) => {
-      return {
-        source_code: coder_to_pass,
-        language_id: langId,
-        stdin: input,
-        expected_output: output,
-      };
-    });
+    // const submission = testCases.map(({ input, output }) => {
+    //   return {
+    //     source_code: coder_to_pass,
+    //     language_id: langId,
+    //     stdin: input,
+    //     expected_output: output,
+    //   };
+    // });
 
-    const submissionResults = await submissionBatch(submission);
+    const submission = {
+      source_code: coder_to_pass,
+      language_id: langId,
+      stdin:
+        testCases?.length +
+        "\n" +
+        testCases.map((testCase) => testCase.input).join("\n"),
+    };
 
-    const tokens = submissionResults.map((res) => res.token);
+    console.log("Submitting reference solution for language:", lang);
+    console.log("Submission data:", submission);
 
-    const results = await pollBatchResults(tokens);
+    const res = await submissionBatch(submission);
+    const token = res.token;
+    console.log("Judge0 submission token:", res);
+    const result = await pollBatchResults(token);
 
-    for (const result of results) {
-      if (result.status.id !== 3) {
-        throw new ApiError(
-          400,
-          `Reference solution failed for language ${lang}: ${result.status.description}`
-        );
-      }
+    if (result.status.id !== 3) {
+      throw new ApiError(500, `Judge0 submission failed for language: ${lang}`);
     }
+    console.log("Judge0 submission result:", result);
   }
 
   // Save the reference solution to the database

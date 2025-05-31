@@ -123,6 +123,7 @@ const CreateProblem = () => {
   });
 
   const onSubmit = async (data) => {
+    console.log("Form data:", data);
     try {
       setIsLoading(true);
 
@@ -130,8 +131,8 @@ const CreateProblem = () => {
       const res = await axiosInstance.post("/problem/create-problem", data);
       if (res.data.success) {
         toast.success("Problem created successfully!");
-        reset();
-        navigate(`/problem/${res.data.data.problemId}`);
+        // reset();
+        // navigate(`/problem/${res.data.data.problemId}`);
       }
     } catch (error) {
       if (error instanceof AxiosError) {

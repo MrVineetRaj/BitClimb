@@ -107,7 +107,8 @@ const ProblemPage = () => {
                   expected_outputs: expected_outputs,
                   problemId: problemId,
                 }).then((res) => {
-                  setCodeRunResult(res.detailedResults);
+                  console.log("Code run result:", res);
+                  setCodeRunResult(res);
                 });
               }}
             >

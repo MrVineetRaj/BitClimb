@@ -32,62 +32,74 @@ export const runCode = asyncHandler(async (req, res) => {
     });
   }
 
-  const submissions = stdin.map((input, idx) => {
-    return {
-      source_code: code,
-      language_id: getJudge0LanguageId(language),
-      stdin: input,
-      base64_encoded: false,
-      wait: false,
-      expected_output: expected_outputs[idx] || "",
-    };
-  });
+  const submission = {
+    source_code: code,
+    language_id: getJudge0LanguageId(language),
+    stdin: stdin?.length + "\n" + stdin.join("\n"), // Join all inputs into a single string
+    base64_encoded: false,
+    wait: false,
+    expected_output: expected_outputs.join("\n"), // Join all expected outputs into a single string
+  };
 
-  const submissionsResult = await submissionBatch(submissions);
+  const { token } = await submissionBatch(submission);
 
-  const tokens = submissionsResult.map((res) => res.token);
+  const result = await pollBatchResults(token);
 
-  const pollingResults = await pollBatchResults(tokens);
+  const finalResults = {
+    ...result,
+    stdout: result.stdout
+      ? Buffer.from(result.stdout, "base64").toString("utf-8")
+      : "",
+    compile_output: result.compile_output
+      ? Buffer.from(result.compile_output, "base64").toString("utf-8")
+      : "",
+    message: result.message
+      ? Buffer.from(result.message, "base64").toString("utf-8")
+      : "",
+    stderr: result.stderr
+      ? Buffer.from(result.stderr, "base64").toString("utf-8")
+      : "",
+  };
 
-  const finalResults = pollingResults.map((result) => {
-    return {
-      ...result,
-      stdout: result.stdout
-        ? Buffer.from(result.stdout, "base64").toString("utf-8")
-        : "",
-      compile_output: result.compile_output
-        ? Buffer.from(result.compile_output, "base64").toString("utf-8")
-        : "",
-      message: result.message
-        ? Buffer.from(result.message, "base64").toString("utf-8")
-        : "",
-      stderr: result.stderr
-        ? Buffer.from(result.stderr, "base64").toString("utf-8")
-        : "",
-    };
-  });
+  const outputs = finalResults.stdout
+    ? finalResults.stdout.trim().split("\n")
+    : [];
 
-  const detailedResults = finalResults.map((res, idx) => {
-    const { stdout, status, compile_output, message, stderr } = res;
+  const detailedResults = outputs.map((output, idx) => {
+    // const { stdout, status, compile_output, message, stderr } = res;
 
     return {
       input: stdin[idx],
       expected_output: expected_outputs[idx] || "",
-      output: stdout.trim(),
-      status: status.description,
-      compile_output: compile_output ? compile_output : "",
-      message: message ? message : "",
-      stderr: stderr ? stderr : "",
+      output: output,
+      status:
+        output === expected_outputs[idx]
+          ? "Accepted"
+          : finalResults?.status?.description,
+      compile_output:
+        output === expected_outputs[idx]
+          ? null
+          : finalResults?.compile_output
+          ? finalResults?.compile_output
+          : null,
+      message:
+        output === expected_outputs[idx]
+          ? null
+          : finalResults?.message
+          ? finalResults?.message
+          : null,
+      stderr:
+        output === expected_outputs[idx]
+          ? null
+          : finalResults?.stderr
+          ? finalResults?.stderr
+          : null,
     };
   });
 
-  res.status(200).json({
-    success: true,
-    message: "Code executed successfully",
-    data: {
-      detailedResults,
-    },
-  });
+  res
+    .status(200)
+    .json(new ApiResponse(200, detailedResults, "Code executed successfully"));
 });
 
 export const submitCode = asyncHandler(async (req, res) => {
@@ -116,45 +128,40 @@ export const submitCode = asyncHandler(async (req, res) => {
     });
   }
 
-  const submissions = stdin.map((input, idx) => {
-    return {
-      source_code: code,
-      language_id: getJudge0LanguageId(language),
-      stdin: input,
-      base64_encoded: false,
-      wait: false,
-      expected_output: expected_outputs[idx] || "",
-    };
-  });
+  const submissions = {
+    source_code: code,
+    language_id: getJudge0LanguageId(language),
+    stdin: stdin.length + "\n" + stdin.join("\n"),
+    base64_encoded: false,
+    wait: false,
+    expected_output: expected_outputs.join("\n"),
+  };
 
-  const submissionsResult = await submissionBatch(submissions);
+  const { token } = await submissionBatch(submissions);
 
-  const tokens = submissionsResult.map((res) => res.token);
+  const pollingResults = await pollBatchResults(token);
 
-  const pollingResults = await pollBatchResults(tokens);
+  const results = {
+    ...pollingResults,
+    stdout: pollingResults?.stdout
+      ? Buffer.from(pollingResults?.stdout, "base64")?.toString("utf-8")
+      : "",
+    compile_output: pollingResults?.compile_output
+      ? Buffer.from(pollingResults?.compile_output, "base64")?.toString("utf-8")
+      : "",
+    message: pollingResults?.message
+      ? Buffer.from(pollingResults?.message, "base64")?.toString("utf-8")
+      : "",
+    stderr: pollingResults?.stderr
+      ? Buffer.from(pollingResults?.stderr, "base64")?.toString("utf-8")
+      : "",
+  };
 
-  const results = pollingResults.map((result) => {
-    return {
-      ...result,
-      stdout: result.stdout
-        ? Buffer.from(result.stdout, "base64").toString("utf-8")
-        : "",
-      compile_output: result.compile_output
-        ? Buffer.from(result.compile_output, "base64").toString("utf-8")
-        : "",
-      message: result.message
-        ? Buffer.from(result.message, "base64").toString("utf-8")
-        : "",
-      stderr: result.stderr
-        ? Buffer.from(result.stderr, "base64").toString("utf-8")
-        : "",
-    };
-  });
+  const outputs = results.stdout ? results.stdout.trim().split("\n") : [];
 
   let isAllPassed = true;
-  const detailedResults = results.map((res, idx) => {
-    const { stdout, status, time, memory, compile_output, message, stderr } =
-      res;
+  const detailedResults = outputs.map((output, idx) => {
+    const { status, time, memory, compile_output, message, stderr } = results;
     const isPassed = status.id === 3;
 
     if (!isPassed) {
@@ -164,13 +171,20 @@ export const submitCode = asyncHandler(async (req, res) => {
     return {
       input: stdin[idx],
       expected_output: expected_outputs[idx] || "",
-      output: stdout.trim(),
-      status: status.description,
+      output: output?.trim(),
+      status:
+        output === expected_outputs[idx] ? "Accepted" : status.description,
       time: time,
       memory: memory,
-      compile_output: compile_output ? compile_output : "",
-      message: message ? message : "",
-      stderr: stderr ? stderr : "",
+      compile_output:
+        output === expected_outputs[idx]
+          ? null
+          : compile_output
+          ? compile_output
+          : null,
+      message:
+        output === expected_outputs[idx] ? null : message ? message : null,
+      stderr: output === expected_outputs[idx] ? null : stderr ? stderr : null,
     };
   });
 

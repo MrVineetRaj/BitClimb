@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import {
@@ -25,7 +25,9 @@ const ProblemPageCodeContainer = ({
   codeRunResult,
 }) => {
   const { isCheckingAuth, authUser } = useAuthStore();
-
+  useEffect(() => {
+    console.log(codeRunResult);
+  }, [codeRunResult]);
   return (
     <div className="w-full h-full flex flex-col items-center justify-between">
       {!isCheckingAuth && !authUser?.id ? (
@@ -134,16 +136,32 @@ const ProblemPageCodeContainer = ({
                   <p className="font-bold">Input :</p>
                   <span>{input?.split(" ").join("\t")}</span>
                 </span>
-                {codeRunResult &&
-                  codeRunResult.length > 0 &&
-                  codeRunResult[idx].compile_output && (
-                    <span className="flex flex-col my-4">
+                {codeRunResult && codeRunResult.length > 0 && (
+                  <span className="flex flex-col my-4">
+                    {(codeRunResult[idx]?.message ||
+                      codeRunResult[idx]?.stderr ||
+                      codeRunResult[idx]?.compile_output) && (
                       <span className="text-lg font-semibold text-gray">
                         Execution description
                       </span>
-                      <span>{codeRunResult[idx].compile_output}</span>
-                    </span>
-                  )}
+                    )}
+                    {codeRunResult[idx]?.compile_output && (
+                      <pre className="max-w-full overflow-auto whitespace-pre-wrap break-words p-2 text-red-500 rounded text-sm">
+                        {codeRunResult[idx]?.compile_output}
+                      </pre>
+                    )}
+                    {codeRunResult[idx]?.stderr && (
+                      <pre className="max-w-full overflow-auto whitespace-pre-wrap break-words p-2 text-red-500 rounded text-sm">
+                        {codeRunResult[idx]?.stderr}
+                      </pre>
+                    )}
+                    {codeRunResult[idx]?.message && (
+                      <pre className="max-w-full overflow-auto whitespace-pre-wrap break-words p-2 text-red-500 rounded text-sm">
+                        {codeRunResult[idx]?.message}
+                      </pre>
+                    )}
+                  </span>
+                )}
 
                 {codeRunResult && codeRunResult.length > 0 && (
                   <span className="grid grid-cols-2 gap-4">
