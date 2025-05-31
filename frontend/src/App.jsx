@@ -49,7 +49,7 @@ function App() {
     <>
       <Navbar />
 
-      <div className="w-[100svw] flex flex-col items-center justify-center mt-4">
+      <div className="w-[100svw] flex flex-col items-center justify-center mt-4 mb-8">
         <div className="w-[95%] flex flex-col items-center justify-between ">
           <Routes>
             <Route path="/" element={<LandingPage />} />

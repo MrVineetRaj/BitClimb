@@ -18,28 +18,7 @@ const DSA_TAGS = [
   "Maths",
 ];
 
-const COMPANY_TAGS = [
-  "Amazon",
-  "Google",
-  "Microsoft",
-  "Facebook",
-  "Apple",
-  "Goldman Sachs",
-  "Adobe",
-  "Flipkart",
-  "Walmart",
-  "Uber",
-  "LinkedIn",
-  "Oracle",
-  "Samsung",
-  "Intel",
-  "Qualcomm",
-  "IBM",
-  "Salesforce",
-  "Twitter",
-  "Snapchat",
-  "Airbnb",
-];
+const COMPANY_TAGS = ["Uber", "Morgan Stanley","Zoho","Reddit"];
 
 const DUMMY_CONTESTS = [
   {

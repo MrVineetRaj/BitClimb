@@ -30,6 +30,7 @@ export const createProblemSchema = z.object({
   }),
 
   tags: z.array(z.string()).min(1, "At least one tag is required"),
+  companies: z.array(z.string()).min(1, "At least one company is required"),
   constraints: z.string().min(1, "Constraints are required"),
 
   examples: z
@@ -51,12 +52,32 @@ export const createProblemSchema = z.object({
       })
     )
     .min(1, "At least one test case is required"),
+  codeSnippetsHeader: z.object({
+    JAVASCRIPT: z.string().min(1, "JavaScript code snippet is required"),
+    PYTHON: z.string().min(1, "Python code snippet is required"),
+    CPP: z.string().min(1, "C++ code snippet is required"),
+  }),
   codeSnippets: z.object({
     JAVASCRIPT: z.string().min(1, "JavaScript code snippet is required"),
     PYTHON: z.string().min(1, "Python code snippet is required"),
     CPP: z.string().min(1, "C++ code snippet is required"),
   }),
+  codeSnippetsFooter: z.object({
+    JAVASCRIPT: z.string().min(1, "JavaScript code snippet is required"),
+    PYTHON: z.string().min(1, "Python code snippet is required"),
+    CPP: z.string().min(1, "C++ code snippet is required"),
+  }),
+  referenceSolutionHeader: z.object({
+    JAVASCRIPT: z.string().min(1, "JavaScript reference solution is required"),
+    PYTHON: z.string().min(1, "Python reference solution is required"),
+    CPP: z.string().min(1, "C++ reference solution is required"),
+  }),
   referenceSolution: z.object({
+    JAVASCRIPT: z.string().min(1, "JavaScript reference solution is required"),
+    PYTHON: z.string().min(1, "Python reference solution is required"),
+    CPP: z.string().min(1, "C++ reference solution is required"),
+  }),
+  referenceSolutionFooter: z.object({
     JAVASCRIPT: z.string().min(1, "JavaScript reference solution is required"),
     PYTHON: z.string().min(1, "Python reference solution is required"),
     CPP: z.string().min(1, "C++ reference solution is required"),

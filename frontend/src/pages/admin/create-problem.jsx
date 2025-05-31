@@ -40,17 +40,38 @@ const CreateProblem = () => {
       description: "",
       difficulty: "EASY",
       tags: [""],
+      companies: [""],
       constraints: "",
       examples: [{ input: "", output: "", explanation: "" }],
       hints: [""],
       editorial: "",
       testCases: [{ input: "", output: "" }],
+      codeSnippetsHeader: {
+        JAVASCRIPT: "",
+        PYTHON: "",
+        CPP: "",
+      },
       codeSnippets: {
         JAVASCRIPT: "",
         PYTHON: "",
         CPP: "",
       },
+      codeSnippetsFooter: {
+        JAVASCRIPT: "",
+        PYTHON: "",
+        CPP: "",
+      },
+      referenceSolutionHeader: {
+        JAVASCRIPT: "",
+        PYTHON: "",
+        CPP: "",
+      },
       referenceSolution: {
+        JAVASCRIPT: "",
+        PYTHON: "",
+        CPP: "",
+      },
+      referenceSolutionFooter: {
         JAVASCRIPT: "",
         PYTHON: "",
         CPP: "",
@@ -92,11 +113,19 @@ const CreateProblem = () => {
     control,
     name: "tags",
   });
+  const {
+    fields: companyFields,
+    append: appendCompany,
+    remove: removeCompany,
+  } = useFieldArray({
+    control,
+    name: "companies",
+  });
 
   const onSubmit = async (data) => {
     try {
       setIsLoading(true);
-      
+
       // Add your API call here
       const res = await axiosInstance.post("/problem/create-problem", data);
       if (res.data.success) {
@@ -214,6 +243,50 @@ const CreateProblem = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => appendTag("")}
+                    className="flex items-center gap-1"
+                  >
+                    <Plus className="size-4" /> Add Tag
+                  </Button>
+                </div>
+                {errors.tags && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.tags.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Companies <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {companyFields.map((field, index) => (
+                    <div key={field.id} className="flex items-center gap-2">
+                      <input
+                        {...register(`companies.${index}`)}
+                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-background"
+                        placeholder="Enter tag"
+                        disabled={isSubmitting || isLoading}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (companyFields.length > 1) {
+                            removeCompany(index);
+                          }
+                        }}
+                        className="text-red-500 hover:text-red-700"
+                        disabled={companyFields.length <= 1}
+                      >
+                        <Trash className="size-4" />
+                      </button>
+                    </div>
+                  ))}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => appendCompany("")}
                     className="flex items-center gap-1"
                   >
                     <Plus className="size-4" /> Add Tag
@@ -420,8 +493,67 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <Code className="size-5" /> JavaScript
                 </h3>
+                <p>Javascript CodeSnippet Header</p>
+                <Controller
+                  name="codeSnippetsHeader.JAVASCRIPT"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="javascript"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.codeSnippets?.JAVASCRIPT?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.codeSnippets.JAVASCRIPT.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4">Javascript CodeSnippet</p>
                 <Controller
                   name="codeSnippets.JAVASCRIPT"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="javascript"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.codeSnippets?.JAVASCRIPT?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.codeSnippets.JAVASCRIPT.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4">Javascript CodeSnippet Footer</p>
+                <Controller
+                  name="codeSnippetsFooter.JAVASCRIPT"
                   control={control}
                   render={({ field }) => (
                     <div>
@@ -454,8 +586,67 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <Code className="size-5" /> Python
                 </h3>
+                <p className="mt-4">Python CodeSnippet Header</p>
+                <Controller
+                  name="codeSnippetsHeader.PYTHON"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="python"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.codeSnippets?.PYTHON?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.codeSnippets.PYTHON.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4">Python CodeSnippet</p>
                 <Controller
                   name="codeSnippets.PYTHON"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="python"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.codeSnippets?.PYTHON?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.codeSnippets.PYTHON.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4">Python CodeSnippet Footer</p>
+                <Controller
+                  name="codeSnippetsFooter.PYTHON"
                   control={control}
                   render={({ field }) => (
                     <div>
@@ -488,8 +679,67 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <Code className="size-5" /> C++
                 </h3>
+                <p className="mt-4">CPP CodeSnippet Header</p>
+                <Controller
+                  name="codeSnippetsHeader.CPP"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="cpp"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.codeSnippets?.CPP?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.codeSnippets.CPP.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />{" "}
+                <p className="mt-4">CPP CodeSnippet</p>
                 <Controller
                   name="codeSnippets.CPP"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="cpp"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.codeSnippets?.CPP?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.codeSnippets.CPP.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />{" "}
+                <p className="mt-4">CPP CodeSnippet Footer</p>
+                <Controller
+                  name="codeSnippetsFooter.CPP"
                   control={control}
                   render={({ field }) => (
                     <div>
@@ -526,8 +776,67 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <FileCode className="size-5" /> JavaScript Solution
                 </h3>
+                <p className="mt-4"> Reference solution Header</p>
+                <Controller
+                  name="referenceSolutionHeader.JAVASCRIPT"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="javascript"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.referenceSolution?.JAVASCRIPT?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.referenceSolution.JAVASCRIPT.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4"> Reference solution</p>
                 <Controller
                   name="referenceSolution.JAVASCRIPT"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="javascript"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.referenceSolution?.JAVASCRIPT?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.referenceSolution.JAVASCRIPT.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4"> Reference solution Footer</p>
+                <Controller
+                  name="referenceSolutionFooter.JAVASCRIPT"
                   control={control}
                   render={({ field }) => (
                     <div>
@@ -560,8 +869,67 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <FileCode className="size-5" /> Python Solution
                 </h3>
+                <p className="mt-4"> Reference solution Header</p>
+                <Controller
+                  name="referenceSolutionHeader.PYTHON"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="python"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.referenceSolution?.PYTHON?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.referenceSolution.PYTHON.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4"> Reference solution</p>
                 <Controller
                   name="referenceSolution.PYTHON"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="python"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.referenceSolution?.PYTHON?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.referenceSolution.PYTHON.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4"> Reference solution Footer</p>
+                <Controller
+                  name="referenceSolutionFooter.PYTHON"
                   control={control}
                   render={({ field }) => (
                     <div>
@@ -594,8 +962,67 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <FileCode className="size-5" /> C++ Solution
                 </h3>
+                <p className="mt-4"> Reference solution Header</p>
+                <Controller
+                  name="referenceSolutionHeader.CPP"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="cpp"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.referenceSolution?.CPP?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.referenceSolution.CPP.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4"> Reference solution</p>
                 <Controller
                   name="referenceSolution.CPP"
+                  control={control}
+                  render={({ field }) => (
+                    <div>
+                      <Editor
+                        height="300px"
+                        language="cpp"
+                        theme="vs-dark"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={{
+                          minimap: { enabled: false },
+                          fontSize: 14,
+                          lineNumbers: "on",
+                          roundedSelection: false,
+                          scrollBeyondLastLine: false,
+                          automaticLayout: true,
+                        }}
+                      />
+                      {errors.referenceSolution?.CPP?.message && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.referenceSolution.CPP.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                />
+                <p className="mt-4"> Reference solution Footer</p>
+                <Controller
+                  name="referenceSolutionFooter.CPP"
                   control={control}
                   render={({ field }) => (
                     <div>

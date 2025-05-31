@@ -1,4 +1,10 @@
-import { Code, Terminal, FileCode, Braces } from "lucide-react";
+import {
+  Code,
+  Terminal,
+  FileCode,
+  Braces,
+  LayoutDashboard,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 const CodeBackground = ({ title, subtitle }) => {
@@ -115,13 +121,15 @@ function reverseList(head) {
         {/* Logo */}
         <div className="flex items-center justify-center mb-6">
           <div className="w-12 h-12 rounded-xl bg-primary/10  flex items-center justify-center">
-            <Code className="w-6 h-6 text-primary" />
+            <LayoutDashboard className="w-6 h-6 text-primary" />
           </div>
         </div>
 
         {/* Text content */}
         <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>
-        <p className="text-slate-300 text-center">{subtitle}</p>
+        {subtitle && (
+          <p className="text-slate-300 text-center italic">{subtitle}</p>
+        )}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const FormField = forwardRef(
       type = "text",
       label,
       error = "",
-      required ,
+      required,
       disabled = false,
       containerStyles = "",
       onChange,
@@ -26,9 +26,11 @@ const FormField = forwardRef(
             className={`flex items-center relative gap-2 w-full ${containerStyles}`}
           >
             <label
-              className="font-semibold text-sm  text-white  transition-all duration-200"
+              className="font-semibold text-sm  text-white  transition-all duration-200 absolute left-2 -top-2 peer-focus:-top-2 peer-focus:text-primary peer-focus:text-xs"
               htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
-            ></label>
+            >
+              {label}
+            </label>
             <input
               ref={ref}
               name={name || label?.toLowerCase().replace(/\s+/g, "_")}
@@ -49,17 +51,17 @@ const FormField = forwardRef(
               {...rest}
             />
 
-            {showingPassword ? (
+            {!showingPassword ? (
               <EyeClosed
                 className="cursor-pointer text-gray-500"
                 onClick={() => {
-                  setShowingPassword(false);
+                  setShowingPassword(true);
                 }}
               />
             ) : (
               <Eye
                 className="cursor-pointer text-gray-500"
-                onClick={() => setShowingPassword(true)}
+                onClick={() => setShowingPassword(false)}
               />
             )}
             {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -67,7 +69,7 @@ const FormField = forwardRef(
         ) : type === "textarea" ? (
           <span className={`relative w-full ${containerStyles}`}>
             <label
-              className="font-semibold text-sm  text-white  transition-all duration-200"
+              className="font-semibold text-sm  text-white  transition-all duration-200  "
               htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
             >
               {label}
@@ -115,7 +117,7 @@ const FormField = forwardRef(
               {...rest}
             >
               <option value="" className="bg-primary/20" disabled>
-                {label} 
+                {label}
               </option>
               {rest.options?.map((option) => (
                 <option
@@ -132,10 +134,10 @@ const FormField = forwardRef(
         ) : (
           <span className={`relative w-full ${containerStyles}`}>
             <label
-              className="font-semibold text-sm  text-white  transition-all duration-200"
+              className="font-semibold text-sm  text-white  transition-all duration-200 "
               htmlFor={name || label?.toLowerCase().replace(/\s+/g, "_")}
             >
-              {label} 
+              {label}
             </label>
             <input
               ref={ref}

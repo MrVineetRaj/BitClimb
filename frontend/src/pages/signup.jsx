@@ -1,12 +1,13 @@
 import FormField from "@/components/shared/form-field";
 import { signUpSchema } from "@/lib/zod.schema";
-import { Lock, Mail, User } from "lucide-react";
+import { LayoutDashboard, Lock, Mail, User } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import CodeBackground from "@/components/shared/auth-image-pattern";
 import { useAuthStore } from "@/store/useAuthStore";
+import { Link } from "react-router";
 
 const SignupPage = () => {
   const { isSigninUp, signup } = useAuthStore();
@@ -30,7 +31,15 @@ const SignupPage = () => {
 
   return (
     <div className="h-screen grid lg:grid-cols-2 w-full">
-      <div className="flex flex-col justify-center items-center gap-8px">
+      <CodeBackground
+        title={"Welcome abroad !"}
+        subtitle={"Climb to the top bit by bit at BitClimb"}
+      />{" "}
+      <div className="flex flex-col justify-center items-center gap-4">
+        <LayoutDashboard className="size-10 text-primary" />
+        <h1 className="text-xl font-bold">
+          Login to <span className="text-primary">BitClimb</span>
+        </h1>
         <form
           className="flex gap-8 flex-col justify-center items-center p-4"
           onSubmit={handleSubmit(onSubmit)}
@@ -88,9 +97,13 @@ const SignupPage = () => {
             SignUp
           </Button>
         </form>
+        <span className="text-sm text-gray-400 ">
+          Already have an account?
+          <Link to={"/login"} className="text-primary font-semibold ml-1">
+            Login Here
+          </Link>
+        </span>
       </div>
-
-      <CodeBackground title={"Welcome abroad !"} />
     </div>
   );
 };

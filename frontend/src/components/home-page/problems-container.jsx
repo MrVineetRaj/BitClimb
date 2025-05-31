@@ -64,6 +64,7 @@ const ProblemsContainer = () => {
     // Simulating an API call to fetch problems
     const fetchProblems = async () => {
       getAllProblems(limit, page).then((data) => {
+        console.log("Fetched problems:", data);
         setProblems(data.problems);
       });
     };
@@ -82,7 +83,7 @@ const ProblemsContainer = () => {
             ></div>
           ))}
         </div>
-      ) : problems && problems.length <= 0 ? (
+      ) : problems && problems.length > 0 ? (
         <div className="w-full flex flex-col gap-4">
           {problems.map((problem, index) => (
             <ProblemRow key={problem.id} idx={index} problem={problem} />

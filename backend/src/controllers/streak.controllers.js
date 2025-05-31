@@ -69,7 +69,7 @@ export const getDailyChallenge = asyncHandler(async (req, res) => {
     },
   });
 
-  console.log("Month Wise Challenges:", monthWiseDailyChallenges);
+  // console.log("Month Wise Challenges:", monthWiseDailyChallenges);
   res
     .status(200)
     .json(

@@ -13,13 +13,18 @@ export const createProblem = asyncHandler(async (req, res) => {
     description,
     difficulty,
     tags,
+    companies,
     examples,
     constraints,
     hints,
     editorial,
     testCases,
+    codeSnippetsHeader,
     codeSnippets,
+    codeSnippetsFooter,
+    referenceSolutionHeader,
     referenceSolution,
+    referenceSolutionFooter,
   } = req.body;
 
   if (req.user.role !== "ADMIN") {
@@ -35,17 +40,23 @@ export const createProblem = asyncHandler(async (req, res) => {
 
   // todo : make you have to run judge0 on vps and then only use it
 
-  for (const [lang, solutionCode] of Object.entries(referenceSolution)) {
+  for (const [lang, solutionCodeHeader] of Object.entries(
+    referenceSolutionHeader
+  )) {
     const langId = getJudge0LanguageId(lang);
-
+    let coder_to_pass =
+      solutionCodeHeader +
+      "\n" +
+      referenceSolution[lang] +
+      "\n" +
+      referenceSolutionFooter[lang];
     if (!langId) {
       throw new ApiError(400, `Invalid language: ${lang}`);
     }
 
-    //
     const submission = testCases.map(({ input, output }) => {
       return {
-        source_code: solutionCode,
+        source_code: coder_to_pass,
         language_id: langId,
         stdin: input,
         expected_output: output,
@@ -66,7 +77,6 @@ export const createProblem = asyncHandler(async (req, res) => {
         );
       }
     }
-
   }
 
   // Save the reference solution to the database
@@ -76,13 +86,18 @@ export const createProblem = asyncHandler(async (req, res) => {
       description,
       difficulty,
       tags: tags || null,
+      companies: companies || null,
       examples: examples || null,
       constraints: constraints || null,
       hints: hints || null,
       editorial: editorial || null,
       testCases: testCases || null,
+      codeSnippetsHeader: codeSnippetsHeader || null,
       codeSnippets: codeSnippets || null,
+      codeSnippetsFooter: codeSnippetsFooter || null,
+      referenceSolutionHeader: referenceSolutionHeader || null,
       referenceSolution: referenceSolution,
+      referenceSolutionFooter: referenceSolutionFooter || null,
       userId: req.user.id, // Assuming the user creating the problem is the one making the request
     },
   });
@@ -106,14 +121,25 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   const difficultySort = req.query.difficultySort || "asc";
   const difficultyFilter = req.query.difficulty || null;
 
+  console.log("Fetching all problems with pagination:", {
+    page,
+    limit,
+  });
   const problems = await db.problem.findMany({
     orderBy: {
       createdAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      tags: true,
+      difficulty: true,
     },
     skip: (page - 1) * limit,
     take: limit,
   });
 
+  console.log("problems fetched:", problems.length);
   if (!problems || problems.length === 0) {
     return res.status(200).json(new ApiResponse(404, [], "No problems found"));
   }

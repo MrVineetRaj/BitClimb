@@ -54,6 +54,7 @@ model Problem {
   description       String
   difficulty        ProblemDifficulty
   tags              String[]
+  companies        String[]
   userId            String
   examples          Json
   constraints       String
@@ -63,7 +64,9 @@ model Problem {
   codeSnippetsHeader      Json
   codeSnippets      Json
   codeSnippetsFooter      Json
+  referenceSolutionHeader Json
   referenceSolution Json
+  referenceSolutionFooter Json
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
 

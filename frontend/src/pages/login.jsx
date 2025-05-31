@@ -1,13 +1,13 @@
 import FormField from "@/components/shared/form-field";
 import { loginSchema, signUpSchema } from "@/lib/zod.schema";
-import { Lock, Mail, User } from "lucide-react";
+import { LayoutDashboard, Lock, Mail, User } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import CodeBackground from "@/components/shared/auth-image-pattern";
 import { useAuthStore } from "@/store/useAuthStore";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const LoginPage = () => {
   const { login, isLoggingIn } = useAuthStore();
@@ -28,7 +28,6 @@ const LoginPage = () => {
     try {
       const res = await login(data.email, data.password);
       if (res) {
-        
         navigate("/");
       }
     } catch (error) {
@@ -39,7 +38,11 @@ const LoginPage = () => {
 
   return (
     <div className="h-screen grid lg:grid-cols-2 w-full">
-      <div className="flex flex-col justify-center items-center gap-8px">
+      <div className="flex flex-col justify-center items-center gap-8">
+        <LayoutDashboard className="size-10 text-primary" />
+        <h1 className="text-xl font-bold">
+          Login to <span className="text-primary">BitClimb</span>
+        </h1>
         <form
           className="flex gap-8 flex-col justify-center items-center p-4"
           onSubmit={handleSubmit(onSubmit)}
@@ -68,10 +71,19 @@ const LoginPage = () => {
           </span>
 
           <Button className={"w-full text-white font-semibold "}>Login</Button>
-        </form>
+        </form>{" "}
+        <span className="text-sm text-gray-400 ">
+          New User ?
+          <Link to={"/signup"} className="text-primary font-semibold ml-1">
+            Signup here
+          </Link>
+        </span>
       </div>
 
-      <CodeBackground title={"Welcome Back  !"} />
+      <CodeBackground
+        title={"Welcome Back  !"}
+        subtitle={"Climb to the top bit by bit at BitClimb"}
+      />
     </div>
   );
 };

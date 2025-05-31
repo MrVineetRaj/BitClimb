@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { useProblemStore } from "@/store/useProblemStore";
 import { Loader, Play, Upload } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 import ProblemPageDetailContainer from "@/components/problem/problem-page-detail-container";
 import ProblemPageCodeContainer from "@/components/problem/problem-page-code-container";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const ProblemPage = () => {
   const {
@@ -16,6 +17,7 @@ const ProblemPage = () => {
     isRunningCode,
     isSubmittingCode,
   } = useProblemStore();
+  const { isCheckingAuth, authUser } = useAuthStore();
   const { problemId } = useParams();
   const [problem, setProblem] = useState(null);
   const [userSubmissions, setUserSubmissions] = useState([]);
@@ -26,6 +28,9 @@ const ProblemPage = () => {
 
   const fetchSubmissionsByProblem = async () => {
     try {
+      if (isCheckingAuth || !authUser?.id) {
+        return;
+      }
       const res = await getUserSubmissionsPerProblem(problemId);
 
       setUserSubmissions(res);
@@ -55,13 +60,29 @@ const ProblemPage = () => {
     fetchProblem();
   }, [getProblemById, problemId]);
   useEffect(() => {
+    if (isCheckingAuth || !authUser?.id) {
+      return;
+    }
     fetchSubmissionsByProblem();
   }, [getUserSubmissionsPerProblem, problemId]);
 
   return (
     <div className="overflow-x-hidden w-full">
       <div className="w-full flex items-center justify-center gap-4">
-        {isRunningCode || isSubmittingCode ? (
+        {isCheckingAuth || !authUser?.id ? (
+          <>
+            <Link to={"/login"}>
+              <Button className="text-white" variant={"outline"}>
+                Login
+              </Button>
+            </Link>
+            <Link to={"/signup"}>
+              <Button className="text-white">
+                Signup 
+              </Button>
+            </Link>
+          </>
+        ) : isRunningCode || isSubmittingCode ? (
           <Loader className="animate-spin " />
         ) : (
           <>
@@ -76,7 +97,11 @@ const ProblemPage = () => {
                 );
 
                 runCode({
+                  source_code_header:
+                    problem?.referenceSolutionHeader[selectedLanguage] || "",
                   source_code: sourceCodeEnteredByUser[selectedLanguage],
+                  source_code_footer:
+                    problem?.referenceSolutionFooter[selectedLanguage] || "",
                   language: selectedLanguage,
                   stdin: stdin,
                   expected_outputs: expected_outputs,
@@ -100,7 +125,11 @@ const ProblemPage = () => {
                 );
 
                 submitCode({
+                  source_code_header:
+                    problem?.referenceSolutionHeader[selectedLanguage],
                   source_code: sourceCodeEnteredByUser[selectedLanguage],
+                  source_code_footer:
+                    problem?.referenceSolutionFooter[selectedLanguage],
                   language: selectedLanguage,
                   stdin: stdin,
                   expected_outputs: expected_outputs,

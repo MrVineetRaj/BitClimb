@@ -9,9 +9,21 @@ import {
 
 export const runCode = asyncHandler(async (req, res) => {
   const { problemId } = req.params;
-  const { source_code, language, stdin, expected_outputs } = req.body;
+  const {
+    source_code_header,
+    source_code,
+    source_code_footer,
+    language,
+    stdin,
+    expected_outputs,
+  } = req.body;
 
-  const code = source_code.trim();
+  const code =
+    source_code_header.trim() +
+    "\n" +
+    source_code.trim() +
+    "\n" +
+    source_code_footer.trim();
 
   if (expected_outputs.length !== stdin.length) {
     return res.status(400).json({
@@ -22,7 +34,7 @@ export const runCode = asyncHandler(async (req, res) => {
 
   const submissions = stdin.map((input, idx) => {
     return {
-      source_code: source_code,
+      source_code: code,
       language_id: getJudge0LanguageId(language),
       stdin: input,
       base64_encoded: false,
@@ -80,10 +92,22 @@ export const runCode = asyncHandler(async (req, res) => {
 
 export const submitCode = asyncHandler(async (req, res) => {
   const { problemId } = req.params;
-  const { source_code, language, stdin, expected_outputs } = req.body;
+  const {
+    source_code_header,
+    source_code,
+    source_code_footer,
+    language,
+    stdin,
+    expected_outputs,
+  } = req.body;
 
   const userId = req.user.id;
-  const code = source_code.trim();
+  const code =
+    source_code_header.trim() +
+    "\n" +
+    source_code.trim() +
+    "\n" +
+    source_code_footer.trim();
 
   if (expected_outputs.length !== stdin.length) {
     return res.status(400).json({
@@ -196,7 +220,7 @@ export const submitCode = asyncHandler(async (req, res) => {
     data: {
       problemId,
       userId,
-      sourceCode: code,
+      sourceCode: source_code,
       language,
       stdin: isAllPassed ? null : stdin[firstIndexWhereFailed],
       stdout: isAllPassed

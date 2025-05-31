@@ -12,7 +12,9 @@ export const useProblemStore = create((set) => ({
   isLoadingHeatMap: false,
 
   runCode: async ({
+    source_code_header,
     source_code,
+    source_code_footer,
     language,
     stdin,
     expected_outputs,
@@ -21,7 +23,9 @@ export const useProblemStore = create((set) => ({
     set({ isRunningCode: true });
     try {
       const response = await axiosInstance.post(`/execute/run/${problemId}`, {
+        source_code_header,
         source_code,
+        source_code_footer,
         language,
         stdin,
         expected_outputs,
@@ -51,7 +55,9 @@ export const useProblemStore = create((set) => ({
   },
 
   submitCode: async ({
+    source_code_header,
     source_code,
+    source_code_footer,
     language,
     stdin,
     expected_outputs,
@@ -62,7 +68,9 @@ export const useProblemStore = create((set) => ({
       const response = await axiosInstance.post(
         `/execute/submit/${problemId}`,
         {
+          source_code_header,
           source_code,
+          source_code_footer,
           language,
           stdin,
           expected_outputs,
@@ -155,6 +163,7 @@ export const useProblemStore = create((set) => ({
       const response = await axiosInstance.get(
         `/problem/get-problems?limit=${limit}&page=${page}`
       );
+      
       set({ isLoadingProblems: false });
       return response.data.data;
     } catch (error) {
