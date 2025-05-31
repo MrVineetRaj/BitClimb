@@ -45,8 +45,38 @@ export const addNewDailyChallenge = async () => {
         date: new Date(),
       },
     });
-
   } catch (error) {
     console.log(error.message);
   }
 };
+
+export const getDailyChallenge = asyncHandler(async (req, res) => {
+  const currDate = new Date();
+  const firstDayOfMonth = new Date(
+    currDate.getFullYear(),
+    currDate.getMonth(),
+    1
+  );
+
+  const monthWiseDailyChallenges = await db.dailyChallenge.findMany({
+    where: {
+      date: {
+        gte: firstDayOfMonth,
+      },
+    },
+    include: {
+      problem: true,
+    },
+  });
+
+  console.log("Month Wise Challenges:", monthWiseDailyChallenges);
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        monthWiseDailyChallenges,
+        "Daily challenge fetched successfully"
+      )
+    );
+});

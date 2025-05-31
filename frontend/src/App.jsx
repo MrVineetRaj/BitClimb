@@ -16,6 +16,10 @@ import CreateProblem from "./pages/admin/create-problem";
 import ProblemPage from "./pages/problem";
 import CreateContextPage from "./pages/admin/create-contest";
 import ProfilePage from "./pages/profile-page";
+import ProblemLists from "./pages/problem-lists";
+import UserMadeList from "./pages/problem-lists/user-made-list";
+import TopicWiseList from "./pages/problem-lists/topic-wise-list";
+import CompanyWiseList from "./pages/problem-lists/company-wise-list";
 
 function App() {
   const {
@@ -56,6 +60,23 @@ function App() {
             <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
             <Route path="/profile/:profileId" element={<ProfilePage />} />
             <Route path="/problem/:problemId" element={<ProblemPage />} />
+
+            <Route
+              path="/problem-lists"
+              element={<ProblemLists />} // Placeholder for Problem Lists Page
+            />
+            <Route
+              path="/problem-lists/:listId"
+              element={<UserMadeList />} // Placeholder for Specific Problem List Page
+            />
+            <Route
+              path="/problem-lists/topic-wise/:topic"
+              element={<TopicWiseList />} // Placeholder for Specific Problem List Page
+            />
+            <Route
+              path="/problem-lists/company-wise/:company"
+              element={<CompanyWiseList />} // Placeholder for Specific Problem List Page
+            />
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/" element={<AdminPanel />} />
               <Route

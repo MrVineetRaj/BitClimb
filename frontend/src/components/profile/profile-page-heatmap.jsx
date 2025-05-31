@@ -110,21 +110,24 @@ const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
                           (item) =>
                             item.location.month === index &&
                             item.location.day === dayIndex &&
-                            item.count > 5
+                            item.count > 6
                         )
                           ? "bg-green-800"
                           : heatMapData.some(
                               (item) =>
                                 item.location.month === index &&
                                 item.location.day === dayIndex &&
-                                item.count > 5
+                                item.count > 3
                             )
                           ? "bg-green-600"
                           : heatMapData.some(
                               (item) =>
                                 item.location.month === index &&
                                 item.location.day === dayIndex &&
-                                item.count > 5
+                                item.count <= 3 &&
+                                item.location.month === index &&
+                                item.location.day === dayIndex &&
+                                item.count >= 1
                             )
                           ? "bg-green-500"
                           : heatMapData[heatMapData?.length - 1].location
@@ -133,8 +136,7 @@ const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
                           ? "bg-primary/20"
                           : heatMapData[heatMapData?.length - 1].location
                               .month == index &&
-                            heatMapData[heatMapData?.length - 1].location
-                              .day >=
+                            heatMapData[heatMapData?.length - 1].location.day >=
                               dayIndex
                           ? "bg-primary/20"
                           : "bg-gray-950"
