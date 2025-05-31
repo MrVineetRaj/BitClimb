@@ -18,15 +18,12 @@ const ProfilePage = () => {
       try {
         const profileData = await getPublicUserProfile(profileId);
         setPublicProfile(profileData);
-        
       } catch (error) {
         console.error("Failed to fetch public profile:", error);
       }
     };
 
     fetchPublicProfile();
-
-    
   }, [profileId, getPublicUserProfile]);
   return (
     <div className="w-full md:w-[90%] xl:w-[60%]  ">
@@ -37,7 +34,11 @@ const ProfilePage = () => {
           are not registered here
         </span>
       </div>
-      <ProfileMetrics publicProfile={publicProfile} profileId={profileId} />
+      <ProfileMetrics
+        publicProfile={publicProfile}
+        profileId={profileId}
+        isLoadingPublicProfile={isLoadingPublicProfile}
+      />
       <ProfilePageHeatMap publicProfile={publicProfile} profileId={profileId} />
       <SubmissionContainerForProfile profileId={profileId} />
     </div>

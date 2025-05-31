@@ -55,8 +55,8 @@ const ProblemRow = ({ problem, idx = 0 }) => {
 };
 
 const ProblemsContainer = () => {
-  const { getAllProblems } = useProblemStore();
-  const [problems, setProblems] = useState([]);
+  const { getAllProblems, isLoadingProblems } = useProblemStore();
+  const [problems, setProblems] = useState(null);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
 
@@ -73,8 +73,17 @@ const ProblemsContainer = () => {
   return (
     <>
       <h1 className="text-2xl font-bold ">Problems</h1>
-      {problems && problems.length > 0 ? (
-        <div className="w-full gap-4">
+      {isLoadingProblems && !problems ? (
+        <div className="flex flex-col gap-4">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <div
+              key={index}
+              className={` bg-primary/10  animate-pulse flex items-center justify-between w-full h-8`}
+            ></div>
+          ))}
+        </div>
+      ) : problems && problems.length <= 0 ? (
+        <div className="w-full flex flex-col gap-4">
           {problems.map((problem, index) => (
             <ProblemRow key={problem.id} idx={index} problem={problem} />
           ))}

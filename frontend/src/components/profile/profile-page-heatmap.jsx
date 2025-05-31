@@ -25,12 +25,16 @@ const MONT_WISE_DAYS = {
 
 const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
   const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth();
+  const currentDate = new Date().getDate();
   const [chosenYear, setChosenYear] = useState(currentYear);
   const [isChosenYearLeap, setIsChosenYearLeap] = useState(
     currentYear % 4 === 4 ||
       (currentYear % 100 === 0 && currentYear % 400 === 0)
   );
-  const { getUserHeatMap } = useProblemStore();
+
+  // const [isLoadingHeatMap, setisLoadingHeatMap] = useState(false);
+  const { getUserHeatMap, isLoadingHeatMap } = useProblemStore();
   const [heatMapData, setHeatMapData] = useState([]);
 
   const fetchHeatMapData = async (year) => {
@@ -48,7 +52,6 @@ const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
       });
 
       setHeatMapData(modifiedData);
-      
     } catch (error) {
       console.error("Error fetching heat map data:", error);
       return {};
@@ -82,8 +85,8 @@ const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
         </Select>
       </div>
 
-      {heatMapData.length == 0 ? (
-        <>Loading</>
+      {isLoadingHeatMap ? (
+        <div className="w-full h-36 mt-4 rounded-md animate-pulse bg-primary/10"></div>
       ) : (
         <div
           className="w-full overflow-x-scroll pb-4"
@@ -106,6 +109,7 @@ const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
                     <div
                       key={dayIndex * 50}
                       className={`size-3  ${
+                        heatMapData.length > 0 &&
                         heatMapData.some(
                           (item) =>
                             item.location.month === index &&
@@ -113,14 +117,16 @@ const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
                             item.count > 6
                         )
                           ? "bg-green-800"
-                          : heatMapData.some(
+                          : heatMapData.length > 0 &&
+                            heatMapData.some(
                               (item) =>
                                 item.location.month === index &&
                                 item.location.day === dayIndex &&
                                 item.count > 3
                             )
                           ? "bg-green-600"
-                          : heatMapData.some(
+                          : heatMapData.length > 0 &&
+                            heatMapData.some(
                               (item) =>
                                 item.location.month === index &&
                                 item.location.day === dayIndex &&
@@ -130,14 +136,9 @@ const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
                                 item.count >= 1
                             )
                           ? "bg-green-500"
-                          : heatMapData[heatMapData?.length - 1].location
-                              .month >=
-                            index + 1
+                          : currentMonth >= index + 1
                           ? "bg-primary/20"
-                          : heatMapData[heatMapData?.length - 1].location
-                              .month == index &&
-                            heatMapData[heatMapData?.length - 1].location.day >=
-                              dayIndex
+                          : currentMonth == index &&currentDate > dayIndex 
                           ? "bg-primary/20"
                           : "bg-gray-950"
                       }  rounded-sm`}

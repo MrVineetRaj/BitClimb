@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/useAuthStore";
 import { useStreakStore } from "@/store/useStreakStore";
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon, Flame } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ const MONTHS = [
 ];
 const StreakCalendar = () => {
   const currDate = new Date();
+  const { isCheckingAuth } = useAuthStore();
   const { isLoadingChallenges, loadDailyChallenges, dailyChallenges } =
     useStreakStore();
   const WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -75,15 +77,15 @@ const StreakCalendar = () => {
       };
     });
 
-    console.log(tempChallenges);
-    setMonthWiseDailyChallenges(tempChallenges);
+    console.log("tempChallenges : ",tempChallenges);
+    setMonthWiseDailyChallenges(tempChallenges || []);
   }, [dailyChallenges]);
 
   return (
     <div className="w-64  flex flex-col items-center justify-center gap-2">
       <span className="text-lg font-semibold">{currDate?.toDateString()}</span>
 
-      {isLoadingChallenges ? (
+      {isLoadingChallenges || isCheckingAuth ? (
         <div className="bg-primary/20 w-64 h-72 animate-pulse"></div>
       ) : (
         <div className="bg-primary/20 w-64 h-72 rounded-lg grid grid-cols-7 grid-rows-6 gap-1 p-2">
@@ -101,7 +103,8 @@ const StreakCalendar = () => {
               {index >= startIdx && (
                 <span
                   className={`h-full w-full flex items-center justify-center ${
-                    !monthWiseDailyChallenges.some((challenge) => {
+                    monthWiseDailyChallenges?.length &&
+                    !monthWiseDailyChallenges?.some((challenge) => {
                       return (
                         challenge?.date == index - startIdx + 1 &&
                         challenge?.problemId
@@ -112,18 +115,24 @@ const StreakCalendar = () => {
                   } rounded-md`}
                   onClick={() => {
                     if (
-                      monthWiseDailyChallenges?.find(()=>{})?.date == index - startIdx + 1 &&
+                      monthWiseDailyChallenges?.length &&
+                      monthWiseDailyChallenges?.find(() => {})?.date ==
+                        index - startIdx + 1 &&
                       challenge?.problemId
                     ) {
                       navigate(
                         `/problem/${
-                          monthWiseDailyChallenges[index - startIdx].problem
+                          monthWiseDailyChallenges?.length
+                            ? monthWiseDailyChallenges[index - startIdx]
+                                ?.problem
+                            : ""
                         }?ref=streak-calendar`
                       );
                     }
                   }}
                 >
-                  {monthWiseDailyChallenges[index - startIdx]?.isSolved ? (
+                  {monthWiseDailyChallenges?.length &&
+                  monthWiseDailyChallenges[index - startIdx]?.isSolved ? (
                     <Flame className="text-orange-500" />
                   ) : (
                     index - startIdx + 1

@@ -37,13 +37,13 @@ function App() {
     initializeAuth();
   }, [checkAuth]);
 
-  if (isCheckingAuth && !authUser) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader className="animate-spin h-10 w-10 text-blue-500" />
-      </div>
-    );
-  }
+  // if (isCheckingAuth && !authUser) {
+  //   return (
+  //     <div className="flex items-center justify-center h-screen">
+  //       <Loader className="animate-spin h-10 w-10 text-blue-500" />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>

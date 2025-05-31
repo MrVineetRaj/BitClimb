@@ -6,6 +6,10 @@ import { axiosInstance } from "@/lib/axios";
 export const useProblemStore = create((set) => ({
   isRunningCode: false,
   isSubmittingCode: false,
+  isLoadingProblems: false,
+  isLoadingSubmissions: false,
+  isLoadingProblem: false,
+  isLoadingHeatMap: false,
 
   runCode: async ({
     source_code,
@@ -89,6 +93,7 @@ export const useProblemStore = create((set) => ({
   },
 
   getProblemById: async (problemId) => {
+    set({ isLoadingProblem: true });
     try {
       const response = await axiosInstance.get(
         `/problem/get-problem/${problemId}`
@@ -109,10 +114,13 @@ export const useProblemStore = create((set) => ({
         });
       }
       throw error;
+    } finally {
+      set({ isLoadingProblem: false });
     }
   },
 
   getUserSubmissionsPerProblem: async (problemId) => {
+    set({ isLoadingSubmissions: true });
     try {
       const response = await axiosInstance.get(
         `/submission/problem/${problemId}`
@@ -134,16 +142,20 @@ export const useProblemStore = create((set) => ({
         });
       }
       throw error;
+    } finally {
+      set({ isLoadingSubmissions: false });
     }
 
     // get
   },
 
   getAllProblems: async (limit = 10, page = 1) => {
+    set({ isLoadingProblems: true });
     try {
       const response = await axiosInstance.get(
         `/problem/get-problems?limit=${limit}&page=${page}`
       );
+      set({ isLoadingProblems: false });
       return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -159,11 +171,15 @@ export const useProblemStore = create((set) => ({
           duration: 3000,
         });
       }
-      throw error;
+      set({ isLoadingProblems: false });
+      // throw error;
+    } finally {
+      set({ isLoadingProblems: false });
     }
   },
 
   getAllUserSubmissions: async (userId, limit = 10, page = 1, isAccepted) => {
+    set({ isLoadingSubmissions: true });
     try {
       const response = await axiosInstance.get(
         `/submission/user?userId=${userId}&limit=${limit}&page=${page}&isAccepted=${isAccepted}`
@@ -185,10 +201,13 @@ export const useProblemStore = create((set) => ({
         });
       }
       throw error;
+    } finally {
+      set({ isLoadingSubmissions: false });
     }
   },
 
   getUserHeatMap: async (userId, year) => {
+    set({ isLoadingHeatMap: true });
     try {
       const response = await axiosInstance.get(
         `/submission/heatmap-submission-count/${userId}?year=${year}`
@@ -209,6 +228,8 @@ export const useProblemStore = create((set) => ({
         });
       }
       throw error;
+    } finally {
+      set({ isLoadingHeatMap: false });
     }
   },
 }));

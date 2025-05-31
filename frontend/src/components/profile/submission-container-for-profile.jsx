@@ -222,7 +222,7 @@ const SubmissionContainerForProfile = ({ profileId }) => {
     currPage: 1,
     totalPage: 5,
   });
-  const { getAllUserSubmissions } = useProblemStore();
+  const { getAllUserSubmissions, isLoadingSubmissions } = useProblemStore();
   const fetchSubmissions = async (page) => {
     try {
       const resp = await getAllUserSubmissions(profileId, 10, page, false);
@@ -274,29 +274,40 @@ const SubmissionContainerForProfile = ({ profileId }) => {
         </TabsList>
 
         <TabsContent value="submissions" className="">
-          <div className="flex items-center flex-col gap-4 mt-4 ">
-            {submissions && submissions.length && submissions.length > 0 ? (
-              submissions?.map((submission, idx) =>
-                submission?.status === "Accepted" ? (
-                  <AcceptedSubmission
-                    submission={submission}
-                    idx={idx}
-                    problemDescription={submission?.problem?.description}
-                    fetchSubmissionsByProblem={() => {}}
-                    key={submission?.id}
-                  />
-                ) : (
-                  <WrongSubmission
-                    submission={submission}
-                    idx={idx}
-                    key={submission?.id}
-                  />
+          {isLoadingSubmissions ? (
+            <div className="flex flex-col gap-4">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <div
+                  key={index}
+                  className={` bg-primary/10  animate-pulse flex items-center justify-between w-full h-8`}
+                ></div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center flex-col gap-4 mt-4 ">
+              {submissions && submissions.length && submissions.length > 0 ? (
+                submissions?.map((submission, idx) =>
+                  submission?.status === "Accepted" ? (
+                    <AcceptedSubmission
+                      submission={submission}
+                      idx={idx}
+                      problemDescription={submission?.problem?.description}
+                      fetchSubmissionsByProblem={() => {}}
+                      key={submission?.id}
+                    />
+                  ) : (
+                    <WrongSubmission
+                      submission={submission}
+                      idx={idx}
+                      key={submission?.id}
+                    />
+                  )
                 )
-              )
-            ) : (
-              <p>No submissions found.</p>
-            )}
-          </div>
+              ) : (
+                <p>No submissions found.</p>
+              )}
+            </div>
+          )}
           {submissionsPage?.totalPage > 1 && (
             <div className="flex justify-end w-full mt-4">
               <Pagination
@@ -316,23 +327,34 @@ const SubmissionContainerForProfile = ({ profileId }) => {
         </TabsContent>
 
         <TabsContent value="accepted-submissions" className="">
-          <div className="flex flex-col gap-6 mt-4">
-            {acceptedSubmissions &&
-            acceptedSubmissions.length &&
-            acceptedSubmissions.length > 0 ? (
-              acceptedSubmissions?.map((submission, idx) => (
-                <AcceptedSubmission
-                  submission={submission}
-                  idx={idx}
-                  problemDescription={submission?.problem?.description}
-                  fetchSubmissionsByProblem={() => {}}
-                  key={submission?.id}
-                />
-              ))
-            ) : (
-              <p>No submissions found.</p>
-            )}
-          </div>
+          {isLoadingSubmissions ? (
+            <div className="flex flex-col gap-4">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <div
+                  key={index}
+                  className={` bg-primary/10  animate-pulse flex items-center justify-between w-full h-8`}
+                ></div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-6 mt-4">
+              {acceptedSubmissions &&
+              acceptedSubmissions.length &&
+              acceptedSubmissions.length > 0 ? (
+                acceptedSubmissions?.map((submission, idx) => (
+                  <AcceptedSubmission
+                    submission={submission}
+                    idx={idx}
+                    problemDescription={submission?.problem?.description}
+                    fetchSubmissionsByProblem={() => {}}
+                    key={submission?.id}
+                  />
+                ))
+              ) : (
+                <p>No submissions found.</p>
+              )}
+            </div>
+          )}
           {acceptedPage?.totalPage > 1 && (
             <div className="flex justify-end w-full mt-4">
               <Pagination
