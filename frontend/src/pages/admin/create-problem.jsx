@@ -494,67 +494,9 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <Code className="size-5" /> JavaScript
                 </h3>
-                <p>Javascript CodeSnippet Header</p>
-                <Controller
-                  name="codeSnippetsHeader.JAVASCRIPT"
-                  control={control}
-                  render={({ field }) => (
-                    <div>
-                      <Editor
-                        height="300px"
-                        language="javascript"
-                        theme="vs-dark"
-                        value={field.value}
-                        onChange={field.onChange}
-                        options={{
-                          minimap: { enabled: false },
-                          fontSize: 14,
-                          lineNumbers: "on",
-                          roundedSelection: false,
-                          scrollBeyondLastLine: false,
-                          automaticLayout: true,
-                        }}
-                      />
-                      {errors.codeSnippets?.JAVASCRIPT?.message && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.codeSnippets.JAVASCRIPT.message}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                />
-                <p className="mt-4">Javascript CodeSnippet</p>
+
                 <Controller
                   name="codeSnippets.JAVASCRIPT"
-                  control={control}
-                  render={({ field }) => (
-                    <div>
-                      <Editor
-                        height="300px"
-                        language="javascript"
-                        theme="vs-dark"
-                        value={field.value}
-                        onChange={field.onChange}
-                        options={{
-                          minimap: { enabled: false },
-                          fontSize: 14,
-                          lineNumbers: "on",
-                          roundedSelection: false,
-                          scrollBeyondLastLine: false,
-                          automaticLayout: true,
-                        }}
-                      />
-                      {errors.codeSnippets?.JAVASCRIPT?.message && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.codeSnippets.JAVASCRIPT.message}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                />
-                <p className="mt-4">Javascript CodeSnippet Footer</p>
-                <Controller
-                  name="codeSnippetsFooter.JAVASCRIPT"
                   control={control}
                   render={({ field }) => (
                     <div>
@@ -587,67 +529,9 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <Code className="size-5" /> Python
                 </h3>
-                <p className="mt-4">Python CodeSnippet Header</p>
-                <Controller
-                  name="codeSnippetsHeader.PYTHON"
-                  control={control}
-                  render={({ field }) => (
-                    <div>
-                      <Editor
-                        height="300px"
-                        language="python"
-                        theme="vs-dark"
-                        value={field.value}
-                        onChange={field.onChange}
-                        options={{
-                          minimap: { enabled: false },
-                          fontSize: 14,
-                          lineNumbers: "on",
-                          roundedSelection: false,
-                          scrollBeyondLastLine: false,
-                          automaticLayout: true,
-                        }}
-                      />
-                      {errors.codeSnippets?.PYTHON?.message && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.codeSnippets.PYTHON.message}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                />
-                <p className="mt-4">Python CodeSnippet</p>
+
                 <Controller
                   name="codeSnippets.PYTHON"
-                  control={control}
-                  render={({ field }) => (
-                    <div>
-                      <Editor
-                        height="300px"
-                        language="python"
-                        theme="vs-dark"
-                        value={field.value}
-                        onChange={field.onChange}
-                        options={{
-                          minimap: { enabled: false },
-                          fontSize: 14,
-                          lineNumbers: "on",
-                          roundedSelection: false,
-                          scrollBeyondLastLine: false,
-                          automaticLayout: true,
-                        }}
-                      />
-                      {errors.codeSnippets?.PYTHON?.message && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.codeSnippets.PYTHON.message}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                />
-                <p className="mt-4">Python CodeSnippet Footer</p>
-                <Controller
-                  name="codeSnippetsFooter.PYTHON"
                   control={control}
                   render={({ field }) => (
                     <div>
@@ -680,67 +564,8 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <Code className="size-5" /> C++
                 </h3>
-                <p className="mt-4">CPP CodeSnippet Header</p>
-                <Controller
-                  name="codeSnippetsHeader.CPP"
-                  control={control}
-                  render={({ field }) => (
-                    <div>
-                      <Editor
-                        height="300px"
-                        language="cpp"
-                        theme="vs-dark"
-                        value={field.value}
-                        onChange={field.onChange}
-                        options={{
-                          minimap: { enabled: false },
-                          fontSize: 14,
-                          lineNumbers: "on",
-                          roundedSelection: false,
-                          scrollBeyondLastLine: false,
-                          automaticLayout: true,
-                        }}
-                      />
-                      {errors.codeSnippets?.CPP?.message && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.codeSnippets.CPP.message}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                />{" "}
-                <p className="mt-4">CPP CodeSnippet</p>
                 <Controller
                   name="codeSnippets.CPP"
-                  control={control}
-                  render={({ field }) => (
-                    <div>
-                      <Editor
-                        height="300px"
-                        language="cpp"
-                        theme="vs-dark"
-                        value={field.value}
-                        onChange={field.onChange}
-                        options={{
-                          minimap: { enabled: false },
-                          fontSize: 14,
-                          lineNumbers: "on",
-                          roundedSelection: false,
-                          scrollBeyondLastLine: false,
-                          automaticLayout: true,
-                        }}
-                      />
-                      {errors.codeSnippets?.CPP?.message && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.codeSnippets.CPP.message}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                />{" "}
-                <p className="mt-4">CPP CodeSnippet Footer</p>
-                <Controller
-                  name="codeSnippetsFooter.CPP"
                   control={control}
                   render={({ field }) => (
                     <div>
