@@ -40,35 +40,39 @@ model User {
   forgotPasswordToken          String?
   forgotPasswordTokenExpiry    DateTime?
 
-  problems      Problem[]
-  submission    Submissions[]
-  testCases     TestCases[]
-  problemSolved ProblemsSolved[]
-  problemLists  ProblemList[]
-  dailyProblems UserDailyChallengeSubmission[]
+  problems             Problem[]
+  submission           Submissions[]
+  testCases            TestCases[]
+  problemSolved        ProblemsSolved[]
+  problemLists         ProblemList[]
+  dailyProblems        UserDailyChallengeSubmission[]
+  // contestRatings ContestRating[]
+  contestsParticipated ContestParticipation[]
+  contestSubmissions   ContestSubmission[]
 }
 
 model Problem {
-  id                      String            @id @default(uuid())
-  title                   String
-  description             String
-  difficulty              ProblemDifficulty
-  tags                    String[]
-  companies               String[]
-  userId                  String
-  examples                Json
-  constraints             String
-  hints                   String[]
-  editorial               String?
-  testCases               Json
-  codeSnippetsHeader      Json
-  codeSnippets            Json
-  codeSnippetsFooter      Json
+  id          String            @id @default(uuid())
+  title       String
+  description String
+  difficulty  ProblemDifficulty
+  tags        String[]
+  companies   String[]
+  userId      String
+  examples    Json
+  constraints String
+  hints       String[]
+  editorial   String?
+  testCases   Json
+
+  codeSnippets Json
+
   referenceSolutionHeader Json
   referenceSolution       Json
   referenceSolutionFooter Json
-  createdAt               DateTime          @default(now())
-  updatedAt               DateTime          @updatedAt
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  isPublic                Boolean  @default(false)
 
   user            User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
   submission      Submissions[]
@@ -76,6 +80,7 @@ model Problem {
   problemSolved   ProblemsSolved[]
   problemLists    ProblemInProblemList[]
   dailyProblems   DailyChallenge[]
+  contestProblems ContestProblem[]
 }
 
 model Submissions {
@@ -100,9 +105,10 @@ model Submissions {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  problem        Problem                        @relation(fields: [problemId], references: [id], onDelete: Cascade)
-  user           User                           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  dailyChallenge UserDailyChallengeSubmission[]
+  problem           Problem                        @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  user              User                           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dailyChallenge    UserDailyChallengeSubmission[]
+  contestSubmission ContestSubmission?
 }
 
 model TestCases {
@@ -184,4 +190,80 @@ model UserDailyChallengeSubmission {
   submission Submissions @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+// model ContestRating {
+//   id          String   @id @default(uuid())
+//   userId      String   
+//   rating      Int
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+
+//   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }
+
+model Contest {
+  id                 String   @id @default(uuid())
+  title              String
+  description        String?
+  startTime          DateTime
+  endTime            DateTime
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  isRankingCompleted Boolean  @default(false)
+
+  problems       ContestProblem[]
+  participations ContestParticipation[]
+  submissions    ContestSubmission[]
+}
+
+model ContestProblem {
+  id           String   @id @default(uuid())
+  contestId    String
+  problemId    String
+  problemIndex String
+  points       Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  contest            Contest             @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  problem            Problem             @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  contestSubmissions ContestSubmission[]
+
+  @@unique([contestId, problemId])
+}
+
+model ContestParticipation {
+  id        String   @id @default(uuid())
+  userId    String
+  contestId String
+  score     Int      @default(0)
+  rank      Int?
+  rating    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contest Contest @relation(fields: [contestId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contestId])
+}
+
+model ContestSubmission {
+  id               String @id @default(uuid())
+  userId           String
+  contestId        String
+  contestProblemId String
+  submissionId     String @unique
+  status           String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contest        Contest        @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  contestProblem ContestProblem @relation(fields: [contestProblemId], references: [id], onDelete: Cascade)
+  submission     Submissions    @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contestId, contestProblemId])
 }

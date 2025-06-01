@@ -149,14 +149,13 @@ exports.Prisma.ProblemScalarFieldEnum = {
   hints: 'hints',
   editorial: 'editorial',
   testCases: 'testCases',
-  codeSnippetsHeader: 'codeSnippetsHeader',
   codeSnippets: 'codeSnippets',
-  codeSnippetsFooter: 'codeSnippetsFooter',
   referenceSolutionHeader: 'referenceSolutionHeader',
   referenceSolution: 'referenceSolution',
   referenceSolutionFooter: 'referenceSolutionFooter',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  isPublic: 'isPublic'
 };
 
 exports.Prisma.SubmissionsScalarFieldEnum = {
@@ -233,6 +232,49 @@ exports.Prisma.UserDailyChallengeSubmissionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ContestScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isRankingCompleted: 'isRankingCompleted'
+};
+
+exports.Prisma.ContestProblemScalarFieldEnum = {
+  id: 'id',
+  contestId: 'contestId',
+  problemId: 'problemId',
+  problemIndex: 'problemIndex',
+  points: 'points',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ContestParticipationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  contestId: 'contestId',
+  score: 'score',
+  rank: 'rank',
+  rating: 'rating',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ContestSubmissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  contestId: 'contestId',
+  contestProblemId: 'contestProblemId',
+  submissionId: 'submissionId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -277,7 +319,11 @@ exports.Prisma.ModelName = {
   ProblemList: 'ProblemList',
   ProblemInProblemList: 'ProblemInProblemList',
   DailyChallenge: 'DailyChallenge',
-  UserDailyChallengeSubmission: 'UserDailyChallengeSubmission'
+  UserDailyChallengeSubmission: 'UserDailyChallengeSubmission',
+  Contest: 'Contest',
+  ContestProblem: 'ContestProblem',
+  ContestParticipation: 'ContestParticipation',
+  ContestSubmission: 'ContestSubmission'
 };
 
 /**

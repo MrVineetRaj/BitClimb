@@ -102,7 +102,7 @@ const updateContest = asyncHandler(async (req, res) => {});
 const deleteContest = asyncHandler(async (req, res) => {});
 
 // todo
-const getContestParticipation = asyncHandler(async (req, res) => {});
+const getContestProblem = asyncHandler(async (req, res) => {});
 
 //  todo
 const getContestSubmissions = asyncHandler(async (req, res) => {});

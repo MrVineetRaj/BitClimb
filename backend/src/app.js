@@ -18,7 +18,8 @@ import adminRouter from "./routes/admin.routes.js";
 import streakRouter from "./routes/streak.routes.js";
 import { addNewDailyChallenge } from "./controllers/streak.controllers.js";
 import aiRouter from "./routes/ai.routes.js";
-import contestRouter from "../routes/contest.routes.js";
+import contestRouter from "./routes/contest.routes.js";
+import { findAndUpdateContestRatings } from "./libs/contest.conf.js";
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
 
@@ -78,5 +79,13 @@ app.use(function onError(err, req, res, next) {
 setInterval(async () => {
   await addNewDailyChallenge();
 }, 1000 * 60);
+
+setInterval(async () => {
+  try {
+    await findAndUpdateContestRatings();
+  } catch (error) {
+    console.error("Error updating contest ratings:", error);
+  }
+}, 1000 * 60 * 60); // Every hour
 
 export default app;

@@ -58,6 +58,26 @@ export type DailyChallenge = $Result.DefaultSelection<Prisma.$DailyChallengePayl
  * 
  */
 export type UserDailyChallengeSubmission = $Result.DefaultSelection<Prisma.$UserDailyChallengeSubmissionPayload>
+/**
+ * Model Contest
+ * 
+ */
+export type Contest = $Result.DefaultSelection<Prisma.$ContestPayload>
+/**
+ * Model ContestProblem
+ * 
+ */
+export type ContestProblem = $Result.DefaultSelection<Prisma.$ContestProblemPayload>
+/**
+ * Model ContestParticipation
+ * 
+ */
+export type ContestParticipation = $Result.DefaultSelection<Prisma.$ContestParticipationPayload>
+/**
+ * Model ContestSubmission
+ * 
+ */
+export type ContestSubmission = $Result.DefaultSelection<Prisma.$ContestSubmissionPayload>
 
 /**
  * Enums
@@ -303,6 +323,46 @@ export class PrismaClient<
     * ```
     */
   get userDailyChallengeSubmission(): Prisma.UserDailyChallengeSubmissionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contest`: Exposes CRUD operations for the **Contest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contests
+    * const contests = await prisma.contest.findMany()
+    * ```
+    */
+  get contest(): Prisma.ContestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contestProblem`: Exposes CRUD operations for the **ContestProblem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContestProblems
+    * const contestProblems = await prisma.contestProblem.findMany()
+    * ```
+    */
+  get contestProblem(): Prisma.ContestProblemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contestParticipation`: Exposes CRUD operations for the **ContestParticipation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContestParticipations
+    * const contestParticipations = await prisma.contestParticipation.findMany()
+    * ```
+    */
+  get contestParticipation(): Prisma.ContestParticipationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contestSubmission`: Exposes CRUD operations for the **ContestSubmission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContestSubmissions
+    * const contestSubmissions = await prisma.contestSubmission.findMany()
+    * ```
+    */
+  get contestSubmission(): Prisma.ContestSubmissionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -751,7 +811,11 @@ export namespace Prisma {
     ProblemList: 'ProblemList',
     ProblemInProblemList: 'ProblemInProblemList',
     DailyChallenge: 'DailyChallenge',
-    UserDailyChallengeSubmission: 'UserDailyChallengeSubmission'
+    UserDailyChallengeSubmission: 'UserDailyChallengeSubmission',
+    Contest: 'Contest',
+    ContestProblem: 'ContestProblem',
+    ContestParticipation: 'ContestParticipation',
+    ContestSubmission: 'ContestSubmission'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -770,7 +834,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "problem" | "submissions" | "testCases" | "problemsSolved" | "problemList" | "problemInProblemList" | "dailyChallenge" | "userDailyChallengeSubmission"
+      modelProps: "user" | "problem" | "submissions" | "testCases" | "problemsSolved" | "problemList" | "problemInProblemList" | "dailyChallenge" | "userDailyChallengeSubmission" | "contest" | "contestProblem" | "contestParticipation" | "contestSubmission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1440,6 +1504,302 @@ export namespace Prisma {
           }
         }
       }
+      Contest: {
+        payload: Prisma.$ContestPayload<ExtArgs>
+        fields: Prisma.ContestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          findFirst: {
+            args: Prisma.ContestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          findMany: {
+            args: Prisma.ContestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>[]
+          }
+          create: {
+            args: Prisma.ContestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          createMany: {
+            args: Prisma.ContestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>[]
+          }
+          delete: {
+            args: Prisma.ContestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          update: {
+            args: Prisma.ContestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestPayload>
+          }
+          aggregate: {
+            args: Prisma.ContestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContest>
+          }
+          groupBy: {
+            args: Prisma.ContestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContestCountArgs<ExtArgs>
+            result: $Utils.Optional<ContestCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContestProblem: {
+        payload: Prisma.$ContestProblemPayload<ExtArgs>
+        fields: Prisma.ContestProblemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContestProblemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContestProblemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>
+          }
+          findFirst: {
+            args: Prisma.ContestProblemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContestProblemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>
+          }
+          findMany: {
+            args: Prisma.ContestProblemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>[]
+          }
+          create: {
+            args: Prisma.ContestProblemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>
+          }
+          createMany: {
+            args: Prisma.ContestProblemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContestProblemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>[]
+          }
+          delete: {
+            args: Prisma.ContestProblemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>
+          }
+          update: {
+            args: Prisma.ContestProblemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContestProblemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContestProblemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContestProblemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContestProblemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemPayload>
+          }
+          aggregate: {
+            args: Prisma.ContestProblemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContestProblem>
+          }
+          groupBy: {
+            args: Prisma.ContestProblemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContestProblemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContestProblemCountArgs<ExtArgs>
+            result: $Utils.Optional<ContestProblemCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContestParticipation: {
+        payload: Prisma.$ContestParticipationPayload<ExtArgs>
+        fields: Prisma.ContestParticipationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContestParticipationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContestParticipationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>
+          }
+          findFirst: {
+            args: Prisma.ContestParticipationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContestParticipationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>
+          }
+          findMany: {
+            args: Prisma.ContestParticipationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>[]
+          }
+          create: {
+            args: Prisma.ContestParticipationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>
+          }
+          createMany: {
+            args: Prisma.ContestParticipationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContestParticipationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>[]
+          }
+          delete: {
+            args: Prisma.ContestParticipationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>
+          }
+          update: {
+            args: Prisma.ContestParticipationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContestParticipationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContestParticipationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContestParticipationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContestParticipationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestParticipationPayload>
+          }
+          aggregate: {
+            args: Prisma.ContestParticipationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContestParticipation>
+          }
+          groupBy: {
+            args: Prisma.ContestParticipationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContestParticipationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContestParticipationCountArgs<ExtArgs>
+            result: $Utils.Optional<ContestParticipationCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContestSubmission: {
+        payload: Prisma.$ContestSubmissionPayload<ExtArgs>
+        fields: Prisma.ContestSubmissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContestSubmissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContestSubmissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>
+          }
+          findFirst: {
+            args: Prisma.ContestSubmissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContestSubmissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>
+          }
+          findMany: {
+            args: Prisma.ContestSubmissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>[]
+          }
+          create: {
+            args: Prisma.ContestSubmissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>
+          }
+          createMany: {
+            args: Prisma.ContestSubmissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContestSubmissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>[]
+          }
+          delete: {
+            args: Prisma.ContestSubmissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>
+          }
+          update: {
+            args: Prisma.ContestSubmissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContestSubmissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContestSubmissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContestSubmissionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContestSubmissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestSubmissionPayload>
+          }
+          aggregate: {
+            args: Prisma.ContestSubmissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContestSubmission>
+          }
+          groupBy: {
+            args: Prisma.ContestSubmissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContestSubmissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContestSubmissionCountArgs<ExtArgs>
+            result: $Utils.Optional<ContestSubmissionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1533,6 +1893,10 @@ export namespace Prisma {
     problemInProblemList?: ProblemInProblemListOmit
     dailyChallenge?: DailyChallengeOmit
     userDailyChallengeSubmission?: UserDailyChallengeSubmissionOmit
+    contest?: ContestOmit
+    contestProblem?: ContestProblemOmit
+    contestParticipation?: ContestParticipationOmit
+    contestSubmission?: ContestSubmissionOmit
   }
 
   /* Types for Logging */
@@ -1633,6 +1997,8 @@ export namespace Prisma {
     problemSolved: number
     problemLists: number
     dailyProblems: number
+    contestsParticipated: number
+    contestSubmissions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1642,6 +2008,8 @@ export namespace Prisma {
     problemSolved?: boolean | UserCountOutputTypeCountProblemSolvedArgs
     problemLists?: boolean | UserCountOutputTypeCountProblemListsArgs
     dailyProblems?: boolean | UserCountOutputTypeCountDailyProblemsArgs
+    contestsParticipated?: boolean | UserCountOutputTypeCountContestsParticipatedArgs
+    contestSubmissions?: boolean | UserCountOutputTypeCountContestSubmissionsArgs
   }
 
   // Custom InputTypes
@@ -1697,6 +2065,20 @@ export namespace Prisma {
     where?: UserDailyChallengeSubmissionWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountContestsParticipatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestParticipationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountContestSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestSubmissionWhereInput
+  }
+
 
   /**
    * Count Type ProblemCountOutputType
@@ -1708,6 +2090,7 @@ export namespace Prisma {
     problemSolved: number
     problemLists: number
     dailyProblems: number
+    contestProblems: number
   }
 
   export type ProblemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1716,6 +2099,7 @@ export namespace Prisma {
     problemSolved?: boolean | ProblemCountOutputTypeCountProblemSolvedArgs
     problemLists?: boolean | ProblemCountOutputTypeCountProblemListsArgs
     dailyProblems?: boolean | ProblemCountOutputTypeCountDailyProblemsArgs
+    contestProblems?: boolean | ProblemCountOutputTypeCountContestProblemsArgs
   }
 
   // Custom InputTypes
@@ -1762,6 +2146,13 @@ export namespace Prisma {
    */
   export type ProblemCountOutputTypeCountDailyProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DailyChallengeWhereInput
+  }
+
+  /**
+   * ProblemCountOutputType without action
+   */
+  export type ProblemCountOutputTypeCountContestProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestProblemWhereInput
   }
 
 
@@ -1824,6 +2215,86 @@ export namespace Prisma {
    */
   export type ProblemListCountOutputTypeCountProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProblemInProblemListWhereInput
+  }
+
+
+  /**
+   * Count Type ContestCountOutputType
+   */
+
+  export type ContestCountOutputType = {
+    problems: number
+    participations: number
+    submissions: number
+  }
+
+  export type ContestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    problems?: boolean | ContestCountOutputTypeCountProblemsArgs
+    participations?: boolean | ContestCountOutputTypeCountParticipationsArgs
+    submissions?: boolean | ContestCountOutputTypeCountSubmissionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContestCountOutputType without action
+   */
+  export type ContestCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestCountOutputType
+     */
+    select?: ContestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContestCountOutputType without action
+   */
+  export type ContestCountOutputTypeCountProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestProblemWhereInput
+  }
+
+  /**
+   * ContestCountOutputType without action
+   */
+  export type ContestCountOutputTypeCountParticipationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestParticipationWhereInput
+  }
+
+  /**
+   * ContestCountOutputType without action
+   */
+  export type ContestCountOutputTypeCountSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestSubmissionWhereInput
+  }
+
+
+  /**
+   * Count Type ContestProblemCountOutputType
+   */
+
+  export type ContestProblemCountOutputType = {
+    contestSubmissions: number
+  }
+
+  export type ContestProblemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contestSubmissions?: boolean | ContestProblemCountOutputTypeCountContestSubmissionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContestProblemCountOutputType without action
+   */
+  export type ContestProblemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemCountOutputType
+     */
+    select?: ContestProblemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContestProblemCountOutputType without action
+   */
+  export type ContestProblemCountOutputTypeCountContestSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestSubmissionWhereInput
   }
 
 
@@ -2065,6 +2536,8 @@ export namespace Prisma {
     problemSolved?: boolean | User$problemSolvedArgs<ExtArgs>
     problemLists?: boolean | User$problemListsArgs<ExtArgs>
     dailyProblems?: boolean | User$dailyProblemsArgs<ExtArgs>
+    contestsParticipated?: boolean | User$contestsParticipatedArgs<ExtArgs>
+    contestSubmissions?: boolean | User$contestSubmissionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2124,6 +2597,8 @@ export namespace Prisma {
     problemSolved?: boolean | User$problemSolvedArgs<ExtArgs>
     problemLists?: boolean | User$problemListsArgs<ExtArgs>
     dailyProblems?: boolean | User$dailyProblemsArgs<ExtArgs>
+    contestsParticipated?: boolean | User$contestsParticipatedArgs<ExtArgs>
+    contestSubmissions?: boolean | User$contestSubmissionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2138,6 +2613,8 @@ export namespace Prisma {
       problemSolved: Prisma.$ProblemsSolvedPayload<ExtArgs>[]
       problemLists: Prisma.$ProblemListPayload<ExtArgs>[]
       dailyProblems: Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>[]
+      contestsParticipated: Prisma.$ContestParticipationPayload<ExtArgs>[]
+      contestSubmissions: Prisma.$ContestSubmissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2553,6 +3030,8 @@ export namespace Prisma {
     problemSolved<T extends User$problemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, User$problemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemsSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemLists<T extends User$problemListsArgs<ExtArgs> = {}>(args?: Subset<T, User$problemListsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     dailyProblems<T extends User$dailyProblemsArgs<ExtArgs> = {}>(args?: Subset<T, User$dailyProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contestsParticipated<T extends User$contestsParticipatedArgs<ExtArgs> = {}>(args?: Subset<T, User$contestsParticipatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contestSubmissions<T extends User$contestSubmissionsArgs<ExtArgs> = {}>(args?: Subset<T, User$contestSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3127,6 +3606,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.contestsParticipated
+   */
+  export type User$contestsParticipatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    where?: ContestParticipationWhereInput
+    orderBy?: ContestParticipationOrderByWithRelationInput | ContestParticipationOrderByWithRelationInput[]
+    cursor?: ContestParticipationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestParticipationScalarFieldEnum | ContestParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * User.contestSubmissions
+   */
+  export type User$contestSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    where?: ContestSubmissionWhereInput
+    orderBy?: ContestSubmissionOrderByWithRelationInput | ContestSubmissionOrderByWithRelationInput[]
+    cursor?: ContestSubmissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestSubmissionScalarFieldEnum | ContestSubmissionScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3165,6 +3692,7 @@ export namespace Prisma {
     editorial: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    isPublic: boolean | null
   }
 
   export type ProblemMaxAggregateOutputType = {
@@ -3177,6 +3705,7 @@ export namespace Prisma {
     editorial: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    isPublic: boolean | null
   }
 
   export type ProblemCountAggregateOutputType = {
@@ -3192,14 +3721,13 @@ export namespace Prisma {
     hints: number
     editorial: number
     testCases: number
-    codeSnippetsHeader: number
     codeSnippets: number
-    codeSnippetsFooter: number
     referenceSolutionHeader: number
     referenceSolution: number
     referenceSolutionFooter: number
     createdAt: number
     updatedAt: number
+    isPublic: number
     _all: number
   }
 
@@ -3214,6 +3742,7 @@ export namespace Prisma {
     editorial?: true
     createdAt?: true
     updatedAt?: true
+    isPublic?: true
   }
 
   export type ProblemMaxAggregateInputType = {
@@ -3226,6 +3755,7 @@ export namespace Prisma {
     editorial?: true
     createdAt?: true
     updatedAt?: true
+    isPublic?: true
   }
 
   export type ProblemCountAggregateInputType = {
@@ -3241,14 +3771,13 @@ export namespace Prisma {
     hints?: true
     editorial?: true
     testCases?: true
-    codeSnippetsHeader?: true
     codeSnippets?: true
-    codeSnippetsFooter?: true
     referenceSolutionHeader?: true
     referenceSolution?: true
     referenceSolutionFooter?: true
     createdAt?: true
     updatedAt?: true
+    isPublic?: true
     _all?: true
   }
 
@@ -3337,14 +3866,13 @@ export namespace Prisma {
     hints: string[]
     editorial: string | null
     testCases: JsonValue
-    codeSnippetsHeader: JsonValue
     codeSnippets: JsonValue
-    codeSnippetsFooter: JsonValue
     referenceSolutionHeader: JsonValue
     referenceSolution: JsonValue
     referenceSolutionFooter: JsonValue
     createdAt: Date
     updatedAt: Date
+    isPublic: boolean
     _count: ProblemCountAggregateOutputType | null
     _min: ProblemMinAggregateOutputType | null
     _max: ProblemMaxAggregateOutputType | null
@@ -3377,20 +3905,20 @@ export namespace Prisma {
     hints?: boolean
     editorial?: boolean
     testCases?: boolean
-    codeSnippetsHeader?: boolean
     codeSnippets?: boolean
-    codeSnippetsFooter?: boolean
     referenceSolutionHeader?: boolean
     referenceSolution?: boolean
     referenceSolutionFooter?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isPublic?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     submission?: boolean | Problem$submissionArgs<ExtArgs>
     hiddenTestCases?: boolean | Problem$hiddenTestCasesArgs<ExtArgs>
     problemSolved?: boolean | Problem$problemSolvedArgs<ExtArgs>
     problemLists?: boolean | Problem$problemListsArgs<ExtArgs>
     dailyProblems?: boolean | Problem$dailyProblemsArgs<ExtArgs>
+    contestProblems?: boolean | Problem$contestProblemsArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["problem"]>
 
@@ -3407,14 +3935,13 @@ export namespace Prisma {
     hints?: boolean
     editorial?: boolean
     testCases?: boolean
-    codeSnippetsHeader?: boolean
     codeSnippets?: boolean
-    codeSnippetsFooter?: boolean
     referenceSolutionHeader?: boolean
     referenceSolution?: boolean
     referenceSolutionFooter?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isPublic?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["problem"]>
 
@@ -3431,14 +3958,13 @@ export namespace Prisma {
     hints?: boolean
     editorial?: boolean
     testCases?: boolean
-    codeSnippetsHeader?: boolean
     codeSnippets?: boolean
-    codeSnippetsFooter?: boolean
     referenceSolutionHeader?: boolean
     referenceSolution?: boolean
     referenceSolutionFooter?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isPublic?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["problem"]>
 
@@ -3455,17 +3981,16 @@ export namespace Prisma {
     hints?: boolean
     editorial?: boolean
     testCases?: boolean
-    codeSnippetsHeader?: boolean
     codeSnippets?: boolean
-    codeSnippetsFooter?: boolean
     referenceSolutionHeader?: boolean
     referenceSolution?: boolean
     referenceSolutionFooter?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isPublic?: boolean
   }
 
-  export type ProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "difficulty" | "tags" | "companies" | "userId" | "examples" | "constraints" | "hints" | "editorial" | "testCases" | "codeSnippetsHeader" | "codeSnippets" | "codeSnippetsFooter" | "referenceSolutionHeader" | "referenceSolution" | "referenceSolutionFooter" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
+  export type ProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "difficulty" | "tags" | "companies" | "userId" | "examples" | "constraints" | "hints" | "editorial" | "testCases" | "codeSnippets" | "referenceSolutionHeader" | "referenceSolution" | "referenceSolutionFooter" | "createdAt" | "updatedAt" | "isPublic", ExtArgs["result"]["problem"]>
   export type ProblemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     submission?: boolean | Problem$submissionArgs<ExtArgs>
@@ -3473,6 +3998,7 @@ export namespace Prisma {
     problemSolved?: boolean | Problem$problemSolvedArgs<ExtArgs>
     problemLists?: boolean | Problem$problemListsArgs<ExtArgs>
     dailyProblems?: boolean | Problem$dailyProblemsArgs<ExtArgs>
+    contestProblems?: boolean | Problem$contestProblemsArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProblemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3491,6 +4017,7 @@ export namespace Prisma {
       problemSolved: Prisma.$ProblemsSolvedPayload<ExtArgs>[]
       problemLists: Prisma.$ProblemInProblemListPayload<ExtArgs>[]
       dailyProblems: Prisma.$DailyChallengePayload<ExtArgs>[]
+      contestProblems: Prisma.$ContestProblemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3505,14 +4032,13 @@ export namespace Prisma {
       hints: string[]
       editorial: string | null
       testCases: Prisma.JsonValue
-      codeSnippetsHeader: Prisma.JsonValue
       codeSnippets: Prisma.JsonValue
-      codeSnippetsFooter: Prisma.JsonValue
       referenceSolutionHeader: Prisma.JsonValue
       referenceSolution: Prisma.JsonValue
       referenceSolutionFooter: Prisma.JsonValue
       createdAt: Date
       updatedAt: Date
+      isPublic: boolean
     }, ExtArgs["result"]["problem"]>
     composites: {}
   }
@@ -3913,6 +4439,7 @@ export namespace Prisma {
     problemSolved<T extends Problem$problemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, Problem$problemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemsSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemLists<T extends Problem$problemListsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$problemListsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemInProblemListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     dailyProblems<T extends Problem$dailyProblemsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$dailyProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contestProblems<T extends Problem$contestProblemsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$contestProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3954,14 +4481,13 @@ export namespace Prisma {
     readonly hints: FieldRef<"Problem", 'String[]'>
     readonly editorial: FieldRef<"Problem", 'String'>
     readonly testCases: FieldRef<"Problem", 'Json'>
-    readonly codeSnippetsHeader: FieldRef<"Problem", 'Json'>
     readonly codeSnippets: FieldRef<"Problem", 'Json'>
-    readonly codeSnippetsFooter: FieldRef<"Problem", 'Json'>
     readonly referenceSolutionHeader: FieldRef<"Problem", 'Json'>
     readonly referenceSolution: FieldRef<"Problem", 'Json'>
     readonly referenceSolutionFooter: FieldRef<"Problem", 'Json'>
     readonly createdAt: FieldRef<"Problem", 'DateTime'>
     readonly updatedAt: FieldRef<"Problem", 'DateTime'>
+    readonly isPublic: FieldRef<"Problem", 'Boolean'>
   }
     
 
@@ -4478,6 +5004,30 @@ export namespace Prisma {
   }
 
   /**
+   * Problem.contestProblems
+   */
+  export type Problem$contestProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    where?: ContestProblemWhereInput
+    orderBy?: ContestProblemOrderByWithRelationInput | ContestProblemOrderByWithRelationInput[]
+    cursor?: ContestProblemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestProblemScalarFieldEnum | ContestProblemScalarFieldEnum[]
+  }
+
+  /**
    * Problem without action
    */
   export type ProblemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4775,6 +5325,7 @@ export namespace Prisma {
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     dailyChallenge?: boolean | Submissions$dailyChallengeArgs<ExtArgs>
+    contestSubmission?: boolean | Submissions$contestSubmissionArgs<ExtArgs>
     _count?: boolean | SubmissionsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["submissions"]>
 
@@ -4853,6 +5404,7 @@ export namespace Prisma {
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     dailyChallenge?: boolean | Submissions$dailyChallengeArgs<ExtArgs>
+    contestSubmission?: boolean | Submissions$contestSubmissionArgs<ExtArgs>
     _count?: boolean | SubmissionsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SubmissionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4870,6 +5422,7 @@ export namespace Prisma {
       problem: Prisma.$ProblemPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
       dailyChallenge: Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>[]
+      contestSubmission: Prisma.$ContestSubmissionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5288,6 +5841,7 @@ export namespace Prisma {
     problem<T extends ProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProblemDefaultArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     dailyChallenge<T extends Submissions$dailyChallengeArgs<ExtArgs> = {}>(args?: Subset<T, Submissions$dailyChallengeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyChallengeSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contestSubmission<T extends Submissions$contestSubmissionArgs<ExtArgs> = {}>(args?: Subset<T, Submissions$contestSubmissionArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5753,6 +6307,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserDailyChallengeSubmissionScalarFieldEnum | UserDailyChallengeSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * Submissions.contestSubmission
+   */
+  export type Submissions$contestSubmissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    where?: ContestSubmissionWhereInput
   }
 
   /**
@@ -12237,6 +12810,4595 @@ export namespace Prisma {
 
 
   /**
+   * Model Contest
+   */
+
+  export type AggregateContest = {
+    _count: ContestCountAggregateOutputType | null
+    _min: ContestMinAggregateOutputType | null
+    _max: ContestMaxAggregateOutputType | null
+  }
+
+  export type ContestMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    startTime: Date | null
+    endTime: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isRankingCompleted: boolean | null
+  }
+
+  export type ContestMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    startTime: Date | null
+    endTime: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isRankingCompleted: boolean | null
+  }
+
+  export type ContestCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    startTime: number
+    endTime: number
+    createdAt: number
+    updatedAt: number
+    isRankingCompleted: number
+    _all: number
+  }
+
+
+  export type ContestMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+    isRankingCompleted?: true
+  }
+
+  export type ContestMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+    isRankingCompleted?: true
+  }
+
+  export type ContestCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+    isRankingCompleted?: true
+    _all?: true
+  }
+
+  export type ContestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contest to aggregate.
+     */
+    where?: ContestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contests to fetch.
+     */
+    orderBy?: ContestOrderByWithRelationInput | ContestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Contests
+    **/
+    _count?: true | ContestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContestMaxAggregateInputType
+  }
+
+  export type GetContestAggregateType<T extends ContestAggregateArgs> = {
+        [P in keyof T & keyof AggregateContest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContest[P]>
+      : GetScalarType<T[P], AggregateContest[P]>
+  }
+
+
+
+
+  export type ContestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestWhereInput
+    orderBy?: ContestOrderByWithAggregationInput | ContestOrderByWithAggregationInput[]
+    by: ContestScalarFieldEnum[] | ContestScalarFieldEnum
+    having?: ContestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContestCountAggregateInputType | true
+    _min?: ContestMinAggregateInputType
+    _max?: ContestMaxAggregateInputType
+  }
+
+  export type ContestGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    startTime: Date
+    endTime: Date
+    createdAt: Date
+    updatedAt: Date
+    isRankingCompleted: boolean
+    _count: ContestCountAggregateOutputType | null
+    _min: ContestMinAggregateOutputType | null
+    _max: ContestMaxAggregateOutputType | null
+  }
+
+  type GetContestGroupByPayload<T extends ContestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContestGroupByOutputType[P]>
+            : GetScalarType<T[P], ContestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isRankingCompleted?: boolean
+    problems?: boolean | Contest$problemsArgs<ExtArgs>
+    participations?: boolean | Contest$participationsArgs<ExtArgs>
+    submissions?: boolean | Contest$submissionsArgs<ExtArgs>
+    _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contest"]>
+
+  export type ContestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isRankingCompleted?: boolean
+  }, ExtArgs["result"]["contest"]>
+
+  export type ContestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isRankingCompleted?: boolean
+  }, ExtArgs["result"]["contest"]>
+
+  export type ContestSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isRankingCompleted?: boolean
+  }
+
+  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "startTime" | "endTime" | "createdAt" | "updatedAt" | "isRankingCompleted", ExtArgs["result"]["contest"]>
+  export type ContestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    problems?: boolean | Contest$problemsArgs<ExtArgs>
+    participations?: boolean | Contest$participationsArgs<ExtArgs>
+    submissions?: boolean | Contest$submissionsArgs<ExtArgs>
+    _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ContestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ContestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ContestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Contest"
+    objects: {
+      problems: Prisma.$ContestProblemPayload<ExtArgs>[]
+      participations: Prisma.$ContestParticipationPayload<ExtArgs>[]
+      submissions: Prisma.$ContestSubmissionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      startTime: Date
+      endTime: Date
+      createdAt: Date
+      updatedAt: Date
+      isRankingCompleted: boolean
+    }, ExtArgs["result"]["contest"]>
+    composites: {}
+  }
+
+  type ContestGetPayload<S extends boolean | null | undefined | ContestDefaultArgs> = $Result.GetResult<Prisma.$ContestPayload, S>
+
+  type ContestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContestCountAggregateInputType | true
+    }
+
+  export interface ContestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Contest'], meta: { name: 'Contest' } }
+    /**
+     * Find zero or one Contest that matches the filter.
+     * @param {ContestFindUniqueArgs} args - Arguments to find a Contest
+     * @example
+     * // Get one Contest
+     * const contest = await prisma.contest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContestFindUniqueArgs>(args: SelectSubset<T, ContestFindUniqueArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Contest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContestFindUniqueOrThrowArgs} args - Arguments to find a Contest
+     * @example
+     * // Get one Contest
+     * const contest = await prisma.contest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContestFindUniqueOrThrowArgs>(args: SelectSubset<T, ContestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestFindFirstArgs} args - Arguments to find a Contest
+     * @example
+     * // Get one Contest
+     * const contest = await prisma.contest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContestFindFirstArgs>(args?: SelectSubset<T, ContestFindFirstArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestFindFirstOrThrowArgs} args - Arguments to find a Contest
+     * @example
+     * // Get one Contest
+     * const contest = await prisma.contest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContestFindFirstOrThrowArgs>(args?: SelectSubset<T, ContestFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Contests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contests
+     * const contests = await prisma.contest.findMany()
+     * 
+     * // Get first 10 Contests
+     * const contests = await prisma.contest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contestWithIdOnly = await prisma.contest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContestFindManyArgs>(args?: SelectSubset<T, ContestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Contest.
+     * @param {ContestCreateArgs} args - Arguments to create a Contest.
+     * @example
+     * // Create one Contest
+     * const Contest = await prisma.contest.create({
+     *   data: {
+     *     // ... data to create a Contest
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContestCreateArgs>(args: SelectSubset<T, ContestCreateArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Contests.
+     * @param {ContestCreateManyArgs} args - Arguments to create many Contests.
+     * @example
+     * // Create many Contests
+     * const contest = await prisma.contest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContestCreateManyArgs>(args?: SelectSubset<T, ContestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Contests and returns the data saved in the database.
+     * @param {ContestCreateManyAndReturnArgs} args - Arguments to create many Contests.
+     * @example
+     * // Create many Contests
+     * const contest = await prisma.contest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Contests and only return the `id`
+     * const contestWithIdOnly = await prisma.contest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContestCreateManyAndReturnArgs>(args?: SelectSubset<T, ContestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Contest.
+     * @param {ContestDeleteArgs} args - Arguments to delete one Contest.
+     * @example
+     * // Delete one Contest
+     * const Contest = await prisma.contest.delete({
+     *   where: {
+     *     // ... filter to delete one Contest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContestDeleteArgs>(args: SelectSubset<T, ContestDeleteArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Contest.
+     * @param {ContestUpdateArgs} args - Arguments to update one Contest.
+     * @example
+     * // Update one Contest
+     * const contest = await prisma.contest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContestUpdateArgs>(args: SelectSubset<T, ContestUpdateArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Contests.
+     * @param {ContestDeleteManyArgs} args - Arguments to filter Contests to delete.
+     * @example
+     * // Delete a few Contests
+     * const { count } = await prisma.contest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContestDeleteManyArgs>(args?: SelectSubset<T, ContestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contests
+     * const contest = await prisma.contest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContestUpdateManyArgs>(args: SelectSubset<T, ContestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contests and returns the data updated in the database.
+     * @param {ContestUpdateManyAndReturnArgs} args - Arguments to update many Contests.
+     * @example
+     * // Update many Contests
+     * const contest = await prisma.contest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Contests and only return the `id`
+     * const contestWithIdOnly = await prisma.contest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContestUpdateManyAndReturnArgs>(args: SelectSubset<T, ContestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Contest.
+     * @param {ContestUpsertArgs} args - Arguments to update or create a Contest.
+     * @example
+     * // Update or create a Contest
+     * const contest = await prisma.contest.upsert({
+     *   create: {
+     *     // ... data to create a Contest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContestUpsertArgs>(args: SelectSubset<T, ContestUpsertArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Contests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestCountArgs} args - Arguments to filter Contests to count.
+     * @example
+     * // Count the number of Contests
+     * const count = await prisma.contest.count({
+     *   where: {
+     *     // ... the filter for the Contests we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContestCountArgs>(
+      args?: Subset<T, ContestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContestAggregateArgs>(args: Subset<T, ContestAggregateArgs>): Prisma.PrismaPromise<GetContestAggregateType<T>>
+
+    /**
+     * Group by Contest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContestGroupByArgs['orderBy'] }
+        : { orderBy?: ContestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Contest model
+   */
+  readonly fields: ContestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Contest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    problems<T extends Contest$problemsArgs<ExtArgs> = {}>(args?: Subset<T, Contest$problemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    participations<T extends Contest$participationsArgs<ExtArgs> = {}>(args?: Subset<T, Contest$participationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    submissions<T extends Contest$submissionsArgs<ExtArgs> = {}>(args?: Subset<T, Contest$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Contest model
+   */
+  interface ContestFieldRefs {
+    readonly id: FieldRef<"Contest", 'String'>
+    readonly title: FieldRef<"Contest", 'String'>
+    readonly description: FieldRef<"Contest", 'String'>
+    readonly startTime: FieldRef<"Contest", 'DateTime'>
+    readonly endTime: FieldRef<"Contest", 'DateTime'>
+    readonly createdAt: FieldRef<"Contest", 'DateTime'>
+    readonly updatedAt: FieldRef<"Contest", 'DateTime'>
+    readonly isRankingCompleted: FieldRef<"Contest", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Contest findUnique
+   */
+  export type ContestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contest to fetch.
+     */
+    where: ContestWhereUniqueInput
+  }
+
+  /**
+   * Contest findUniqueOrThrow
+   */
+  export type ContestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contest to fetch.
+     */
+    where: ContestWhereUniqueInput
+  }
+
+  /**
+   * Contest findFirst
+   */
+  export type ContestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contest to fetch.
+     */
+    where?: ContestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contests to fetch.
+     */
+    orderBy?: ContestOrderByWithRelationInput | ContestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contests.
+     */
+    cursor?: ContestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contests.
+     */
+    distinct?: ContestScalarFieldEnum | ContestScalarFieldEnum[]
+  }
+
+  /**
+   * Contest findFirstOrThrow
+   */
+  export type ContestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contest to fetch.
+     */
+    where?: ContestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contests to fetch.
+     */
+    orderBy?: ContestOrderByWithRelationInput | ContestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contests.
+     */
+    cursor?: ContestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contests.
+     */
+    distinct?: ContestScalarFieldEnum | ContestScalarFieldEnum[]
+  }
+
+  /**
+   * Contest findMany
+   */
+  export type ContestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter, which Contests to fetch.
+     */
+    where?: ContestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contests to fetch.
+     */
+    orderBy?: ContestOrderByWithRelationInput | ContestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Contests.
+     */
+    cursor?: ContestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contests.
+     */
+    skip?: number
+    distinct?: ContestScalarFieldEnum | ContestScalarFieldEnum[]
+  }
+
+  /**
+   * Contest create
+   */
+  export type ContestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Contest.
+     */
+    data: XOR<ContestCreateInput, ContestUncheckedCreateInput>
+  }
+
+  /**
+   * Contest createMany
+   */
+  export type ContestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Contests.
+     */
+    data: ContestCreateManyInput | ContestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Contest createManyAndReturn
+   */
+  export type ContestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * The data used to create many Contests.
+     */
+    data: ContestCreateManyInput | ContestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Contest update
+   */
+  export type ContestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Contest.
+     */
+    data: XOR<ContestUpdateInput, ContestUncheckedUpdateInput>
+    /**
+     * Choose, which Contest to update.
+     */
+    where: ContestWhereUniqueInput
+  }
+
+  /**
+   * Contest updateMany
+   */
+  export type ContestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Contests.
+     */
+    data: XOR<ContestUpdateManyMutationInput, ContestUncheckedUpdateManyInput>
+    /**
+     * Filter which Contests to update
+     */
+    where?: ContestWhereInput
+    /**
+     * Limit how many Contests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contest updateManyAndReturn
+   */
+  export type ContestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * The data used to update Contests.
+     */
+    data: XOR<ContestUpdateManyMutationInput, ContestUncheckedUpdateManyInput>
+    /**
+     * Filter which Contests to update
+     */
+    where?: ContestWhereInput
+    /**
+     * Limit how many Contests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contest upsert
+   */
+  export type ContestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Contest to update in case it exists.
+     */
+    where: ContestWhereUniqueInput
+    /**
+     * In case the Contest found by the `where` argument doesn't exist, create a new Contest with this data.
+     */
+    create: XOR<ContestCreateInput, ContestUncheckedCreateInput>
+    /**
+     * In case the Contest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContestUpdateInput, ContestUncheckedUpdateInput>
+  }
+
+  /**
+   * Contest delete
+   */
+  export type ContestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+    /**
+     * Filter which Contest to delete.
+     */
+    where: ContestWhereUniqueInput
+  }
+
+  /**
+   * Contest deleteMany
+   */
+  export type ContestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contests to delete
+     */
+    where?: ContestWhereInput
+    /**
+     * Limit how many Contests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contest.problems
+   */
+  export type Contest$problemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    where?: ContestProblemWhereInput
+    orderBy?: ContestProblemOrderByWithRelationInput | ContestProblemOrderByWithRelationInput[]
+    cursor?: ContestProblemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestProblemScalarFieldEnum | ContestProblemScalarFieldEnum[]
+  }
+
+  /**
+   * Contest.participations
+   */
+  export type Contest$participationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    where?: ContestParticipationWhereInput
+    orderBy?: ContestParticipationOrderByWithRelationInput | ContestParticipationOrderByWithRelationInput[]
+    cursor?: ContestParticipationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestParticipationScalarFieldEnum | ContestParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * Contest.submissions
+   */
+  export type Contest$submissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    where?: ContestSubmissionWhereInput
+    orderBy?: ContestSubmissionOrderByWithRelationInput | ContestSubmissionOrderByWithRelationInput[]
+    cursor?: ContestSubmissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestSubmissionScalarFieldEnum | ContestSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * Contest without action
+   */
+  export type ContestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contest
+     */
+    select?: ContestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contest
+     */
+    omit?: ContestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContestProblem
+   */
+
+  export type AggregateContestProblem = {
+    _count: ContestProblemCountAggregateOutputType | null
+    _avg: ContestProblemAvgAggregateOutputType | null
+    _sum: ContestProblemSumAggregateOutputType | null
+    _min: ContestProblemMinAggregateOutputType | null
+    _max: ContestProblemMaxAggregateOutputType | null
+  }
+
+  export type ContestProblemAvgAggregateOutputType = {
+    points: number | null
+  }
+
+  export type ContestProblemSumAggregateOutputType = {
+    points: number | null
+  }
+
+  export type ContestProblemMinAggregateOutputType = {
+    id: string | null
+    contestId: string | null
+    problemId: string | null
+    problemIndex: string | null
+    points: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContestProblemMaxAggregateOutputType = {
+    id: string | null
+    contestId: string | null
+    problemId: string | null
+    problemIndex: string | null
+    points: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContestProblemCountAggregateOutputType = {
+    id: number
+    contestId: number
+    problemId: number
+    problemIndex: number
+    points: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ContestProblemAvgAggregateInputType = {
+    points?: true
+  }
+
+  export type ContestProblemSumAggregateInputType = {
+    points?: true
+  }
+
+  export type ContestProblemMinAggregateInputType = {
+    id?: true
+    contestId?: true
+    problemId?: true
+    problemIndex?: true
+    points?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContestProblemMaxAggregateInputType = {
+    id?: true
+    contestId?: true
+    problemId?: true
+    problemIndex?: true
+    points?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContestProblemCountAggregateInputType = {
+    id?: true
+    contestId?: true
+    problemId?: true
+    problemIndex?: true
+    points?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ContestProblemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContestProblem to aggregate.
+     */
+    where?: ContestProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestProblems to fetch.
+     */
+    orderBy?: ContestProblemOrderByWithRelationInput | ContestProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContestProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestProblems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestProblems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContestProblems
+    **/
+    _count?: true | ContestProblemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContestProblemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContestProblemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContestProblemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContestProblemMaxAggregateInputType
+  }
+
+  export type GetContestProblemAggregateType<T extends ContestProblemAggregateArgs> = {
+        [P in keyof T & keyof AggregateContestProblem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContestProblem[P]>
+      : GetScalarType<T[P], AggregateContestProblem[P]>
+  }
+
+
+
+
+  export type ContestProblemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestProblemWhereInput
+    orderBy?: ContestProblemOrderByWithAggregationInput | ContestProblemOrderByWithAggregationInput[]
+    by: ContestProblemScalarFieldEnum[] | ContestProblemScalarFieldEnum
+    having?: ContestProblemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContestProblemCountAggregateInputType | true
+    _avg?: ContestProblemAvgAggregateInputType
+    _sum?: ContestProblemSumAggregateInputType
+    _min?: ContestProblemMinAggregateInputType
+    _max?: ContestProblemMaxAggregateInputType
+  }
+
+  export type ContestProblemGroupByOutputType = {
+    id: string
+    contestId: string
+    problemId: string
+    problemIndex: string
+    points: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ContestProblemCountAggregateOutputType | null
+    _avg: ContestProblemAvgAggregateOutputType | null
+    _sum: ContestProblemSumAggregateOutputType | null
+    _min: ContestProblemMinAggregateOutputType | null
+    _max: ContestProblemMaxAggregateOutputType | null
+  }
+
+  type GetContestProblemGroupByPayload<T extends ContestProblemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContestProblemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContestProblemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContestProblemGroupByOutputType[P]>
+            : GetScalarType<T[P], ContestProblemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContestProblemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    contestId?: boolean
+    problemId?: boolean
+    problemIndex?: boolean
+    points?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+    contestSubmissions?: boolean | ContestProblem$contestSubmissionsArgs<ExtArgs>
+    _count?: boolean | ContestProblemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestProblem"]>
+
+  export type ContestProblemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    contestId?: boolean
+    problemId?: boolean
+    problemIndex?: boolean
+    points?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestProblem"]>
+
+  export type ContestProblemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    contestId?: boolean
+    problemId?: boolean
+    problemIndex?: boolean
+    points?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestProblem"]>
+
+  export type ContestProblemSelectScalar = {
+    id?: boolean
+    contestId?: boolean
+    problemId?: boolean
+    problemIndex?: boolean
+    points?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ContestProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "contestId" | "problemId" | "problemIndex" | "points" | "createdAt" | "updatedAt", ExtArgs["result"]["contestProblem"]>
+  export type ContestProblemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+    contestSubmissions?: boolean | ContestProblem$contestSubmissionsArgs<ExtArgs>
+    _count?: boolean | ContestProblemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ContestProblemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+  export type ContestProblemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+
+  export type $ContestProblemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContestProblem"
+    objects: {
+      contest: Prisma.$ContestPayload<ExtArgs>
+      problem: Prisma.$ProblemPayload<ExtArgs>
+      contestSubmissions: Prisma.$ContestSubmissionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      contestId: string
+      problemId: string
+      problemIndex: string
+      points: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["contestProblem"]>
+    composites: {}
+  }
+
+  type ContestProblemGetPayload<S extends boolean | null | undefined | ContestProblemDefaultArgs> = $Result.GetResult<Prisma.$ContestProblemPayload, S>
+
+  type ContestProblemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContestProblemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContestProblemCountAggregateInputType | true
+    }
+
+  export interface ContestProblemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContestProblem'], meta: { name: 'ContestProblem' } }
+    /**
+     * Find zero or one ContestProblem that matches the filter.
+     * @param {ContestProblemFindUniqueArgs} args - Arguments to find a ContestProblem
+     * @example
+     * // Get one ContestProblem
+     * const contestProblem = await prisma.contestProblem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContestProblemFindUniqueArgs>(args: SelectSubset<T, ContestProblemFindUniqueArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContestProblem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContestProblemFindUniqueOrThrowArgs} args - Arguments to find a ContestProblem
+     * @example
+     * // Get one ContestProblem
+     * const contestProblem = await prisma.contestProblem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContestProblemFindUniqueOrThrowArgs>(args: SelectSubset<T, ContestProblemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContestProblem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemFindFirstArgs} args - Arguments to find a ContestProblem
+     * @example
+     * // Get one ContestProblem
+     * const contestProblem = await prisma.contestProblem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContestProblemFindFirstArgs>(args?: SelectSubset<T, ContestProblemFindFirstArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContestProblem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemFindFirstOrThrowArgs} args - Arguments to find a ContestProblem
+     * @example
+     * // Get one ContestProblem
+     * const contestProblem = await prisma.contestProblem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContestProblemFindFirstOrThrowArgs>(args?: SelectSubset<T, ContestProblemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContestProblems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContestProblems
+     * const contestProblems = await prisma.contestProblem.findMany()
+     * 
+     * // Get first 10 ContestProblems
+     * const contestProblems = await prisma.contestProblem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contestProblemWithIdOnly = await prisma.contestProblem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContestProblemFindManyArgs>(args?: SelectSubset<T, ContestProblemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContestProblem.
+     * @param {ContestProblemCreateArgs} args - Arguments to create a ContestProblem.
+     * @example
+     * // Create one ContestProblem
+     * const ContestProblem = await prisma.contestProblem.create({
+     *   data: {
+     *     // ... data to create a ContestProblem
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContestProblemCreateArgs>(args: SelectSubset<T, ContestProblemCreateArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContestProblems.
+     * @param {ContestProblemCreateManyArgs} args - Arguments to create many ContestProblems.
+     * @example
+     * // Create many ContestProblems
+     * const contestProblem = await prisma.contestProblem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContestProblemCreateManyArgs>(args?: SelectSubset<T, ContestProblemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContestProblems and returns the data saved in the database.
+     * @param {ContestProblemCreateManyAndReturnArgs} args - Arguments to create many ContestProblems.
+     * @example
+     * // Create many ContestProblems
+     * const contestProblem = await prisma.contestProblem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContestProblems and only return the `id`
+     * const contestProblemWithIdOnly = await prisma.contestProblem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContestProblemCreateManyAndReturnArgs>(args?: SelectSubset<T, ContestProblemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContestProblem.
+     * @param {ContestProblemDeleteArgs} args - Arguments to delete one ContestProblem.
+     * @example
+     * // Delete one ContestProblem
+     * const ContestProblem = await prisma.contestProblem.delete({
+     *   where: {
+     *     // ... filter to delete one ContestProblem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContestProblemDeleteArgs>(args: SelectSubset<T, ContestProblemDeleteArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContestProblem.
+     * @param {ContestProblemUpdateArgs} args - Arguments to update one ContestProblem.
+     * @example
+     * // Update one ContestProblem
+     * const contestProblem = await prisma.contestProblem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContestProblemUpdateArgs>(args: SelectSubset<T, ContestProblemUpdateArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContestProblems.
+     * @param {ContestProblemDeleteManyArgs} args - Arguments to filter ContestProblems to delete.
+     * @example
+     * // Delete a few ContestProblems
+     * const { count } = await prisma.contestProblem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContestProblemDeleteManyArgs>(args?: SelectSubset<T, ContestProblemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContestProblems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContestProblems
+     * const contestProblem = await prisma.contestProblem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContestProblemUpdateManyArgs>(args: SelectSubset<T, ContestProblemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContestProblems and returns the data updated in the database.
+     * @param {ContestProblemUpdateManyAndReturnArgs} args - Arguments to update many ContestProblems.
+     * @example
+     * // Update many ContestProblems
+     * const contestProblem = await prisma.contestProblem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContestProblems and only return the `id`
+     * const contestProblemWithIdOnly = await prisma.contestProblem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContestProblemUpdateManyAndReturnArgs>(args: SelectSubset<T, ContestProblemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContestProblem.
+     * @param {ContestProblemUpsertArgs} args - Arguments to update or create a ContestProblem.
+     * @example
+     * // Update or create a ContestProblem
+     * const contestProblem = await prisma.contestProblem.upsert({
+     *   create: {
+     *     // ... data to create a ContestProblem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContestProblem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContestProblemUpsertArgs>(args: SelectSubset<T, ContestProblemUpsertArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContestProblems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemCountArgs} args - Arguments to filter ContestProblems to count.
+     * @example
+     * // Count the number of ContestProblems
+     * const count = await prisma.contestProblem.count({
+     *   where: {
+     *     // ... the filter for the ContestProblems we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContestProblemCountArgs>(
+      args?: Subset<T, ContestProblemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContestProblemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContestProblem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContestProblemAggregateArgs>(args: Subset<T, ContestProblemAggregateArgs>): Prisma.PrismaPromise<GetContestProblemAggregateType<T>>
+
+    /**
+     * Group by ContestProblem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContestProblemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContestProblemGroupByArgs['orderBy'] }
+        : { orderBy?: ContestProblemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContestProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContestProblemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContestProblem model
+   */
+  readonly fields: ContestProblemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContestProblem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContestProblemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    contest<T extends ContestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContestDefaultArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    problem<T extends ProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProblemDefaultArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contestSubmissions<T extends ContestProblem$contestSubmissionsArgs<ExtArgs> = {}>(args?: Subset<T, ContestProblem$contestSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContestProblem model
+   */
+  interface ContestProblemFieldRefs {
+    readonly id: FieldRef<"ContestProblem", 'String'>
+    readonly contestId: FieldRef<"ContestProblem", 'String'>
+    readonly problemId: FieldRef<"ContestProblem", 'String'>
+    readonly problemIndex: FieldRef<"ContestProblem", 'String'>
+    readonly points: FieldRef<"ContestProblem", 'Int'>
+    readonly createdAt: FieldRef<"ContestProblem", 'DateTime'>
+    readonly updatedAt: FieldRef<"ContestProblem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContestProblem findUnique
+   */
+  export type ContestProblemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblem to fetch.
+     */
+    where: ContestProblemWhereUniqueInput
+  }
+
+  /**
+   * ContestProblem findUniqueOrThrow
+   */
+  export type ContestProblemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblem to fetch.
+     */
+    where: ContestProblemWhereUniqueInput
+  }
+
+  /**
+   * ContestProblem findFirst
+   */
+  export type ContestProblemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblem to fetch.
+     */
+    where?: ContestProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestProblems to fetch.
+     */
+    orderBy?: ContestProblemOrderByWithRelationInput | ContestProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContestProblems.
+     */
+    cursor?: ContestProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestProblems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestProblems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContestProblems.
+     */
+    distinct?: ContestProblemScalarFieldEnum | ContestProblemScalarFieldEnum[]
+  }
+
+  /**
+   * ContestProblem findFirstOrThrow
+   */
+  export type ContestProblemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblem to fetch.
+     */
+    where?: ContestProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestProblems to fetch.
+     */
+    orderBy?: ContestProblemOrderByWithRelationInput | ContestProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContestProblems.
+     */
+    cursor?: ContestProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestProblems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestProblems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContestProblems.
+     */
+    distinct?: ContestProblemScalarFieldEnum | ContestProblemScalarFieldEnum[]
+  }
+
+  /**
+   * ContestProblem findMany
+   */
+  export type ContestProblemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblems to fetch.
+     */
+    where?: ContestProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestProblems to fetch.
+     */
+    orderBy?: ContestProblemOrderByWithRelationInput | ContestProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContestProblems.
+     */
+    cursor?: ContestProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestProblems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestProblems.
+     */
+    skip?: number
+    distinct?: ContestProblemScalarFieldEnum | ContestProblemScalarFieldEnum[]
+  }
+
+  /**
+   * ContestProblem create
+   */
+  export type ContestProblemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContestProblem.
+     */
+    data: XOR<ContestProblemCreateInput, ContestProblemUncheckedCreateInput>
+  }
+
+  /**
+   * ContestProblem createMany
+   */
+  export type ContestProblemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContestProblems.
+     */
+    data: ContestProblemCreateManyInput | ContestProblemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContestProblem createManyAndReturn
+   */
+  export type ContestProblemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContestProblems.
+     */
+    data: ContestProblemCreateManyInput | ContestProblemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContestProblem update
+   */
+  export type ContestProblemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContestProblem.
+     */
+    data: XOR<ContestProblemUpdateInput, ContestProblemUncheckedUpdateInput>
+    /**
+     * Choose, which ContestProblem to update.
+     */
+    where: ContestProblemWhereUniqueInput
+  }
+
+  /**
+   * ContestProblem updateMany
+   */
+  export type ContestProblemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContestProblems.
+     */
+    data: XOR<ContestProblemUpdateManyMutationInput, ContestProblemUncheckedUpdateManyInput>
+    /**
+     * Filter which ContestProblems to update
+     */
+    where?: ContestProblemWhereInput
+    /**
+     * Limit how many ContestProblems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContestProblem updateManyAndReturn
+   */
+  export type ContestProblemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * The data used to update ContestProblems.
+     */
+    data: XOR<ContestProblemUpdateManyMutationInput, ContestProblemUncheckedUpdateManyInput>
+    /**
+     * Filter which ContestProblems to update
+     */
+    where?: ContestProblemWhereInput
+    /**
+     * Limit how many ContestProblems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContestProblem upsert
+   */
+  export type ContestProblemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContestProblem to update in case it exists.
+     */
+    where: ContestProblemWhereUniqueInput
+    /**
+     * In case the ContestProblem found by the `where` argument doesn't exist, create a new ContestProblem with this data.
+     */
+    create: XOR<ContestProblemCreateInput, ContestProblemUncheckedCreateInput>
+    /**
+     * In case the ContestProblem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContestProblemUpdateInput, ContestProblemUncheckedUpdateInput>
+  }
+
+  /**
+   * ContestProblem delete
+   */
+  export type ContestProblemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+    /**
+     * Filter which ContestProblem to delete.
+     */
+    where: ContestProblemWhereUniqueInput
+  }
+
+  /**
+   * ContestProblem deleteMany
+   */
+  export type ContestProblemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContestProblems to delete
+     */
+    where?: ContestProblemWhereInput
+    /**
+     * Limit how many ContestProblems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContestProblem.contestSubmissions
+   */
+  export type ContestProblem$contestSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    where?: ContestSubmissionWhereInput
+    orderBy?: ContestSubmissionOrderByWithRelationInput | ContestSubmissionOrderByWithRelationInput[]
+    cursor?: ContestSubmissionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestSubmissionScalarFieldEnum | ContestSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * ContestProblem without action
+   */
+  export type ContestProblemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblem
+     */
+    select?: ContestProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblem
+     */
+    omit?: ContestProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContestParticipation
+   */
+
+  export type AggregateContestParticipation = {
+    _count: ContestParticipationCountAggregateOutputType | null
+    _avg: ContestParticipationAvgAggregateOutputType | null
+    _sum: ContestParticipationSumAggregateOutputType | null
+    _min: ContestParticipationMinAggregateOutputType | null
+    _max: ContestParticipationMaxAggregateOutputType | null
+  }
+
+  export type ContestParticipationAvgAggregateOutputType = {
+    score: number | null
+    rank: number | null
+    rating: number | null
+  }
+
+  export type ContestParticipationSumAggregateOutputType = {
+    score: number | null
+    rank: number | null
+    rating: number | null
+  }
+
+  export type ContestParticipationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    contestId: string | null
+    score: number | null
+    rank: number | null
+    rating: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContestParticipationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    contestId: string | null
+    score: number | null
+    rank: number | null
+    rating: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContestParticipationCountAggregateOutputType = {
+    id: number
+    userId: number
+    contestId: number
+    score: number
+    rank: number
+    rating: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ContestParticipationAvgAggregateInputType = {
+    score?: true
+    rank?: true
+    rating?: true
+  }
+
+  export type ContestParticipationSumAggregateInputType = {
+    score?: true
+    rank?: true
+    rating?: true
+  }
+
+  export type ContestParticipationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    contestId?: true
+    score?: true
+    rank?: true
+    rating?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContestParticipationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    contestId?: true
+    score?: true
+    rank?: true
+    rating?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContestParticipationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    contestId?: true
+    score?: true
+    rank?: true
+    rating?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ContestParticipationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContestParticipation to aggregate.
+     */
+    where?: ContestParticipationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestParticipations to fetch.
+     */
+    orderBy?: ContestParticipationOrderByWithRelationInput | ContestParticipationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContestParticipationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestParticipations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestParticipations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContestParticipations
+    **/
+    _count?: true | ContestParticipationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContestParticipationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContestParticipationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContestParticipationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContestParticipationMaxAggregateInputType
+  }
+
+  export type GetContestParticipationAggregateType<T extends ContestParticipationAggregateArgs> = {
+        [P in keyof T & keyof AggregateContestParticipation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContestParticipation[P]>
+      : GetScalarType<T[P], AggregateContestParticipation[P]>
+  }
+
+
+
+
+  export type ContestParticipationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestParticipationWhereInput
+    orderBy?: ContestParticipationOrderByWithAggregationInput | ContestParticipationOrderByWithAggregationInput[]
+    by: ContestParticipationScalarFieldEnum[] | ContestParticipationScalarFieldEnum
+    having?: ContestParticipationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContestParticipationCountAggregateInputType | true
+    _avg?: ContestParticipationAvgAggregateInputType
+    _sum?: ContestParticipationSumAggregateInputType
+    _min?: ContestParticipationMinAggregateInputType
+    _max?: ContestParticipationMaxAggregateInputType
+  }
+
+  export type ContestParticipationGroupByOutputType = {
+    id: string
+    userId: string
+    contestId: string
+    score: number
+    rank: number | null
+    rating: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ContestParticipationCountAggregateOutputType | null
+    _avg: ContestParticipationAvgAggregateOutputType | null
+    _sum: ContestParticipationSumAggregateOutputType | null
+    _min: ContestParticipationMinAggregateOutputType | null
+    _max: ContestParticipationMaxAggregateOutputType | null
+  }
+
+  type GetContestParticipationGroupByPayload<T extends ContestParticipationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContestParticipationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContestParticipationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContestParticipationGroupByOutputType[P]>
+            : GetScalarType<T[P], ContestParticipationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContestParticipationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    contestId?: boolean
+    score?: boolean
+    rank?: boolean
+    rating?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestParticipation"]>
+
+  export type ContestParticipationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    contestId?: boolean
+    score?: boolean
+    rank?: boolean
+    rating?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestParticipation"]>
+
+  export type ContestParticipationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    contestId?: boolean
+    score?: boolean
+    rank?: boolean
+    rating?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestParticipation"]>
+
+  export type ContestParticipationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    contestId?: boolean
+    score?: boolean
+    rank?: boolean
+    rating?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ContestParticipationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "contestId" | "score" | "rank" | "rating" | "createdAt" | "updatedAt", ExtArgs["result"]["contestParticipation"]>
+  export type ContestParticipationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }
+  export type ContestParticipationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }
+  export type ContestParticipationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }
+
+  export type $ContestParticipationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContestParticipation"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      contest: Prisma.$ContestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      contestId: string
+      score: number
+      rank: number | null
+      rating: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["contestParticipation"]>
+    composites: {}
+  }
+
+  type ContestParticipationGetPayload<S extends boolean | null | undefined | ContestParticipationDefaultArgs> = $Result.GetResult<Prisma.$ContestParticipationPayload, S>
+
+  type ContestParticipationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContestParticipationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContestParticipationCountAggregateInputType | true
+    }
+
+  export interface ContestParticipationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContestParticipation'], meta: { name: 'ContestParticipation' } }
+    /**
+     * Find zero or one ContestParticipation that matches the filter.
+     * @param {ContestParticipationFindUniqueArgs} args - Arguments to find a ContestParticipation
+     * @example
+     * // Get one ContestParticipation
+     * const contestParticipation = await prisma.contestParticipation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContestParticipationFindUniqueArgs>(args: SelectSubset<T, ContestParticipationFindUniqueArgs<ExtArgs>>): Prisma__ContestParticipationClient<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContestParticipation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContestParticipationFindUniqueOrThrowArgs} args - Arguments to find a ContestParticipation
+     * @example
+     * // Get one ContestParticipation
+     * const contestParticipation = await prisma.contestParticipation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContestParticipationFindUniqueOrThrowArgs>(args: SelectSubset<T, ContestParticipationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContestParticipationClient<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContestParticipation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestParticipationFindFirstArgs} args - Arguments to find a ContestParticipation
+     * @example
+     * // Get one ContestParticipation
+     * const contestParticipation = await prisma.contestParticipation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContestParticipationFindFirstArgs>(args?: SelectSubset<T, ContestParticipationFindFirstArgs<ExtArgs>>): Prisma__ContestParticipationClient<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContestParticipation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestParticipationFindFirstOrThrowArgs} args - Arguments to find a ContestParticipation
+     * @example
+     * // Get one ContestParticipation
+     * const contestParticipation = await prisma.contestParticipation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContestParticipationFindFirstOrThrowArgs>(args?: SelectSubset<T, ContestParticipationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContestParticipationClient<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContestParticipations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestParticipationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContestParticipations
+     * const contestParticipations = await prisma.contestParticipation.findMany()
+     * 
+     * // Get first 10 ContestParticipations
+     * const contestParticipations = await prisma.contestParticipation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contestParticipationWithIdOnly = await prisma.contestParticipation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContestParticipationFindManyArgs>(args?: SelectSubset<T, ContestParticipationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContestParticipation.
+     * @param {ContestParticipationCreateArgs} args - Arguments to create a ContestParticipation.
+     * @example
+     * // Create one ContestParticipation
+     * const ContestParticipation = await prisma.contestParticipation.create({
+     *   data: {
+     *     // ... data to create a ContestParticipation
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContestParticipationCreateArgs>(args: SelectSubset<T, ContestParticipationCreateArgs<ExtArgs>>): Prisma__ContestParticipationClient<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContestParticipations.
+     * @param {ContestParticipationCreateManyArgs} args - Arguments to create many ContestParticipations.
+     * @example
+     * // Create many ContestParticipations
+     * const contestParticipation = await prisma.contestParticipation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContestParticipationCreateManyArgs>(args?: SelectSubset<T, ContestParticipationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContestParticipations and returns the data saved in the database.
+     * @param {ContestParticipationCreateManyAndReturnArgs} args - Arguments to create many ContestParticipations.
+     * @example
+     * // Create many ContestParticipations
+     * const contestParticipation = await prisma.contestParticipation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContestParticipations and only return the `id`
+     * const contestParticipationWithIdOnly = await prisma.contestParticipation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContestParticipationCreateManyAndReturnArgs>(args?: SelectSubset<T, ContestParticipationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContestParticipation.
+     * @param {ContestParticipationDeleteArgs} args - Arguments to delete one ContestParticipation.
+     * @example
+     * // Delete one ContestParticipation
+     * const ContestParticipation = await prisma.contestParticipation.delete({
+     *   where: {
+     *     // ... filter to delete one ContestParticipation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContestParticipationDeleteArgs>(args: SelectSubset<T, ContestParticipationDeleteArgs<ExtArgs>>): Prisma__ContestParticipationClient<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContestParticipation.
+     * @param {ContestParticipationUpdateArgs} args - Arguments to update one ContestParticipation.
+     * @example
+     * // Update one ContestParticipation
+     * const contestParticipation = await prisma.contestParticipation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContestParticipationUpdateArgs>(args: SelectSubset<T, ContestParticipationUpdateArgs<ExtArgs>>): Prisma__ContestParticipationClient<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContestParticipations.
+     * @param {ContestParticipationDeleteManyArgs} args - Arguments to filter ContestParticipations to delete.
+     * @example
+     * // Delete a few ContestParticipations
+     * const { count } = await prisma.contestParticipation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContestParticipationDeleteManyArgs>(args?: SelectSubset<T, ContestParticipationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContestParticipations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestParticipationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContestParticipations
+     * const contestParticipation = await prisma.contestParticipation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContestParticipationUpdateManyArgs>(args: SelectSubset<T, ContestParticipationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContestParticipations and returns the data updated in the database.
+     * @param {ContestParticipationUpdateManyAndReturnArgs} args - Arguments to update many ContestParticipations.
+     * @example
+     * // Update many ContestParticipations
+     * const contestParticipation = await prisma.contestParticipation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContestParticipations and only return the `id`
+     * const contestParticipationWithIdOnly = await prisma.contestParticipation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContestParticipationUpdateManyAndReturnArgs>(args: SelectSubset<T, ContestParticipationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContestParticipation.
+     * @param {ContestParticipationUpsertArgs} args - Arguments to update or create a ContestParticipation.
+     * @example
+     * // Update or create a ContestParticipation
+     * const contestParticipation = await prisma.contestParticipation.upsert({
+     *   create: {
+     *     // ... data to create a ContestParticipation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContestParticipation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContestParticipationUpsertArgs>(args: SelectSubset<T, ContestParticipationUpsertArgs<ExtArgs>>): Prisma__ContestParticipationClient<$Result.GetResult<Prisma.$ContestParticipationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContestParticipations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestParticipationCountArgs} args - Arguments to filter ContestParticipations to count.
+     * @example
+     * // Count the number of ContestParticipations
+     * const count = await prisma.contestParticipation.count({
+     *   where: {
+     *     // ... the filter for the ContestParticipations we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContestParticipationCountArgs>(
+      args?: Subset<T, ContestParticipationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContestParticipationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContestParticipation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestParticipationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContestParticipationAggregateArgs>(args: Subset<T, ContestParticipationAggregateArgs>): Prisma.PrismaPromise<GetContestParticipationAggregateType<T>>
+
+    /**
+     * Group by ContestParticipation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestParticipationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContestParticipationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContestParticipationGroupByArgs['orderBy'] }
+        : { orderBy?: ContestParticipationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContestParticipationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContestParticipationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContestParticipation model
+   */
+  readonly fields: ContestParticipationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContestParticipation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContestParticipationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contest<T extends ContestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContestDefaultArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContestParticipation model
+   */
+  interface ContestParticipationFieldRefs {
+    readonly id: FieldRef<"ContestParticipation", 'String'>
+    readonly userId: FieldRef<"ContestParticipation", 'String'>
+    readonly contestId: FieldRef<"ContestParticipation", 'String'>
+    readonly score: FieldRef<"ContestParticipation", 'Int'>
+    readonly rank: FieldRef<"ContestParticipation", 'Int'>
+    readonly rating: FieldRef<"ContestParticipation", 'Int'>
+    readonly createdAt: FieldRef<"ContestParticipation", 'DateTime'>
+    readonly updatedAt: FieldRef<"ContestParticipation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContestParticipation findUnique
+   */
+  export type ContestParticipationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestParticipation to fetch.
+     */
+    where: ContestParticipationWhereUniqueInput
+  }
+
+  /**
+   * ContestParticipation findUniqueOrThrow
+   */
+  export type ContestParticipationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestParticipation to fetch.
+     */
+    where: ContestParticipationWhereUniqueInput
+  }
+
+  /**
+   * ContestParticipation findFirst
+   */
+  export type ContestParticipationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestParticipation to fetch.
+     */
+    where?: ContestParticipationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestParticipations to fetch.
+     */
+    orderBy?: ContestParticipationOrderByWithRelationInput | ContestParticipationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContestParticipations.
+     */
+    cursor?: ContestParticipationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestParticipations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestParticipations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContestParticipations.
+     */
+    distinct?: ContestParticipationScalarFieldEnum | ContestParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * ContestParticipation findFirstOrThrow
+   */
+  export type ContestParticipationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestParticipation to fetch.
+     */
+    where?: ContestParticipationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestParticipations to fetch.
+     */
+    orderBy?: ContestParticipationOrderByWithRelationInput | ContestParticipationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContestParticipations.
+     */
+    cursor?: ContestParticipationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestParticipations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestParticipations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContestParticipations.
+     */
+    distinct?: ContestParticipationScalarFieldEnum | ContestParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * ContestParticipation findMany
+   */
+  export type ContestParticipationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestParticipations to fetch.
+     */
+    where?: ContestParticipationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestParticipations to fetch.
+     */
+    orderBy?: ContestParticipationOrderByWithRelationInput | ContestParticipationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContestParticipations.
+     */
+    cursor?: ContestParticipationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestParticipations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestParticipations.
+     */
+    skip?: number
+    distinct?: ContestParticipationScalarFieldEnum | ContestParticipationScalarFieldEnum[]
+  }
+
+  /**
+   * ContestParticipation create
+   */
+  export type ContestParticipationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContestParticipation.
+     */
+    data: XOR<ContestParticipationCreateInput, ContestParticipationUncheckedCreateInput>
+  }
+
+  /**
+   * ContestParticipation createMany
+   */
+  export type ContestParticipationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContestParticipations.
+     */
+    data: ContestParticipationCreateManyInput | ContestParticipationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContestParticipation createManyAndReturn
+   */
+  export type ContestParticipationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContestParticipations.
+     */
+    data: ContestParticipationCreateManyInput | ContestParticipationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContestParticipation update
+   */
+  export type ContestParticipationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContestParticipation.
+     */
+    data: XOR<ContestParticipationUpdateInput, ContestParticipationUncheckedUpdateInput>
+    /**
+     * Choose, which ContestParticipation to update.
+     */
+    where: ContestParticipationWhereUniqueInput
+  }
+
+  /**
+   * ContestParticipation updateMany
+   */
+  export type ContestParticipationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContestParticipations.
+     */
+    data: XOR<ContestParticipationUpdateManyMutationInput, ContestParticipationUncheckedUpdateManyInput>
+    /**
+     * Filter which ContestParticipations to update
+     */
+    where?: ContestParticipationWhereInput
+    /**
+     * Limit how many ContestParticipations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContestParticipation updateManyAndReturn
+   */
+  export type ContestParticipationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * The data used to update ContestParticipations.
+     */
+    data: XOR<ContestParticipationUpdateManyMutationInput, ContestParticipationUncheckedUpdateManyInput>
+    /**
+     * Filter which ContestParticipations to update
+     */
+    where?: ContestParticipationWhereInput
+    /**
+     * Limit how many ContestParticipations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContestParticipation upsert
+   */
+  export type ContestParticipationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContestParticipation to update in case it exists.
+     */
+    where: ContestParticipationWhereUniqueInput
+    /**
+     * In case the ContestParticipation found by the `where` argument doesn't exist, create a new ContestParticipation with this data.
+     */
+    create: XOR<ContestParticipationCreateInput, ContestParticipationUncheckedCreateInput>
+    /**
+     * In case the ContestParticipation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContestParticipationUpdateInput, ContestParticipationUncheckedUpdateInput>
+  }
+
+  /**
+   * ContestParticipation delete
+   */
+  export type ContestParticipationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+    /**
+     * Filter which ContestParticipation to delete.
+     */
+    where: ContestParticipationWhereUniqueInput
+  }
+
+  /**
+   * ContestParticipation deleteMany
+   */
+  export type ContestParticipationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContestParticipations to delete
+     */
+    where?: ContestParticipationWhereInput
+    /**
+     * Limit how many ContestParticipations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContestParticipation without action
+   */
+  export type ContestParticipationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestParticipation
+     */
+    select?: ContestParticipationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestParticipation
+     */
+    omit?: ContestParticipationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestParticipationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContestSubmission
+   */
+
+  export type AggregateContestSubmission = {
+    _count: ContestSubmissionCountAggregateOutputType | null
+    _min: ContestSubmissionMinAggregateOutputType | null
+    _max: ContestSubmissionMaxAggregateOutputType | null
+  }
+
+  export type ContestSubmissionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    contestId: string | null
+    contestProblemId: string | null
+    submissionId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContestSubmissionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    contestId: string | null
+    contestProblemId: string | null
+    submissionId: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContestSubmissionCountAggregateOutputType = {
+    id: number
+    userId: number
+    contestId: number
+    contestProblemId: number
+    submissionId: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ContestSubmissionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    contestId?: true
+    contestProblemId?: true
+    submissionId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContestSubmissionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    contestId?: true
+    contestProblemId?: true
+    submissionId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContestSubmissionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    contestId?: true
+    contestProblemId?: true
+    submissionId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ContestSubmissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContestSubmission to aggregate.
+     */
+    where?: ContestSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestSubmissions to fetch.
+     */
+    orderBy?: ContestSubmissionOrderByWithRelationInput | ContestSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContestSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContestSubmissions
+    **/
+    _count?: true | ContestSubmissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContestSubmissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContestSubmissionMaxAggregateInputType
+  }
+
+  export type GetContestSubmissionAggregateType<T extends ContestSubmissionAggregateArgs> = {
+        [P in keyof T & keyof AggregateContestSubmission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContestSubmission[P]>
+      : GetScalarType<T[P], AggregateContestSubmission[P]>
+  }
+
+
+
+
+  export type ContestSubmissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestSubmissionWhereInput
+    orderBy?: ContestSubmissionOrderByWithAggregationInput | ContestSubmissionOrderByWithAggregationInput[]
+    by: ContestSubmissionScalarFieldEnum[] | ContestSubmissionScalarFieldEnum
+    having?: ContestSubmissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContestSubmissionCountAggregateInputType | true
+    _min?: ContestSubmissionMinAggregateInputType
+    _max?: ContestSubmissionMaxAggregateInputType
+  }
+
+  export type ContestSubmissionGroupByOutputType = {
+    id: string
+    userId: string
+    contestId: string
+    contestProblemId: string
+    submissionId: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ContestSubmissionCountAggregateOutputType | null
+    _min: ContestSubmissionMinAggregateOutputType | null
+    _max: ContestSubmissionMaxAggregateOutputType | null
+  }
+
+  type GetContestSubmissionGroupByPayload<T extends ContestSubmissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContestSubmissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContestSubmissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContestSubmissionGroupByOutputType[P]>
+            : GetScalarType<T[P], ContestSubmissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContestSubmissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    contestId?: boolean
+    contestProblemId?: boolean
+    submissionId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    contestProblem?: boolean | ContestProblemDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestSubmission"]>
+
+  export type ContestSubmissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    contestId?: boolean
+    contestProblemId?: boolean
+    submissionId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    contestProblem?: boolean | ContestProblemDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestSubmission"]>
+
+  export type ContestSubmissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    contestId?: boolean
+    contestProblemId?: boolean
+    submissionId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    contestProblem?: boolean | ContestProblemDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestSubmission"]>
+
+  export type ContestSubmissionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    contestId?: boolean
+    contestProblemId?: boolean
+    submissionId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ContestSubmissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "contestId" | "contestProblemId" | "submissionId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["contestSubmission"]>
+  export type ContestSubmissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    contestProblem?: boolean | ContestProblemDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }
+  export type ContestSubmissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    contestProblem?: boolean | ContestProblemDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }
+  export type ContestSubmissionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+    contestProblem?: boolean | ContestProblemDefaultArgs<ExtArgs>
+    submission?: boolean | SubmissionsDefaultArgs<ExtArgs>
+  }
+
+  export type $ContestSubmissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContestSubmission"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      contest: Prisma.$ContestPayload<ExtArgs>
+      contestProblem: Prisma.$ContestProblemPayload<ExtArgs>
+      submission: Prisma.$SubmissionsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      contestId: string
+      contestProblemId: string
+      submissionId: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["contestSubmission"]>
+    composites: {}
+  }
+
+  type ContestSubmissionGetPayload<S extends boolean | null | undefined | ContestSubmissionDefaultArgs> = $Result.GetResult<Prisma.$ContestSubmissionPayload, S>
+
+  type ContestSubmissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContestSubmissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContestSubmissionCountAggregateInputType | true
+    }
+
+  export interface ContestSubmissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContestSubmission'], meta: { name: 'ContestSubmission' } }
+    /**
+     * Find zero or one ContestSubmission that matches the filter.
+     * @param {ContestSubmissionFindUniqueArgs} args - Arguments to find a ContestSubmission
+     * @example
+     * // Get one ContestSubmission
+     * const contestSubmission = await prisma.contestSubmission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContestSubmissionFindUniqueArgs>(args: SelectSubset<T, ContestSubmissionFindUniqueArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContestSubmission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContestSubmissionFindUniqueOrThrowArgs} args - Arguments to find a ContestSubmission
+     * @example
+     * // Get one ContestSubmission
+     * const contestSubmission = await prisma.contestSubmission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContestSubmissionFindUniqueOrThrowArgs>(args: SelectSubset<T, ContestSubmissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContestSubmission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestSubmissionFindFirstArgs} args - Arguments to find a ContestSubmission
+     * @example
+     * // Get one ContestSubmission
+     * const contestSubmission = await prisma.contestSubmission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContestSubmissionFindFirstArgs>(args?: SelectSubset<T, ContestSubmissionFindFirstArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContestSubmission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestSubmissionFindFirstOrThrowArgs} args - Arguments to find a ContestSubmission
+     * @example
+     * // Get one ContestSubmission
+     * const contestSubmission = await prisma.contestSubmission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContestSubmissionFindFirstOrThrowArgs>(args?: SelectSubset<T, ContestSubmissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContestSubmissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestSubmissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContestSubmissions
+     * const contestSubmissions = await prisma.contestSubmission.findMany()
+     * 
+     * // Get first 10 ContestSubmissions
+     * const contestSubmissions = await prisma.contestSubmission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contestSubmissionWithIdOnly = await prisma.contestSubmission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContestSubmissionFindManyArgs>(args?: SelectSubset<T, ContestSubmissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContestSubmission.
+     * @param {ContestSubmissionCreateArgs} args - Arguments to create a ContestSubmission.
+     * @example
+     * // Create one ContestSubmission
+     * const ContestSubmission = await prisma.contestSubmission.create({
+     *   data: {
+     *     // ... data to create a ContestSubmission
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContestSubmissionCreateArgs>(args: SelectSubset<T, ContestSubmissionCreateArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContestSubmissions.
+     * @param {ContestSubmissionCreateManyArgs} args - Arguments to create many ContestSubmissions.
+     * @example
+     * // Create many ContestSubmissions
+     * const contestSubmission = await prisma.contestSubmission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContestSubmissionCreateManyArgs>(args?: SelectSubset<T, ContestSubmissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContestSubmissions and returns the data saved in the database.
+     * @param {ContestSubmissionCreateManyAndReturnArgs} args - Arguments to create many ContestSubmissions.
+     * @example
+     * // Create many ContestSubmissions
+     * const contestSubmission = await prisma.contestSubmission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContestSubmissions and only return the `id`
+     * const contestSubmissionWithIdOnly = await prisma.contestSubmission.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContestSubmissionCreateManyAndReturnArgs>(args?: SelectSubset<T, ContestSubmissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContestSubmission.
+     * @param {ContestSubmissionDeleteArgs} args - Arguments to delete one ContestSubmission.
+     * @example
+     * // Delete one ContestSubmission
+     * const ContestSubmission = await prisma.contestSubmission.delete({
+     *   where: {
+     *     // ... filter to delete one ContestSubmission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContestSubmissionDeleteArgs>(args: SelectSubset<T, ContestSubmissionDeleteArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContestSubmission.
+     * @param {ContestSubmissionUpdateArgs} args - Arguments to update one ContestSubmission.
+     * @example
+     * // Update one ContestSubmission
+     * const contestSubmission = await prisma.contestSubmission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContestSubmissionUpdateArgs>(args: SelectSubset<T, ContestSubmissionUpdateArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContestSubmissions.
+     * @param {ContestSubmissionDeleteManyArgs} args - Arguments to filter ContestSubmissions to delete.
+     * @example
+     * // Delete a few ContestSubmissions
+     * const { count } = await prisma.contestSubmission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContestSubmissionDeleteManyArgs>(args?: SelectSubset<T, ContestSubmissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContestSubmissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestSubmissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContestSubmissions
+     * const contestSubmission = await prisma.contestSubmission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContestSubmissionUpdateManyArgs>(args: SelectSubset<T, ContestSubmissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContestSubmissions and returns the data updated in the database.
+     * @param {ContestSubmissionUpdateManyAndReturnArgs} args - Arguments to update many ContestSubmissions.
+     * @example
+     * // Update many ContestSubmissions
+     * const contestSubmission = await prisma.contestSubmission.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContestSubmissions and only return the `id`
+     * const contestSubmissionWithIdOnly = await prisma.contestSubmission.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContestSubmissionUpdateManyAndReturnArgs>(args: SelectSubset<T, ContestSubmissionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContestSubmission.
+     * @param {ContestSubmissionUpsertArgs} args - Arguments to update or create a ContestSubmission.
+     * @example
+     * // Update or create a ContestSubmission
+     * const contestSubmission = await prisma.contestSubmission.upsert({
+     *   create: {
+     *     // ... data to create a ContestSubmission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContestSubmission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContestSubmissionUpsertArgs>(args: SelectSubset<T, ContestSubmissionUpsertArgs<ExtArgs>>): Prisma__ContestSubmissionClient<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContestSubmissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestSubmissionCountArgs} args - Arguments to filter ContestSubmissions to count.
+     * @example
+     * // Count the number of ContestSubmissions
+     * const count = await prisma.contestSubmission.count({
+     *   where: {
+     *     // ... the filter for the ContestSubmissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContestSubmissionCountArgs>(
+      args?: Subset<T, ContestSubmissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContestSubmissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContestSubmission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestSubmissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContestSubmissionAggregateArgs>(args: Subset<T, ContestSubmissionAggregateArgs>): Prisma.PrismaPromise<GetContestSubmissionAggregateType<T>>
+
+    /**
+     * Group by ContestSubmission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestSubmissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContestSubmissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContestSubmissionGroupByArgs['orderBy'] }
+        : { orderBy?: ContestSubmissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContestSubmissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContestSubmissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContestSubmission model
+   */
+  readonly fields: ContestSubmissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContestSubmission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContestSubmissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contest<T extends ContestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContestDefaultArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contestProblem<T extends ContestProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContestProblemDefaultArgs<ExtArgs>>): Prisma__ContestProblemClient<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    submission<T extends SubmissionsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubmissionsDefaultArgs<ExtArgs>>): Prisma__SubmissionsClient<$Result.GetResult<Prisma.$SubmissionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContestSubmission model
+   */
+  interface ContestSubmissionFieldRefs {
+    readonly id: FieldRef<"ContestSubmission", 'String'>
+    readonly userId: FieldRef<"ContestSubmission", 'String'>
+    readonly contestId: FieldRef<"ContestSubmission", 'String'>
+    readonly contestProblemId: FieldRef<"ContestSubmission", 'String'>
+    readonly submissionId: FieldRef<"ContestSubmission", 'String'>
+    readonly status: FieldRef<"ContestSubmission", 'String'>
+    readonly createdAt: FieldRef<"ContestSubmission", 'DateTime'>
+    readonly updatedAt: FieldRef<"ContestSubmission", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContestSubmission findUnique
+   */
+  export type ContestSubmissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestSubmission to fetch.
+     */
+    where: ContestSubmissionWhereUniqueInput
+  }
+
+  /**
+   * ContestSubmission findUniqueOrThrow
+   */
+  export type ContestSubmissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestSubmission to fetch.
+     */
+    where: ContestSubmissionWhereUniqueInput
+  }
+
+  /**
+   * ContestSubmission findFirst
+   */
+  export type ContestSubmissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestSubmission to fetch.
+     */
+    where?: ContestSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestSubmissions to fetch.
+     */
+    orderBy?: ContestSubmissionOrderByWithRelationInput | ContestSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContestSubmissions.
+     */
+    cursor?: ContestSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContestSubmissions.
+     */
+    distinct?: ContestSubmissionScalarFieldEnum | ContestSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * ContestSubmission findFirstOrThrow
+   */
+  export type ContestSubmissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestSubmission to fetch.
+     */
+    where?: ContestSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestSubmissions to fetch.
+     */
+    orderBy?: ContestSubmissionOrderByWithRelationInput | ContestSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContestSubmissions.
+     */
+    cursor?: ContestSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestSubmissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContestSubmissions.
+     */
+    distinct?: ContestSubmissionScalarFieldEnum | ContestSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * ContestSubmission findMany
+   */
+  export type ContestSubmissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestSubmissions to fetch.
+     */
+    where?: ContestSubmissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestSubmissions to fetch.
+     */
+    orderBy?: ContestSubmissionOrderByWithRelationInput | ContestSubmissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContestSubmissions.
+     */
+    cursor?: ContestSubmissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestSubmissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestSubmissions.
+     */
+    skip?: number
+    distinct?: ContestSubmissionScalarFieldEnum | ContestSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * ContestSubmission create
+   */
+  export type ContestSubmissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContestSubmission.
+     */
+    data: XOR<ContestSubmissionCreateInput, ContestSubmissionUncheckedCreateInput>
+  }
+
+  /**
+   * ContestSubmission createMany
+   */
+  export type ContestSubmissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContestSubmissions.
+     */
+    data: ContestSubmissionCreateManyInput | ContestSubmissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContestSubmission createManyAndReturn
+   */
+  export type ContestSubmissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContestSubmissions.
+     */
+    data: ContestSubmissionCreateManyInput | ContestSubmissionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContestSubmission update
+   */
+  export type ContestSubmissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContestSubmission.
+     */
+    data: XOR<ContestSubmissionUpdateInput, ContestSubmissionUncheckedUpdateInput>
+    /**
+     * Choose, which ContestSubmission to update.
+     */
+    where: ContestSubmissionWhereUniqueInput
+  }
+
+  /**
+   * ContestSubmission updateMany
+   */
+  export type ContestSubmissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContestSubmissions.
+     */
+    data: XOR<ContestSubmissionUpdateManyMutationInput, ContestSubmissionUncheckedUpdateManyInput>
+    /**
+     * Filter which ContestSubmissions to update
+     */
+    where?: ContestSubmissionWhereInput
+    /**
+     * Limit how many ContestSubmissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContestSubmission updateManyAndReturn
+   */
+  export type ContestSubmissionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * The data used to update ContestSubmissions.
+     */
+    data: XOR<ContestSubmissionUpdateManyMutationInput, ContestSubmissionUncheckedUpdateManyInput>
+    /**
+     * Filter which ContestSubmissions to update
+     */
+    where?: ContestSubmissionWhereInput
+    /**
+     * Limit how many ContestSubmissions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContestSubmission upsert
+   */
+  export type ContestSubmissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContestSubmission to update in case it exists.
+     */
+    where: ContestSubmissionWhereUniqueInput
+    /**
+     * In case the ContestSubmission found by the `where` argument doesn't exist, create a new ContestSubmission with this data.
+     */
+    create: XOR<ContestSubmissionCreateInput, ContestSubmissionUncheckedCreateInput>
+    /**
+     * In case the ContestSubmission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContestSubmissionUpdateInput, ContestSubmissionUncheckedUpdateInput>
+  }
+
+  /**
+   * ContestSubmission delete
+   */
+  export type ContestSubmissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+    /**
+     * Filter which ContestSubmission to delete.
+     */
+    where: ContestSubmissionWhereUniqueInput
+  }
+
+  /**
+   * ContestSubmission deleteMany
+   */
+  export type ContestSubmissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContestSubmissions to delete
+     */
+    where?: ContestSubmissionWhereInput
+    /**
+     * Limit how many ContestSubmissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContestSubmission without action
+   */
+  export type ContestSubmissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestSubmission
+     */
+    select?: ContestSubmissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestSubmission
+     */
+    omit?: ContestSubmissionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestSubmissionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12282,14 +17444,13 @@ export namespace Prisma {
     hints: 'hints',
     editorial: 'editorial',
     testCases: 'testCases',
-    codeSnippetsHeader: 'codeSnippetsHeader',
     codeSnippets: 'codeSnippets',
-    codeSnippetsFooter: 'codeSnippetsFooter',
     referenceSolutionHeader: 'referenceSolutionHeader',
     referenceSolution: 'referenceSolution',
     referenceSolutionFooter: 'referenceSolutionFooter',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    isPublic: 'isPublic'
   };
 
   export type ProblemScalarFieldEnum = (typeof ProblemScalarFieldEnum)[keyof typeof ProblemScalarFieldEnum]
@@ -12388,6 +17549,61 @@ export namespace Prisma {
   };
 
   export type UserDailyChallengeSubmissionScalarFieldEnum = (typeof UserDailyChallengeSubmissionScalarFieldEnum)[keyof typeof UserDailyChallengeSubmissionScalarFieldEnum]
+
+
+  export const ContestScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    startTime: 'startTime',
+    endTime: 'endTime',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    isRankingCompleted: 'isRankingCompleted'
+  };
+
+  export type ContestScalarFieldEnum = (typeof ContestScalarFieldEnum)[keyof typeof ContestScalarFieldEnum]
+
+
+  export const ContestProblemScalarFieldEnum: {
+    id: 'id',
+    contestId: 'contestId',
+    problemId: 'problemId',
+    problemIndex: 'problemIndex',
+    points: 'points',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ContestProblemScalarFieldEnum = (typeof ContestProblemScalarFieldEnum)[keyof typeof ContestProblemScalarFieldEnum]
+
+
+  export const ContestParticipationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    contestId: 'contestId',
+    score: 'score',
+    rank: 'rank',
+    rating: 'rating',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ContestParticipationScalarFieldEnum = (typeof ContestParticipationScalarFieldEnum)[keyof typeof ContestParticipationScalarFieldEnum]
+
+
+  export const ContestSubmissionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    contestId: 'contestId',
+    contestProblemId: 'contestProblemId',
+    submissionId: 'submissionId',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ContestSubmissionScalarFieldEnum = (typeof ContestSubmissionScalarFieldEnum)[keyof typeof ContestSubmissionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12524,6 +17740,20 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -12552,6 +17782,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedListRelationFilter
     problemLists?: ProblemListListRelationFilter
     dailyProblems?: UserDailyChallengeSubmissionListRelationFilter
+    contestsParticipated?: ContestParticipationListRelationFilter
+    contestSubmissions?: ContestSubmissionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -12574,6 +17806,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedOrderByRelationAggregateInput
     problemLists?: ProblemListOrderByRelationAggregateInput
     dailyProblems?: UserDailyChallengeSubmissionOrderByRelationAggregateInput
+    contestsParticipated?: ContestParticipationOrderByRelationAggregateInput
+    contestSubmissions?: ContestSubmissionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12599,6 +17833,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedListRelationFilter
     problemLists?: ProblemListListRelationFilter
     dailyProblems?: UserDailyChallengeSubmissionListRelationFilter
+    contestsParticipated?: ContestParticipationListRelationFilter
+    contestSubmissions?: ContestSubmissionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12655,20 +17891,20 @@ export namespace Prisma {
     hints?: StringNullableListFilter<"Problem">
     editorial?: StringNullableFilter<"Problem"> | string | null
     testCases?: JsonFilter<"Problem">
-    codeSnippetsHeader?: JsonFilter<"Problem">
     codeSnippets?: JsonFilter<"Problem">
-    codeSnippetsFooter?: JsonFilter<"Problem">
     referenceSolutionHeader?: JsonFilter<"Problem">
     referenceSolution?: JsonFilter<"Problem">
     referenceSolutionFooter?: JsonFilter<"Problem">
     createdAt?: DateTimeFilter<"Problem"> | Date | string
     updatedAt?: DateTimeFilter<"Problem"> | Date | string
+    isPublic?: BoolFilter<"Problem"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     submission?: SubmissionsListRelationFilter
     hiddenTestCases?: TestCasesListRelationFilter
     problemSolved?: ProblemsSolvedListRelationFilter
     problemLists?: ProblemInProblemListListRelationFilter
     dailyProblems?: DailyChallengeListRelationFilter
+    contestProblems?: ContestProblemListRelationFilter
   }
 
   export type ProblemOrderByWithRelationInput = {
@@ -12684,20 +17920,20 @@ export namespace Prisma {
     hints?: SortOrder
     editorial?: SortOrderInput | SortOrder
     testCases?: SortOrder
-    codeSnippetsHeader?: SortOrder
     codeSnippets?: SortOrder
-    codeSnippetsFooter?: SortOrder
     referenceSolutionHeader?: SortOrder
     referenceSolution?: SortOrder
     referenceSolutionFooter?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
     user?: UserOrderByWithRelationInput
     submission?: SubmissionsOrderByRelationAggregateInput
     hiddenTestCases?: TestCasesOrderByRelationAggregateInput
     problemSolved?: ProblemsSolvedOrderByRelationAggregateInput
     problemLists?: ProblemInProblemListOrderByRelationAggregateInput
     dailyProblems?: DailyChallengeOrderByRelationAggregateInput
+    contestProblems?: ContestProblemOrderByRelationAggregateInput
   }
 
   export type ProblemWhereUniqueInput = Prisma.AtLeast<{
@@ -12716,20 +17952,20 @@ export namespace Prisma {
     hints?: StringNullableListFilter<"Problem">
     editorial?: StringNullableFilter<"Problem"> | string | null
     testCases?: JsonFilter<"Problem">
-    codeSnippetsHeader?: JsonFilter<"Problem">
     codeSnippets?: JsonFilter<"Problem">
-    codeSnippetsFooter?: JsonFilter<"Problem">
     referenceSolutionHeader?: JsonFilter<"Problem">
     referenceSolution?: JsonFilter<"Problem">
     referenceSolutionFooter?: JsonFilter<"Problem">
     createdAt?: DateTimeFilter<"Problem"> | Date | string
     updatedAt?: DateTimeFilter<"Problem"> | Date | string
+    isPublic?: BoolFilter<"Problem"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     submission?: SubmissionsListRelationFilter
     hiddenTestCases?: TestCasesListRelationFilter
     problemSolved?: ProblemsSolvedListRelationFilter
     problemLists?: ProblemInProblemListListRelationFilter
     dailyProblems?: DailyChallengeListRelationFilter
+    contestProblems?: ContestProblemListRelationFilter
   }, "id">
 
   export type ProblemOrderByWithAggregationInput = {
@@ -12745,14 +17981,13 @@ export namespace Prisma {
     hints?: SortOrder
     editorial?: SortOrderInput | SortOrder
     testCases?: SortOrder
-    codeSnippetsHeader?: SortOrder
     codeSnippets?: SortOrder
-    codeSnippetsFooter?: SortOrder
     referenceSolutionHeader?: SortOrder
     referenceSolution?: SortOrder
     referenceSolutionFooter?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
     _count?: ProblemCountOrderByAggregateInput
     _max?: ProblemMaxOrderByAggregateInput
     _min?: ProblemMinOrderByAggregateInput
@@ -12774,14 +18009,13 @@ export namespace Prisma {
     hints?: StringNullableListFilter<"Problem">
     editorial?: StringNullableWithAggregatesFilter<"Problem"> | string | null
     testCases?: JsonWithAggregatesFilter<"Problem">
-    codeSnippetsHeader?: JsonWithAggregatesFilter<"Problem">
     codeSnippets?: JsonWithAggregatesFilter<"Problem">
-    codeSnippetsFooter?: JsonWithAggregatesFilter<"Problem">
     referenceSolutionHeader?: JsonWithAggregatesFilter<"Problem">
     referenceSolution?: JsonWithAggregatesFilter<"Problem">
     referenceSolutionFooter?: JsonWithAggregatesFilter<"Problem">
     createdAt?: DateTimeWithAggregatesFilter<"Problem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Problem"> | Date | string
+    isPublic?: BoolWithAggregatesFilter<"Problem"> | boolean
   }
 
   export type SubmissionsWhereInput = {
@@ -12810,6 +18044,7 @@ export namespace Prisma {
     problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     dailyChallenge?: UserDailyChallengeSubmissionListRelationFilter
+    contestSubmission?: XOR<ContestSubmissionNullableScalarRelationFilter, ContestSubmissionWhereInput> | null
   }
 
   export type SubmissionsOrderByWithRelationInput = {
@@ -12835,6 +18070,7 @@ export namespace Prisma {
     problem?: ProblemOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     dailyChallenge?: UserDailyChallengeSubmissionOrderByRelationAggregateInput
+    contestSubmission?: ContestSubmissionOrderByWithRelationInput
   }
 
   export type SubmissionsWhereUniqueInput = Prisma.AtLeast<{
@@ -12863,6 +18099,7 @@ export namespace Prisma {
     problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     dailyChallenge?: UserDailyChallengeSubmissionListRelationFilter
+    contestSubmission?: XOR<ContestSubmissionNullableScalarRelationFilter, ContestSubmissionWhereInput> | null
   }, "id">
 
   export type SubmissionsOrderByWithAggregationInput = {
@@ -13282,6 +18519,312 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"UserDailyChallengeSubmission"> | Date | string
   }
 
+  export type ContestWhereInput = {
+    AND?: ContestWhereInput | ContestWhereInput[]
+    OR?: ContestWhereInput[]
+    NOT?: ContestWhereInput | ContestWhereInput[]
+    id?: StringFilter<"Contest"> | string
+    title?: StringFilter<"Contest"> | string
+    description?: StringNullableFilter<"Contest"> | string | null
+    startTime?: DateTimeFilter<"Contest"> | Date | string
+    endTime?: DateTimeFilter<"Contest"> | Date | string
+    createdAt?: DateTimeFilter<"Contest"> | Date | string
+    updatedAt?: DateTimeFilter<"Contest"> | Date | string
+    isRankingCompleted?: BoolFilter<"Contest"> | boolean
+    problems?: ContestProblemListRelationFilter
+    participations?: ContestParticipationListRelationFilter
+    submissions?: ContestSubmissionListRelationFilter
+  }
+
+  export type ContestOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isRankingCompleted?: SortOrder
+    problems?: ContestProblemOrderByRelationAggregateInput
+    participations?: ContestParticipationOrderByRelationAggregateInput
+    submissions?: ContestSubmissionOrderByRelationAggregateInput
+  }
+
+  export type ContestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ContestWhereInput | ContestWhereInput[]
+    OR?: ContestWhereInput[]
+    NOT?: ContestWhereInput | ContestWhereInput[]
+    title?: StringFilter<"Contest"> | string
+    description?: StringNullableFilter<"Contest"> | string | null
+    startTime?: DateTimeFilter<"Contest"> | Date | string
+    endTime?: DateTimeFilter<"Contest"> | Date | string
+    createdAt?: DateTimeFilter<"Contest"> | Date | string
+    updatedAt?: DateTimeFilter<"Contest"> | Date | string
+    isRankingCompleted?: BoolFilter<"Contest"> | boolean
+    problems?: ContestProblemListRelationFilter
+    participations?: ContestParticipationListRelationFilter
+    submissions?: ContestSubmissionListRelationFilter
+  }, "id">
+
+  export type ContestOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isRankingCompleted?: SortOrder
+    _count?: ContestCountOrderByAggregateInput
+    _max?: ContestMaxOrderByAggregateInput
+    _min?: ContestMinOrderByAggregateInput
+  }
+
+  export type ContestScalarWhereWithAggregatesInput = {
+    AND?: ContestScalarWhereWithAggregatesInput | ContestScalarWhereWithAggregatesInput[]
+    OR?: ContestScalarWhereWithAggregatesInput[]
+    NOT?: ContestScalarWhereWithAggregatesInput | ContestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Contest"> | string
+    title?: StringWithAggregatesFilter<"Contest"> | string
+    description?: StringNullableWithAggregatesFilter<"Contest"> | string | null
+    startTime?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
+    endTime?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
+    isRankingCompleted?: BoolWithAggregatesFilter<"Contest"> | boolean
+  }
+
+  export type ContestProblemWhereInput = {
+    AND?: ContestProblemWhereInput | ContestProblemWhereInput[]
+    OR?: ContestProblemWhereInput[]
+    NOT?: ContestProblemWhereInput | ContestProblemWhereInput[]
+    id?: StringFilter<"ContestProblem"> | string
+    contestId?: StringFilter<"ContestProblem"> | string
+    problemId?: StringFilter<"ContestProblem"> | string
+    problemIndex?: StringFilter<"ContestProblem"> | string
+    points?: IntNullableFilter<"ContestProblem"> | number | null
+    createdAt?: DateTimeFilter<"ContestProblem"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestProblem"> | Date | string
+    contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+    contestSubmissions?: ContestSubmissionListRelationFilter
+  }
+
+  export type ContestProblemOrderByWithRelationInput = {
+    id?: SortOrder
+    contestId?: SortOrder
+    problemId?: SortOrder
+    problemIndex?: SortOrder
+    points?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    contest?: ContestOrderByWithRelationInput
+    problem?: ProblemOrderByWithRelationInput
+    contestSubmissions?: ContestSubmissionOrderByRelationAggregateInput
+  }
+
+  export type ContestProblemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    contestId_problemId?: ContestProblemContestIdProblemIdCompoundUniqueInput
+    AND?: ContestProblemWhereInput | ContestProblemWhereInput[]
+    OR?: ContestProblemWhereInput[]
+    NOT?: ContestProblemWhereInput | ContestProblemWhereInput[]
+    contestId?: StringFilter<"ContestProblem"> | string
+    problemId?: StringFilter<"ContestProblem"> | string
+    problemIndex?: StringFilter<"ContestProblem"> | string
+    points?: IntNullableFilter<"ContestProblem"> | number | null
+    createdAt?: DateTimeFilter<"ContestProblem"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestProblem"> | Date | string
+    contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+    contestSubmissions?: ContestSubmissionListRelationFilter
+  }, "id" | "contestId_problemId">
+
+  export type ContestProblemOrderByWithAggregationInput = {
+    id?: SortOrder
+    contestId?: SortOrder
+    problemId?: SortOrder
+    problemIndex?: SortOrder
+    points?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ContestProblemCountOrderByAggregateInput
+    _avg?: ContestProblemAvgOrderByAggregateInput
+    _max?: ContestProblemMaxOrderByAggregateInput
+    _min?: ContestProblemMinOrderByAggregateInput
+    _sum?: ContestProblemSumOrderByAggregateInput
+  }
+
+  export type ContestProblemScalarWhereWithAggregatesInput = {
+    AND?: ContestProblemScalarWhereWithAggregatesInput | ContestProblemScalarWhereWithAggregatesInput[]
+    OR?: ContestProblemScalarWhereWithAggregatesInput[]
+    NOT?: ContestProblemScalarWhereWithAggregatesInput | ContestProblemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContestProblem"> | string
+    contestId?: StringWithAggregatesFilter<"ContestProblem"> | string
+    problemId?: StringWithAggregatesFilter<"ContestProblem"> | string
+    problemIndex?: StringWithAggregatesFilter<"ContestProblem"> | string
+    points?: IntNullableWithAggregatesFilter<"ContestProblem"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"ContestProblem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ContestProblem"> | Date | string
+  }
+
+  export type ContestParticipationWhereInput = {
+    AND?: ContestParticipationWhereInput | ContestParticipationWhereInput[]
+    OR?: ContestParticipationWhereInput[]
+    NOT?: ContestParticipationWhereInput | ContestParticipationWhereInput[]
+    id?: StringFilter<"ContestParticipation"> | string
+    userId?: StringFilter<"ContestParticipation"> | string
+    contestId?: StringFilter<"ContestParticipation"> | string
+    score?: IntFilter<"ContestParticipation"> | number
+    rank?: IntNullableFilter<"ContestParticipation"> | number | null
+    rating?: IntNullableFilter<"ContestParticipation"> | number | null
+    createdAt?: DateTimeFilter<"ContestParticipation"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestParticipation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
+  }
+
+  export type ContestParticipationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    score?: SortOrder
+    rank?: SortOrderInput | SortOrder
+    rating?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    contest?: ContestOrderByWithRelationInput
+  }
+
+  export type ContestParticipationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_contestId?: ContestParticipationUserIdContestIdCompoundUniqueInput
+    AND?: ContestParticipationWhereInput | ContestParticipationWhereInput[]
+    OR?: ContestParticipationWhereInput[]
+    NOT?: ContestParticipationWhereInput | ContestParticipationWhereInput[]
+    userId?: StringFilter<"ContestParticipation"> | string
+    contestId?: StringFilter<"ContestParticipation"> | string
+    score?: IntFilter<"ContestParticipation"> | number
+    rank?: IntNullableFilter<"ContestParticipation"> | number | null
+    rating?: IntNullableFilter<"ContestParticipation"> | number | null
+    createdAt?: DateTimeFilter<"ContestParticipation"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestParticipation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
+  }, "id" | "userId_contestId">
+
+  export type ContestParticipationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    score?: SortOrder
+    rank?: SortOrderInput | SortOrder
+    rating?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ContestParticipationCountOrderByAggregateInput
+    _avg?: ContestParticipationAvgOrderByAggregateInput
+    _max?: ContestParticipationMaxOrderByAggregateInput
+    _min?: ContestParticipationMinOrderByAggregateInput
+    _sum?: ContestParticipationSumOrderByAggregateInput
+  }
+
+  export type ContestParticipationScalarWhereWithAggregatesInput = {
+    AND?: ContestParticipationScalarWhereWithAggregatesInput | ContestParticipationScalarWhereWithAggregatesInput[]
+    OR?: ContestParticipationScalarWhereWithAggregatesInput[]
+    NOT?: ContestParticipationScalarWhereWithAggregatesInput | ContestParticipationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContestParticipation"> | string
+    userId?: StringWithAggregatesFilter<"ContestParticipation"> | string
+    contestId?: StringWithAggregatesFilter<"ContestParticipation"> | string
+    score?: IntWithAggregatesFilter<"ContestParticipation"> | number
+    rank?: IntNullableWithAggregatesFilter<"ContestParticipation"> | number | null
+    rating?: IntNullableWithAggregatesFilter<"ContestParticipation"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"ContestParticipation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ContestParticipation"> | Date | string
+  }
+
+  export type ContestSubmissionWhereInput = {
+    AND?: ContestSubmissionWhereInput | ContestSubmissionWhereInput[]
+    OR?: ContestSubmissionWhereInput[]
+    NOT?: ContestSubmissionWhereInput | ContestSubmissionWhereInput[]
+    id?: StringFilter<"ContestSubmission"> | string
+    userId?: StringFilter<"ContestSubmission"> | string
+    contestId?: StringFilter<"ContestSubmission"> | string
+    contestProblemId?: StringFilter<"ContestSubmission"> | string
+    submissionId?: StringFilter<"ContestSubmission"> | string
+    status?: StringFilter<"ContestSubmission"> | string
+    createdAt?: DateTimeFilter<"ContestSubmission"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestSubmission"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
+    contestProblem?: XOR<ContestProblemScalarRelationFilter, ContestProblemWhereInput>
+    submission?: XOR<SubmissionsScalarRelationFilter, SubmissionsWhereInput>
+  }
+
+  export type ContestSubmissionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    contestProblemId?: SortOrder
+    submissionId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    contest?: ContestOrderByWithRelationInput
+    contestProblem?: ContestProblemOrderByWithRelationInput
+    submission?: SubmissionsOrderByWithRelationInput
+  }
+
+  export type ContestSubmissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    submissionId?: string
+    userId_contestId_contestProblemId?: ContestSubmissionUserIdContestIdContestProblemIdCompoundUniqueInput
+    AND?: ContestSubmissionWhereInput | ContestSubmissionWhereInput[]
+    OR?: ContestSubmissionWhereInput[]
+    NOT?: ContestSubmissionWhereInput | ContestSubmissionWhereInput[]
+    userId?: StringFilter<"ContestSubmission"> | string
+    contestId?: StringFilter<"ContestSubmission"> | string
+    contestProblemId?: StringFilter<"ContestSubmission"> | string
+    status?: StringFilter<"ContestSubmission"> | string
+    createdAt?: DateTimeFilter<"ContestSubmission"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestSubmission"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
+    contestProblem?: XOR<ContestProblemScalarRelationFilter, ContestProblemWhereInput>
+    submission?: XOR<SubmissionsScalarRelationFilter, SubmissionsWhereInput>
+  }, "id" | "submissionId" | "userId_contestId_contestProblemId">
+
+  export type ContestSubmissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    contestProblemId?: SortOrder
+    submissionId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ContestSubmissionCountOrderByAggregateInput
+    _max?: ContestSubmissionMaxOrderByAggregateInput
+    _min?: ContestSubmissionMinOrderByAggregateInput
+  }
+
+  export type ContestSubmissionScalarWhereWithAggregatesInput = {
+    AND?: ContestSubmissionScalarWhereWithAggregatesInput | ContestSubmissionScalarWhereWithAggregatesInput[]
+    OR?: ContestSubmissionScalarWhereWithAggregatesInput[]
+    NOT?: ContestSubmissionScalarWhereWithAggregatesInput | ContestSubmissionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContestSubmission"> | string
+    userId?: StringWithAggregatesFilter<"ContestSubmission"> | string
+    contestId?: StringWithAggregatesFilter<"ContestSubmission"> | string
+    contestProblemId?: StringWithAggregatesFilter<"ContestSubmission"> | string
+    submissionId?: StringWithAggregatesFilter<"ContestSubmission"> | string
+    status?: StringWithAggregatesFilter<"ContestSubmission"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ContestSubmission"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ContestSubmission"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -13302,6 +18845,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -13324,6 +18869,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -13346,6 +18893,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -13368,6 +18917,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13430,20 +18981,20 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateInput = {
@@ -13459,19 +19010,19 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUpdateInput = {
@@ -13486,20 +19037,20 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateInput = {
@@ -13515,19 +19066,19 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemCreateManyInput = {
@@ -13543,14 +19094,13 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
   }
 
   export type ProblemUpdateManyMutationInput = {
@@ -13565,14 +19115,13 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProblemUncheckedUpdateManyInput = {
@@ -13588,14 +19137,13 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SubmissionsCreateInput = {
@@ -13619,6 +19167,7 @@ export namespace Prisma {
     problem: ProblemCreateNestedOneWithoutSubmissionInput
     user: UserCreateNestedOneWithoutSubmissionInput
     dailyChallenge?: UserDailyChallengeSubmissionCreateNestedManyWithoutSubmissionInput
+    contestSubmission?: ContestSubmissionCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionsUncheckedCreateInput = {
@@ -13642,6 +19191,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
+    contestSubmission?: ContestSubmissionUncheckedCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionsUpdateInput = {
@@ -13665,6 +19215,7 @@ export namespace Prisma {
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
     user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
     dailyChallenge?: UserDailyChallengeSubmissionUpdateManyWithoutSubmissionNestedInput
+    contestSubmission?: ContestSubmissionUpdateOneWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateInput = {
@@ -13688,6 +19239,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
+    contestSubmission?: ContestSubmissionUncheckedUpdateOneWithoutSubmissionNestedInput
   }
 
   export type SubmissionsCreateManyInput = {
@@ -14112,6 +19664,315 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ContestCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+    problems?: ContestProblemCreateNestedManyWithoutContestInput
+    participations?: ContestParticipationCreateNestedManyWithoutContestInput
+    submissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+    problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
+    participations?: ContestParticipationUncheckedCreateNestedManyWithoutContestInput
+    submissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    problems?: ContestProblemUpdateManyWithoutContestNestedInput
+    participations?: ContestParticipationUpdateManyWithoutContestNestedInput
+    submissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+  }
+
+  export type ContestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
+    participations?: ContestParticipationUncheckedUpdateManyWithoutContestNestedInput
+    submissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
+  }
+
+  export type ContestCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+  }
+
+  export type ContestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContestProblemCreateInput = {
+    id?: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contest: ContestCreateNestedOneWithoutProblemsInput
+    problem: ProblemCreateNestedOneWithoutContestProblemsInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestProblemInput
+  }
+
+  export type ContestProblemUncheckedCreateInput = {
+    id?: string
+    contestId: string
+    problemId: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestProblemInput
+  }
+
+  export type ContestProblemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contest?: ContestUpdateOneRequiredWithoutProblemsNestedInput
+    problem?: ProblemUpdateOneRequiredWithoutContestProblemsNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutContestProblemNestedInput
+  }
+
+  export type ContestProblemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestProblemNestedInput
+  }
+
+  export type ContestProblemCreateManyInput = {
+    id?: string
+    contestId: string
+    problemId: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestProblemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestParticipationCreateInput = {
+    id?: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestsParticipatedInput
+    contest: ContestCreateNestedOneWithoutParticipationsInput
+  }
+
+  export type ContestParticipationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    contestId: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestParticipationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestsParticipatedNestedInput
+    contest?: ContestUpdateOneRequiredWithoutParticipationsNestedInput
+  }
+
+  export type ContestParticipationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestParticipationCreateManyInput = {
+    id?: string
+    userId: string
+    contestId: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestParticipationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestParticipationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionCreateInput = {
+    id?: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestSubmissionsInput
+    contest: ContestCreateNestedOneWithoutSubmissionsInput
+    contestProblem: ContestProblemCreateNestedOneWithoutContestSubmissionsInput
+    submission: SubmissionsCreateNestedOneWithoutContestSubmissionInput
+  }
+
+  export type ContestSubmissionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    contestId: string
+    contestProblemId: string
+    submissionId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestSubmissionsNestedInput
+    contest?: ContestUpdateOneRequiredWithoutSubmissionsNestedInput
+    contestProblem?: ContestProblemUpdateOneRequiredWithoutContestSubmissionsNestedInput
+    submission?: SubmissionsUpdateOneRequiredWithoutContestSubmissionNestedInput
+  }
+
+  export type ContestSubmissionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    contestProblemId?: StringFieldUpdateOperationsInput | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionCreateManyInput = {
+    id?: string
+    userId: string
+    contestId: string
+    contestProblemId: string
+    submissionId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    contestProblemId?: StringFieldUpdateOperationsInput | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -14212,6 +20073,18 @@ export namespace Prisma {
     none?: UserDailyChallengeSubmissionWhereInput
   }
 
+  export type ContestParticipationListRelationFilter = {
+    every?: ContestParticipationWhereInput
+    some?: ContestParticipationWhereInput
+    none?: ContestParticipationWhereInput
+  }
+
+  export type ContestSubmissionListRelationFilter = {
+    every?: ContestSubmissionWhereInput
+    some?: ContestSubmissionWhereInput
+    none?: ContestSubmissionWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -14238,6 +20111,14 @@ export namespace Prisma {
   }
 
   export type UserDailyChallengeSubmissionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContestParticipationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContestSubmissionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14426,11 +20307,21 @@ export namespace Prisma {
     none?: DailyChallengeWhereInput
   }
 
+  export type ContestProblemListRelationFilter = {
+    every?: ContestProblemWhereInput
+    some?: ContestProblemWhereInput
+    none?: ContestProblemWhereInput
+  }
+
   export type ProblemInProblemListOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type DailyChallengeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContestProblemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14447,14 +20338,13 @@ export namespace Prisma {
     hints?: SortOrder
     editorial?: SortOrder
     testCases?: SortOrder
-    codeSnippetsHeader?: SortOrder
     codeSnippets?: SortOrder
-    codeSnippetsFooter?: SortOrder
     referenceSolutionHeader?: SortOrder
     referenceSolution?: SortOrder
     referenceSolutionFooter?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
   }
 
   export type ProblemMaxOrderByAggregateInput = {
@@ -14467,6 +20357,7 @@ export namespace Prisma {
     editorial?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
   }
 
   export type ProblemMinOrderByAggregateInput = {
@@ -14479,6 +20370,7 @@ export namespace Prisma {
     editorial?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
   }
 
   export type EnumProblemDifficultyWithAggregatesFilter<$PrismaModel = never> = {
@@ -14520,6 +20412,11 @@ export namespace Prisma {
   export type ProblemScalarRelationFilter = {
     is?: ProblemWhereInput
     isNot?: ProblemWhereInput
+  }
+
+  export type ContestSubmissionNullableScalarRelationFilter = {
+    is?: ContestSubmissionWhereInput | null
+    isNot?: ContestSubmissionWhereInput | null
   }
 
   export type SubmissionsCountOrderByAggregateInput = {
@@ -14764,6 +20661,235 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type ContestCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isRankingCompleted?: SortOrder
+  }
+
+  export type ContestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isRankingCompleted?: SortOrder
+  }
+
+  export type ContestMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isRankingCompleted?: SortOrder
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type ContestScalarRelationFilter = {
+    is?: ContestWhereInput
+    isNot?: ContestWhereInput
+  }
+
+  export type ContestProblemContestIdProblemIdCompoundUniqueInput = {
+    contestId: string
+    problemId: string
+  }
+
+  export type ContestProblemCountOrderByAggregateInput = {
+    id?: SortOrder
+    contestId?: SortOrder
+    problemId?: SortOrder
+    problemIndex?: SortOrder
+    points?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestProblemAvgOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type ContestProblemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    contestId?: SortOrder
+    problemId?: SortOrder
+    problemIndex?: SortOrder
+    points?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestProblemMinOrderByAggregateInput = {
+    id?: SortOrder
+    contestId?: SortOrder
+    problemId?: SortOrder
+    problemIndex?: SortOrder
+    points?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestProblemSumOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type ContestParticipationUserIdContestIdCompoundUniqueInput = {
+    userId: string
+    contestId: string
+  }
+
+  export type ContestParticipationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    score?: SortOrder
+    rank?: SortOrder
+    rating?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestParticipationAvgOrderByAggregateInput = {
+    score?: SortOrder
+    rank?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type ContestParticipationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    score?: SortOrder
+    rank?: SortOrder
+    rating?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestParticipationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    score?: SortOrder
+    rank?: SortOrder
+    rating?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestParticipationSumOrderByAggregateInput = {
+    score?: SortOrder
+    rank?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type ContestProblemScalarRelationFilter = {
+    is?: ContestProblemWhereInput
+    isNot?: ContestProblemWhereInput
+  }
+
+  export type ContestSubmissionUserIdContestIdContestProblemIdCompoundUniqueInput = {
+    userId: string
+    contestId: string
+    contestProblemId: string
+  }
+
+  export type ContestSubmissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    contestProblemId?: SortOrder
+    submissionId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestSubmissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    contestProblemId?: SortOrder
+    submissionId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestSubmissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    contestId?: SortOrder
+    contestProblemId?: SortOrder
+    submissionId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type ProblemCreateNestedManyWithoutUserInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -14806,6 +20932,20 @@ export namespace Prisma {
     connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
   }
 
+  export type ContestParticipationCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContestParticipationCreateWithoutUserInput, ContestParticipationUncheckedCreateWithoutUserInput> | ContestParticipationCreateWithoutUserInput[] | ContestParticipationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestParticipationCreateOrConnectWithoutUserInput | ContestParticipationCreateOrConnectWithoutUserInput[]
+    createMany?: ContestParticipationCreateManyUserInputEnvelope
+    connect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+  }
+
+  export type ContestSubmissionCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContestSubmissionCreateWithoutUserInput, ContestSubmissionUncheckedCreateWithoutUserInput> | ContestSubmissionCreateWithoutUserInput[] | ContestSubmissionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutUserInput | ContestSubmissionCreateOrConnectWithoutUserInput[]
+    createMany?: ContestSubmissionCreateManyUserInputEnvelope
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+  }
+
   export type ProblemUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -14846,6 +20986,20 @@ export namespace Prisma {
     connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput | UserDailyChallengeSubmissionCreateOrConnectWithoutUserInput[]
     createMany?: UserDailyChallengeSubmissionCreateManyUserInputEnvelope
     connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+  }
+
+  export type ContestParticipationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContestParticipationCreateWithoutUserInput, ContestParticipationUncheckedCreateWithoutUserInput> | ContestParticipationCreateWithoutUserInput[] | ContestParticipationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestParticipationCreateOrConnectWithoutUserInput | ContestParticipationCreateOrConnectWithoutUserInput[]
+    createMany?: ContestParticipationCreateManyUserInputEnvelope
+    connect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+  }
+
+  export type ContestSubmissionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContestSubmissionCreateWithoutUserInput, ContestSubmissionUncheckedCreateWithoutUserInput> | ContestSubmissionCreateWithoutUserInput[] | ContestSubmissionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutUserInput | ContestSubmissionCreateOrConnectWithoutUserInput[]
+    createMany?: ContestSubmissionCreateManyUserInputEnvelope
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14956,6 +21110,34 @@ export namespace Prisma {
     deleteMany?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
   }
 
+  export type ContestParticipationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContestParticipationCreateWithoutUserInput, ContestParticipationUncheckedCreateWithoutUserInput> | ContestParticipationCreateWithoutUserInput[] | ContestParticipationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestParticipationCreateOrConnectWithoutUserInput | ContestParticipationCreateOrConnectWithoutUserInput[]
+    upsert?: ContestParticipationUpsertWithWhereUniqueWithoutUserInput | ContestParticipationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContestParticipationCreateManyUserInputEnvelope
+    set?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    disconnect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    delete?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    connect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    update?: ContestParticipationUpdateWithWhereUniqueWithoutUserInput | ContestParticipationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContestParticipationUpdateManyWithWhereWithoutUserInput | ContestParticipationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContestParticipationScalarWhereInput | ContestParticipationScalarWhereInput[]
+  }
+
+  export type ContestSubmissionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContestSubmissionCreateWithoutUserInput, ContestSubmissionUncheckedCreateWithoutUserInput> | ContestSubmissionCreateWithoutUserInput[] | ContestSubmissionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutUserInput | ContestSubmissionCreateOrConnectWithoutUserInput[]
+    upsert?: ContestSubmissionUpsertWithWhereUniqueWithoutUserInput | ContestSubmissionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContestSubmissionCreateManyUserInputEnvelope
+    set?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    disconnect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    delete?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    update?: ContestSubmissionUpdateWithWhereUniqueWithoutUserInput | ContestSubmissionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContestSubmissionUpdateManyWithWhereWithoutUserInput | ContestSubmissionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+  }
+
   export type ProblemUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -15040,6 +21222,34 @@ export namespace Prisma {
     deleteMany?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
   }
 
+  export type ContestParticipationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContestParticipationCreateWithoutUserInput, ContestParticipationUncheckedCreateWithoutUserInput> | ContestParticipationCreateWithoutUserInput[] | ContestParticipationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestParticipationCreateOrConnectWithoutUserInput | ContestParticipationCreateOrConnectWithoutUserInput[]
+    upsert?: ContestParticipationUpsertWithWhereUniqueWithoutUserInput | ContestParticipationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContestParticipationCreateManyUserInputEnvelope
+    set?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    disconnect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    delete?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    connect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    update?: ContestParticipationUpdateWithWhereUniqueWithoutUserInput | ContestParticipationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContestParticipationUpdateManyWithWhereWithoutUserInput | ContestParticipationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContestParticipationScalarWhereInput | ContestParticipationScalarWhereInput[]
+  }
+
+  export type ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContestSubmissionCreateWithoutUserInput, ContestSubmissionUncheckedCreateWithoutUserInput> | ContestSubmissionCreateWithoutUserInput[] | ContestSubmissionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutUserInput | ContestSubmissionCreateOrConnectWithoutUserInput[]
+    upsert?: ContestSubmissionUpsertWithWhereUniqueWithoutUserInput | ContestSubmissionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContestSubmissionCreateManyUserInputEnvelope
+    set?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    disconnect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    delete?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    update?: ContestSubmissionUpdateWithWhereUniqueWithoutUserInput | ContestSubmissionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContestSubmissionUpdateManyWithWhereWithoutUserInput | ContestSubmissionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+  }
+
   export type ProblemCreatetagsInput = {
     set: string[]
   }
@@ -15093,6 +21303,13 @@ export namespace Prisma {
     connect?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
   }
 
+  export type ContestProblemCreateNestedManyWithoutProblemInput = {
+    create?: XOR<ContestProblemCreateWithoutProblemInput, ContestProblemUncheckedCreateWithoutProblemInput> | ContestProblemCreateWithoutProblemInput[] | ContestProblemUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutProblemInput | ContestProblemCreateOrConnectWithoutProblemInput[]
+    createMany?: ContestProblemCreateManyProblemInputEnvelope
+    connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+  }
+
   export type SubmissionsUncheckedCreateNestedManyWithoutProblemInput = {
     create?: XOR<SubmissionsCreateWithoutProblemInput, SubmissionsUncheckedCreateWithoutProblemInput> | SubmissionsCreateWithoutProblemInput[] | SubmissionsUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: SubmissionsCreateOrConnectWithoutProblemInput | SubmissionsCreateOrConnectWithoutProblemInput[]
@@ -15126,6 +21343,13 @@ export namespace Prisma {
     connectOrCreate?: DailyChallengeCreateOrConnectWithoutProblemInput | DailyChallengeCreateOrConnectWithoutProblemInput[]
     createMany?: DailyChallengeCreateManyProblemInputEnvelope
     connect?: DailyChallengeWhereUniqueInput | DailyChallengeWhereUniqueInput[]
+  }
+
+  export type ContestProblemUncheckedCreateNestedManyWithoutProblemInput = {
+    create?: XOR<ContestProblemCreateWithoutProblemInput, ContestProblemUncheckedCreateWithoutProblemInput> | ContestProblemCreateWithoutProblemInput[] | ContestProblemUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutProblemInput | ContestProblemCreateOrConnectWithoutProblemInput[]
+    createMany?: ContestProblemCreateManyProblemInputEnvelope
+    connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
   }
 
   export type EnumProblemDifficultyFieldUpdateOperationsInput = {
@@ -15225,6 +21449,20 @@ export namespace Prisma {
     deleteMany?: DailyChallengeScalarWhereInput | DailyChallengeScalarWhereInput[]
   }
 
+  export type ContestProblemUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<ContestProblemCreateWithoutProblemInput, ContestProblemUncheckedCreateWithoutProblemInput> | ContestProblemCreateWithoutProblemInput[] | ContestProblemUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutProblemInput | ContestProblemCreateOrConnectWithoutProblemInput[]
+    upsert?: ContestProblemUpsertWithWhereUniqueWithoutProblemInput | ContestProblemUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: ContestProblemCreateManyProblemInputEnvelope
+    set?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    disconnect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    delete?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    update?: ContestProblemUpdateWithWhereUniqueWithoutProblemInput | ContestProblemUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: ContestProblemUpdateManyWithWhereWithoutProblemInput | ContestProblemUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: ContestProblemScalarWhereInput | ContestProblemScalarWhereInput[]
+  }
+
   export type SubmissionsUncheckedUpdateManyWithoutProblemNestedInput = {
     create?: XOR<SubmissionsCreateWithoutProblemInput, SubmissionsUncheckedCreateWithoutProblemInput> | SubmissionsCreateWithoutProblemInput[] | SubmissionsUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: SubmissionsCreateOrConnectWithoutProblemInput | SubmissionsCreateOrConnectWithoutProblemInput[]
@@ -15295,6 +21533,20 @@ export namespace Prisma {
     deleteMany?: DailyChallengeScalarWhereInput | DailyChallengeScalarWhereInput[]
   }
 
+  export type ContestProblemUncheckedUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<ContestProblemCreateWithoutProblemInput, ContestProblemUncheckedCreateWithoutProblemInput> | ContestProblemCreateWithoutProblemInput[] | ContestProblemUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutProblemInput | ContestProblemCreateOrConnectWithoutProblemInput[]
+    upsert?: ContestProblemUpsertWithWhereUniqueWithoutProblemInput | ContestProblemUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: ContestProblemCreateManyProblemInputEnvelope
+    set?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    disconnect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    delete?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    update?: ContestProblemUpdateWithWhereUniqueWithoutProblemInput | ContestProblemUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: ContestProblemUpdateManyWithWhereWithoutProblemInput | ContestProblemUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: ContestProblemScalarWhereInput | ContestProblemScalarWhereInput[]
+  }
+
   export type ProblemCreateNestedOneWithoutSubmissionInput = {
     create?: XOR<ProblemCreateWithoutSubmissionInput, ProblemUncheckedCreateWithoutSubmissionInput>
     connectOrCreate?: ProblemCreateOrConnectWithoutSubmissionInput
@@ -15314,11 +21566,23 @@ export namespace Prisma {
     connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
   }
 
+  export type ContestSubmissionCreateNestedOneWithoutSubmissionInput = {
+    create?: XOR<ContestSubmissionCreateWithoutSubmissionInput, ContestSubmissionUncheckedCreateWithoutSubmissionInput>
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutSubmissionInput
+    connect?: ContestSubmissionWhereUniqueInput
+  }
+
   export type UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput = {
     create?: XOR<UserDailyChallengeSubmissionCreateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput> | UserDailyChallengeSubmissionCreateWithoutSubmissionInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput[]
     connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput | UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput[]
     createMany?: UserDailyChallengeSubmissionCreateManySubmissionInputEnvelope
     connect?: UserDailyChallengeSubmissionWhereUniqueInput | UserDailyChallengeSubmissionWhereUniqueInput[]
+  }
+
+  export type ContestSubmissionUncheckedCreateNestedOneWithoutSubmissionInput = {
+    create?: XOR<ContestSubmissionCreateWithoutSubmissionInput, ContestSubmissionUncheckedCreateWithoutSubmissionInput>
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutSubmissionInput
+    connect?: ContestSubmissionWhereUniqueInput
   }
 
   export type ProblemUpdateOneRequiredWithoutSubmissionNestedInput = {
@@ -15351,6 +21615,16 @@ export namespace Prisma {
     deleteMany?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
   }
 
+  export type ContestSubmissionUpdateOneWithoutSubmissionNestedInput = {
+    create?: XOR<ContestSubmissionCreateWithoutSubmissionInput, ContestSubmissionUncheckedCreateWithoutSubmissionInput>
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutSubmissionInput
+    upsert?: ContestSubmissionUpsertWithoutSubmissionInput
+    disconnect?: ContestSubmissionWhereInput | boolean
+    delete?: ContestSubmissionWhereInput | boolean
+    connect?: ContestSubmissionWhereUniqueInput
+    update?: XOR<XOR<ContestSubmissionUpdateToOneWithWhereWithoutSubmissionInput, ContestSubmissionUpdateWithoutSubmissionInput>, ContestSubmissionUncheckedUpdateWithoutSubmissionInput>
+  }
+
   export type UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput = {
     create?: XOR<UserDailyChallengeSubmissionCreateWithoutSubmissionInput, UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput> | UserDailyChallengeSubmissionCreateWithoutSubmissionInput[] | UserDailyChallengeSubmissionUncheckedCreateWithoutSubmissionInput[]
     connectOrCreate?: UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput | UserDailyChallengeSubmissionCreateOrConnectWithoutSubmissionInput[]
@@ -15363,6 +21637,16 @@ export namespace Prisma {
     update?: UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutSubmissionInput | UserDailyChallengeSubmissionUpdateWithWhereUniqueWithoutSubmissionInput[]
     updateMany?: UserDailyChallengeSubmissionUpdateManyWithWhereWithoutSubmissionInput | UserDailyChallengeSubmissionUpdateManyWithWhereWithoutSubmissionInput[]
     deleteMany?: UserDailyChallengeSubmissionScalarWhereInput | UserDailyChallengeSubmissionScalarWhereInput[]
+  }
+
+  export type ContestSubmissionUncheckedUpdateOneWithoutSubmissionNestedInput = {
+    create?: XOR<ContestSubmissionCreateWithoutSubmissionInput, ContestSubmissionUncheckedCreateWithoutSubmissionInput>
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutSubmissionInput
+    upsert?: ContestSubmissionUpsertWithoutSubmissionInput
+    disconnect?: ContestSubmissionWhereInput | boolean
+    delete?: ContestSubmissionWhereInput | boolean
+    connect?: ContestSubmissionWhereUniqueInput
+    update?: XOR<XOR<ContestSubmissionUpdateToOneWithWhereWithoutSubmissionInput, ContestSubmissionUpdateWithoutSubmissionInput>, ContestSubmissionUncheckedUpdateWithoutSubmissionInput>
   }
 
   export type ProblemCreateNestedOneWithoutHiddenTestCasesInput = {
@@ -15545,6 +21829,302 @@ export namespace Prisma {
     upsert?: SubmissionsUpsertWithoutDailyChallengeInput
     connect?: SubmissionsWhereUniqueInput
     update?: XOR<XOR<SubmissionsUpdateToOneWithWhereWithoutDailyChallengeInput, SubmissionsUpdateWithoutDailyChallengeInput>, SubmissionsUncheckedUpdateWithoutDailyChallengeInput>
+  }
+
+  export type ContestProblemCreateNestedManyWithoutContestInput = {
+    create?: XOR<ContestProblemCreateWithoutContestInput, ContestProblemUncheckedCreateWithoutContestInput> | ContestProblemCreateWithoutContestInput[] | ContestProblemUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutContestInput | ContestProblemCreateOrConnectWithoutContestInput[]
+    createMany?: ContestProblemCreateManyContestInputEnvelope
+    connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+  }
+
+  export type ContestParticipationCreateNestedManyWithoutContestInput = {
+    create?: XOR<ContestParticipationCreateWithoutContestInput, ContestParticipationUncheckedCreateWithoutContestInput> | ContestParticipationCreateWithoutContestInput[] | ContestParticipationUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestParticipationCreateOrConnectWithoutContestInput | ContestParticipationCreateOrConnectWithoutContestInput[]
+    createMany?: ContestParticipationCreateManyContestInputEnvelope
+    connect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+  }
+
+  export type ContestSubmissionCreateNestedManyWithoutContestInput = {
+    create?: XOR<ContestSubmissionCreateWithoutContestInput, ContestSubmissionUncheckedCreateWithoutContestInput> | ContestSubmissionCreateWithoutContestInput[] | ContestSubmissionUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestInput | ContestSubmissionCreateOrConnectWithoutContestInput[]
+    createMany?: ContestSubmissionCreateManyContestInputEnvelope
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+  }
+
+  export type ContestProblemUncheckedCreateNestedManyWithoutContestInput = {
+    create?: XOR<ContestProblemCreateWithoutContestInput, ContestProblemUncheckedCreateWithoutContestInput> | ContestProblemCreateWithoutContestInput[] | ContestProblemUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutContestInput | ContestProblemCreateOrConnectWithoutContestInput[]
+    createMany?: ContestProblemCreateManyContestInputEnvelope
+    connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+  }
+
+  export type ContestParticipationUncheckedCreateNestedManyWithoutContestInput = {
+    create?: XOR<ContestParticipationCreateWithoutContestInput, ContestParticipationUncheckedCreateWithoutContestInput> | ContestParticipationCreateWithoutContestInput[] | ContestParticipationUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestParticipationCreateOrConnectWithoutContestInput | ContestParticipationCreateOrConnectWithoutContestInput[]
+    createMany?: ContestParticipationCreateManyContestInputEnvelope
+    connect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+  }
+
+  export type ContestSubmissionUncheckedCreateNestedManyWithoutContestInput = {
+    create?: XOR<ContestSubmissionCreateWithoutContestInput, ContestSubmissionUncheckedCreateWithoutContestInput> | ContestSubmissionCreateWithoutContestInput[] | ContestSubmissionUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestInput | ContestSubmissionCreateOrConnectWithoutContestInput[]
+    createMany?: ContestSubmissionCreateManyContestInputEnvelope
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+  }
+
+  export type ContestProblemUpdateManyWithoutContestNestedInput = {
+    create?: XOR<ContestProblemCreateWithoutContestInput, ContestProblemUncheckedCreateWithoutContestInput> | ContestProblemCreateWithoutContestInput[] | ContestProblemUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutContestInput | ContestProblemCreateOrConnectWithoutContestInput[]
+    upsert?: ContestProblemUpsertWithWhereUniqueWithoutContestInput | ContestProblemUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: ContestProblemCreateManyContestInputEnvelope
+    set?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    disconnect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    delete?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    update?: ContestProblemUpdateWithWhereUniqueWithoutContestInput | ContestProblemUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: ContestProblemUpdateManyWithWhereWithoutContestInput | ContestProblemUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: ContestProblemScalarWhereInput | ContestProblemScalarWhereInput[]
+  }
+
+  export type ContestParticipationUpdateManyWithoutContestNestedInput = {
+    create?: XOR<ContestParticipationCreateWithoutContestInput, ContestParticipationUncheckedCreateWithoutContestInput> | ContestParticipationCreateWithoutContestInput[] | ContestParticipationUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestParticipationCreateOrConnectWithoutContestInput | ContestParticipationCreateOrConnectWithoutContestInput[]
+    upsert?: ContestParticipationUpsertWithWhereUniqueWithoutContestInput | ContestParticipationUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: ContestParticipationCreateManyContestInputEnvelope
+    set?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    disconnect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    delete?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    connect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    update?: ContestParticipationUpdateWithWhereUniqueWithoutContestInput | ContestParticipationUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: ContestParticipationUpdateManyWithWhereWithoutContestInput | ContestParticipationUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: ContestParticipationScalarWhereInput | ContestParticipationScalarWhereInput[]
+  }
+
+  export type ContestSubmissionUpdateManyWithoutContestNestedInput = {
+    create?: XOR<ContestSubmissionCreateWithoutContestInput, ContestSubmissionUncheckedCreateWithoutContestInput> | ContestSubmissionCreateWithoutContestInput[] | ContestSubmissionUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestInput | ContestSubmissionCreateOrConnectWithoutContestInput[]
+    upsert?: ContestSubmissionUpsertWithWhereUniqueWithoutContestInput | ContestSubmissionUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: ContestSubmissionCreateManyContestInputEnvelope
+    set?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    disconnect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    delete?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    update?: ContestSubmissionUpdateWithWhereUniqueWithoutContestInput | ContestSubmissionUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: ContestSubmissionUpdateManyWithWhereWithoutContestInput | ContestSubmissionUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+  }
+
+  export type ContestProblemUncheckedUpdateManyWithoutContestNestedInput = {
+    create?: XOR<ContestProblemCreateWithoutContestInput, ContestProblemUncheckedCreateWithoutContestInput> | ContestProblemCreateWithoutContestInput[] | ContestProblemUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutContestInput | ContestProblemCreateOrConnectWithoutContestInput[]
+    upsert?: ContestProblemUpsertWithWhereUniqueWithoutContestInput | ContestProblemUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: ContestProblemCreateManyContestInputEnvelope
+    set?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    disconnect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    delete?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+    update?: ContestProblemUpdateWithWhereUniqueWithoutContestInput | ContestProblemUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: ContestProblemUpdateManyWithWhereWithoutContestInput | ContestProblemUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: ContestProblemScalarWhereInput | ContestProblemScalarWhereInput[]
+  }
+
+  export type ContestParticipationUncheckedUpdateManyWithoutContestNestedInput = {
+    create?: XOR<ContestParticipationCreateWithoutContestInput, ContestParticipationUncheckedCreateWithoutContestInput> | ContestParticipationCreateWithoutContestInput[] | ContestParticipationUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestParticipationCreateOrConnectWithoutContestInput | ContestParticipationCreateOrConnectWithoutContestInput[]
+    upsert?: ContestParticipationUpsertWithWhereUniqueWithoutContestInput | ContestParticipationUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: ContestParticipationCreateManyContestInputEnvelope
+    set?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    disconnect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    delete?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    connect?: ContestParticipationWhereUniqueInput | ContestParticipationWhereUniqueInput[]
+    update?: ContestParticipationUpdateWithWhereUniqueWithoutContestInput | ContestParticipationUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: ContestParticipationUpdateManyWithWhereWithoutContestInput | ContestParticipationUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: ContestParticipationScalarWhereInput | ContestParticipationScalarWhereInput[]
+  }
+
+  export type ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput = {
+    create?: XOR<ContestSubmissionCreateWithoutContestInput, ContestSubmissionUncheckedCreateWithoutContestInput> | ContestSubmissionCreateWithoutContestInput[] | ContestSubmissionUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestInput | ContestSubmissionCreateOrConnectWithoutContestInput[]
+    upsert?: ContestSubmissionUpsertWithWhereUniqueWithoutContestInput | ContestSubmissionUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: ContestSubmissionCreateManyContestInputEnvelope
+    set?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    disconnect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    delete?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    update?: ContestSubmissionUpdateWithWhereUniqueWithoutContestInput | ContestSubmissionUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: ContestSubmissionUpdateManyWithWhereWithoutContestInput | ContestSubmissionUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+  }
+
+  export type ContestCreateNestedOneWithoutProblemsInput = {
+    create?: XOR<ContestCreateWithoutProblemsInput, ContestUncheckedCreateWithoutProblemsInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutProblemsInput
+    connect?: ContestWhereUniqueInput
+  }
+
+  export type ProblemCreateNestedOneWithoutContestProblemsInput = {
+    create?: XOR<ProblemCreateWithoutContestProblemsInput, ProblemUncheckedCreateWithoutContestProblemsInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutContestProblemsInput
+    connect?: ProblemWhereUniqueInput
+  }
+
+  export type ContestSubmissionCreateNestedManyWithoutContestProblemInput = {
+    create?: XOR<ContestSubmissionCreateWithoutContestProblemInput, ContestSubmissionUncheckedCreateWithoutContestProblemInput> | ContestSubmissionCreateWithoutContestProblemInput[] | ContestSubmissionUncheckedCreateWithoutContestProblemInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestProblemInput | ContestSubmissionCreateOrConnectWithoutContestProblemInput[]
+    createMany?: ContestSubmissionCreateManyContestProblemInputEnvelope
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+  }
+
+  export type ContestSubmissionUncheckedCreateNestedManyWithoutContestProblemInput = {
+    create?: XOR<ContestSubmissionCreateWithoutContestProblemInput, ContestSubmissionUncheckedCreateWithoutContestProblemInput> | ContestSubmissionCreateWithoutContestProblemInput[] | ContestSubmissionUncheckedCreateWithoutContestProblemInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestProblemInput | ContestSubmissionCreateOrConnectWithoutContestProblemInput[]
+    createMany?: ContestSubmissionCreateManyContestProblemInputEnvelope
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ContestUpdateOneRequiredWithoutProblemsNestedInput = {
+    create?: XOR<ContestCreateWithoutProblemsInput, ContestUncheckedCreateWithoutProblemsInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutProblemsInput
+    upsert?: ContestUpsertWithoutProblemsInput
+    connect?: ContestWhereUniqueInput
+    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutProblemsInput, ContestUpdateWithoutProblemsInput>, ContestUncheckedUpdateWithoutProblemsInput>
+  }
+
+  export type ProblemUpdateOneRequiredWithoutContestProblemsNestedInput = {
+    create?: XOR<ProblemCreateWithoutContestProblemsInput, ProblemUncheckedCreateWithoutContestProblemsInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutContestProblemsInput
+    upsert?: ProblemUpsertWithoutContestProblemsInput
+    connect?: ProblemWhereUniqueInput
+    update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutContestProblemsInput, ProblemUpdateWithoutContestProblemsInput>, ProblemUncheckedUpdateWithoutContestProblemsInput>
+  }
+
+  export type ContestSubmissionUpdateManyWithoutContestProblemNestedInput = {
+    create?: XOR<ContestSubmissionCreateWithoutContestProblemInput, ContestSubmissionUncheckedCreateWithoutContestProblemInput> | ContestSubmissionCreateWithoutContestProblemInput[] | ContestSubmissionUncheckedCreateWithoutContestProblemInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestProblemInput | ContestSubmissionCreateOrConnectWithoutContestProblemInput[]
+    upsert?: ContestSubmissionUpsertWithWhereUniqueWithoutContestProblemInput | ContestSubmissionUpsertWithWhereUniqueWithoutContestProblemInput[]
+    createMany?: ContestSubmissionCreateManyContestProblemInputEnvelope
+    set?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    disconnect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    delete?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    update?: ContestSubmissionUpdateWithWhereUniqueWithoutContestProblemInput | ContestSubmissionUpdateWithWhereUniqueWithoutContestProblemInput[]
+    updateMany?: ContestSubmissionUpdateManyWithWhereWithoutContestProblemInput | ContestSubmissionUpdateManyWithWhereWithoutContestProblemInput[]
+    deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+  }
+
+  export type ContestSubmissionUncheckedUpdateManyWithoutContestProblemNestedInput = {
+    create?: XOR<ContestSubmissionCreateWithoutContestProblemInput, ContestSubmissionUncheckedCreateWithoutContestProblemInput> | ContestSubmissionCreateWithoutContestProblemInput[] | ContestSubmissionUncheckedCreateWithoutContestProblemInput[]
+    connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestProblemInput | ContestSubmissionCreateOrConnectWithoutContestProblemInput[]
+    upsert?: ContestSubmissionUpsertWithWhereUniqueWithoutContestProblemInput | ContestSubmissionUpsertWithWhereUniqueWithoutContestProblemInput[]
+    createMany?: ContestSubmissionCreateManyContestProblemInputEnvelope
+    set?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    disconnect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    delete?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+    update?: ContestSubmissionUpdateWithWhereUniqueWithoutContestProblemInput | ContestSubmissionUpdateWithWhereUniqueWithoutContestProblemInput[]
+    updateMany?: ContestSubmissionUpdateManyWithWhereWithoutContestProblemInput | ContestSubmissionUpdateManyWithWhereWithoutContestProblemInput[]
+    deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutContestsParticipatedInput = {
+    create?: XOR<UserCreateWithoutContestsParticipatedInput, UserUncheckedCreateWithoutContestsParticipatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContestsParticipatedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ContestCreateNestedOneWithoutParticipationsInput = {
+    create?: XOR<ContestCreateWithoutParticipationsInput, ContestUncheckedCreateWithoutParticipationsInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutParticipationsInput
+    connect?: ContestWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutContestsParticipatedNestedInput = {
+    create?: XOR<UserCreateWithoutContestsParticipatedInput, UserUncheckedCreateWithoutContestsParticipatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContestsParticipatedInput
+    upsert?: UserUpsertWithoutContestsParticipatedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContestsParticipatedInput, UserUpdateWithoutContestsParticipatedInput>, UserUncheckedUpdateWithoutContestsParticipatedInput>
+  }
+
+  export type ContestUpdateOneRequiredWithoutParticipationsNestedInput = {
+    create?: XOR<ContestCreateWithoutParticipationsInput, ContestUncheckedCreateWithoutParticipationsInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutParticipationsInput
+    upsert?: ContestUpsertWithoutParticipationsInput
+    connect?: ContestWhereUniqueInput
+    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutParticipationsInput, ContestUpdateWithoutParticipationsInput>, ContestUncheckedUpdateWithoutParticipationsInput>
+  }
+
+  export type UserCreateNestedOneWithoutContestSubmissionsInput = {
+    create?: XOR<UserCreateWithoutContestSubmissionsInput, UserUncheckedCreateWithoutContestSubmissionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContestSubmissionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ContestCreateNestedOneWithoutSubmissionsInput = {
+    create?: XOR<ContestCreateWithoutSubmissionsInput, ContestUncheckedCreateWithoutSubmissionsInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutSubmissionsInput
+    connect?: ContestWhereUniqueInput
+  }
+
+  export type ContestProblemCreateNestedOneWithoutContestSubmissionsInput = {
+    create?: XOR<ContestProblemCreateWithoutContestSubmissionsInput, ContestProblemUncheckedCreateWithoutContestSubmissionsInput>
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutContestSubmissionsInput
+    connect?: ContestProblemWhereUniqueInput
+  }
+
+  export type SubmissionsCreateNestedOneWithoutContestSubmissionInput = {
+    create?: XOR<SubmissionsCreateWithoutContestSubmissionInput, SubmissionsUncheckedCreateWithoutContestSubmissionInput>
+    connectOrCreate?: SubmissionsCreateOrConnectWithoutContestSubmissionInput
+    connect?: SubmissionsWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutContestSubmissionsNestedInput = {
+    create?: XOR<UserCreateWithoutContestSubmissionsInput, UserUncheckedCreateWithoutContestSubmissionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContestSubmissionsInput
+    upsert?: UserUpsertWithoutContestSubmissionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContestSubmissionsInput, UserUpdateWithoutContestSubmissionsInput>, UserUncheckedUpdateWithoutContestSubmissionsInput>
+  }
+
+  export type ContestUpdateOneRequiredWithoutSubmissionsNestedInput = {
+    create?: XOR<ContestCreateWithoutSubmissionsInput, ContestUncheckedCreateWithoutSubmissionsInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutSubmissionsInput
+    upsert?: ContestUpsertWithoutSubmissionsInput
+    connect?: ContestWhereUniqueInput
+    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutSubmissionsInput, ContestUpdateWithoutSubmissionsInput>, ContestUncheckedUpdateWithoutSubmissionsInput>
+  }
+
+  export type ContestProblemUpdateOneRequiredWithoutContestSubmissionsNestedInput = {
+    create?: XOR<ContestProblemCreateWithoutContestSubmissionsInput, ContestProblemUncheckedCreateWithoutContestSubmissionsInput>
+    connectOrCreate?: ContestProblemCreateOrConnectWithoutContestSubmissionsInput
+    upsert?: ContestProblemUpsertWithoutContestSubmissionsInput
+    connect?: ContestProblemWhereUniqueInput
+    update?: XOR<XOR<ContestProblemUpdateToOneWithWhereWithoutContestSubmissionsInput, ContestProblemUpdateWithoutContestSubmissionsInput>, ContestProblemUncheckedUpdateWithoutContestSubmissionsInput>
+  }
+
+  export type SubmissionsUpdateOneRequiredWithoutContestSubmissionNestedInput = {
+    create?: XOR<SubmissionsCreateWithoutContestSubmissionInput, SubmissionsUncheckedCreateWithoutContestSubmissionInput>
+    connectOrCreate?: SubmissionsCreateOrConnectWithoutContestSubmissionInput
+    upsert?: SubmissionsUpsertWithoutContestSubmissionInput
+    connect?: SubmissionsWhereUniqueInput
+    update?: XOR<XOR<SubmissionsUpdateToOneWithWhereWithoutContestSubmissionInput, SubmissionsUpdateWithoutContestSubmissionInput>, SubmissionsUncheckedUpdateWithoutContestSubmissionInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15751,6 +22331,60 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type ProblemCreateWithoutUserInput = {
     id?: string
     title: string
@@ -15763,19 +22397,19 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutUserInput = {
@@ -15790,19 +22424,19 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutUserInput = {
@@ -15835,6 +22469,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
     dailyChallenge?: UserDailyChallengeSubmissionCreateNestedManyWithoutSubmissionInput
+    contestSubmission?: ContestSubmissionCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionsUncheckedCreateWithoutUserInput = {
@@ -15857,6 +22492,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
+    contestSubmission?: ContestSubmissionUncheckedCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionsCreateOrConnectWithoutUserInput = {
@@ -15975,6 +22611,66 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContestParticipationCreateWithoutUserInput = {
+    id?: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contest: ContestCreateNestedOneWithoutParticipationsInput
+  }
+
+  export type ContestParticipationUncheckedCreateWithoutUserInput = {
+    id?: string
+    contestId: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestParticipationCreateOrConnectWithoutUserInput = {
+    where: ContestParticipationWhereUniqueInput
+    create: XOR<ContestParticipationCreateWithoutUserInput, ContestParticipationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ContestParticipationCreateManyUserInputEnvelope = {
+    data: ContestParticipationCreateManyUserInput | ContestParticipationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContestSubmissionCreateWithoutUserInput = {
+    id?: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contest: ContestCreateNestedOneWithoutSubmissionsInput
+    contestProblem: ContestProblemCreateNestedOneWithoutContestSubmissionsInput
+    submission: SubmissionsCreateNestedOneWithoutContestSubmissionInput
+  }
+
+  export type ContestSubmissionUncheckedCreateWithoutUserInput = {
+    id?: string
+    contestId: string
+    contestProblemId: string
+    submissionId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionCreateOrConnectWithoutUserInput = {
+    where: ContestSubmissionWhereUniqueInput
+    create: XOR<ContestSubmissionCreateWithoutUserInput, ContestSubmissionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ContestSubmissionCreateManyUserInputEnvelope = {
+    data: ContestSubmissionCreateManyUserInput | ContestSubmissionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ProblemUpsertWithWhereUniqueWithoutUserInput = {
     where: ProblemWhereUniqueInput
     update: XOR<ProblemUpdateWithoutUserInput, ProblemUncheckedUpdateWithoutUserInput>
@@ -16007,14 +22703,13 @@ export namespace Prisma {
     hints?: StringNullableListFilter<"Problem">
     editorial?: StringNullableFilter<"Problem"> | string | null
     testCases?: JsonFilter<"Problem">
-    codeSnippetsHeader?: JsonFilter<"Problem">
     codeSnippets?: JsonFilter<"Problem">
-    codeSnippetsFooter?: JsonFilter<"Problem">
     referenceSolutionHeader?: JsonFilter<"Problem">
     referenceSolution?: JsonFilter<"Problem">
     referenceSolutionFooter?: JsonFilter<"Problem">
     createdAt?: DateTimeFilter<"Problem"> | Date | string
     updatedAt?: DateTimeFilter<"Problem"> | Date | string
+    isPublic?: BoolFilter<"Problem"> | boolean
   }
 
   export type SubmissionsUpsertWithWhereUniqueWithoutUserInput = {
@@ -16170,6 +22865,66 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"UserDailyChallengeSubmission"> | Date | string
   }
 
+  export type ContestParticipationUpsertWithWhereUniqueWithoutUserInput = {
+    where: ContestParticipationWhereUniqueInput
+    update: XOR<ContestParticipationUpdateWithoutUserInput, ContestParticipationUncheckedUpdateWithoutUserInput>
+    create: XOR<ContestParticipationCreateWithoutUserInput, ContestParticipationUncheckedCreateWithoutUserInput>
+  }
+
+  export type ContestParticipationUpdateWithWhereUniqueWithoutUserInput = {
+    where: ContestParticipationWhereUniqueInput
+    data: XOR<ContestParticipationUpdateWithoutUserInput, ContestParticipationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ContestParticipationUpdateManyWithWhereWithoutUserInput = {
+    where: ContestParticipationScalarWhereInput
+    data: XOR<ContestParticipationUpdateManyMutationInput, ContestParticipationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ContestParticipationScalarWhereInput = {
+    AND?: ContestParticipationScalarWhereInput | ContestParticipationScalarWhereInput[]
+    OR?: ContestParticipationScalarWhereInput[]
+    NOT?: ContestParticipationScalarWhereInput | ContestParticipationScalarWhereInput[]
+    id?: StringFilter<"ContestParticipation"> | string
+    userId?: StringFilter<"ContestParticipation"> | string
+    contestId?: StringFilter<"ContestParticipation"> | string
+    score?: IntFilter<"ContestParticipation"> | number
+    rank?: IntNullableFilter<"ContestParticipation"> | number | null
+    rating?: IntNullableFilter<"ContestParticipation"> | number | null
+    createdAt?: DateTimeFilter<"ContestParticipation"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestParticipation"> | Date | string
+  }
+
+  export type ContestSubmissionUpsertWithWhereUniqueWithoutUserInput = {
+    where: ContestSubmissionWhereUniqueInput
+    update: XOR<ContestSubmissionUpdateWithoutUserInput, ContestSubmissionUncheckedUpdateWithoutUserInput>
+    create: XOR<ContestSubmissionCreateWithoutUserInput, ContestSubmissionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ContestSubmissionUpdateWithWhereUniqueWithoutUserInput = {
+    where: ContestSubmissionWhereUniqueInput
+    data: XOR<ContestSubmissionUpdateWithoutUserInput, ContestSubmissionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ContestSubmissionUpdateManyWithWhereWithoutUserInput = {
+    where: ContestSubmissionScalarWhereInput
+    data: XOR<ContestSubmissionUpdateManyMutationInput, ContestSubmissionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ContestSubmissionScalarWhereInput = {
+    AND?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+    OR?: ContestSubmissionScalarWhereInput[]
+    NOT?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+    id?: StringFilter<"ContestSubmission"> | string
+    userId?: StringFilter<"ContestSubmission"> | string
+    contestId?: StringFilter<"ContestSubmission"> | string
+    contestProblemId?: StringFilter<"ContestSubmission"> | string
+    submissionId?: StringFilter<"ContestSubmission"> | string
+    status?: StringFilter<"ContestSubmission"> | string
+    createdAt?: DateTimeFilter<"ContestSubmission"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestSubmission"> | Date | string
+  }
+
   export type UserCreateWithoutProblemsInput = {
     id?: string
     name?: string | null
@@ -16189,6 +22944,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProblemsInput = {
@@ -16210,6 +22967,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProblemsInput = {
@@ -16237,6 +22996,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutSubmissionInput
     dailyChallenge?: UserDailyChallengeSubmissionCreateNestedManyWithoutSubmissionInput
+    contestSubmission?: ContestSubmissionCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionsUncheckedCreateWithoutProblemInput = {
@@ -16259,6 +23019,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
+    contestSubmission?: ContestSubmissionUncheckedCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionsCreateOrConnectWithoutProblemInput = {
@@ -16371,6 +23132,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContestProblemCreateWithoutProblemInput = {
+    id?: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contest: ContestCreateNestedOneWithoutProblemsInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestProblemInput
+  }
+
+  export type ContestProblemUncheckedCreateWithoutProblemInput = {
+    id?: string
+    contestId: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestProblemInput
+  }
+
+  export type ContestProblemCreateOrConnectWithoutProblemInput = {
+    where: ContestProblemWhereUniqueInput
+    create: XOR<ContestProblemCreateWithoutProblemInput, ContestProblemUncheckedCreateWithoutProblemInput>
+  }
+
+  export type ContestProblemCreateManyProblemInputEnvelope = {
+    data: ContestProblemCreateManyProblemInput | ContestProblemCreateManyProblemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutProblemsInput = {
     update: XOR<UserUpdateWithoutProblemsInput, UserUncheckedUpdateWithoutProblemsInput>
     create: XOR<UserCreateWithoutProblemsInput, UserUncheckedCreateWithoutProblemsInput>
@@ -16401,6 +23192,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProblemsInput = {
@@ -16422,6 +23215,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SubmissionsUpsertWithWhereUniqueWithoutProblemInput = {
@@ -16526,6 +23321,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"DailyChallenge"> | Date | string
   }
 
+  export type ContestProblemUpsertWithWhereUniqueWithoutProblemInput = {
+    where: ContestProblemWhereUniqueInput
+    update: XOR<ContestProblemUpdateWithoutProblemInput, ContestProblemUncheckedUpdateWithoutProblemInput>
+    create: XOR<ContestProblemCreateWithoutProblemInput, ContestProblemUncheckedCreateWithoutProblemInput>
+  }
+
+  export type ContestProblemUpdateWithWhereUniqueWithoutProblemInput = {
+    where: ContestProblemWhereUniqueInput
+    data: XOR<ContestProblemUpdateWithoutProblemInput, ContestProblemUncheckedUpdateWithoutProblemInput>
+  }
+
+  export type ContestProblemUpdateManyWithWhereWithoutProblemInput = {
+    where: ContestProblemScalarWhereInput
+    data: XOR<ContestProblemUpdateManyMutationInput, ContestProblemUncheckedUpdateManyWithoutProblemInput>
+  }
+
+  export type ContestProblemScalarWhereInput = {
+    AND?: ContestProblemScalarWhereInput | ContestProblemScalarWhereInput[]
+    OR?: ContestProblemScalarWhereInput[]
+    NOT?: ContestProblemScalarWhereInput | ContestProblemScalarWhereInput[]
+    id?: StringFilter<"ContestProblem"> | string
+    contestId?: StringFilter<"ContestProblem"> | string
+    problemId?: StringFilter<"ContestProblem"> | string
+    problemIndex?: StringFilter<"ContestProblem"> | string
+    points?: IntNullableFilter<"ContestProblem"> | number | null
+    createdAt?: DateTimeFilter<"ContestProblem"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestProblem"> | Date | string
+  }
+
   export type ProblemCreateWithoutSubmissionInput = {
     id?: string
     title: string
@@ -16538,19 +23362,19 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     user: UserCreateNestedOneWithoutProblemsInput
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutSubmissionInput = {
@@ -16566,18 +23390,18 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutSubmissionInput = {
@@ -16604,6 +23428,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubmissionInput = {
@@ -16625,6 +23451,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubmissionInput = {
@@ -16658,6 +23486,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContestSubmissionCreateWithoutSubmissionInput = {
+    id?: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestSubmissionsInput
+    contest: ContestCreateNestedOneWithoutSubmissionsInput
+    contestProblem: ContestProblemCreateNestedOneWithoutContestSubmissionsInput
+  }
+
+  export type ContestSubmissionUncheckedCreateWithoutSubmissionInput = {
+    id?: string
+    userId: string
+    contestId: string
+    contestProblemId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionCreateOrConnectWithoutSubmissionInput = {
+    where: ContestSubmissionWhereUniqueInput
+    create: XOR<ContestSubmissionCreateWithoutSubmissionInput, ContestSubmissionUncheckedCreateWithoutSubmissionInput>
+  }
+
   export type ProblemUpsertWithoutSubmissionInput = {
     update: XOR<ProblemUpdateWithoutSubmissionInput, ProblemUncheckedUpdateWithoutSubmissionInput>
     create: XOR<ProblemCreateWithoutSubmissionInput, ProblemUncheckedCreateWithoutSubmissionInput>
@@ -16681,19 +23534,19 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutSubmissionInput = {
@@ -16709,18 +23562,18 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type UserUpsertWithoutSubmissionInput = {
@@ -16753,6 +23606,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmissionInput = {
@@ -16774,6 +23629,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserDailyChallengeSubmissionUpsertWithWhereUniqueWithoutSubmissionInput = {
@@ -16792,6 +23649,37 @@ export namespace Prisma {
     data: XOR<UserDailyChallengeSubmissionUpdateManyMutationInput, UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionInput>
   }
 
+  export type ContestSubmissionUpsertWithoutSubmissionInput = {
+    update: XOR<ContestSubmissionUpdateWithoutSubmissionInput, ContestSubmissionUncheckedUpdateWithoutSubmissionInput>
+    create: XOR<ContestSubmissionCreateWithoutSubmissionInput, ContestSubmissionUncheckedCreateWithoutSubmissionInput>
+    where?: ContestSubmissionWhereInput
+  }
+
+  export type ContestSubmissionUpdateToOneWithWhereWithoutSubmissionInput = {
+    where?: ContestSubmissionWhereInput
+    data: XOR<ContestSubmissionUpdateWithoutSubmissionInput, ContestSubmissionUncheckedUpdateWithoutSubmissionInput>
+  }
+
+  export type ContestSubmissionUpdateWithoutSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestSubmissionsNestedInput
+    contest?: ContestUpdateOneRequiredWithoutSubmissionsNestedInput
+    contestProblem?: ContestProblemUpdateOneRequiredWithoutContestSubmissionsNestedInput
+  }
+
+  export type ContestSubmissionUncheckedUpdateWithoutSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    contestProblemId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ProblemCreateWithoutHiddenTestCasesInput = {
     id?: string
     title: string
@@ -16804,19 +23692,19 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutHiddenTestCasesInput = {
@@ -16832,18 +23720,18 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutHiddenTestCasesInput = {
@@ -16870,6 +23758,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTestCasesInput = {
@@ -16891,6 +23781,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTestCasesInput = {
@@ -16921,19 +23813,19 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutHiddenTestCasesInput = {
@@ -16949,18 +23841,18 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type UserUpsertWithoutTestCasesInput = {
@@ -16993,6 +23885,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTestCasesInput = {
@@ -17014,6 +23908,8 @@ export namespace Prisma {
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProblemSolvedInput = {
@@ -17035,6 +23931,8 @@ export namespace Prisma {
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProblemSolvedInput = {
@@ -17056,6 +23954,8 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProblemSolvedInput = {
@@ -17075,19 +23975,19 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutProblemSolvedInput = {
@@ -17103,18 +24003,18 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutProblemSolvedInput = {
@@ -17152,6 +24052,8 @@ export namespace Prisma {
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProblemSolvedInput = {
@@ -17173,6 +24075,8 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProblemUpsertWithoutProblemSolvedInput = {
@@ -17198,19 +24102,19 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutProblemSolvedInput = {
@@ -17226,18 +24130,18 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemInProblemListCreateWithoutProblemListInput = {
@@ -17283,6 +24187,8 @@ export namespace Prisma {
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProblemListsInput = {
@@ -17304,6 +24210,8 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProblemListsInput = {
@@ -17357,6 +24265,8 @@ export namespace Prisma {
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProblemListsInput = {
@@ -17378,6 +24288,8 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProblemListCreateWithoutProblemsInput = {
@@ -17415,19 +24327,19 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutProblemListsInput = {
@@ -17443,18 +24355,18 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutProblemListsInput = {
@@ -17514,19 +24426,19 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutProblemListsInput = {
@@ -17542,18 +24454,18 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemCreateWithoutDailyProblemsInput = {
@@ -17568,19 +24480,19 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionsCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutDailyProblemsInput = {
@@ -17596,18 +24508,18 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
     hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutDailyProblemsInput = {
@@ -17638,19 +24550,19 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutDailyProblemsInput = {
@@ -17666,18 +24578,18 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type UserCreateWithoutDailyProblemsInput = {
@@ -17699,6 +24611,8 @@ export namespace Prisma {
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDailyProblemsInput = {
@@ -17720,6 +24634,8 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
     problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDailyProblemsInput = {
@@ -17747,6 +24663,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
     user: UserCreateNestedOneWithoutSubmissionInput
+    contestSubmission?: ContestSubmissionCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionsUncheckedCreateWithoutDailyChallengeInput = {
@@ -17769,6 +24686,7 @@ export namespace Prisma {
     isAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    contestSubmission?: ContestSubmissionUncheckedCreateNestedOneWithoutSubmissionInput
   }
 
   export type SubmissionsCreateOrConnectWithoutDailyChallengeInput = {
@@ -17806,6 +24724,8 @@ export namespace Prisma {
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDailyProblemsInput = {
@@ -17827,6 +24747,8 @@ export namespace Prisma {
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
     problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SubmissionsUpsertWithoutDailyChallengeInput = {
@@ -17860,6 +24782,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
     user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
+    contestSubmission?: ContestSubmissionUpdateOneWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateWithoutDailyChallengeInput = {
@@ -17882,6 +24805,899 @@ export namespace Prisma {
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contestSubmission?: ContestSubmissionUncheckedUpdateOneWithoutSubmissionNestedInput
+  }
+
+  export type ContestProblemCreateWithoutContestInput = {
+    id?: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problem: ProblemCreateNestedOneWithoutContestProblemsInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestProblemInput
+  }
+
+  export type ContestProblemUncheckedCreateWithoutContestInput = {
+    id?: string
+    problemId: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestProblemInput
+  }
+
+  export type ContestProblemCreateOrConnectWithoutContestInput = {
+    where: ContestProblemWhereUniqueInput
+    create: XOR<ContestProblemCreateWithoutContestInput, ContestProblemUncheckedCreateWithoutContestInput>
+  }
+
+  export type ContestProblemCreateManyContestInputEnvelope = {
+    data: ContestProblemCreateManyContestInput | ContestProblemCreateManyContestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContestParticipationCreateWithoutContestInput = {
+    id?: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestsParticipatedInput
+  }
+
+  export type ContestParticipationUncheckedCreateWithoutContestInput = {
+    id?: string
+    userId: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestParticipationCreateOrConnectWithoutContestInput = {
+    where: ContestParticipationWhereUniqueInput
+    create: XOR<ContestParticipationCreateWithoutContestInput, ContestParticipationUncheckedCreateWithoutContestInput>
+  }
+
+  export type ContestParticipationCreateManyContestInputEnvelope = {
+    data: ContestParticipationCreateManyContestInput | ContestParticipationCreateManyContestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContestSubmissionCreateWithoutContestInput = {
+    id?: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestSubmissionsInput
+    contestProblem: ContestProblemCreateNestedOneWithoutContestSubmissionsInput
+    submission: SubmissionsCreateNestedOneWithoutContestSubmissionInput
+  }
+
+  export type ContestSubmissionUncheckedCreateWithoutContestInput = {
+    id?: string
+    userId: string
+    contestProblemId: string
+    submissionId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionCreateOrConnectWithoutContestInput = {
+    where: ContestSubmissionWhereUniqueInput
+    create: XOR<ContestSubmissionCreateWithoutContestInput, ContestSubmissionUncheckedCreateWithoutContestInput>
+  }
+
+  export type ContestSubmissionCreateManyContestInputEnvelope = {
+    data: ContestSubmissionCreateManyContestInput | ContestSubmissionCreateManyContestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContestProblemUpsertWithWhereUniqueWithoutContestInput = {
+    where: ContestProblemWhereUniqueInput
+    update: XOR<ContestProblemUpdateWithoutContestInput, ContestProblemUncheckedUpdateWithoutContestInput>
+    create: XOR<ContestProblemCreateWithoutContestInput, ContestProblemUncheckedCreateWithoutContestInput>
+  }
+
+  export type ContestProblemUpdateWithWhereUniqueWithoutContestInput = {
+    where: ContestProblemWhereUniqueInput
+    data: XOR<ContestProblemUpdateWithoutContestInput, ContestProblemUncheckedUpdateWithoutContestInput>
+  }
+
+  export type ContestProblemUpdateManyWithWhereWithoutContestInput = {
+    where: ContestProblemScalarWhereInput
+    data: XOR<ContestProblemUpdateManyMutationInput, ContestProblemUncheckedUpdateManyWithoutContestInput>
+  }
+
+  export type ContestParticipationUpsertWithWhereUniqueWithoutContestInput = {
+    where: ContestParticipationWhereUniqueInput
+    update: XOR<ContestParticipationUpdateWithoutContestInput, ContestParticipationUncheckedUpdateWithoutContestInput>
+    create: XOR<ContestParticipationCreateWithoutContestInput, ContestParticipationUncheckedCreateWithoutContestInput>
+  }
+
+  export type ContestParticipationUpdateWithWhereUniqueWithoutContestInput = {
+    where: ContestParticipationWhereUniqueInput
+    data: XOR<ContestParticipationUpdateWithoutContestInput, ContestParticipationUncheckedUpdateWithoutContestInput>
+  }
+
+  export type ContestParticipationUpdateManyWithWhereWithoutContestInput = {
+    where: ContestParticipationScalarWhereInput
+    data: XOR<ContestParticipationUpdateManyMutationInput, ContestParticipationUncheckedUpdateManyWithoutContestInput>
+  }
+
+  export type ContestSubmissionUpsertWithWhereUniqueWithoutContestInput = {
+    where: ContestSubmissionWhereUniqueInput
+    update: XOR<ContestSubmissionUpdateWithoutContestInput, ContestSubmissionUncheckedUpdateWithoutContestInput>
+    create: XOR<ContestSubmissionCreateWithoutContestInput, ContestSubmissionUncheckedCreateWithoutContestInput>
+  }
+
+  export type ContestSubmissionUpdateWithWhereUniqueWithoutContestInput = {
+    where: ContestSubmissionWhereUniqueInput
+    data: XOR<ContestSubmissionUpdateWithoutContestInput, ContestSubmissionUncheckedUpdateWithoutContestInput>
+  }
+
+  export type ContestSubmissionUpdateManyWithWhereWithoutContestInput = {
+    where: ContestSubmissionScalarWhereInput
+    data: XOR<ContestSubmissionUpdateManyMutationInput, ContestSubmissionUncheckedUpdateManyWithoutContestInput>
+  }
+
+  export type ContestCreateWithoutProblemsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+    participations?: ContestParticipationCreateNestedManyWithoutContestInput
+    submissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestUncheckedCreateWithoutProblemsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+    participations?: ContestParticipationUncheckedCreateNestedManyWithoutContestInput
+    submissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestCreateOrConnectWithoutProblemsInput = {
+    where: ContestWhereUniqueInput
+    create: XOR<ContestCreateWithoutProblemsInput, ContestUncheckedCreateWithoutProblemsInput>
+  }
+
+  export type ProblemCreateWithoutContestProblemsInput = {
+    id?: string
+    title: string
+    description: string
+    difficulty: $Enums.ProblemDifficulty
+    tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints: string
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    testCases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutionHeader: JsonNullValueInput | InputJsonValue
+    referenceSolution: JsonNullValueInput | InputJsonValue
+    referenceSolutionFooter: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    user: UserCreateNestedOneWithoutProblemsInput
+    submission?: SubmissionsCreateNestedManyWithoutProblemInput
+    hiddenTestCases?: TestCasesCreateNestedManyWithoutProblemInput
+    problemSolved?: ProblemsSolvedCreateNestedManyWithoutProblemInput
+    problemLists?: ProblemInProblemListCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemUncheckedCreateWithoutContestProblemsInput = {
+    id?: string
+    title: string
+    description: string
+    difficulty: $Enums.ProblemDifficulty
+    tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
+    userId: string
+    examples: JsonNullValueInput | InputJsonValue
+    constraints: string
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    testCases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutionHeader: JsonNullValueInput | InputJsonValue
+    referenceSolution: JsonNullValueInput | InputJsonValue
+    referenceSolutionFooter: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isPublic?: boolean
+    submission?: SubmissionsUncheckedCreateNestedManyWithoutProblemInput
+    hiddenTestCases?: TestCasesUncheckedCreateNestedManyWithoutProblemInput
+    problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutProblemInput
+    problemLists?: ProblemInProblemListUncheckedCreateNestedManyWithoutProblemInput
+    dailyProblems?: DailyChallengeUncheckedCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemCreateOrConnectWithoutContestProblemsInput = {
+    where: ProblemWhereUniqueInput
+    create: XOR<ProblemCreateWithoutContestProblemsInput, ProblemUncheckedCreateWithoutContestProblemsInput>
+  }
+
+  export type ContestSubmissionCreateWithoutContestProblemInput = {
+    id?: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestSubmissionsInput
+    contest: ContestCreateNestedOneWithoutSubmissionsInput
+    submission: SubmissionsCreateNestedOneWithoutContestSubmissionInput
+  }
+
+  export type ContestSubmissionUncheckedCreateWithoutContestProblemInput = {
+    id?: string
+    userId: string
+    contestId: string
+    submissionId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionCreateOrConnectWithoutContestProblemInput = {
+    where: ContestSubmissionWhereUniqueInput
+    create: XOR<ContestSubmissionCreateWithoutContestProblemInput, ContestSubmissionUncheckedCreateWithoutContestProblemInput>
+  }
+
+  export type ContestSubmissionCreateManyContestProblemInputEnvelope = {
+    data: ContestSubmissionCreateManyContestProblemInput | ContestSubmissionCreateManyContestProblemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContestUpsertWithoutProblemsInput = {
+    update: XOR<ContestUpdateWithoutProblemsInput, ContestUncheckedUpdateWithoutProblemsInput>
+    create: XOR<ContestCreateWithoutProblemsInput, ContestUncheckedCreateWithoutProblemsInput>
+    where?: ContestWhereInput
+  }
+
+  export type ContestUpdateToOneWithWhereWithoutProblemsInput = {
+    where?: ContestWhereInput
+    data: XOR<ContestUpdateWithoutProblemsInput, ContestUncheckedUpdateWithoutProblemsInput>
+  }
+
+  export type ContestUpdateWithoutProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    participations?: ContestParticipationUpdateManyWithoutContestNestedInput
+    submissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+  }
+
+  export type ContestUncheckedUpdateWithoutProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    participations?: ContestParticipationUncheckedUpdateManyWithoutContestNestedInput
+    submissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
+  }
+
+  export type ProblemUpsertWithoutContestProblemsInput = {
+    update: XOR<ProblemUpdateWithoutContestProblemsInput, ProblemUncheckedUpdateWithoutContestProblemsInput>
+    create: XOR<ProblemCreateWithoutContestProblemsInput, ProblemUncheckedCreateWithoutContestProblemsInput>
+    where?: ProblemWhereInput
+  }
+
+  export type ProblemUpdateToOneWithWhereWithoutContestProblemsInput = {
+    where?: ProblemWhereInput
+    data: XOR<ProblemUpdateWithoutContestProblemsInput, ProblemUncheckedUpdateWithoutContestProblemsInput>
+  }
+
+  export type ProblemUpdateWithoutContestProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficulty?: EnumProblemDifficultyFieldUpdateOperationsInput | $Enums.ProblemDifficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: StringFieldUpdateOperationsInput | string
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    testCases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
+    referenceSolution?: JsonNullValueInput | InputJsonValue
+    referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutProblemsNestedInput
+    submission?: SubmissionsUpdateManyWithoutProblemNestedInput
+    hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
+    problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
+    problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemUncheckedUpdateWithoutContestProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficulty?: EnumProblemDifficultyFieldUpdateOperationsInput | $Enums.ProblemDifficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
+    userId?: StringFieldUpdateOperationsInput | string
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: StringFieldUpdateOperationsInput | string
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    testCases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
+    referenceSolution?: JsonNullValueInput | InputJsonValue
+    referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
+    hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
+    problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
+    problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
+    dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ContestSubmissionUpsertWithWhereUniqueWithoutContestProblemInput = {
+    where: ContestSubmissionWhereUniqueInput
+    update: XOR<ContestSubmissionUpdateWithoutContestProblemInput, ContestSubmissionUncheckedUpdateWithoutContestProblemInput>
+    create: XOR<ContestSubmissionCreateWithoutContestProblemInput, ContestSubmissionUncheckedCreateWithoutContestProblemInput>
+  }
+
+  export type ContestSubmissionUpdateWithWhereUniqueWithoutContestProblemInput = {
+    where: ContestSubmissionWhereUniqueInput
+    data: XOR<ContestSubmissionUpdateWithoutContestProblemInput, ContestSubmissionUncheckedUpdateWithoutContestProblemInput>
+  }
+
+  export type ContestSubmissionUpdateManyWithWhereWithoutContestProblemInput = {
+    where: ContestSubmissionScalarWhereInput
+    data: XOR<ContestSubmissionUpdateManyMutationInput, ContestSubmissionUncheckedUpdateManyWithoutContestProblemInput>
+  }
+
+  export type UserCreateWithoutContestsParticipatedInput = {
+    id?: string
+    name?: string | null
+    email: string
+    avatar?: string | null
+    role?: $Enums.UserRole
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationTokenExpiry?: Date | string | null
+    forgotPasswordToken?: string | null
+    forgotPasswordTokenExpiry?: Date | string | null
+    problems?: ProblemCreateNestedManyWithoutUserInput
+    submission?: SubmissionsCreateNestedManyWithoutUserInput
+    testCases?: TestCasesCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
+    problemLists?: ProblemListCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutContestsParticipatedInput = {
+    id?: string
+    name?: string | null
+    email: string
+    avatar?: string | null
+    role?: $Enums.UserRole
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationTokenExpiry?: Date | string | null
+    forgotPasswordToken?: string | null
+    forgotPasswordTokenExpiry?: Date | string | null
+    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
+    submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
+    testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
+    problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutContestsParticipatedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutContestsParticipatedInput, UserUncheckedCreateWithoutContestsParticipatedInput>
+  }
+
+  export type ContestCreateWithoutParticipationsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+    problems?: ContestProblemCreateNestedManyWithoutContestInput
+    submissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestUncheckedCreateWithoutParticipationsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+    problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
+    submissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestCreateOrConnectWithoutParticipationsInput = {
+    where: ContestWhereUniqueInput
+    create: XOR<ContestCreateWithoutParticipationsInput, ContestUncheckedCreateWithoutParticipationsInput>
+  }
+
+  export type UserUpsertWithoutContestsParticipatedInput = {
+    update: XOR<UserUpdateWithoutContestsParticipatedInput, UserUncheckedUpdateWithoutContestsParticipatedInput>
+    create: XOR<UserCreateWithoutContestsParticipatedInput, UserUncheckedCreateWithoutContestsParticipatedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutContestsParticipatedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutContestsParticipatedInput, UserUncheckedUpdateWithoutContestsParticipatedInput>
+  }
+
+  export type UserUpdateWithoutContestsParticipatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    problems?: ProblemUpdateManyWithoutUserNestedInput
+    submission?: SubmissionsUpdateManyWithoutUserNestedInput
+    testCases?: TestCasesUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
+    problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutContestsParticipatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
+    submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
+    testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
+    problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ContestUpsertWithoutParticipationsInput = {
+    update: XOR<ContestUpdateWithoutParticipationsInput, ContestUncheckedUpdateWithoutParticipationsInput>
+    create: XOR<ContestCreateWithoutParticipationsInput, ContestUncheckedCreateWithoutParticipationsInput>
+    where?: ContestWhereInput
+  }
+
+  export type ContestUpdateToOneWithWhereWithoutParticipationsInput = {
+    where?: ContestWhereInput
+    data: XOR<ContestUpdateWithoutParticipationsInput, ContestUncheckedUpdateWithoutParticipationsInput>
+  }
+
+  export type ContestUpdateWithoutParticipationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    problems?: ContestProblemUpdateManyWithoutContestNestedInput
+    submissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+  }
+
+  export type ContestUncheckedUpdateWithoutParticipationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
+    submissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
+  }
+
+  export type UserCreateWithoutContestSubmissionsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    avatar?: string | null
+    role?: $Enums.UserRole
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationTokenExpiry?: Date | string | null
+    forgotPasswordToken?: string | null
+    forgotPasswordTokenExpiry?: Date | string | null
+    problems?: ProblemCreateNestedManyWithoutUserInput
+    submission?: SubmissionsCreateNestedManyWithoutUserInput
+    testCases?: TestCasesCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
+    problemLists?: ProblemListCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutContestSubmissionsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    avatar?: string | null
+    role?: $Enums.UserRole
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationTokenExpiry?: Date | string | null
+    forgotPasswordToken?: string | null
+    forgotPasswordTokenExpiry?: Date | string | null
+    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
+    submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
+    testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
+    problemLists?: ProblemListUncheckedCreateNestedManyWithoutUserInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestsParticipated?: ContestParticipationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutContestSubmissionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutContestSubmissionsInput, UserUncheckedCreateWithoutContestSubmissionsInput>
+  }
+
+  export type ContestCreateWithoutSubmissionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+    problems?: ContestProblemCreateNestedManyWithoutContestInput
+    participations?: ContestParticipationCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestUncheckedCreateWithoutSubmissionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isRankingCompleted?: boolean
+    problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
+    participations?: ContestParticipationUncheckedCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestCreateOrConnectWithoutSubmissionsInput = {
+    where: ContestWhereUniqueInput
+    create: XOR<ContestCreateWithoutSubmissionsInput, ContestUncheckedCreateWithoutSubmissionsInput>
+  }
+
+  export type ContestProblemCreateWithoutContestSubmissionsInput = {
+    id?: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contest: ContestCreateNestedOneWithoutProblemsInput
+    problem: ProblemCreateNestedOneWithoutContestProblemsInput
+  }
+
+  export type ContestProblemUncheckedCreateWithoutContestSubmissionsInput = {
+    id?: string
+    contestId: string
+    problemId: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemCreateOrConnectWithoutContestSubmissionsInput = {
+    where: ContestProblemWhereUniqueInput
+    create: XOR<ContestProblemCreateWithoutContestSubmissionsInput, ContestProblemUncheckedCreateWithoutContestSubmissionsInput>
+  }
+
+  export type SubmissionsCreateWithoutContestSubmissionInput = {
+    id?: string
+    sourceCode: string
+    language: string
+    stdin?: string | null
+    stdout?: string | null
+    stdError?: string | null
+    compileOutput?: string | null
+    message?: string | null
+    status: string
+    memory?: string | null
+    time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problem: ProblemCreateNestedOneWithoutSubmissionInput
+    user: UserCreateNestedOneWithoutSubmissionInput
+    dailyChallenge?: UserDailyChallengeSubmissionCreateNestedManyWithoutSubmissionInput
+  }
+
+  export type SubmissionsUncheckedCreateWithoutContestSubmissionInput = {
+    id?: string
+    userId: string
+    problemId: string
+    sourceCode: string
+    language: string
+    stdin?: string | null
+    stdout?: string | null
+    stdError?: string | null
+    compileOutput?: string | null
+    message?: string | null
+    status: string
+    memory?: string | null
+    time?: string | null
+    codeReview?: string | null
+    timeComplexity?: string | null
+    spaceComplexity?: string | null
+    isAccepted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
+  }
+
+  export type SubmissionsCreateOrConnectWithoutContestSubmissionInput = {
+    where: SubmissionsWhereUniqueInput
+    create: XOR<SubmissionsCreateWithoutContestSubmissionInput, SubmissionsUncheckedCreateWithoutContestSubmissionInput>
+  }
+
+  export type UserUpsertWithoutContestSubmissionsInput = {
+    update: XOR<UserUpdateWithoutContestSubmissionsInput, UserUncheckedUpdateWithoutContestSubmissionsInput>
+    create: XOR<UserCreateWithoutContestSubmissionsInput, UserUncheckedCreateWithoutContestSubmissionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutContestSubmissionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutContestSubmissionsInput, UserUncheckedUpdateWithoutContestSubmissionsInput>
+  }
+
+  export type UserUpdateWithoutContestSubmissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    problems?: ProblemUpdateManyWithoutUserNestedInput
+    submission?: SubmissionsUpdateManyWithoutUserNestedInput
+    testCases?: TestCasesUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
+    problemLists?: ProblemListUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutContestSubmissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
+    submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
+    testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
+    problemLists?: ProblemListUncheckedUpdateManyWithoutUserNestedInput
+    dailyProblems?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestsParticipated?: ContestParticipationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ContestUpsertWithoutSubmissionsInput = {
+    update: XOR<ContestUpdateWithoutSubmissionsInput, ContestUncheckedUpdateWithoutSubmissionsInput>
+    create: XOR<ContestCreateWithoutSubmissionsInput, ContestUncheckedCreateWithoutSubmissionsInput>
+    where?: ContestWhereInput
+  }
+
+  export type ContestUpdateToOneWithWhereWithoutSubmissionsInput = {
+    where?: ContestWhereInput
+    data: XOR<ContestUpdateWithoutSubmissionsInput, ContestUncheckedUpdateWithoutSubmissionsInput>
+  }
+
+  export type ContestUpdateWithoutSubmissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    problems?: ContestProblemUpdateManyWithoutContestNestedInput
+    participations?: ContestParticipationUpdateManyWithoutContestNestedInput
+  }
+
+  export type ContestUncheckedUpdateWithoutSubmissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isRankingCompleted?: BoolFieldUpdateOperationsInput | boolean
+    problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
+    participations?: ContestParticipationUncheckedUpdateManyWithoutContestNestedInput
+  }
+
+  export type ContestProblemUpsertWithoutContestSubmissionsInput = {
+    update: XOR<ContestProblemUpdateWithoutContestSubmissionsInput, ContestProblemUncheckedUpdateWithoutContestSubmissionsInput>
+    create: XOR<ContestProblemCreateWithoutContestSubmissionsInput, ContestProblemUncheckedCreateWithoutContestSubmissionsInput>
+    where?: ContestProblemWhereInput
+  }
+
+  export type ContestProblemUpdateToOneWithWhereWithoutContestSubmissionsInput = {
+    where?: ContestProblemWhereInput
+    data: XOR<ContestProblemUpdateWithoutContestSubmissionsInput, ContestProblemUncheckedUpdateWithoutContestSubmissionsInput>
+  }
+
+  export type ContestProblemUpdateWithoutContestSubmissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contest?: ContestUpdateOneRequiredWithoutProblemsNestedInput
+    problem?: ProblemUpdateOneRequiredWithoutContestProblemsNestedInput
+  }
+
+  export type ContestProblemUncheckedUpdateWithoutContestSubmissionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubmissionsUpsertWithoutContestSubmissionInput = {
+    update: XOR<SubmissionsUpdateWithoutContestSubmissionInput, SubmissionsUncheckedUpdateWithoutContestSubmissionInput>
+    create: XOR<SubmissionsCreateWithoutContestSubmissionInput, SubmissionsUncheckedCreateWithoutContestSubmissionInput>
+    where?: SubmissionsWhereInput
+  }
+
+  export type SubmissionsUpdateToOneWithWhereWithoutContestSubmissionInput = {
+    where?: SubmissionsWhereInput
+    data: XOR<SubmissionsUpdateWithoutContestSubmissionInput, SubmissionsUncheckedUpdateWithoutContestSubmissionInput>
+  }
+
+  export type SubmissionsUpdateWithoutContestSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceCode?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    stdin?: NullableStringFieldUpdateOperationsInput | string | null
+    stdout?: NullableStringFieldUpdateOperationsInput | string | null
+    stdError?: NullableStringFieldUpdateOperationsInput | string | null
+    compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    memory?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
+    user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
+    dailyChallenge?: UserDailyChallengeSubmissionUpdateManyWithoutSubmissionNestedInput
+  }
+
+  export type SubmissionsUncheckedUpdateWithoutContestSubmissionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    sourceCode?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    stdin?: NullableStringFieldUpdateOperationsInput | string | null
+    stdout?: NullableStringFieldUpdateOperationsInput | string | null
+    stdError?: NullableStringFieldUpdateOperationsInput | string | null
+    compileOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    memory?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    codeReview?: NullableStringFieldUpdateOperationsInput | string | null
+    timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
+    isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
   }
 
   export type ProblemCreateManyUserInput = {
@@ -17896,14 +25712,13 @@ export namespace Prisma {
     hints?: ProblemCreatehintsInput | string[]
     editorial?: string | null
     testCases: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader: JsonNullValueInput | InputJsonValue
     codeSnippets: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader: JsonNullValueInput | InputJsonValue
     referenceSolution: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
   }
 
   export type SubmissionsCreateManyUserInput = {
@@ -17959,6 +25774,26 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ContestParticipationCreateManyUserInput = {
+    id?: string
+    contestId: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionCreateManyUserInput = {
+    id?: string
+    contestId: string
+    contestProblemId: string
+    submissionId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ProblemUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -17971,19 +25806,19 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     submission?: SubmissionsUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutUserInput = {
@@ -17998,19 +25833,19 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     submission?: SubmissionsUncheckedUpdateManyWithoutProblemNestedInput
     hiddenTestCases?: TestCasesUncheckedUpdateManyWithoutProblemNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemLists?: ProblemInProblemListUncheckedUpdateManyWithoutProblemNestedInput
     dailyProblems?: DailyChallengeUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateManyWithoutUserInput = {
@@ -18025,14 +25860,13 @@ export namespace Prisma {
     hints?: ProblemUpdatehintsInput | string[]
     editorial?: NullableStringFieldUpdateOperationsInput | string | null
     testCases?: JsonNullValueInput | InputJsonValue
-    codeSnippetsHeader?: JsonNullValueInput | InputJsonValue
     codeSnippets?: JsonNullValueInput | InputJsonValue
-    codeSnippetsFooter?: JsonNullValueInput | InputJsonValue
     referenceSolutionHeader?: JsonNullValueInput | InputJsonValue
     referenceSolution?: JsonNullValueInput | InputJsonValue
     referenceSolutionFooter?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SubmissionsUpdateWithoutUserInput = {
@@ -18055,6 +25889,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
     dailyChallenge?: UserDailyChallengeSubmissionUpdateManyWithoutSubmissionNestedInput
+    contestSubmission?: ContestSubmissionUpdateOneWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateWithoutUserInput = {
@@ -18077,6 +25912,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
+    contestSubmission?: ContestSubmissionUncheckedUpdateOneWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateManyWithoutUserInput = {
@@ -18198,6 +26034,66 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ContestParticipationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contest?: ContestUpdateOneRequiredWithoutParticipationsNestedInput
+  }
+
+  export type ContestParticipationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestParticipationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contest?: ContestUpdateOneRequiredWithoutSubmissionsNestedInput
+    contestProblem?: ContestProblemUpdateOneRequiredWithoutContestSubmissionsNestedInput
+    submission?: SubmissionsUpdateOneRequiredWithoutContestSubmissionNestedInput
+  }
+
+  export type ContestSubmissionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    contestProblemId?: StringFieldUpdateOperationsInput | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    contestProblemId?: StringFieldUpdateOperationsInput | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SubmissionsCreateManyProblemInput = {
     id?: string
     userId: string
@@ -18249,6 +26145,15 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ContestProblemCreateManyProblemInput = {
+    id?: string
+    contestId: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type SubmissionsUpdateWithoutProblemInput = {
     id?: StringFieldUpdateOperationsInput | string
     sourceCode?: StringFieldUpdateOperationsInput | string
@@ -18269,6 +26174,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
     dailyChallenge?: UserDailyChallengeSubmissionUpdateManyWithoutSubmissionNestedInput
+    contestSubmission?: ContestSubmissionUpdateOneWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateWithoutProblemInput = {
@@ -18291,6 +26197,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
+    contestSubmission?: ContestSubmissionUncheckedUpdateOneWithoutSubmissionNestedInput
   }
 
   export type SubmissionsUncheckedUpdateManyWithoutProblemInput = {
@@ -18404,6 +26311,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ContestProblemUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contest?: ContestUpdateOneRequiredWithoutProblemsNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutContestProblemNestedInput
+  }
+
+  export type ContestProblemUncheckedUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestProblemNestedInput
+  }
+
+  export type ContestProblemUncheckedUpdateManyWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserDailyChallengeSubmissionCreateManySubmissionInput = {
     id?: string
     userId: string
@@ -18460,6 +26396,164 @@ export namespace Prisma {
   export type ProblemInProblemListUncheckedUpdateManyWithoutProblemListInput = {
     id?: StringFieldUpdateOperationsInput | string
     problemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestProblemCreateManyContestInput = {
+    id?: string
+    problemId: string
+    problemIndex: string
+    points?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestParticipationCreateManyContestInput = {
+    id?: string
+    userId: string
+    score?: number
+    rank?: number | null
+    rating?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionCreateManyContestInput = {
+    id?: string
+    userId: string
+    contestProblemId: string
+    submissionId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemUpdateWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problem?: ProblemUpdateOneRequiredWithoutContestProblemsNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutContestProblemNestedInput
+  }
+
+  export type ContestProblemUncheckedUpdateWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestProblemNestedInput
+  }
+
+  export type ContestProblemUncheckedUpdateManyWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    problemIndex?: StringFieldUpdateOperationsInput | string
+    points?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestParticipationUpdateWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestsParticipatedNestedInput
+  }
+
+  export type ContestParticipationUncheckedUpdateWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestParticipationUncheckedUpdateManyWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
+    rating?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionUpdateWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestSubmissionsNestedInput
+    contestProblem?: ContestProblemUpdateOneRequiredWithoutContestSubmissionsNestedInput
+    submission?: SubmissionsUpdateOneRequiredWithoutContestSubmissionNestedInput
+  }
+
+  export type ContestSubmissionUncheckedUpdateWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestProblemId?: StringFieldUpdateOperationsInput | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionUncheckedUpdateManyWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestProblemId?: StringFieldUpdateOperationsInput | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionCreateManyContestProblemInput = {
+    id?: string
+    userId: string
+    contestId: string
+    submissionId: string
+    status: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestSubmissionUpdateWithoutContestProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestSubmissionsNestedInput
+    contest?: ContestUpdateOneRequiredWithoutSubmissionsNestedInput
+    submission?: SubmissionsUpdateOneRequiredWithoutContestSubmissionNestedInput
+  }
+
+  export type ContestSubmissionUncheckedUpdateWithoutContestProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestSubmissionUncheckedUpdateManyWithoutContestProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    submissionId?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

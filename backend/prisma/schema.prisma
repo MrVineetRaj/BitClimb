@@ -81,7 +81,6 @@ model Problem {
   problemLists    ProblemInProblemList[]
   dailyProblems   DailyChallenge[]
   contestProblems ContestProblem[]
-  contestSubmissions ContestSubmission[]
 }
 
 model Submissions {
@@ -212,6 +211,7 @@ model Contest {
   endTime     DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  isRankingCompleted Boolean @default(false)
 
   problems    ContestProblem[]
   participations ContestParticipation[]
@@ -229,6 +229,7 @@ model ContestProblem {
 
   contest Contest @relation(fields: [contestId], references: [id], onDelete: Cascade)
   problem Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  contestSubmissions ContestSubmission[]
 
   @@unique([contestId, problemId])
 }
@@ -253,7 +254,7 @@ model ContestSubmission {
   id         String   @id @default(uuid())
   userId      String
   contestId   String
-  problemId   String
+  contestProblemId   String
   submissionId String @unique
   status String 
 
@@ -262,8 +263,8 @@ model ContestSubmission {
 
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   contest     Contest @relation(fields: [contestId], references: [id], onDelete: Cascade)
-  problem     Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  contestProblem     ContestProblem  @relation(fields: [contestProblemId], references: [id], onDelete: Cascade)
   submission  Submissions @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, contestId, problemId])
+  @@unique([userId, contestId, contestProblemId])
 }
