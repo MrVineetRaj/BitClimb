@@ -18,6 +18,7 @@ import adminRouter from "./routes/admin.routes.js";
 import streakRouter from "./routes/streak.routes.js";
 import { addNewDailyChallenge } from "./controllers/streak.controllers.js";
 import aiRouter from "./routes/ai.routes.js";
+import contestRouter from "../routes/contest.routes.js";
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
 
@@ -47,6 +48,7 @@ app.use("/api/v1/submission", submissionRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/streak", streakRouter);
 app.use("/api/v1/ai", aiRouter);
+app.use("/api/v1/contest", contestRouter);
 
 // Optional fallthrough error handler
 app.use(function onError(err, req, res, next) {
