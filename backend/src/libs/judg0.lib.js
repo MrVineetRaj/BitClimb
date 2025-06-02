@@ -11,13 +11,12 @@ export const getJudge0LanguageId = (lang) => {
 };
 
 export const submissionBatch = async (submissions) => {
-  
   try {
     const { data } = await axios.post(
       `${process.env.JUDGE0_API_URL}/submissions?base64_encoded=false&wait=false`,
       submissions
     );
-    
+
     return data;
   } catch (error) {
     console.error(`Error submitting batch to Judge0 API: ${error}`);
@@ -35,16 +34,17 @@ export const pollBatchResults = async (token) => {
   const currTime = Date.now();
   while (true) {
     try {
-      console.log(`Polling results for tokens: ${token}`);
+      // console.log(`Polling results for tokens: ${token}`);
       const { data } = await axios.get(
         `${process.env.JUDGE0_API_URL}/submissions/${token}?base64_encoded=true`
       );
-
+      // console.log(data || "nothing to show....");
       // Check if all results are ready
       if (data.status.id >= 3) {
-        console.log(
-          `All results ready after ${Math.floor(Date.now() - currTime)} seconds`
-        );
+        // console.log(data.status);
+        // console.log(
+        //   `All results ready after ${Math.floor(Date.now() - currTime)} seconds`
+        // );
         return data;
       }
 

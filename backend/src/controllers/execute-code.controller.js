@@ -41,6 +41,8 @@ export const runCode = asyncHandler(async (req, res) => {
     expected_output: expected_outputs.join("\n"), // Join all expected outputs into a single string
   };
 
+  // console.log("Polling results:", submission);
+
   const { token } = await submissionBatch(submission);
 
   const result = await pollBatchResults(token);
@@ -49,47 +51,47 @@ export const runCode = asyncHandler(async (req, res) => {
     ...result,
     stdout: result.stdout
       ? Buffer.from(result.stdout, "base64").toString("utf-8")
-      : "",
+      : null,
     compile_output: result.compile_output
       ? Buffer.from(result.compile_output, "base64").toString("utf-8")
-      : "",
+      : null,
     message: result.message
       ? Buffer.from(result.message, "base64").toString("utf-8")
-      : "",
+      : null,
     stderr: result.stderr
       ? Buffer.from(result.stderr, "base64").toString("utf-8")
-      : "",
+      : null,
   };
-
+  // console.log("Final results:", finalResults);
   const outputs = finalResults.stdout
     ? finalResults.stdout.trim().split("\n")
     : [];
 
-  const detailedResults = outputs.map((output, idx) => {
+  const detailedResults = expected_outputs.map((expected_output, idx) => {
     // const { stdout, status, compile_output, message, stderr } = res;
 
     return {
       input: stdin[idx],
-      expected_output: expected_outputs[idx] || "",
-      output: output,
+      expected_output: expected_output || "",
+      output: outputs[idx] || "No output",
       status:
-        output === expected_outputs[idx]
+        expected_output === outputs[idx]
           ? "Accepted"
           : finalResults?.status?.description,
       compile_output:
-        output === expected_outputs[idx]
+        expected_output === outputs[idx]
           ? null
           : finalResults?.compile_output
           ? finalResults?.compile_output
           : null,
       message:
-        output === expected_outputs[idx]
+        expected_output === outputs[idx]
           ? null
           : finalResults?.message
           ? finalResults?.message
           : null,
       stderr:
-        output === expected_outputs[idx]
+        expected_output === outputs[idx]
           ? null
           : finalResults?.stderr
           ? finalResults?.stderr
@@ -137,61 +139,80 @@ export const submitCode = asyncHandler(async (req, res) => {
     expected_output: expected_outputs.join("\n"),
   };
 
+  // ...existing code...
+  //   const submissions = {
+  //     source_code: `
+  // import sys
+  // input_data = sys.stdin.read().strip()
+  // print("Input received:", repr(input_data))
+  // lines = input_data.split('\\n')
+  // print("Lines:", lines)
+  // t = int(lines[0])
+  // print("Number of test cases:", t)
+  // for i in range(1, t + 1):
+  //     n = int(lines[i])
+  //     result = "Even" if n % 2 == 0 else "Odd"
+  //     print(result)
+  //   `,
+  //     language_id: getJudge0LanguageId(language),
+  //     stdin: stdin.length + "\n" + stdin.join("\n"),
+  //     base64_encoded: false,
+  //     wait: false,
+  //   };
+  // ...existing code...
+  // console.log(submissions);
   const { token } = await submissionBatch(submissions);
 
   const pollingResults = await pollBatchResults(token);
 
+  // console.log("Polling results:", pollingResults);
   const results = {
     ...pollingResults,
     stdout: pollingResults?.stdout
-      ? Buffer.from(pollingResults?.stdout, "base64")?.toString("utf-8")
-      : "",
+      ? Buffer.from(pollingResults.stdout, "base64").toString("utf-8")
+      : null, // Keep as null instead of empty string
     compile_output: pollingResults?.compile_output
-      ? Buffer.from(pollingResults?.compile_output, "base64")?.toString("utf-8")
-      : "",
+      ? Buffer.from(pollingResults.compile_output, "base64").toString("utf-8")
+      : null,
     message: pollingResults?.message
-      ? Buffer.from(pollingResults?.message, "base64")?.toString("utf-8")
-      : "",
+      ? Buffer.from(pollingResults.message, "base64").toString("utf-8")
+      : null,
     stderr: pollingResults?.stderr
-      ? Buffer.from(pollingResults?.stderr, "base64")?.toString("utf-8")
-      : "",
+      ? Buffer.from(pollingResults.stderr, "base64").toString("utf-8")
+      : null,
   };
 
+  // console.log("Decoded results:", results); // Add this to debug
   const outputs = results.stdout ? results.stdout.trim().split("\n") : [];
 
-  let isAllPassed = true;
-  const detailedResults = outputs.map((output, idx) => {
+  let isAllPassed = results?.status?.id === 3 && outputs.length > 0;
+  const detailedResults = expected_outputs.map((expected_output, idx) => {
     const { status, time, memory, compile_output, message, stderr } = results;
-    const isPassed = status.id === 3;
-
-    if (!isPassed) {
-      isAllPassed = false;
-    }
-
     return {
       input: stdin[idx],
-      expected_output: expected_outputs[idx] || "",
-      output: output?.trim(),
+      expected_output: expected_output?.trim(),
+      output: outputs[idx]?.trim() || "No output",
       status:
-        output === expected_outputs[idx] ? "Accepted" : status.description,
+        expected_output === outputs[idx] ? "Accepted" : status.description,
       time: time,
       memory: memory,
       compile_output:
-        output === expected_outputs[idx]
+        expected_output === outputs[idx]
           ? null
           : compile_output
           ? compile_output
           : null,
       message:
-        output === expected_outputs[idx] ? null : message ? message : null,
-      stderr: output === expected_outputs[idx] ? null : stderr ? stderr : null,
+        expected_output === outputs[idx] ? null : message ? message : null,
+      stderr: expected_output === outputs[idx] ? null : stderr ? stderr : null,
     };
   });
+
 
   let firstIndexWhereFailed = detailedResults.findIndex(
     (result) => result.status !== "Accepted"
   );
-  isAllPassed;
+
   let totalTime = 0;
   let totalMemory = 0;
 
@@ -230,7 +251,9 @@ export const submitCode = asyncHandler(async (req, res) => {
     });
   }
 
-  const newSubmission = await db.submissions.create({
+  // console.log("isAllPassed :", isAllPassed);
+
+  await db.submissions.create({
     data: {
       problemId,
       userId,
@@ -239,7 +262,9 @@ export const submitCode = asyncHandler(async (req, res) => {
       stdin: isAllPassed ? null : stdin[firstIndexWhereFailed],
       stdout: isAllPassed
         ? null
-        : detailedResults[firstIndexWhereFailed].output,
+        : detailedResults[firstIndexWhereFailed]?.output
+        ? detailedResults[firstIndexWhereFailed]?.output
+        : '"No output"',
       stdError: detailedResults[firstIndexWhereFailed]?.stderr
         ? detailedResults[firstIndexWhereFailed]?.stderr
         : null,
@@ -250,7 +275,7 @@ export const submitCode = asyncHandler(async (req, res) => {
         ? "Accepted"
         : detailedResults[firstIndexWhereFailed]?.status
         ? JSON.stringify(detailedResults[firstIndexWhereFailed]?.status)
-        : "Unknown Error",
+        : '"Unknown Error"',
       time: isAllPassed ? `${totalTime.toFixed(3)} s` : null,
       memory: isAllPassed ? `${(totalMemory / 1024).toFixed(2)} MB` : null,
       message: detailedResults[firstIndexWhereFailed]?.message
@@ -261,12 +286,12 @@ export const submitCode = asyncHandler(async (req, res) => {
     },
   });
 
-  console.log("New submission created:", newSubmission);
+  // console.log("New submission created:", newSubmission);
   res.status(200).json(
     new ApiResponse(
       200,
       {
-        submission: newSubmission,
+        // submission: newSubmission,
       },
       "Code submitted successfully"
     )

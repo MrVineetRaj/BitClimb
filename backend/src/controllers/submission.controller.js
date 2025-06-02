@@ -121,7 +121,7 @@ export const getSubmissionsCntPerYearForPublicProfile = asyncHandler(
       count: Number(entry.count),
     }));
 
-    console.log("Result:", safeResult);
+    // console.log("Result:", safeResult);
     res
       .status(200)
       .json(

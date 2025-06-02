@@ -77,7 +77,7 @@ export const useProblemStore = create((set) => ({
         }
       );
       set({ isSubmitting: false });
-      console.log("Submission Response:", response.data);
+      // console.log("Submission Response:", response.data);
       toast.success("Submission Successful");
       return response.data.data;
     } catch (error) {

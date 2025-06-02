@@ -77,7 +77,7 @@ const StreakCalendar = () => {
       };
     });
 
-    console.log("tempChallenges : ",tempChallenges);
+    // console.log("tempChallenges : ",tempChallenges);
     setMonthWiseDailyChallenges(tempChallenges || []);
   }, [dailyChallenges]);
 

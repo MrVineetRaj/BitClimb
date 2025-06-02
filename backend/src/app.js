@@ -78,7 +78,7 @@ app.use(function onError(err, req, res, next) {
 
 setInterval(async () => {
   await addNewDailyChallenge();
-}, 1000 * 60);
+}, 1000 * 60 * 60);
 
 setInterval(async () => {
   try {

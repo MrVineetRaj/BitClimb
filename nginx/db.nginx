@@ -1,0 +1,30 @@
+events{}
+
+http{
+  include mime.types;
+
+  # Server block for <your_domain>.live
+  server{
+    listen 443 ssl http2;
+    server_name <your_domain>.live;
+
+    # Log configuration
+    access_log /var/log/nginx/<your_domain>.access.log;
+    error_log /var/log/nginx/<your_domain>.error.log;
+
+    ssl_certificate /etc/letsencrypt/live/<your_domain>.live/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/<your_domain>.live/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    location / {
+      proxy_pass http://127.0.0.1:5432;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+    }
+  }
+}
+
+

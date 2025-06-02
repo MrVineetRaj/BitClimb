@@ -15,6 +15,7 @@ import { Editor } from "@monaco-editor/react";
 import { useProblemStore } from "@/store/useProblemStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import { Link } from "react-router";
+import { AlignLeft, Copy, RefreshCcw } from "lucide-react";
 
 const ProblemPageCodeContainer = ({
   problem,
@@ -25,9 +26,9 @@ const ProblemPageCodeContainer = ({
   codeRunResult,
 }) => {
   const { isCheckingAuth, authUser } = useAuthStore();
-  useEffect(() => {
-    console.log(codeRunResult);
-  }, [codeRunResult]);
+  // useEffect(() => {
+    // console.log(codeRunResult);
+  // }, [codeRunResult]);
   return (
     <div className="w-full h-full flex flex-col items-center justify-between">
       {!isCheckingAuth && !authUser?.id ? (
@@ -49,48 +50,58 @@ const ProblemPageCodeContainer = ({
         </div>
       ) : (
         <div className="w-full">
-          <Select
-            defaultValue="CPP"
-            className="w-full my-4"
-            onValueChange={(value) => {
-              setSelectedLanguage(value);
-            }}
-          >
-            <SelectTrigger className="">
-              <SelectValue placeholder="Select Language" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Languages</SelectLabel>
-                <SelectItem value="CPP">C++</SelectItem>
-                <SelectItem value="PYTHON">Python</SelectItem>
-                <SelectItem value="JAVASCRIPT">JavaScript</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <h1 className="text-xl font-bold mb-4">Code Editor</h1>
+          <div className="flex items-end justify-between">
+            <Select
+              defaultValue="CPP"
+              className="w-full my-4"
+              onValueChange={(value) => {
+                setSelectedLanguage(value);
+              }}
+            >
+              <SelectTrigger className="">
+                <SelectValue placeholder="Select Language" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Languages</SelectLabel>
+                  <SelectItem value="CPP">C++</SelectItem>
+                  <SelectItem value="PYTHON">Python</SelectItem>
+                  <SelectItem value="JAVASCRIPT">JavaScript</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
 
-          <Editor
-            key={selectedLanguage} // Add this to force re-rendering when language changes
-            height="550px"
-            language={selectedLanguage.toLowerCase()} // Use language instead of defaultLanguage
-            theme="hc-black"
-            options={{
-              minimap: { enabled: false },
-              lineNumbers: "on",
-              scrollBeyondLastLine: false,
-              renderLineHighlight: "none",
-              contextmenu: false,
-              wordWrap: "on",
-              backgroundColor: "black",
-            }}
-            value={sourceCodeEnteredByUser[selectedLanguage] || ""} // Use value instead of defaultValue
-            onChange={(value) => {
-              setSourceCodeEnteredByUser((prev) => ({
-                ...prev,
-                [selectedLanguage]: value,
-              }));
-            }}
-          />
+            <span className="text-gray-500 flex gap-2">
+              <AlignLeft className="size-5" />
+              <Copy className="size-5" />
+              <RefreshCcw className="size-5" />
+            </span>
+          </div>
+          <div className="w-full mt-3">
+            <Editor
+              key={selectedLanguage} // Add this to force re-rendering when language changes
+              height="550px"
+              language={selectedLanguage.toLowerCase()} // Use language instead of defaultLanguage
+              theme="hc-black"
+              options={{
+                minimap: { enabled: false },
+                lineNumbers: "on",
+                scrollBeyondLastLine: false,
+                renderLineHighlight: "none",
+                contextmenu: false,
+                wordWrap: "off",
+                backgroundColor: "black",
+              }}
+              value={sourceCodeEnteredByUser[selectedLanguage] || ""} // Use value instead of defaultValue
+              onChange={(value) => {
+                setSourceCodeEnteredByUser((prev) => ({
+                  ...prev,
+                  [selectedLanguage]: value,
+                }));
+              }}
+            />
+          </div>
 
           <Tabs defaultValue="test-1" className="mt-4 ">
             <TabsList className={"flex gap-4"}>
@@ -132,9 +143,9 @@ const ProblemPageCodeContainer = ({
                       {codeRunResult[idx].status}
                     </span>
                   )}
-                <span className="flex gap-2 ">
+                <span className="flex gap-2 flex-col">
                   <p className="font-bold">Input :</p>
-                  <span>{input?.split(" ").join("\t")}</span>
+                  <pre className="">{input}</pre>
                 </span>
                 {codeRunResult && codeRunResult.length > 0 && (
                   <span className="flex flex-col my-4">

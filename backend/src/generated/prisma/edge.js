@@ -340,7 +340,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://db_0_owner:npg_UZpPI81tWgvD@ep-spring-leaf-a1rb56kt-pooler.ap-southeast-1.aws.neon.tech/db_0?sslmode=require"
+        "value": "postgres://admin:7hnnPv2PLiLKfk2LHuhRUXfn7EhThHZI@db.bitclimb.live/bitclimb"
       }
     }
   },

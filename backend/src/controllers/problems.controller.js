@@ -56,15 +56,6 @@ export const createProblem = asyncHandler(async (req, res) => {
       throw new ApiError(400, `Invalid language: ${lang}`);
     }
 
-    // const submission = testCases.map(({ input, output }) => {
-    //   return {
-    //     source_code: coder_to_pass,
-    //     language_id: langId,
-    //     stdin: input,
-    //     expected_output: output,
-    //   };
-    // });
-
     const submission = {
       source_code: coder_to_pass,
       language_id: langId,
@@ -72,20 +63,43 @@ export const createProblem = asyncHandler(async (req, res) => {
         testCases?.length +
         "\n" +
         testCases.map((testCase) => testCase.input).join("\n"),
+      expected_output: testCases.map((testCase) => testCase.output).join("\n"),
     };
-
-    console.log("Submitting reference solution for language:", lang);
-    console.log("Submission data:", submission);
 
     const res = await submissionBatch(submission);
     const token = res.token;
-    console.log("Judge0 submission token:", res);
-    const result = await pollBatchResults(token);
+    // console.log("Judge0 submission token:", res);
+    const pollingResult = await pollBatchResults(token);
+
+    const result = {
+      ...pollingResult,
+      stdout: pollingResult?.stdout
+        ? Buffer.from(pollingResult.stdout, "base64").toString("utf-8")
+        : null, // Keep as null instead of empty string
+      compile_output: pollingResult?.compile_output
+        ? Buffer.from(pollingResult.compile_output, "base64").toString("utf-8")
+        : null,
+      message: pollingResult?.message
+        ? Buffer.from(pollingResult.message, "base64").toString("utf-8")
+        : null,
+      stderr: pollingResult?.stderr
+        ? Buffer.from(pollingResult.stderr, "base64").toString("utf-8")
+        : null,
+    };
+
+    // console.log("Judge0 submission result:", result);
 
     if (result.status.id !== 3) {
-      throw new ApiError(500, `Judge0 submission failed for language: ${lang}`);
+
+      throw new ApiError(
+        500,
+        `Judge0 submission failed for language: ${lang}`,
+        {
+          error: result,
+        }
+      );
     }
-    console.log("Judge0 submission result:", result);
+    // console.log("Judge0 submission result:", result);
   }
 
   // Save the reference solution to the database
@@ -101,9 +115,7 @@ export const createProblem = asyncHandler(async (req, res) => {
       hints: hints || null,
       editorial: editorial || null,
       testCases: testCases || null,
-      codeSnippetsHeader: codeSnippetsHeader || null,
       codeSnippets: codeSnippets || null,
-      codeSnippetsFooter: codeSnippetsFooter || null,
       referenceSolutionHeader: referenceSolutionHeader || null,
       referenceSolution: referenceSolution,
       referenceSolutionFooter: referenceSolutionFooter || null,
@@ -130,10 +142,10 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   const difficultySort = req.query.difficultySort || "asc";
   const difficultyFilter = req.query.difficulty || null;
 
-  console.log("Fetching all problems with pagination:", {
-    page,
-    limit,
-  });
+  // console.log("Fetching all problems with pagination:", {
+  //   page,
+  //   limit,
+  // });
   const problems = await db.problem.findMany({
     orderBy: {
       createdAt: "desc",
@@ -148,7 +160,7 @@ export const getAllProblems = asyncHandler(async (req, res) => {
     take: limit,
   });
 
-  console.log("problems fetched:", problems.length);
+  // console.log("problems fetched:", problems.length);
   if (!problems || problems.length === 0) {
     return res.status(200).json(new ApiResponse(404, [], "No problems found"));
   }

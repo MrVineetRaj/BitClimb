@@ -33,11 +33,11 @@ const ProblemPageDetailContainer = ({
   submitCodeResult,
   fetchSubmissionsByProblem,
 }) => {
-  const [activeTab, setActiveTab] = useState("submissions");
+  const [activeTab, setActiveTab] = useState("description");
 
   useEffect(() => {
     if (submitCodeResult) {
-      console.log("Submit Code Result:", submitCodeResult);
+      // console.log("Submit Code Result:", submitCodeResult);
       setActiveTab("submissions");
     }
   }, [submitCodeResult]);
@@ -53,7 +53,7 @@ const ProblemPageDetailContainer = ({
         >
           Description
         </TabsTrigger>
-        {problem && problem?.editorial && (
+        {problem && problem?.referenceSolution && (
           <TabsTrigger
             value="editorial"
             onClick={() => {
@@ -61,16 +61,6 @@ const ProblemPageDetailContainer = ({
             }}
           >
             Editorial
-          </TabsTrigger>
-        )}
-        {problem && problem?.referenceSolution && (
-          <TabsTrigger
-            value="solution"
-            onClick={() => {
-              setActiveTab("solution");
-            }}
-          >
-            Solution
           </TabsTrigger>
         )}
 
@@ -132,11 +122,17 @@ const ProblemPageDetailContainer = ({
                       Example {index + 1}
                     </h3>
                     <div className="mb-4 pl-4 border-l-2 border-gray-500">
-                      <p className="mb-2">
-                        <strong>Input:</strong> {input}
+                      <p className="mb-2 flex flex-col items-start">
+                        <strong>Input:</strong>
+                        <pre className="bg-black ml-2 p-2 rounded-md">
+                          {input}
+                        </pre>
                       </p>
-                      <p className="mb-2">
-                        <strong>Output:</strong> {output}
+                      <p className="mb-2 flex flex-col items-start">
+                        <strong>Output:</strong>
+                        <pre className="bg-black ml-2 p-2 rounded-md">
+                          {output}
+                        </pre>
                       </p>
                       {explanation && (
                         <p className="text-sm text-gray-500">
@@ -156,13 +152,13 @@ const ProblemPageDetailContainer = ({
               <h3 className="text-xl font-semibold mb-2 flex items-center gap-2 my-8">
                 <Lock className="size-4" /> Constraints
               </h3>
-              <p>
-                {problem.constraints?.split("\\n")?.map((str, index) => (
-                  <span className="block" key={index}>
-                    {str}
-                  </span>
-                ))}
-              </p>
+              <pre>
+                {/* {problem.constraints?.split("\\n")?.map((str, index) => (
+                  <span className="block" key={index}> */}
+                {problem.constraints}
+                {/* </span>
+                ))} */}
+              </pre>
             </div>
           )}
 
@@ -193,18 +189,10 @@ const ProblemPageDetailContainer = ({
         </TabsContent>
       }
 
-      {problem && problem?.editorial && (
+      {problem && problem?.referenceSolution && (
         <TabsContent value="editorial" className="h-full">
           <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Editorial</h2>
-            <p>{problem.editorial}</p>
-          </div>
-        </TabsContent>
-      )}
-      {problem && problem?.referenceSolution && (
-        <TabsContent value="solution" className="h-full">
-          <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4 ">Reference Solution</h2>
+            <h2 className="text-2xl font-bold mb-4 ">Editorial</h2>
             <Tabs
               defaultValue={Object.keys(problem?.referenceSolution)[0]}
               className="w-full"

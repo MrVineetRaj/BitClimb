@@ -77,9 +77,7 @@ const ProblemPage = () => {
               </Button>
             </Link>
             <Link to={"/signup"}>
-              <Button className="text-white">
-                Signup 
-              </Button>
+              <Button className="text-white">Signup</Button>
             </Link>
           </>
         ) : isRunningCode || isSubmittingCode ? (
@@ -95,7 +93,7 @@ const ProblemPage = () => {
                 const expected_outputs = problem?.testCases?.map(
                   (testCase) => testCase.output
                 );
-
+                setCodeRunResult(null);
                 runCode({
                   source_code_header:
                     problem?.referenceSolutionHeader[selectedLanguage] || "",
@@ -107,7 +105,7 @@ const ProblemPage = () => {
                   expected_outputs: expected_outputs,
                   problemId: problemId,
                 }).then((res) => {
-                  console.log("Code run result:", res);
+                  // console.log("Code run result:", res);
                   setCodeRunResult(res);
                 });
               }}
