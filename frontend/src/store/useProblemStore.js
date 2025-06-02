@@ -62,11 +62,14 @@ export const useProblemStore = create((set) => ({
     stdin,
     expected_outputs,
     problemId,
+    ref = "",
+    contestId = "",
+    contestProblemId = "",
   }) => {
     set({ isSubmittingCode: true });
     try {
       const response = await axiosInstance.post(
-        `/execute/submit/${problemId}`,
+        `/execute/submit/${problemId}?contestId=${contestId}&contestProblemId=${contestProblemId}&ref=${ref}`,
         {
           source_code_header,
           source_code,
@@ -100,11 +103,11 @@ export const useProblemStore = create((set) => ({
     }
   },
 
-  getProblemById: async (problemId) => {
+  getProblemById: async (problemId, ref = "") => {
     set({ isLoadingProblem: true });
     try {
       const response = await axiosInstance.get(
-        `/problem/get-problem/${problemId}`
+        `/problem/get-problem/${problemId}?ref=${ref}`
       );
       return response.data.data;
     } catch (error) {
@@ -163,7 +166,7 @@ export const useProblemStore = create((set) => ({
       const response = await axiosInstance.get(
         `/problem/get-problems?limit=${limit}&page=${page}`
       );
-      
+
       set({ isLoadingProblems: false });
       return response.data.data;
     } catch (error) {

@@ -6,7 +6,7 @@ import {
   getAllContests,
   updateContest,
   deleteContest,
-  getContestProblem,
+  getContestProblems,
   getContestSubmissions,
   registerUserForContest,
   unregisterUserFromContest,
@@ -35,16 +35,12 @@ contestRouter.delete(
   adminAuthMiddleware,
   deleteContest
 );
-contestRouter.get(
-  "/:contestId/problems",
-  authMiddleware,
-  getContestProblem,
-);
+contestRouter.get("/:contestId/problems", authMiddleware, getContestProblems);
 
 contestRouter.get(
   "/:contestId/submissions",
   authMiddleware,
-  getContestSubmissions,
+  getContestSubmissions
 );
 contestRouter.post(
   "/:contestId/register",

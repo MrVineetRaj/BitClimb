@@ -18781,7 +18781,6 @@ export namespace Prisma {
   export type ContestSubmissionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     submissionId?: string
-    userId_contestId_contestProblemId?: ContestSubmissionUserIdContestIdContestProblemIdCompoundUniqueInput
     AND?: ContestSubmissionWhereInput | ContestSubmissionWhereInput[]
     OR?: ContestSubmissionWhereInput[]
     NOT?: ContestSubmissionWhereInput | ContestSubmissionWhereInput[]
@@ -18795,7 +18794,7 @@ export namespace Prisma {
     contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
     contestProblem?: XOR<ContestProblemScalarRelationFilter, ContestProblemWhereInput>
     submission?: XOR<SubmissionsScalarRelationFilter, SubmissionsWhereInput>
-  }, "id" | "submissionId" | "userId_contestId_contestProblemId">
+  }, "id" | "submissionId">
 
   export type ContestSubmissionOrderByWithAggregationInput = {
     id?: SortOrder
@@ -20849,12 +20848,6 @@ export namespace Prisma {
   export type ContestProblemScalarRelationFilter = {
     is?: ContestProblemWhereInput
     isNot?: ContestProblemWhereInput
-  }
-
-  export type ContestSubmissionUserIdContestIdContestProblemIdCompoundUniqueInput = {
-    userId: string
-    contestId: string
-    contestProblemId: string
   }
 
   export type ContestSubmissionCountOrderByAggregateInput = {

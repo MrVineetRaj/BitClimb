@@ -266,5 +266,4 @@ model ContestSubmission {
   contestProblem     ContestProblem  @relation(fields: [contestProblemId], references: [id], onDelete: Cascade)
   submission  Submissions @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, contestId, contestProblemId])
 }

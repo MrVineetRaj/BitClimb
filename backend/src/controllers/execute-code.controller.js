@@ -106,6 +106,7 @@ export const runCode = asyncHandler(async (req, res) => {
 
 export const submitCode = asyncHandler(async (req, res) => {
   const { problemId } = req.params;
+  const { contestProblemId, ref, contestId } = req.query;
   const {
     source_code_header,
     source_code,
@@ -208,7 +209,6 @@ export const submitCode = asyncHandler(async (req, res) => {
     };
   });
 
-
   let firstIndexWhereFailed = detailedResults.findIndex(
     (result) => result.status !== "Accepted"
   );
@@ -253,7 +253,7 @@ export const submitCode = asyncHandler(async (req, res) => {
 
   // console.log("isAllPassed :", isAllPassed);
 
-  await db.submissions.create({
+  const newSubmission = await db.submissions.create({
     data: {
       problemId,
       userId,
@@ -285,6 +285,18 @@ export const submitCode = asyncHandler(async (req, res) => {
       isAccepted: isAllPassed,
     },
   });
+
+  if (ref === "contest") {
+    await db.contestSubmission.create({
+      data: {
+        contestId,
+        contestProblemId,
+        userId,
+        submissionId: newSubmission.id,
+        status: isAllPassed ? "Accepted" : "Rejected",
+      },
+    });
+  }
 
   // console.log("New submission created:", newSubmission);
   res.status(200).json(

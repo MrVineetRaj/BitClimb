@@ -86,6 +86,6 @@ setInterval(async () => {
   } catch (error) {
     console.error("Error updating contest ratings:", error);
   }
-}, 1000 * 60 * 60); // Every hour
+}, 1000 * 30 * 2); // Every hour
 
 export default app;

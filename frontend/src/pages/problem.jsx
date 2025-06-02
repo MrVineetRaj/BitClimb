@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useProblemStore } from "@/store/useProblemStore";
 import { Loader, Play, Upload } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
 
 import ProblemPageDetailContainer from "@/components/problem/problem-page-detail-container";
 import ProblemPageCodeContainer from "@/components/problem/problem-page-code-container";
@@ -17,6 +17,7 @@ const ProblemPage = () => {
     isRunningCode,
     isSubmittingCode,
   } = useProblemStore();
+  const [searchPrams] = useSearchParams();
   const { isCheckingAuth, authUser } = useAuthStore();
   const { problemId } = useParams();
   const [problem, setProblem] = useState(null);
@@ -25,7 +26,9 @@ const ProblemPage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("CPP");
   const [codeRunResult, setCodeRunResult] = useState(null);
   const [submitCodeResult, setSubmitCodeResult] = useState(null);
-
+  const [ref, setRef] = useState();
+  const [contestId, setContestId] = useState(null);
+  const [contestProblemId, setContestProblemId] = useState(null);
   const fetchSubmissionsByProblem = async () => {
     try {
       if (isCheckingAuth || !authUser?.id) {
@@ -39,9 +42,14 @@ const ProblemPage = () => {
     }
   };
   useEffect(() => {
+    const currentRef = searchPrams.get("ref");
+    setRef(searchPrams.get("ref") || "");
+    setContestId(searchPrams.get("q") || null);
+    setContestProblemId(searchPrams.get("r") || null);
+
     const fetchProblem = async () => {
       try {
-        const res = await getProblemById(problemId);
+        const res = await getProblemById(problemId, currentRef);
 
         setProblem(res);
 
@@ -58,7 +66,7 @@ const ProblemPage = () => {
     };
 
     fetchProblem();
-  }, [getProblemById, problemId]);
+  }, [getProblemById, problemId, searchPrams]);
   useEffect(() => {
     if (isCheckingAuth || !authUser?.id) {
       return;
@@ -133,6 +141,9 @@ const ProblemPage = () => {
                   stdin: stdin,
                   expected_outputs: expected_outputs,
                   problemId: problemId,
+                  ref: ref || "",
+                  contestId: contestId || "",
+                  contestProblemId: contestProblemId || "",
                 }).then((res) => {
                   setSubmitCodeResult(res.submission);
                   fetchSubmissionsByProblem();

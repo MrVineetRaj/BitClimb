@@ -20,6 +20,8 @@ import ProblemLists from "./pages/problem-lists";
 import UserMadeList from "./pages/problem-lists/user-made-list";
 import TopicWiseList from "./pages/problem-lists/topic-wise-list";
 import CompanyWiseList from "./pages/problem-lists/company-wise-list";
+import SingleContestPage from "./pages/contest/single-contest-page";
+import ContestProblemsPage from "./pages/contest/contest-problems-page";
 
 function App() {
   const {
@@ -60,6 +62,11 @@ function App() {
             <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
             <Route path="/profile/:profileId" element={<ProfilePage />} />
             <Route path="/problem/:problemId" element={<ProblemPage />} />
+            <Route path="/contest/:contestId" element={<SingleContestPage />} />
+            <Route
+              path="/contest/:contestId/problems"
+              element={<ContestProblemsPage />}
+            />
 
             <Route
               path="/problem-lists"

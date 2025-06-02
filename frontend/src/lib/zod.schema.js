@@ -74,3 +74,24 @@ export const createProblemSchema = z.object({
     CPP: z.string().min(1, "C++ reference solution is required"),
   }),
 });
+
+export const createContestSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().optional(),
+  startTime: z.string().refine((val) => !isNaN(Date.parse(val)), {
+    message: "Start time must be a valid ISO8601 date string",
+  }),
+  endTime: z.string().refine((val) => !isNaN(Date.parse(val)), {
+    message: "End time must be a valid ISO8601 date string",
+  }),
+  problems: z.array(z.string()).min(1, "At least one problem ID is required"),
+  problemIndex: z
+    .array(z.string())
+    .min(1, "At least one problem index is required"),
+  problemPoints: z.array(
+    z
+      .string()
+      .transform((val) => parseInt(val, 10))
+      .or(z.number())
+  ),
+});

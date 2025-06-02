@@ -51,7 +51,6 @@ const AdminPanel = () => {
     const handleLoadUsers = () => {
       getRecentRegistrations()
         .then((data) => {
-          
           setRecentRegistrations(data.userCount);
         })
         .catch((error) => {

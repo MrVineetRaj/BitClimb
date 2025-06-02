@@ -17,10 +17,12 @@ const createContest = asyncHandler(async (req, res) => {
   } = req.body;
 
   const newContest = await db?.contest.create({
-    title,
-    description: description || "",
-    startTime: new Date(startTime),
-    endTime: new Date(endTime),
+    data: {
+      title: title,
+      description: description || "",
+      startTime: new Date(startTime),
+      endTime: new Date(endTime),
+    },
   });
 
   if (!newContest) {
@@ -46,26 +48,46 @@ const createContest = asyncHandler(async (req, res) => {
 
 const getContest = asyncHandler(async (req, res) => {
   const { contestId } = req.params;
-
   const contest = await db.contest.findFirst({
     where: {
       id: contestId,
     },
-    include: {
-      problems: true,
+  });
+
+  const isParticipated = await db.contestParticipation.findFirst({
+    where: {
+      contestId: contestId,
+      userId: req.user.id,
+    },
+    select: {
+      id: true,
     },
   });
 
+  // console.log("Contest fetched:", contest);
   if (!contest) {
     throw new ApiError(404, "Contest not found");
   }
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { contest, isParticipated: !!isParticipated },
+        "Contest fetched"
+      )
+    );
 });
 const getAllContests = asyncHandler(async (req, res) => {
   const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.page) || 10;
+  const limit = Number(req.query.limit) || 10;
   const now = new Date();
-  const type = req.query.typeOfContest || "DEFAULT";
+  const type = req.query.typeOfContest || "DEFAULt";
+  // console.log("query:", req.query);
 
+  // console.log("Query type:", type);
+  // console.log("Current time:", now);
   const whereCondition =
     type === "BANNER"
       ? {
@@ -77,9 +99,12 @@ const getAllContests = asyncHandler(async (req, res) => {
             },
           ],
         }
-      : {
-          endTime: { lte: now }, // Past
-        };
+      : {}; // This should return all contests when type is not "BANNER"
+  // console.log("Where condition:", JSON.stringify(whereCondition, null, 2));
+
+  // First, let's check if there are any contests at all
+  const totalContests = await db.contest.count();
+  // console.log("Total contests in database:", totalContests);
 
   const contests = await db.contest.findMany({
     where: whereCondition,
@@ -88,6 +113,9 @@ const getAllContests = asyncHandler(async (req, res) => {
     take: limit,
   });
 
+  // console.log("Contests fetched:", contests);
+  // console.log("Number of contests found:", contests.length);
+
   if (!contests || contests?.length <= 0) {
     return res.status(200).json(new ApiResponse(200, [], "Contest fetched"));
   }
@@ -95,6 +123,7 @@ const getAllContests = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, contests, "Contest fetched"));
 });
 
+// 223.181.34.191
 //todo
 const updateContest = asyncHandler(async (req, res) => {});
 
@@ -102,7 +131,30 @@ const updateContest = asyncHandler(async (req, res) => {});
 const deleteContest = asyncHandler(async (req, res) => {});
 
 // todo
-const getContestProblem = asyncHandler(async (req, res) => {});
+const getContestProblems = asyncHandler(async (req, res) => {
+  const { contestId } = req.params;
+  const problems = await db.contestProblem.findMany({
+    where: {
+      contestId,
+    },
+    include: {
+      problem: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
+    },
+  });
+  if (!problems || problems.length === 0) {
+    throw new ApiError(404, "No problems found for this contest");
+  }
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, problems, "Contest problems fetched successfully")
+    );
+});
 
 //  todo
 const getContestSubmissions = asyncHandler(async (req, res) => {});
@@ -111,16 +163,63 @@ const registerUserForContest = asyncHandler(async (req, res) => {
   const { contestId } = req.params;
   const userId = req.user.id;
 
-  await db.contestParticipation.create({
+  const prevParticipationOfUser = await db.contestParticipation.findFirst({
+    where: {
+      userId,
+    },
+    select: {
+      rating: true,
+      contestId: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const isParticipated = await db.contestParticipation.create({
     data: {
       userId,
       contestId,
+      rating: prevParticipationOfUser?.rating || 800,
     },
   });
+
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        isParticipated: !!isParticipated,
+      },
+      "User registered for contest successfully"
+    )
+  );
 });
 
 // todo
-const unregisterUserFromContest = asyncHandler(async (req, res) => {});
+const unregisterUserFromContest = asyncHandler(async (req, res) => {
+  const { contestId } = req.params;
+  const userId = req.user.id;
+
+  // console.log("Unregistering user:", userId, "from contest:", contestId);
+  const isParticipated = await db.contestParticipation.delete({
+    where: {
+      userId_contestId: {
+        userId,
+        contestId,
+      },
+    },
+  });
+
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        isParticipated: !!!isParticipated, // Invert the boolean to indicate unregistration
+      },
+      "User unregistered from contest successfully"
+    )
+  );
+});
 
 const getContestLeaderboard = asyncHandler(async (req, res) => {
   const { contestId } = req.params;
@@ -191,7 +290,7 @@ export {
   getAllContests,
   updateContest,
   deleteContest,
-  getContestProblem,
+  getContestProblems,
   getContestSubmissions,
   registerUserForContest,
   unregisterUserFromContest,

@@ -90,7 +90,6 @@ export const createProblem = asyncHandler(async (req, res) => {
     // console.log("Judge0 submission result:", result);
 
     if (result.status.id !== 3) {
-
       throw new ApiError(
         500,
         `Judge0 submission failed for language: ${lang}`,
@@ -147,6 +146,9 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   //   limit,
   // });
   const problems = await db.problem.findMany({
+    where: {
+      isPublic: true, // Only fetch public problems
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -219,17 +221,46 @@ export const getAllProblems = asyncHandler(async (req, res) => {
 
 export const getProblemById = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  const ref = req.query.ref || ""; // Check if ref query parameter is present
   // console.log("Fetching problem with ID:", id);
+  console.log("Fetching problem with ID and ref:", id, " ", ref);
   // Validate problem ID
   if (!id) {
     throw new ApiError(400, "Problem ID is required");
   }
 
-  const problem = await db.problem.findUnique({
+  let findQuery = {
     where: {
       id: id,
+      isPublic: true, // Only fetch public problems by default
     },
-  });
+  };
+
+  if (ref === "contest") {
+    findQuery = {
+      where: {
+        id: id,
+        isPublic: false, // Only fetch public problems for contests
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        difficulty: true,
+        tags: true,
+        examples: true,
+        constraints: true,
+        hints: true,
+        testCases: true,
+        codeSnippets: true,
+        referenceSolutionHeader: true,
+        referenceSolutionFooter: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    };
+  }
+  const problem = await db.problem.findUnique(findQuery);
 
   if (!problem) {
     throw new ApiError(404, "Problem not found");

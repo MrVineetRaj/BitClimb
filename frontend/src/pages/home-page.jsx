@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { DSA_TAGS, COMPANY_TAGS, DUMMY_CONTESTS } from "@/lib/constants";
 import { Badge } from "@/components/ui/badge";
 import { LayoutDashboard } from "lucide-react";
+import BannerContests from "@/components/contest/banner-contsts";
 const HomePage = () => {
   const [selectedTheoryTags, setSelectedTheoryTags] = useState([]);
   const [selectedCompanyTags, setSelectedCompanyTags] = useState([]);
@@ -17,30 +18,7 @@ const HomePage = () => {
           }}
         >
           <h1 className="text-white text-2xl font-bold mb-4 ">Contests</h1>
-          <div
-            className="overflow-x-scroll flex gap-4"
-            style={{
-              scrollbarWidth: "none",
-            }}
-          >
-            {DUMMY_CONTESTS?.map((contest, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-blue-500/20 via-blue-400/20 to-blue-300/30   p-4 rounded-lg shadow-md min-w-84 h-48 hover:to-blue-500/30 hover:via-blue-400/20 hover:from-blue-300/20 transition-color duration-300 relative"
-              >
-                <LayoutDashboard className="absolute top-4 right-4" />
-                <h2 className="text-xl font-semibold text-white">
-                  {contest.title}
-                </h2>
-                <p className="text-primary font-black absolute bottom-2 right-2">
-                  {new Date(contest.startTime).toLocaleString("en-US", {
-                    dateStyle: "short",
-                    timeStyle: "short",
-                  })}
-                </p>
-              </div>
-            ))}
-          </div>
+          <BannerContests />
         </div>
 
         <div className=" hidden lg:flex  items-center justify-center">
