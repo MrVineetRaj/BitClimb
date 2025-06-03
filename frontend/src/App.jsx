@@ -22,6 +22,7 @@ import TopicWiseList from "./pages/problem-lists/topic-wise-list";
 import CompanyWiseList from "./pages/problem-lists/company-wise-list";
 import SingleContestPage from "./pages/contest/single-contest-page";
 import ContestProblemsPage from "./pages/contest/contest-problems-page";
+import ContestResults from "./pages/contest/contest-results";
 
 function App() {
   const {
@@ -63,6 +64,10 @@ function App() {
             <Route path="/profile/:profileId" element={<ProfilePage />} />
             <Route path="/problem/:problemId" element={<ProblemPage />} />
             <Route path="/contest/:contestId" element={<SingleContestPage />} />
+            <Route
+              path="/contest/:contestId/results"
+              element={<ContestResults />}
+            />
             <Route
               path="/contest/:contestId/problems"
               element={<ContestProblemsPage />}

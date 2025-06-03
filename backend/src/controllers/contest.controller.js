@@ -242,6 +242,12 @@ const getContestLeaderboard = asyncHandler(async (req, res) => {
     },
   });
 
+  const contest = await db.contest.findFirst({
+    where: {
+      id: contestId,
+    },
+  });
+
   const latestAcceptedPerUser = new Map();
 
   for (let i = 0; i < acceptedSubmissions.length; i++) {
@@ -271,15 +277,29 @@ const getContestLeaderboard = asyncHandler(async (req, res) => {
     }
   }
 
-  res
-    .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        { leaderboard: result, currentRankOfUser },
-        "Live rank list fetched"
-      )
-    );
+  const contestProblems = await db.contestProblem.findMany({
+    where: {
+      contestId,
+    },
+    select: {
+      problemId: true,
+      points: true,
+      problemIndex: true,
+    },
+  });
+
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        contest: contest,
+        leaderboard: result,
+        currentRankOfUser,
+        contestProblems,
+      },
+      "Live rank list fetched"
+    )
+  );
 });
 
 const updateUserRating = asyncHandler(async (req, res) => {});

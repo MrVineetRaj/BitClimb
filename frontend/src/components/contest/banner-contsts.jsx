@@ -47,7 +47,7 @@ const BannerContests = () => {
                 </p>
                 <p className="text-gray-400">To</p>
                 <p className="text-primary font-black ">
-                  {new Date(contest.startTime).toLocaleString("en-US", {
+                  {new Date(contest.endTime).toLocaleString("en-US", {
                     dateStyle: "short",
                     timeStyle: "short",
                   })}

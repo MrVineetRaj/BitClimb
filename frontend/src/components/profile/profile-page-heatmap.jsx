@@ -133,7 +133,7 @@ const ProfilePageHeatMap = ({ publicProfile, profileId }) => {
                                 item.count <= 3 &&
                                 item.location.month === index &&
                                 item.location.day === dayIndex &&
-                                item.count >= 1
+                                item.count > 0
                             )
                           ? "bg-green-500"
                           : currentMonth >= index + 1

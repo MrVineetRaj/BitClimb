@@ -106,6 +106,22 @@ const ProblemPageDetailContainer = ({
                   ))}
                 </div>
               </HoverCardContent>
+            </HoverCard>{" "}
+            <HoverCard>
+              <HoverCardTrigger className="text-sm text-white">
+                <Badge className={""} variant={"outline"}>
+                  Companies
+                </Badge>
+              </HoverCardTrigger>
+              <HoverCardContent className="p-2 w-auto">
+                <div className="flex flex-wrap gap-2">
+                  {problem?.companies?.map((company, index) => (
+                    <Badge variant={"outline"} key={index}>
+                      {company}
+                    </Badge>
+                  ))}
+                </div>
+              </HoverCardContent>
             </HoverCard>
           </span>
           <p className="mb-8">{problem ? problem.description : "Loading..."}</p>
