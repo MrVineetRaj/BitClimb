@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: bumblebee --default, night --prefersdark;
+}
+
+body {
+  @apply text-base-content max-w-screen min-h-screen overflow-x-hidden -z-50 flex flex-col items-center;
+}

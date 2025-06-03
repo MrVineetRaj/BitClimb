@@ -249,7 +249,7 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   });
 
   // solvedProblems.forEach((sp) => solvedProblems.set(sp.problemId, true));
-  const idx = 0;
+  let idx = 0;
 
   const tempProblems = problems.map((problem) => {
     const isSolved = problem.id === solvedProblems[idx]?.problemId;
