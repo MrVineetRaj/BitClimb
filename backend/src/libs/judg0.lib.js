@@ -14,7 +14,12 @@ export const submissionBatch = async (submissions) => {
   try {
     const { data } = await axios.post(
       `${process.env.JUDGE0_API_URL}/submissions?base64_encoded=false&wait=false`,
-      submissions
+      submissions,
+      {
+        headers: {
+          "x-Auth-Token": process.env.JUDGE0_API_TOKEN,
+        },
+      }
     );
 
     return data;
@@ -36,7 +41,12 @@ export const pollBatchResults = async (token) => {
     try {
       // console.log(`Polling results for tokens: ${token}`);
       const { data } = await axios.get(
-        `${process.env.JUDGE0_API_URL}/submissions/${token}?base64_encoded=true`
+        `${process.env.JUDGE0_API_URL}/submissions/${token}?base64_encoded=true`,
+        {
+          headers: {
+            "X-Auth-Token": process.env.JUDGE0_API_TOKEN,
+          },
+        }
       );
       // console.log(data || "nothing to show....");
       // Check if all results are ready

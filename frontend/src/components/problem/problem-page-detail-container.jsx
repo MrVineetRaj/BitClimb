@@ -32,15 +32,16 @@ const ProblemPageDetailContainer = ({
   userSubmissions,
   submitCodeResult,
   fetchSubmissionsByProblem,
+  activeTab,
+  setActiveTab,
 }) => {
-  const [activeTab, setActiveTab] = useState("description");
+  // const [activeTab, setActiveTab] = useState("description");
 
   useEffect(() => {
     if (submitCodeResult) {
-      // console.log("Submit Code Result:", submitCodeResult);
       setActiveTab("submissions");
     }
-  }, [submitCodeResult]);
+  }, [userSubmissions]);
 
   return (
     <Tabs value={activeTab} className=" h-full">
@@ -124,7 +125,9 @@ const ProblemPageDetailContainer = ({
               </HoverCardContent>
             </HoverCard>
           </span>
-          <p className="mb-8">{problem ? problem.description : "Loading..."}</p>
+          <pre className="max-w-full overflow-auto whitespace-pre-wrap break-wordstext-white  text-sm">
+            {problem ? problem.description : "Loading..."}
+          </pre>
 
           <hr />
           <div className="my-8">
@@ -138,18 +141,18 @@ const ProblemPageDetailContainer = ({
                       Example {index + 1}
                     </h3>
                     <div className="mb-4 pl-4 border-l-2 border-gray-500">
-                      <p className="mb-2 flex flex-col items-start">
+                      <span className="mb-2 flex flex-col items-start">
                         <strong>Input:</strong>
-                        <pre className="bg-black ml-2 p-2 rounded-md">
+                        <pre className="max-w-full overflow-auto whitespace-pre-wrap break-words p-2 bg-black rounded-lg text-white  text-sm">
                           {input}
                         </pre>
-                      </p>
-                      <p className="mb-2 flex flex-col items-start">
+                      </span>
+                      <span className="mb-2 flex flex-col items-start">
                         <strong>Output:</strong>
-                        <pre className="bg-black ml-2 p-2 rounded-md">
+                        <pre className="max-w-full overflow-auto whitespace-pre-wrap break-words p-2 bg-black rounded-lg text-white  text-sm">
                           {output}
                         </pre>
-                      </p>
+                      </span>
                       {explanation && (
                         <p className="text-sm text-gray-500">
                           <strong>Explanation:</strong> {explanation}
@@ -168,7 +171,7 @@ const ProblemPageDetailContainer = ({
               <h3 className="text-xl font-semibold mb-2 flex items-center gap-2 my-8">
                 <Lock className="size-4" /> Constraints
               </h3>
-              <pre>
+              <pre className="max-w-full overflow-auto whitespace-pre-wrap break-words p-2 text-white rounded text-sm">
                 {/* {problem.constraints?.split("\\n")?.map((str, index) => (
                   <span className="block" key={index}> */}
                 {problem.constraints}

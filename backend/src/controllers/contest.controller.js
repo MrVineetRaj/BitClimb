@@ -1,5 +1,6 @@
 import { db } from "../libs/db.js";
 import { asyncHandler, ApiError, ApiResponse } from "../libs/helpers.js";
+import { redis } from "../libs/redis.conf.js";
 
 const createContest = asyncHandler(async (req, res) => {
   if (req.user?.role != "ADMIN") {
@@ -88,33 +89,46 @@ const getAllContests = asyncHandler(async (req, res) => {
 
   // console.log("Query type:", type);
   // console.log("Current time:", now);
-  const whereCondition =
-    type === "BANNER"
-      ? {
-          OR: [
-            { startTime: { gt: now } }, // Upcoming
-            {
-              startTime: { lte: now },
-              endTime: { gte: now }, // Ongoing
-            },
-          ],
-        }
-      : {}; // This should return all contests when type is not "BANNER"
-  // console.log("Where condition:", JSON.stringify(whereCondition, null, 2));
 
-  // First, let's check if there are any contests at all
-  const totalContests = await db.contest.count();
-  // console.log("Total contests in database:", totalContests);
+  let contests = await redis.get(`contests:${type}:${page}:${limit}`);
+  if (contests) {
+    contests = JSON.parse(contests);
+  } else {
+    const whereCondition =
+      type === "BANNER"
+        ? {
+            OR: [
+              { startTime: { gt: now } }, // Upcoming
+              {
+                startTime: { lte: now },
+                endTime: { gte: now }, // Ongoing
+              },
+            ],
+          }
+        : {}; // This should return all contests when type is not "BANNER"
+    // console.log("Where condition:", JSON.stringify(whereCondition, null, 2));
 
-  const contests = await db.contest.findMany({
-    where: whereCondition,
-    orderBy: { startTime: "desc" },
-    skip: (page - 1) * limit,
-    take: limit,
-  });
+    // First, let's check if there are any contests at all
+    // const totalContests = await db.contest.count();
+    // console.log("Total contests in database:", totalContests);
 
-  // console.log("Contests fetched:", contests);
-  // console.log("Number of contests found:", contests.length);
+    contests = await db.contest.findMany({
+      where: whereCondition,
+      orderBy: { startTime: "desc" },
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    // console.log("Contests fetched from database:", contests.length);
+    if (contests.length > 0) {
+      await redis.set(
+        `contests:${type}:${page}:${limit}`,
+        JSON.stringify(contests),
+        "EX",
+        60 * 60 // Cache for 1 hour
+      );
+    }
+  }
 
   if (!contests || contests?.length <= 0) {
     return res.status(200).json(new ApiResponse(200, [], "Contest fetched"));

@@ -29,6 +29,7 @@ const ProblemPage = () => {
   const [ref, setRef] = useState();
   const [contestId, setContestId] = useState(null);
   const [contestProblemId, setContestProblemId] = useState(null);
+  const [activeTab, setActiveTab] = useState("description");
   const fetchSubmissionsByProblem = async () => {
     try {
       if (isCheckingAuth || !authUser?.id) {
@@ -147,6 +148,7 @@ const ProblemPage = () => {
                 }).then((res) => {
                   setSubmitCodeResult(res.submission);
                   fetchSubmissionsByProblem();
+                  setActiveTab("submissions");
                 });
               }}
             >
@@ -163,6 +165,8 @@ const ProblemPage = () => {
             userSubmissions={userSubmissions}
             submitCodeResult={submitCodeResult}
             fetchSubmissionsByProblem={fetchSubmissionsByProblem}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
           />
         </div>
         <div className="col-span-1 w-full min-h-[600px]">

@@ -30,7 +30,7 @@ npx prisma db push
   sleep 5s
 ```
 
-
+```json
 const data = `{
     "title": "Add Two Numbers",
     "description": "Given two numbers a and b add them up and return the outout",
@@ -78,9 +78,9 @@ const data = `{
         "JAVA": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        System.out.println(a + b);\n    }\n}"
     }
 }
+```
 
-
-docker compose up -d db redis
+sudo docker compose up -d db redis
 sleep 10s
-docker compose up -d
+sudo docker compose up -d
 sleep 5s

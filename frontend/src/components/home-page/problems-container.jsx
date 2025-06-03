@@ -64,7 +64,7 @@ const ProblemsContainer = () => {
     // Simulating an API call to fetch problems
     const fetchProblems = async () => {
       getAllProblems(limit, page).then((data) => {
-        // console.log("Fetched problems:", data);
+        console.log("Fetched problems:", data);
         setProblems(data.problems);
       });
     };

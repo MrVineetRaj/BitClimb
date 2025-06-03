@@ -5,6 +5,7 @@ import {
   pollBatchResults,
   submissionBatch,
 } from "../libs/judg0.lib.js";
+import { redis } from "../libs/redis.conf.js";
 import { getUserIdIfAuthenticated } from "../libs/utils.js";
 
 export const createProblem = asyncHandler(async (req, res) => {
@@ -121,6 +122,19 @@ export const createProblem = asyncHandler(async (req, res) => {
       userId: req.user.id, // Assuming the user creating the problem is the one making the request
     },
   });
+  // Invalidate ALL cached problem pages and related data
+  const problemsPattern = "problems:*"; // This will match all keys starting with 'problems:'
+  const problemKeys = await redis.keys(problemsPattern);
+
+  if (problemKeys.length > 0) {
+    await redis.del(problemKeys);
+  }
+
+  const totalProblemPagesPattern = "totalProblemPages:*"; // This will match the key for total problem pages
+  const totalProblemPagesKey = await redis.keys(totalProblemPagesPattern);
+  if (totalProblemPagesKey.length > 0) {
+    await redis.del(totalProblemPagesKey);
+  }
 
   res
     .status(201)
@@ -145,40 +159,78 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   //   page,
   //   limit,
   // });
-  const problems = await db.problem.findMany({
-    where: {
-      isPublic: true, // Only fetch public problems
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-    select: {
-      id: true,
-      title: true,
-      tags: true,
-      difficulty: true,
-    },
-    skip: (page - 1) * limit,
-    take: limit,
-  });
+  let problems = [];
+  let totalProblemPages = 0;
+  problems = await redis.get(`problems:${page}:${limit}:`);
 
-  // console.log("problems fetched:", problems.length);
-  if (!problems || problems.length === 0) {
-    return res.status(200).json(new ApiResponse(404, [], "No problems found"));
+  totalProblemPages = await redis.get(`totalProblemPages:${limit}`);
+  if (problems && totalProblemPages) {
+    problems = JSON.parse(problems);
+  } else if (problems && !!totalProblemPages) {
+    const totalProblems = await db.problem.count();
+    totalProblemPages = Math.ceil(totalProblems / limit);
+
+    await redis.set(
+      `totalProblemPages:${limit}`,
+      totalProblemPages,
+      "EX",
+      60 * 60 * 24 * 7 // Cache for 1 hour
+    );
+  } else {
+    problems = await db.problem.findMany({
+      where: {
+        isPublic: true, // Only fetch public problems
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        title: true,
+        tags: true,
+        difficulty: true,
+      },
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    // console.log("problems fetched:", problems.length);
+    if (!problems || problems.length === 0) {
+      return res
+        .status(200)
+        .json(new ApiResponse(404, [], "No problems found"));
+    }
+
+    const totalProblems = await db.problem.count();
+    totalProblemPages = Math.ceil(totalProblems / limit);
+
+    // Cache the problems and total pages in Redis
+    await redis.set(
+      `problems:${page}:${limit}:`,
+      JSON.stringify(problems),
+      "EX",
+      60 * 60 * 24 * 7 // Cache for 1 hour
+    );
+    await redis.set(
+      `totalProblemPages:${limit}`,
+      totalProblemPages,
+      "EX",
+      60 // Cache for 1 hour
+    );
   }
 
-  const totalProblems = await db.problem.count();
-  const totalPages = Math.ceil(totalProblems / limit);
-
+  console.log(
+    `Fetched problems for page ${page} with limit ${limit} and total pages ${totalProblemPages}`,
+    problems
+  );
   const userId = await getUserIdIfAuthenticated(req);
-
   if (!userId) {
     res.status(200).json(
       new ApiResponse(
         200,
         {
           problems,
-          totalPages,
+          totalPages: totalProblemPages,
           currentPage: page,
           limit,
         },
@@ -188,29 +240,34 @@ export const getAllProblems = asyncHandler(async (req, res) => {
     return;
   }
 
-  const SolvedProblems = Promise.all(
-    problems.map(async (problem) => {
-      const solved = await db.problemsSolved.findFirst({
-        where: {
-          userId: userId,
-          problemId: problem.id,
-        },
-      });
-      return {
-        ...problem,
-        solved: !!solved,
-      };
-    })
-  );
+  let solvedProblems = await db.problemsSolved.findMany({
+    where: {
+      userId: userId,
+      problemId: { in: problems.map((p) => p.id) },
+    },
+    select: { problemId: true },
+  });
 
-  const problemsWithSolvedStatus = await SolvedProblems;
+  // solvedProblems.forEach((sp) => solvedProblems.set(sp.problemId, true));
+  const idx = 0;
+
+  const tempProblems = problems.map((problem) => {
+    const isSolved = problem.id === solvedProblems[idx]?.problemId;
+    if (isSolved) {
+      idx++;
+    }
+    return {
+      ...problem,
+      isSolved: isSolved,
+    };
+  });
 
   res.status(200).json(
     new ApiResponse(
       200,
       {
-        problems: problemsWithSolvedStatus,
-        totalPages,
+        problems: tempProblems,
+        totalPages: totalProblemPages,
         currentPage: page,
         limit,
       },
@@ -236,31 +293,45 @@ export const getProblemById = asyncHandler(async (req, res) => {
     },
   };
 
-  if (ref === "contest") {
-    findQuery = {
-      where: {
-        id: id,
-        isPublic: false, // Only fetch public problems for contests
-      },
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        difficulty: true,
-        tags: true,
-        examples: true,
-        constraints: true,
-        hints: true,
-        testCases: true,
-        codeSnippets: true,
-        referenceSolutionHeader: true,
-        referenceSolutionFooter: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    };
+  // If ref is provided, modify the query accordingly
+  let problem = await redis.get(`problem:${id}:${ref}`);
+  if (problem) {
+    console.log(`Fetching problem from cache for ID: ${id} with ref: ${ref}`);
+    problem = JSON.parse(problem);
+  } else {
+    if (ref === "contest") {
+      findQuery = {
+        where: {
+          id: id,
+          isPublic: false, // Only fetch public problems for contests
+        },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          difficulty: true,
+          tags: true,
+          examples: true,
+          constraints: true,
+          hints: true,
+          testCases: true,
+          codeSnippets: true,
+          referenceSolutionHeader: true,
+          referenceSolutionFooter: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      };
+    }
+    problem = await db.problem.findUnique(findQuery);
+
+    redis.set(
+      `problem:${id}:${ref}`,
+      JSON.stringify(problem),
+      "EX",
+      60 * 60 // Cache for 1 hour
+    );
   }
-  const problem = await db.problem.findUnique(findQuery);
 
   if (!problem) {
     throw new ApiError(404, "Problem not found");

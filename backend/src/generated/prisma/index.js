@@ -341,7 +341,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgres://admin:7hnnPv2PLiLKfk2LHuhRUXfn7EhThHZI@db.bitclimb.live/bitclimb"
+        "value": "postgres://76e1086dfbabdcd1:46d5e61eac2b8c0e4f6faf7a88e10658@postgres.bitclimb.live/bitclimb"
       }
     }
   },

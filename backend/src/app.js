@@ -20,12 +20,18 @@ import { addNewDailyChallenge } from "./controllers/streak.controllers.js";
 import aiRouter from "./routes/ai.routes.js";
 import contestRouter from "./routes/contest.routes.js";
 import { findAndUpdateContestRatings } from "./libs/contest.conf.js";
+import { redis } from "./libs/redis.conf.js";
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
+
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors(CorsOptions));
+
+redis.on("connect", () => {
+  console.log("Connected to Redis");
+});
 
 app.get("/", (req, res) => {
   res.json({
