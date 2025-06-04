@@ -174,13 +174,11 @@ export const useProblemStore = create((set) => ({
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message || "Failed to fetch problems";
-        toast.error("Fetch Problems Failed", {
-          description: errorMessage,
+        toast.error(errorMessage, {
           duration: 3000,
         });
       } else {
         toast.error("Fetch Problems Failed", {
-          description: "An unexpected error occurred",
           duration: 3000,
         });
       }
@@ -203,13 +201,11 @@ export const useProblemStore = create((set) => ({
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message || "Failed to fetch user submissions";
-        toast.error("Fetch User Submissions Failed", {
-          description: errorMessage,
+        toast.error(errorMessage, {
           duration: 3000,
         });
       } else {
         toast.error("Fetch User Submissions Failed", {
-          description: "An unexpected error occurred",
           duration: 3000,
         });
       }
@@ -230,13 +226,11 @@ export const useProblemStore = create((set) => ({
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message || "Failed to fetch heatmap data";
-        toast.error("Fetch Heatmap Failed", {
-          description: errorMessage,
+        toast.error(errorMessage, {
           duration: 3000,
         });
       } else {
         toast.error("Fetch Heatmap Failed", {
-          description: "An unexpected error occurred",
           duration: 3000,
         });
       }

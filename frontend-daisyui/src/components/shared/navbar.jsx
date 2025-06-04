@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ThemeToggle from "./theme-toggle";
 import { Link, useLocation } from "react-router";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const Navbar = () => {
+  const { authUser } = useAuthStore();
   const [hasScrolled, setHasScrolled] = useState(false);
   const { pathname } = useLocation();
 
@@ -52,26 +54,38 @@ const Navbar = () => {
           ))}
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end flex gap-4 ">
         <ThemeToggle />
-
-        <details className="dropdown">
-          <summary className="btn btn-ghost m-1">
-            <div className="avatar">
-              <div className=" w-10 rounded-full">
-                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+        {!!!authUser ? (
+          <Link to={"/signup"}>
+            <button className="btn  btn-primary text-white font-bold">
+              Get Started
+            </button>
+          </Link>
+        ) : (
+          <details className="dropdown dropdown-end">
+            <summary className="btn btn-ghost m-1">
+              <div className="avatar">
+                <div className=" w-10 rounded-full">
+                  <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+                </div>
               </div>
-            </div>
-          </summary>
-          <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 2</a>
-            </li>
-          </ul>
-        </details>
+            </summary>
+            <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+              <li>
+                <Link to={"/profile"}>Profile</Link>
+              </li>{" "}
+              {authUser?.role === "ADMIN" && (
+                <li>
+                  <Link to={"/admin/panel"}>Admin Panel</Link>
+                </li>
+              )}
+              <li>
+                <button className="btn btn-soft btn-error">Logout</button>
+              </li>
+            </ul>
+          </details>
+        )}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg

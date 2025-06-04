@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import { AxiosError } from "axios";
-import { toast } from "sonner";
+import { toast } from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
   authUser: null,
@@ -26,7 +26,6 @@ export const useAuthStore = create((set) => ({
         },
         isCheckingAuth: false,
       });
-      
     } catch (error) {
       set({ authUser: null, isCheckingAuth: false });
     } finally {
@@ -47,8 +46,7 @@ export const useAuthStore = create((set) => ({
     } catch (error) {
       if (error instanceof AxiosError) {
         const errorMessage = error.response?.data?.message || "Login failed";
-        toast.error("Login Failed", {
-          description: errorMessage,
+        toast.error(errorMessage, {
           duration: 3000,
         });
       } else {
@@ -76,7 +74,6 @@ export const useAuthStore = create((set) => ({
         name,
       });
 
-      
       set({ authUser: response.data.data, isSigninUp: false });
       toast.success("Signup Successful", {
         description: "Verification Email Sent",

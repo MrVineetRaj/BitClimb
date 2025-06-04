@@ -4,9 +4,11 @@ export const CookieOptions = {
   sameSite: "none",
   secure: process.env.NODE_ENV !== "development",
 };
-
+const corsOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",").map((url) => url.trim())
+  : ["http://localhost:5173"];
 export const CorsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  origin: corsOrigins,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,

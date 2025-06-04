@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function ThemeToggle() {
   const getInitialTheme = () =>
     window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "night"
+      ? "dark"
       : "bumblebee";
 
   const [theme, setTheme] = useState(
@@ -11,12 +11,12 @@ export default function ThemeToggle() {
   );
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", "night");
+    document.documentElement.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () =>
-    setTheme(theme === "bumblebee" ? "night" : "bumblebee");
+    setTheme(theme === "bumblebee" ? "dark" : "bumblebee");
 
   return (
     <label className="toggle text-base-content">

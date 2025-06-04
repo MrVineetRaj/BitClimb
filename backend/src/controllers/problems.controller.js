@@ -324,6 +324,36 @@ export const getProblemById = asyncHandler(async (req, res) => {
       };
     }
     problem = await db.problem.findUnique(findQuery);
+    const submissionCount = await db.submissions.count({
+      where: {
+        problemId: id,
+      },
+    });
+
+    const usersAttempted = await db.submissions.findMany({
+      where: {
+        problemId: id,
+      },
+      select: {
+        userId: true,
+      },
+      distinct: ["userId"],
+    });
+
+    const acceptedCount = await db.submissions.count({
+      where: {
+        problemId: id,
+        status: "Accepted",
+      },
+    });
+
+    problem = {
+      ...problem,
+      acceptanceRate: submissionCount
+        ? (acceptedCount / submissionCount) * 100
+        : 0,
+      usersAttempted: usersAttempted.length,
+    };
 
     redis.set(
       `problem:${id}:${ref}`,

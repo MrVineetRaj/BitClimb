@@ -84,14 +84,19 @@ export const createContestSchema = z.object({
   endTime: z.string().refine((val) => !isNaN(Date.parse(val)), {
     message: "End time must be a valid ISO8601 date string",
   }),
-  problems: z.array(z.string()).min(1, "At least one problem ID is required"),
-  problemIndex: z
-    .array(z.string())
-    .min(1, "At least one problem index is required"),
-  problemPoints: z.array(
-    z
-      .string()
-      .transform((val) => parseInt(val, 10))
-      .or(z.number())
-  ),
+  problems: z
+    .array(
+      z.object({
+        problemId: z.string().min(1, "Problem ID is required"),
+        problemIndex: z.string().min(1, "Problem index is required"),
+        problemPoints: z
+          .string()
+          .transform((val) => parseInt(val, 10))
+          .or(z.number())
+          .refine((val) => !isNaN(val), {
+            message: "Problem points must be a valid number",
+          }),
+      })
+    )
+    .min(1, "At least one problem is required"),
 });
