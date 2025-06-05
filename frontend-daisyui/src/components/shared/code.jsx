@@ -5,10 +5,6 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function Code({ codeString, language }) {
-  useEffect(() => {
-    console.log("Code String:", codeString);
-    console.log("Language:", language);
-  }, [codeString, language]);
   return (
     <div className="w-full relative">
       <Clipboard

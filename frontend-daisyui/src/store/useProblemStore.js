@@ -22,6 +22,7 @@ export const useProblemStore = create((set) => ({
     problemId,
   }) => {
     set({ isRunningCode: true });
+    const toastId = toast.loading("Running your code...");
     try {
       const response = await axiosInstance.post(`/execute/run/${problemId}`, {
         source_code_header,
@@ -33,20 +34,20 @@ export const useProblemStore = create((set) => ({
       });
 
       set({ isRunningCode: false });
-      toast.success("Execution Successful");
-      return response.data.data;
+      toast.success("Execution Successful", { id: toastId });
+      return response.data;
     } catch (error) {
       set({ isRunningCode: false });
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message || "Code execution failed";
         toast.error("Execution Failed", {
-          description: errorMessage,
+          id: toastId,
           duration: 3000,
         });
       } else {
         toast.error("Execution Failed", {
-          description: "An unexpected error occurred",
+          id: toastId,
           duration: 3000,
         });
       }
@@ -166,12 +167,13 @@ export const useProblemStore = create((set) => ({
     page = 1,
     search = "",
     tags = "",
-    company = ""
+    company = "",
+    ref = ""
   ) => {
     set({ isLoadingProblems: true });
     try {
       const response = await axiosInstance.get(
-        `/problem/get-problems?limit=${limit}&page=${page}&search=${search}&tags=${tags}&company=${company}`
+        `/problem/get-problems?limit=${limit}&page=${page}&search=${search}&tags=${tags}&company=${company}&ref=${ref}`
       );
 
       set({ isLoadingProblems: false });

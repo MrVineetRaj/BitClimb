@@ -1,3 +1,4 @@
+import { UserRole } from "../generated/prisma/index.js";
 import { db } from "../libs/db.js";
 import { ApiError, ApiResponse, asyncHandler } from "../libs/helpers.js";
 import {
@@ -153,6 +154,66 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   const tagsQuery = req.query.tags || null;
   const companyQuery = req.query.company || null;
   const searchQuery = req.query.search || null;
+  const ref = req.query.ref || null;
+
+  if (ref.toLowerCase() === "admin") {
+    const userId = await getUserIdIfAuthenticated(req);
+
+    if (!userId) {
+      return res
+        .status(403)
+        .json(new ApiResponse(403, {}, "You are not authorized to view this"));
+    }
+    // If the user is an admin, fetch all problems without any filters
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      select: { role: true },
+    });
+
+    if (!user || user.role !== UserRole.ADMIN) {
+      return res
+        .status(403)
+        .json(new ApiResponse(403, {}, "You are not authorized to view this"));
+    }
+    // const && req.user.role === UserRole.ADMIN
+    const problems = await db.problem.findMany({
+      where: {
+        title: {
+          contains: searchQuery ? searchQuery.toLowerCase().trim() : "",
+          mode: "insensitive",
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    const totalProblems = await db.problem.count({
+      where: {
+        title: {
+          contains: searchQuery ? searchQuery.toLowerCase().trim() : "",
+          mode: "insensitive",
+        },
+      },
+    });
+
+    const totalProblemPages = Math.ceil(totalProblems / limit);
+
+    return res.status(200).json(
+      new ApiResponse(
+        200,
+        {
+          problems,
+          totalPages: totalProblemPages,
+          currentPage: page,
+          limit,
+        },
+        "Problems fetched successfully"
+      )
+    );
+  }
 
   console.log("Fetching all problems with pagination:", {
     tagsQuery,

@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { AxiosError } from "axios";
-import { toast } from "sonner";
-import { axiosInstance } from "@/lib/axios";
-
+import { toast } from "react-hot-toast";
+import { axiosInstance } from "../lib/axios";
 export const useAdminStore = create((set) => ({
   isLoadingMetrics: false,
   isLoadingUsers: false,
@@ -13,22 +12,22 @@ export const useAdminStore = create((set) => ({
     set({ isLoadingMetrics: true });
     try {
       const response = await axiosInstance.get("/admin/metrics");
-      return response.data.data;
+      return response.data;
     } catch (error) {
-      set({ metrics: null, isLoadingMetrics: false });
+      set({ isLoadingMetrics: false });
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message || "Failed to load metrics";
-        toast.error("Metrics Load Failed", {
-          description: errorMessage,
+        toast.error(errorMessage, {
           duration: 3000,
         });
       } else {
         toast.error("Metrics Load Failed", {
-          description: "An unexpected error occurred",
           duration: 3000,
         });
       }
+    } finally {
+      set({ isLoadingMetrics: false });
     }
   },
 
@@ -36,24 +35,24 @@ export const useAdminStore = create((set) => ({
     set({ isLoadingUsers: true });
     try {
       const response = await axiosInstance.get("/auth/recent-registrations");
-      
-      return response.data.data;
+
+      return response.data;
     } catch (error) {
-      set({ recentRegistrations: null, isLoadingUsers: false });
+      set({ isLoadingUsers: false });
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message ||
           "Failed to load recent registrations";
-        toast.error("Recent Registrations Load Failed", {
-          description: errorMessage,
+        toast.error(errorMessage, {
           duration: 3000,
         });
       } else {
         toast.error("Recent Registrations Load Failed", {
-          description: "An unexpected error occurred",
           duration: 3000,
         });
       }
+    } finally {
+      set({ isLoadingUsers: false });
     }
   },
 }));

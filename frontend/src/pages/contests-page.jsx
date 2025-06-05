@@ -9,7 +9,7 @@ const ContestPage = () => {
   const now = new Date();
   useEffect(() => {
     getContests().then((data) => {
-      console.log(data);
+      // console.log(data);
       setContests(data);
     });
   }, []);

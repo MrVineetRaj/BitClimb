@@ -1,3 +1,5 @@
+import { Crown, Target, User, Code } from "lucide-react";
+
 const DSA_TAGS = [
   "Arrays",
   "Strings",
@@ -18,7 +20,7 @@ const DSA_TAGS = [
   "Maths",
 ];
 
-const COMPANY_TAGS = ["Uber", "Morgan Stanley","Zoho","Reddit"];
+const COMPANY_TAGS = ["Uber", "Morgan Stanley", "Zoho", "Reddit"];
 
 const DUMMY_CONTESTS = [
   {
@@ -35,4 +37,39 @@ const DUMMY_CONTESTS = [
   },
 ];
 
-export { DSA_TAGS, COMPANY_TAGS, DUMMY_CONTESTS };
+const ADMIN_OPTIONS = [
+  {
+    title: "Problems",
+    button: "Create Problem",
+    icon: Code,
+    count: 0,
+    path: "/admin/panel/create-problem",
+    isDisabled: false,
+  },
+  {
+    title: "Contests",
+    button: "Create Contest",
+    icon: Target,
+    count: 0,
+    path: "/admin/panel/create-contest",
+    isDisabled: false,
+  },
+  {
+    title: "Users",
+    button: "Manage User",
+    icon: User,
+    count: 0,
+    path: "/admin/panel/manage-user",
+    isDisabled: true,
+  },
+  {
+    title: "Admin",
+    button: "Manage Admin",
+    icon: Crown,
+    count: 0,
+    path: "/admin/panel/manage-admin",
+    isDisabled: true,
+  },
+];
+
+export { DSA_TAGS, COMPANY_TAGS, DUMMY_CONTESTS, ADMIN_OPTIONS };

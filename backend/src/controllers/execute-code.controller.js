@@ -62,7 +62,7 @@ export const runCode = asyncHandler(async (req, res) => {
       ? Buffer.from(result.stderr, "base64").toString("utf-8")
       : null,
   };
-  // console.log("Final results:", finalResults);
+  console.log("Final results:", finalResults);
   const outputs = finalResults.stdout
     ? finalResults.stdout.trim().split("\n")
     : [];
@@ -73,25 +73,37 @@ export const runCode = asyncHandler(async (req, res) => {
     return {
       input: stdin[idx],
       expected_output: expected_output || "",
-      output: outputs[idx] || "No output",
+      output: outputs[idx] || null,
       status:
-        expected_output === outputs[idx]
+        expected_output === outputs[idx] &&
+        !finalResults?.compile_output &&
+        !finalResults?.stderr &&
+        !finalResults?.message
           ? "Accepted"
           : finalResults?.status?.description,
       compile_output:
-        expected_output === outputs[idx]
+        expected_output === outputs[idx] &&
+        !finalResults?.compile_output &&
+        !finalResults?.stderr &&
+        !finalResults?.message
           ? null
           : finalResults?.compile_output
           ? finalResults?.compile_output
           : null,
       message:
-        expected_output === outputs[idx]
+        expected_output === outputs[idx] &&
+        !finalResults?.compile_output &&
+        !finalResults?.stderr &&
+        !finalResults?.message
           ? null
           : finalResults?.message
           ? finalResults?.message
           : null,
       stderr:
-        expected_output === outputs[idx]
+        expected_output === outputs[idx] &&
+        !finalResults?.compile_output &&
+        !finalResults?.stderr &&
+        !finalResults?.message
           ? null
           : finalResults?.stderr
           ? finalResults?.stderr
@@ -99,6 +111,7 @@ export const runCode = asyncHandler(async (req, res) => {
     };
   });
 
+  console.log("Detailed results:", detailedResults);
   res
     .status(200)
     .json(new ApiResponse(200, detailedResults, "Code executed successfully"));

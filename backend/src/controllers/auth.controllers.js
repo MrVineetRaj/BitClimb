@@ -215,7 +215,6 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
 
   const { unHashedToken, hashedToken, tokenExpiry } = generateTemporaryToken();
 
-  
   await db.user.update({
     where: {
       email,
@@ -235,7 +234,6 @@ const forgotPasswordRequest = asyncHandler(async (req, res) => {
     ),
   });
 
-  
   res.status(200).json(new ApiResponse(200, {}, "Forgot password link send"));
 });
 
@@ -362,12 +360,15 @@ const checkAuth = asyncHandler(async (req, res) => {
 });
 
 const getRecentRegistrations = asyncHandler(async (req, res) => {
-  const userCount = await db.user.findMany({
+  const recentRegistrations = await db.user.findMany({
     orderBy: {
       createdAt: "desc",
     },
     select: {
+      id: true,
+      isEmailVerified: true,
       name: true,
+      createdAt: true,
     },
     skip: 0,
     take: 10,
@@ -375,7 +376,11 @@ const getRecentRegistrations = asyncHandler(async (req, res) => {
   res
     .status(200)
     .json(
-      new ApiResponse(200, { userCount }, "Recent users fetched successfully")
+      new ApiResponse(
+        200,
+        recentRegistrations,
+        "Recent users fetched successfully"
+      )
     );
 });
 
