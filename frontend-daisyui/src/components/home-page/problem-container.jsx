@@ -4,54 +4,10 @@ import { Bookmark, Check, CheckCircle, Circle } from "lucide-react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router";
 import Heading from "../shared/heading";
 import SaveProblemToPlaylistModel from "../shared/save-problem-to-playlist-model";
+import ProblemRow from "../shared/problem-row";
 
 
 
-const ProblemRow = ({ problem, idx = 0 }) => {
-  return (
-    <div
-      className={`${
-        idx % 2 == 0 ? "bg-primary/10" : ""
-      } p-4 transition-colors min-w-64 flex items-center justify-between hover:bg-primary/20 `}
-    >
-      <span className="flex items-center gap-2">
-        {problem?.isSolved ? (
-          <CheckCircle className="size-4 text-green-500" />
-        ) : (
-          <Circle className="size-4" />
-        )}
-        <Link to={`/problem/${problem.id}`} className={`font-bold text-sm  `}>
-          {problem.title}
-        </Link>
-      </span>
-
-      <span className="flex items-center gap-4">
-        <span className="md:flex items-center gap-2 hidden ">
-          {problem?.tags &&
-            problem?.tags.length > 0 &&
-            problem?.tags?.map((tag, index) => (
-              <div className="badge badge-neutral" key={index}>
-                {tag}
-              </div>
-            ))}
-        </span>
-        <div
-          className={`${
-            problem?.difficulty === "EASY"
-              ? "bg-green-500"
-              : problem?.difficulty === "MEDIUM"
-              ? "bg-orange-500"
-              : "bg-red-500"
-          } text-white badge badge-neutral`}
-        >
-          {" "}
-          {problem?.difficulty}
-        </div>
-        <SaveProblemToPlaylistModel problemId={problem?.id} />
-      </span>
-    </div>
-  );
-};
 
 const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
   const { getAllProblems, isLoadingProblems } = useProblemStore();
@@ -76,9 +32,9 @@ const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    // setTimeout(() => {
       loadProblems();
-    }, 400);
+    // }, );
   }, []);
 
   useEffect(() => {

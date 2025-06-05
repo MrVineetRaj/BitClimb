@@ -57,12 +57,13 @@ const HomePage = () => {
     setContests(DUMMY_CONTESTS);
   }, []);
 
+  
   // useEffect(() => {
   // Fetch or filter contests based on selected topics and companies
 
   return (
-    <div className=" w-full p-4">
-      {contests && contests?.length > 0 && (
+    <div className="flex flex-col items-center w-full p-4">
+      {/* {contests && contests?.length > 0 && (
         <div className="w-full flex flex-col items-center">
           <Heading
             title={"Upcoming"}
@@ -76,14 +77,14 @@ const HomePage = () => {
             })}
           </div>
         </div>
-      )}
-      <div className="w-full flex flex-row items-start min-h-[600px] gap-4 my-8">
+      )} */}
+      <div className="w-full lg:w-[80%] flex flex-row items-start min-h-[600px] gap-4 my-8">
         <ProblemContainer
           selectedTopics={selectedTopics}
           selectedCompanies={selectedCompanies}
         />
         <div className="h-full max-w-84 min-w-72">
-          <h1 className="text-xl font-bold">DSA TOPICS</h1>
+          <h1 className="text-xl font-bold mt-8">DSA TOPICS</h1>
           <div className="flex gap-3 flex-wrap mt-4 mb-8">
             {COMPANY_NAMES?.map((topic, idx) => {
               return (

@@ -13,6 +13,7 @@ import ProblemPage from "./pages/problem-page";
 import ProblemListsPage from "./pages/problem-lists/problem-lists-page";
 import Contests from "./pages/contests/contests";
 import { useProblemListStore } from "./store/useProblemListStore";
+import ProblemListPage from "./pages/problem-lists/problem-list-page";
 const App = () => {
   const { isCheckingAuth, checkAuth, authUser } = useAuthStore();
   const { getAllProblemLists } = useProblemListStore();
@@ -47,7 +48,12 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/problem/:problemId" element={<ProblemPage />} />
         <Route path="/problem-lists" element={<ProblemListsPage />} />
+        <Route
+          path="/problem-lists/:problemListId"
+          element={<ProblemListPage />}
+        />
         <Route path="/contests" element={<Contests />} />
+        <Route path="/contests/:contestId" element={<Contests />} />
       </Routes>
     </div>
   );

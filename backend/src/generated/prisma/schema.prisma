@@ -81,6 +81,14 @@ model Problem {
   problemLists    ProblemInProblemList[]
   dailyProblems   DailyChallenge[]
   contestProblems ContestProblem[]
+
+  // indexing
+  @@index([isPublic])
+  @@index([difficulty])
+  @@index([userId])
+  @@index([title])
+  @@index([tags])
+  @@index([companies])
 }
 
 model Submissions {
@@ -109,6 +117,11 @@ model Submissions {
   user              User                           @relation(fields: [userId], references: [id], onDelete: Cascade)
   dailyChallenge    UserDailyChallengeSubmission[]
   contestSubmission ContestSubmission?
+
+  @@index([userId])
+  @@index([problemId])
+  @@index([status])
+  @@index([isAccepted])
 }
 
 model TestCases {
@@ -124,6 +137,8 @@ model TestCases {
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([problemId])
 }
 
 model ProblemsSolved {
@@ -137,6 +152,8 @@ model ProblemsSolved {
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@unique([userId, problemId])
+  @@index([problemId])
+  @@index([userId])
 }
 
 model ProblemList {
@@ -152,6 +169,8 @@ model ProblemList {
   problems ProblemInProblemList[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model ProblemInProblemList {
@@ -166,6 +185,8 @@ model ProblemInProblemList {
   problem     Problem     @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@unique([problemListId, problemId])
+  @@index([problemListId])
+  @@index([userId])
 }
 
 model DailyChallenge {
@@ -177,6 +198,9 @@ model DailyChallenge {
   updatedAt DateTime @updatedAt
 
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@index([problemId])
+  @@index([date])
 }
 
 model UserDailyChallengeSubmission {
@@ -216,6 +240,10 @@ model Contest {
   problems       ContestProblem[]
   participations ContestParticipation[]
   submissions    ContestSubmission[]
+
+  @@index([startTime])
+  @@index([endTime])
+  @@index([isRankingCompleted])
 }
 
 model ContestProblem {
@@ -232,6 +260,9 @@ model ContestProblem {
   contestSubmissions ContestSubmission[]
 
   @@unique([contestId, problemId])
+  @@index([contestId])
+  @@index([problemId])
+  @@index([problemIndex])
 }
 
 model ContestParticipation {
@@ -265,4 +296,10 @@ model ContestSubmission {
   contest        Contest        @relation(fields: [contestId], references: [id], onDelete: Cascade)
   contestProblem ContestProblem @relation(fields: [contestProblemId], references: [id], onDelete: Cascade)
   submission     Submissions    @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([contestId])
+  @@index([contestProblemId])
+  @@index([status])
+  @@index([createdAt])
 }

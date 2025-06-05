@@ -24,26 +24,28 @@ const getAllProblemLists = asyncHandler(async (req, res) => {
     );
 });
 
-const getProblemListById = asyncHandler(async (req, res) => {
+const getProblemListMetricsById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const userId = req.user.id;
 
+  const now = Date.now();
   // Validate problem list ID and user ID
   if (!id || !userId) {
     throw new ApiError(400, "Problem list ID and User ID are required");
   }
 
+  // 1. Get basic problem list info
   const problemList = await db.problemList.findUnique({
     where: {
       id: id,
       userId: userId,
     },
-    include: {
-      problems: {
-        include: {
-          problem: true, // Include problem details
-        },
-      },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      createdAt: true,
+      updatedAt: true,
     },
   });
 
@@ -51,13 +53,175 @@ const getProblemListById = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Problem list not found or you are not authorized");
   }
 
+  // 3. Get problems with their difficulties
+  const problemsWithDifficulty = await db.problemInProblemList.findMany({
+    where: {
+      problemListId: id,
+      userId: userId,
+    },
+    include: {
+      problem: {
+        select: {
+          difficulty: true,
+        },
+      },
+    },
+  });
+
+  // 4. Get solved problems with difficulties
+  const solvedProblems = await db.problemInProblemList.findMany({
+    where: {
+      problemListId: id,
+      userId: userId,
+      problem: {
+        problemSolved: {
+          some: {
+            userId: userId,
+          },
+        },
+      },
+    },
+    include: {
+      problem: {
+        select: {
+          difficulty: true,
+        },
+      },
+    },
+  });
+
+  // Calculate metrics
+  const totalProblems = problemsWithDifficulty.length;
+
+  const difficultyCount = {
+    easy: problemsWithDifficulty.filter((p) => p.problem.difficulty === "EASY")
+      .length,
+    medium: problemsWithDifficulty.filter(
+      (p) => p.problem.difficulty === "MEDIUM"
+    ).length,
+    hard: problemsWithDifficulty.filter((p) => p.problem.difficulty === "HARD")
+      .length,
+  };
+
+  const solvedCount = {
+    total: solvedProblems.length,
+    easy: solvedProblems.filter((p) => p.problem.difficulty === "EASY").length,
+    medium: solvedProblems.filter((p) => p.problem.difficulty === "MEDIUM")
+      .length,
+    hard: solvedProblems.filter((p) => p.problem.difficulty === "HARD").length,
+  };
+
+  const result = {
+    ...problemList,
+    totalProblems,
+    solved: solvedCount,
+    counts: difficultyCount,
+  };
+
+  console.log(
+    "\n\n\nProblem List Metrics fetch in ",
+    Date.now() - now,
+    "ms\n\n\n"
+  );
   res
     .status(200)
     .json(
-      new ApiResponse(200, problemList, "Problem list retrieved successfully")
+      new ApiResponse(
+        200,
+        result,
+        "Problem list metrics retrieved successfully"
+      )
     );
 });
 
+const getProblemsPerProblemList = asyncHandler(async (req, res) => {
+  const { id } = req.params; // Problem list ID
+  const { page = 1, limit = 10, difficulty = "" } = req.query;
+  const userId = req.user.id;
+
+  // Validate problem list ID and user ID
+  if (!id || !userId) {
+    throw new ApiError(400, "Problem list ID and User ID are required");
+  }
+
+  // Validate pagination parameters
+  const pageNumber = parseInt(page, 10);
+  const pageSize = parseInt(limit, 10);
+  if (isNaN(pageNumber) || isNaN(pageSize) || pageNumber < 1 || pageSize < 1) {
+    throw new ApiError(400, "Invalid pagination parameters");
+  }
+
+  // Fetch problems in the specified problem list with pagination and difficulty filter
+  const problems = await db.problemInProblemList.findMany({
+    where: {
+      problemListId: id,
+      userId: userId,
+      ...(difficulty && {
+        problem: {
+          difficulty: difficulty.toUpperCase(),
+        },
+      }),
+    },
+    include: {
+      problem: {
+        select: {
+          id: true,
+          title: true,
+          difficulty: true,
+          tags: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    skip: (pageNumber - 1) * pageSize,
+    take: pageSize,
+  });
+
+  // check if any problem is solved by the user
+  const solvedProblems = await db.problemsSolved.findMany({
+    where: {
+      userId: userId,
+      problemId: { in: problems.map((p) => p.id) },
+    },
+    select: { problemId: true },
+  });
+
+  const solvedProblemIds = new Set(solvedProblems.map((sp) => sp.problemId));
+
+  const problemsWithSolvedStatus = problems.map((problem) => ({
+    ...problem,
+    isSolved: solvedProblemIds.has(problem.id),
+  }));
+
+  const totalProblemsCount = await db.problemInProblemList.count({
+    where: {
+      problemListId: id,
+      userId: userId,
+      ...(difficulty && {
+        problem: {
+          difficulty: difficulty.toUpperCase(),
+        },
+      }),
+    },
+  });
+
+  const totalProblemPages = Math.ceil(totalProblemsCount / pageSize);
+
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        problems: problemsWithSolvedStatus,
+        totalPages: totalProblemPages,
+        currentPage: page,
+        limit,
+      },
+      "Problems fetched successfully"
+    )
+  );
+});
 const createProblemList = asyncHandler(async (req, res) => {
   const { title, description } = req.body;
   const userId = req.user.id;
@@ -179,10 +343,7 @@ const addProblemToList = asyncHandler(async (req, res) => {
     const existingListTitles = existingProblems
       .map((item) => item.problemList.title)
       .join("', '");
-    throw new ApiError(
-      400,
-      `Problem is already in '${existingListTitles}'`
-    );
+    throw new ApiError(400, `Problem is already in '${existingListTitles}'`);
   }
 
   await db.problemInProblemList.createMany({
@@ -199,10 +360,11 @@ const addProblemToList = asyncHandler(async (req, res) => {
 const removeProblemFromList = asyncHandler(async (req, res) => {});
 export {
   getAllProblemLists,
-  getProblemListById,
+  getProblemListMetricsById,
   createProblemList,
   updateProblemList,
   deleteProblemList,
   addProblemToList,
   removeProblemFromList,
+  getProblemsPerProblemList,
 };

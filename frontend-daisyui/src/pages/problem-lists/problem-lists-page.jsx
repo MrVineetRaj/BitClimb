@@ -3,34 +3,21 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { Link } from "react-router";
 import { Plus } from "lucide-react";
 import Heading from "../../components/shared/heading";
+import { useProblemListStore } from "../../store/useProblemListStore";
+import CreateNewProblemList from "../../components/shared/create-new-problem-list";
 
 const ProblemListsPage = () => {
   const { authUser } = useAuthStore();
-  const [lists, setLists] = useState([
-    {
-      id: 1,
-      title: "My First Problem List",
-    },
-    {
-      id: 2,
-      title: "My Second Problem List",
-    },
-    {
-      id: 3,
-      title: "My Third Problem List",
-    },
-  ]);
+  const { problemLists } = useProblemListStore();
+
   return (
     <div className="w-full p-8 h-full flex gap-4 items-start">
-      <div className="min-w-72 w-48 bg-base-100/50 backdrop:blur-2xl min-h-[700px]">
-        <h2 className="text-2xl font-bold"> Your Problem Lists</h2>
+      <div className="min-w-72 w-48 bg-base-100/50 backdrop:blur-2xl min-h-[700px] sticky bottom-0">
+        <h2 className="text-2xl font-bold">Your Problem Lists</h2>
         <hr className="my-4" />
-        <div className="flex flex-col gap-5 mt-8 items-center">
-          <button className="btn btn-secondary btn-soft w-full btn-outline  font-bold">
-            <Plus className="w-6 h-6 " />
-            New List
-          </button>
-          {lists?.map((list, idx) => {
+        <div className="flex flex-col gap-5 mt-8 items-center ">
+          <CreateNewProblemList />
+          {problemLists?.map((list, idx) => {
             return (
               <Link
                 to={`/problem-lists/${list.id}`}

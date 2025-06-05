@@ -8,7 +8,8 @@ export const useProblemListStore = create((set) => ({
   isLoadingProblemsLists: false,
   isCreatingProblemList: false,
   isAddingProblemToList: false,
-  error: null,
+  isLoadingProblemListMetrics: false,
+  isLoadingProblemListWiseProblems: false,
 
   createProblemList: async (title, description) => {
     set({
@@ -97,6 +98,78 @@ export const useProblemListStore = create((set) => ({
         id: toastId,
         duration: 3000,
       });
+    }
+  },
+
+  getProblemListMetricsById: async (id) => {
+    set({ isLoadingProblemListMetrics: true, error: null });
+    try {
+      const response = await axiosInstance.get(`/problem-list/${id}/metrics`);
+      return response.data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data?.message ||
+            "Failed to fetch problem list metrics"
+        );
+      } else {
+        toast.error(
+          "An unexpected error occurred while fetching problem list metrics"
+        );
+      }
+    } finally {
+      set({ isLoadingProblemListMetrics: false });
+    }
+  },
+
+  // getProblemsPerProblemList: async (
+  //   problemListId,
+  //   page = 1,
+  //   limit = 10,
+  //   difficulty = ""
+  // ) => {
+  //   set({ isLoadingProblemListWiseProblems: true });
+  //   try {
+  //     const response = await axiosInstance.get(
+  //       `/problem-list/${problemListId}/problems?page=${page}&limit=${limit}&difficulty=${difficulty}`
+  //     );
+  //     return response.data;
+  //   } catch (error) {
+  //     if (error instanceof AxiosError) {
+  //       toast.error(
+  //         error.response?.data?.message ||
+  //           "Failed to fetch problems for problem list"
+  //       );
+  //     } else {
+  //       toast.error(
+  //         "An unexpected error occurred while fetching problems for problem list"
+  //       );
+  //     }
+  //   } finally {
+  //     set({ isLoadingProblemListWiseProblems: false });
+  //   }
+  // },
+
+  getProblemsPerProblemList: async (problemListId, page = 1, limit = 10, difficulty = "") => {
+    set({ isLoadingProblemListWiseProblems: true});
+    try {
+      const response = await axiosInstance.get(
+        `/problem-list/${problemListId}/problems?page=${page}&limit=${limit}&difficulty=${difficulty}`
+      );
+      return response.data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data?.message ||
+            "Failed to fetch problems for problem list"
+        );
+      } else {
+        toast.error(
+          "An unexpected error occurred while fetching problems for problem list"
+        );
+      }
+    } finally {
+      set({ isLoadingProblemListWiseProblems: false });
     }
   },
 }));

@@ -3,6 +3,7 @@ import { AlertCircle, Bookmark, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { createProblemListSchema } from "../../lib/zod.schema";
 import { useProblemListStore } from "../../store/useProblemListStore";
+
 const CreateNewProblemList = ({ problemId = "problem_list_page" }) => {
   const { isCreatingProblemList, createProblemList, getAllProblemLists } =
     useProblemListStore();
@@ -33,7 +34,9 @@ const CreateNewProblemList = ({ problemId = "problem_list_page" }) => {
   return (
     <>
       <button
-        className="btn btn-secondary btn-outline absolute right-2 top-2"
+        className={`btn btn-secondary btn-outline ${
+          problemId !== "problem_list_page" ? "absolute" : "w-full btn-soft"
+        } right-2 top-2`}
         onClick={() =>
           document
             .getElementById(`create_new_problem_list_model_at_${problemId}`)
