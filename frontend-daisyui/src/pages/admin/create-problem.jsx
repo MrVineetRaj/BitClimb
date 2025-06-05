@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Heading from "../../components/shared/heading";
-import { BookOpen, Code, Cog, Edit, File, Plus, Trash } from "lucide-react";
+import {
+  BookOpen,
+  Code,
+  Cog,
+  Edit,
+  File,
+  Plus,
+  Trash,
+  AlertCircle,
+} from "lucide-react";
 import { createProblemSchema } from "../../lib/zod.schema";
 import { useNavigate } from "react-router";
 import { Editor } from "@monaco-editor/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { axiosInstance } from "../../lib/axios";
+import { AxiosError } from "axios";
+import { toast } from "react-hot-toast";
 
 const CreateProblem = () => {
   const navigate = useNavigate();
@@ -24,6 +35,7 @@ const CreateProblem = () => {
     register,
     control,
     reset,
+    trigger,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
@@ -115,25 +127,39 @@ const CreateProblem = () => {
     name: "companies",
   });
 
+  useEffect(() => {
+    console.log(tagFields);
+    console.log(companyFields);
+    console.log(exampleFields);
+    console.log(testCaseFields);
+  }, [tagFields, companyFields, exampleFields, testCaseFields]);
   // useEffect
   const onSubmit = async (data) => {
-    // console.log("Form data:", data);
+    console.log("Form data:", data);
+    const toastId =  toast.loading("creating!");
+
     try {
       setIsLoading(true);
 
       // Add your API call here
       const res = await axiosInstance.post("/problem/create-problem", data);
       if (res.data.success) {
-        toast.success("Problem created successfully!");
+        toast.success("Problem created successfully!", {
+          id: toastId,
+        });
         // reset();
         // navigate(`/problem/${res.data.data.problemId}`);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.message || "An error occurred");
+        toast.error(error.response?.data?.message || "An error occurred", {
+          id: toastId,
+        });
         return;
       }
-      toast.error("Failed to create problem");
+      toast.error("Failed to create problem", {
+        id: toastId,
+      });
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -143,7 +169,7 @@ const CreateProblem = () => {
   return (
     <div className="w-full p-4 flex flex-col items-start justify-start">
       <Heading title={"Create New Problem"} />
-      <form action="" className="w-full">
+      <form action="" className="w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="tabs tabs-border w-full">
           <label className="tab">
             <input
@@ -168,7 +194,6 @@ const CreateProblem = () => {
                   type="text"
                   className="input w-full"
                   placeholder="Type here"
-                  required
                   {...register("title")}
                 />{" "}
                 {errors.title?.message && (
@@ -191,6 +216,12 @@ const CreateProblem = () => {
                   <option value={"MEDIUM"}>Medium</option>
                   <option value={"HARD"}>Hard</option>
                 </select>
+                {errors.difficulty?.message && (
+                  <p className="text-error flex items-center gap-2">
+                    <AlertCircle className="size-4" />
+                    {errors.difficulty?.message}
+                  </p>
+                )}
               </fieldset>
             </div>
             <fieldset className="fieldset  w-full">
@@ -201,9 +232,14 @@ const CreateProblem = () => {
                 className="textarea w-full"
                 rows="7"
                 placeholder="Type here..."
-                required
                 {...register("description")}
-              ></textarea>
+              ></textarea>{" "}
+              {errors.description?.message && (
+                <p className="text-error flex items-center gap-2">
+                  <AlertCircle className="size-4" />
+                  {errors.description?.message}
+                </p>
+              )}
             </fieldset>
 
             <div className="flex gap-4">
@@ -214,24 +250,34 @@ const CreateProblem = () => {
                 <div className="space-y-2">
                   {tagFields.map((field, index) => (
                     <div key={field.id} className="flex items-center gap-2">
-                      <input
-                        {...register(`tags.${index}`)}
-                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-background"
-                        placeholder="Enter tag"
-                        disabled={isSubmitting || isLoading}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (tagFields.length > 1) {
-                            removeTag(index);
-                          }
-                        }}
-                        className="text-red-500 hover:text-red-700"
-                        disabled={tagFields.length <= 1}
-                      >
-                        <Trash className="size-4" />
-                      </button>
+                      <fieldset className="fieldset  w-full">
+                        <span className="flex gap-4 items-center">
+                          <input
+                            {...register(`tags.${index}`)}
+                            className="input w-full"
+                            placeholder="Enter tag"
+                            disabled={isSubmitting || isLoading}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (tagFields.length > 1) {
+                                removeTag(index);
+                              }
+                            }}
+                            className="text-red-500 hover:text-red-700"
+                            disabled={tagFields.length <= 1}
+                          >
+                            <Trash className="size-4" />
+                          </button>
+                        </span>
+                        {errors.tags?.message && (
+                          <p className="text-error flex items-center gap-2">
+                            <AlertCircle className="size-4" />
+                            {errors.tags?.message}
+                          </p>
+                        )}
+                      </fieldset>
                     </div>
                   ))}
                   <div
@@ -249,24 +295,34 @@ const CreateProblem = () => {
                 <div className="space-y-2">
                   {companyFields.map((field, index) => (
                     <div key={field.id} className="flex items-center gap-2">
-                      <input
-                        {...register(`companies.${index}`)}
-                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-background"
-                        placeholder="Enter tag"
-                        disabled={isSubmitting || isLoading}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (tagFields.length > 1) {
-                            removeCompany(index);
-                          }
-                        }}
-                        className="text-red-500 hover:text-red-700"
-                        disabled={tagFields.length <= 1}
-                      >
-                        <Trash className="size-4" />
-                      </button>
+                      <fieldset className="fieldset  w-full">
+                        <span className="flex gap-4 items-center">
+                          <input
+                            {...register(`companies.${index}`)}
+                            className="w-full input"
+                            placeholder="Enter tag"
+                            disabled={isSubmitting || isLoading}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (companyFields.length > 1) {
+                                removeCompany(index);
+                              }
+                            }}
+                            className="text-red-500 hover:text-red-700"
+                            disabled={companyFields.length <= 1}
+                          >
+                            <Trash className="size-4" />
+                          </button>
+                        </span>
+                        {errors.companies?.message && (
+                          <p className="text-error flex items-center gap-2">
+                            <AlertCircle className="size-4" />
+                            {errors.companies?.message}
+                          </p>
+                        )}
+                      </fieldset>
                     </div>
                   ))}
                   <div
@@ -287,10 +343,60 @@ const CreateProblem = () => {
                 className="textarea w-full"
                 rows="7"
                 placeholder="Type here..."
-                required
                 {...register("constraints")}
               ></textarea>
+              {errors.constraints?.message && (
+                <p className="text-error flex items-center gap-2">
+                  <AlertCircle className="size-4" />
+                  {errors.constraints?.message}
+                </p>
+              )}
             </fieldset>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold mb-2">
+                Hints ? <span className="text-red-500">*</span>
+              </h3>
+              <div className="space-y-2">
+                {hintFields.map((field, index) => (
+                  <div key={field.id} className="flex items-center gap-2">
+                    <fieldset className="fieldset  w-full">
+                      <span className="flex gap-4 items-center">
+                        <input
+                          {...register(`hints.${index}`)}
+                          className="w-full input"
+                          placeholder="Enter tag"
+                          disabled={isSubmitting || isLoading}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (hintFields.length > 1) {
+                              removeHint(index);
+                            }
+                          }}
+                          className="text-red-500 hover:text-red-700"
+                          disabled={hintFields.length <= 1}
+                        >
+                          <Trash className="size-4" />
+                        </button>
+                      </span>
+                      {errors.hints?.message && (
+                        <p className="text-error flex items-center gap-2">
+                          <AlertCircle className="size-4" />
+                          {errors.hints?.message}
+                        </p>
+                      )}
+                    </fieldset>
+                  </div>
+                ))}
+                <div
+                  className="btn btn-primary flex items-center gap-1 w-full"
+                  onClick={() => appendHint("")}
+                >
+                  <Plus className="size-4" /> Add Hints
+                </div>
+              </div>
+            </div>
           </div>
 
           <label className="tab">
@@ -338,7 +444,6 @@ const CreateProblem = () => {
                         className="textarea w-full"
                         rows="7"
                         placeholder="Type here..."
-                        required
                         {...register(`examples.${index}.input`)}
                       ></textarea>
                     </fieldset>
@@ -350,7 +455,6 @@ const CreateProblem = () => {
                         className="textarea w-full"
                         rows="7"
                         placeholder="Type here..."
-                        required
                         {...register(`examples.${index}.output`)}
                       ></textarea>
                     </fieldset>
@@ -366,8 +470,14 @@ const CreateProblem = () => {
                       {...register(`examples.${index}.explanation`)}
                     ></textarea>
                   </fieldset>
+                  {errors.examples?.message && (
+                    <p className="text-error flex items-center gap-2">
+                      <AlertCircle className="size-4" />
+                      {errors.examples?.message}
+                    </p>
+                  )}
                 </div>
-              ))}{" "}
+              ))}
               <button
                 className="btn btn-primary"
                 type="button"
@@ -425,8 +535,7 @@ const CreateProblem = () => {
                         className="textarea w-full"
                         rows="5"
                         placeholder="Type here..."
-                        required
-                        {...register(`testCase.${index}.input`)}
+                        {...register(`testCases.${index}.input`)}
                       ></textarea>
                     </fieldset>
                     <fieldset className="fieldset  w-full">
@@ -437,13 +546,18 @@ const CreateProblem = () => {
                         className="textarea w-full"
                         rows="5"
                         placeholder="Type here..."
-                        required
-                        {...register(`testCase.${index}.output`)}
+                        {...register(`testCases.${index}.output`)}
                       ></textarea>
                     </fieldset>
                   </div>
+                  {errors.testCases?.message && (
+                    <p className="text-error flex items-center gap-2">
+                      <AlertCircle className="size-4" />
+                      {errors.testCases?.message}
+                    </p>
+                  )}
                 </div>
-              ))}{" "}
+              ))}
               <button
                 className="btn btn-primary"
                 type="button"
@@ -471,7 +585,6 @@ const CreateProblem = () => {
                 <h3 className="font-medium mb-4 flex items-center gap-2">
                   <Code className="size-5" /> JavaScript
                 </h3>
-
                 <Controller
                   name="codeSnippets.JAVASCRIPT"
                   control={control}
@@ -902,6 +1015,7 @@ const CreateProblem = () => {
         <div className="flex items-center justify-between pl-10 mt-4">
           {currentlyActiveTab >= 0 && (
             <button
+              type="button"
               className="btn btn-neutral"
               disabled={currentlyActiveTab === 0}
               onClick={() => {
@@ -913,8 +1027,11 @@ const CreateProblem = () => {
           )}
           {currentlyActiveTab <= tabs.length - 2 ? (
             <button
+              type="button"
               className="btn btn-neutral"
-              onClick={() => {
+              onClick={async () => {
+                // Validate current tab fields before moving
+
                 setCurrentlyActiveTab((prev) =>
                   Math.min(prev + 1, tabs.length - 1)
                 );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Heading from "../components/shared/heading";
 import ContestCard from "../components/contests/contest-card";
 import ProblemContainer from "../components/home-page/problem-container";
+import { useSearchParams } from "react-router";
 
 const DUMMY_CONTESTS = [
   {
@@ -42,13 +43,23 @@ const COMPANY_NAMES = [
   "Oracle",
 ];
 const HomePage = () => {
+  const [searchParams] = useSearchParams();
   const [contests, setContests] = useState();
-  const [selectedTopics, setSelectedTopics] = useState([]);
-  const [selectedCompanies, setSelectedCompanies] = useState([]);
+  const [selectedTopics, setSelectedTopics] = useState(
+    searchParams?.get("tags")?.split(";") || []
+  );
+  const [selectedCompanies, setSelectedCompanies] = useState(
+    searchParams?.get("company")?.split(";") || []
+  );
+
   // const []
   useEffect(() => {
     setContests(DUMMY_CONTESTS);
   }, []);
+
+  // useEffect(() => {
+  // Fetch or filter contests based on selected topics and companies
+
   return (
     <div className=" w-full p-4">
       {contests && contests?.length > 0 && (
@@ -67,7 +78,10 @@ const HomePage = () => {
         </div>
       )}
       <div className="w-full flex flex-row items-start min-h-[600px] gap-4 my-8">
-        <ProblemContainer />
+        <ProblemContainer
+          selectedTopics={selectedTopics}
+          selectedCompanies={selectedCompanies}
+        />
         <div className="h-full max-w-84 min-w-72">
           <h1 className="text-xl font-bold">DSA TOPICS</h1>
           <div className="flex gap-3 flex-wrap mt-4 mb-8">

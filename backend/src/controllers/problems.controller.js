@@ -152,77 +152,137 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   // pagination, etc.
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
-  const difficultySort = req.query.difficultySort || "asc";
-  const difficultyFilter = req.query.difficulty || null;
+  const tagsQuery = req.query.tags || null; // Tags filter
+  const companyQuery = req.query.company || null; // Company filter
+  const searchQuery = req.query.search || null;
 
   // console.log("Fetching all problems with pagination:", {
   //   page,
   //   limit,
   // });
+  console.log("Fetching all problems with pagination:", {
+    tagsQuery,
+    companyQuery,
+    searchQuery,
+    page,
+    limit,
+  });
   let problems = [];
   let totalProblemPages = 0;
-  problems = await redis.get(`problems:${page}:${limit}:`);
+  if (searchQuery || tagsQuery || companyQuery) {
+    const whereClause = {};
 
-  totalProblemPages = await redis.get(`totalProblemPages:${limit}`);
-  if (problems && totalProblemPages) {
-    problems = JSON.parse(problems);
-  } else if (problems && !!totalProblemPages) {
-    const totalProblems = await db.problem.count();
-    totalProblemPages = Math.ceil(totalProblems / limit);
+    // Only add title filter if searchQuery exists and is not empty
+    if (searchQuery && searchQuery.trim()) {
+      whereClause.title = {
+        contains: searchQuery.toLowerCase().trim(),
+        mode: "insensitive",
+      };
+    }
 
-    await redis.set(
-      `totalProblemPages:${limit}`,
-      totalProblemPages,
-      "EX",
-      60 * 60 * 24 * 7 // Cache for 1 hour
-    );
-  } else {
+    // Only add tags filter if tagsQuery exists and is not empty
+    if (tagsQuery && tagsQuery.trim()) {
+      whereClause.tags = {
+        hasEvery: tagsQuery.split(";").filter((tag) => tag.trim()),
+        // mode: "insensitive",
+      };
+    }
+    // Only add companies filter if companyQuery exists and is not empty
+    if (companyQuery && companyQuery.trim()) {
+      whereClause.companies = {
+        hasEvery: companyQuery.split(";").filter((company) => company.trim()),
+        // mode: "insensitive",
+      };
+    }
+
+    // console.log("Search where clause:", whereClause);
+    const companies = ["Google", "Amazon"];
+
+    // problems = await db.problem.findMany({
+    //   where: {
+    //     companies: {
+    //       hasEvery: companies,
+    //     },
+    //   },
+    //   select: {
+    //     id: true,
+    //     title: true,
+    //     tags: true,
+    //     difficulty: true,
+    //     companies: true,
+    //   },
+    // });
     problems = await db.problem.findMany({
-      where: {
-        isPublic: true, // Only fetch public problems
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
+      where: whereClause,
       select: {
         id: true,
         title: true,
         tags: true,
         difficulty: true,
       },
-      skip: (page - 1) * limit,
-      take: limit,
     });
+    console.log("problems fetched:", problems); // here it shows 2 values in problems
+  } else {
+    problems = await redis.get(`problems:${page}:${limit}:`);
 
-    // console.log("problems fetched:", problems.length);
-    if (!problems || problems.length === 0) {
-      return res
-        .status(200)
-        .json(new ApiResponse(404, [], "No problems found"));
+    totalProblemPages = await redis.get(`totalProblemPages:${limit}`);
+    if (problems && totalProblemPages) {
+      problems = JSON.parse(problems);
+    } else if (problems && !!totalProblemPages) {
+      const totalProblems = await db.problem.count();
+      totalProblemPages = Math.ceil(totalProblems / limit);
+
+      await redis.set(
+        `totalProblemPages:${limit}`,
+        totalProblemPages,
+        "EX",
+        60 * 60 * 24 * 7 // Cache for 1 hour
+      );
+    } else {
+      problems = await db.problem.findMany({
+        where: {
+          isPublic: true, // Only fetch public problems
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        select: {
+          id: true,
+          title: true,
+          tags: true,
+          difficulty: true,
+        },
+        skip: (page - 1) * limit,
+        take: limit,
+      });
+
+      // console.log("problems fetched:", problems.length);
+      if (!problems || problems.length === 0) {
+        return res
+          .status(200)
+          .json(new ApiResponse(404, [], "No problems found"));
+      }
+
+      const totalProblems = await db.problem.count();
+      totalProblemPages = Math.ceil(totalProblems / limit);
+
+      // Cache the problems and total pages in Redis
+      await redis.set(
+        `problems:${page}:${limit}:`,
+        JSON.stringify(problems),
+        "EX",
+        60 * 60 * 24 * 7 // Cache for 1 hour
+      );
+      await redis.set(
+        `totalProblemPages:${limit}`,
+        totalProblemPages,
+        "EX",
+        60 // Cache for 1 hour
+      );
     }
-
-    const totalProblems = await db.problem.count();
-    totalProblemPages = Math.ceil(totalProblems / limit);
-
-    // Cache the problems and total pages in Redis
-    await redis.set(
-      `problems:${page}:${limit}:`,
-      JSON.stringify(problems),
-      "EX",
-      60 * 60 * 24 * 7 // Cache for 1 hour
-    );
-    await redis.set(
-      `totalProblemPages:${limit}`,
-      totalProblemPages,
-      "EX",
-      60 // Cache for 1 hour
-    );
   }
+  console.log("problems displaying:", problems); // here it show empty
 
-  console.log(
-    `Fetched problems for page ${page} with limit ${limit} and total pages ${totalProblemPages}`,
-    problems
-  );
   const userId = await getUserIdIfAuthenticated(req);
   if (!userId) {
     res.status(200).json(

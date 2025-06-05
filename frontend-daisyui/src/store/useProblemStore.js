@@ -161,11 +161,17 @@ export const useProblemStore = create((set) => ({
     // get
   },
 
-  getAllProblems: async (limit = 10, page = 1) => {
+  getAllProblems: async (
+    limit = 10,
+    page = 1,
+    search = "",
+    tags = "",
+    company = ""
+  ) => {
     set({ isLoadingProblems: true });
     try {
       const response = await axiosInstance.get(
-        `/problem/get-problems?limit=${limit}&page=${page}`
+        `/problem/get-problems?limit=${limit}&page=${page}&search=${search}&tags=${tags}&company=${company}`
       );
 
       set({ isLoadingProblems: false });

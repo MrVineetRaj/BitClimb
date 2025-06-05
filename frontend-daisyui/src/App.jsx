@@ -10,6 +10,8 @@ import AdminPanel from "./pages/admin/admin-panel";
 import CreateProblem from "./pages/admin/create-problem";
 import CreateContest from "./pages/admin/create-contest";
 import ProblemPage from "./pages/problem-page";
+import ProblemListsPage from "./pages/problem-lists/problem-lists-page";
+import Contests from "./pages/contests/contests";
 const App = () => {
   const { isCheckingAuth, checkAuth } = useAuthStore();
   useEffect(() => {
@@ -33,6 +35,8 @@ const App = () => {
         <Route path="/admin/panel/create-contest" element={<CreateContest />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/problem/:problemId" element={<ProblemPage />} />
+        <Route path="/problem-lists" element={<ProblemListsPage />} />
+        <Route path="/contests" element={<Contests />} />
       </Routes>
     </div>
   );
