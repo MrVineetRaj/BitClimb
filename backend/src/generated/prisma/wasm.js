@@ -200,7 +200,7 @@ exports.Prisma.ProblemsSolvedScalarFieldEnum = {
 
 exports.Prisma.ProblemListScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  title: 'title',
   description: 'description',
   userId: 'userId',
   createdAt: 'createdAt',
@@ -212,7 +212,8 @@ exports.Prisma.ProblemInProblemListScalarFieldEnum = {
   problemListId: 'problemListId',
   problemId: 'problemId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.DailyChallengeScalarFieldEnum = {

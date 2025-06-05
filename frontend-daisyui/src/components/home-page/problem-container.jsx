@@ -3,6 +3,10 @@ import { useProblemStore } from "../../store/useProblemStore";
 import { Bookmark, Check, CheckCircle, Circle } from "lucide-react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router";
 import Heading from "../shared/heading";
+import SaveProblemToPlaylistModel from "../shared/save-problem-to-playlist-model";
+
+
+
 const ProblemRow = ({ problem, idx = 0 }) => {
   return (
     <div
@@ -43,11 +47,12 @@ const ProblemRow = ({ problem, idx = 0 }) => {
           {" "}
           {problem?.difficulty}
         </div>
-        <Bookmark className="size-4 text-gray-400 ml-2" />
+        <SaveProblemToPlaylistModel problemId={problem?.id} />
       </span>
     </div>
   );
 };
+
 const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
   const { getAllProblems, isLoadingProblems } = useProblemStore();
   const [problems, setProblems] = useState();
@@ -66,6 +71,7 @@ const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
     company = ""
   ) => {
     const res = await getAllProblems(limit, page, search, tags, company);
+    console.log("res", res);
     setProblems(res?.problems);
   };
 

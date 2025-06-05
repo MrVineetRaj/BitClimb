@@ -12,12 +12,16 @@ import {
   removeProblemFromList,
 } from "../controllers/problem-list.controller.js";
 
-problemListRouter.get("/", authMiddleware, getAllProblemLists);
+problemListRouter.get("/all", authMiddleware, getAllProblemLists);
 problemListRouter.get("/:id", authMiddleware, getProblemListById);
-problemListRouter.post("/", authMiddleware, createProblemList);
+problemListRouter.post("/new-problem-list", authMiddleware, createProblemList);
 problemListRouter.put("/:id", authMiddleware, updateProblemList);
 problemListRouter.delete("/:id", authMiddleware, deleteProblemList);
-problemListRouter.post("/:id/add-problem", authMiddleware, addProblemToList);
+problemListRouter.post(
+  "/add-problem",
+  authMiddleware,
+  addProblemToList
+);
 problemListRouter.post(
   "/:id/remove-problem",
   authMiddleware,

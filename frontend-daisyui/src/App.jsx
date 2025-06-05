@@ -12,8 +12,10 @@ import CreateContest from "./pages/admin/create-contest";
 import ProblemPage from "./pages/problem-page";
 import ProblemListsPage from "./pages/problem-lists/problem-lists-page";
 import Contests from "./pages/contests/contests";
+import { useProblemListStore } from "./store/useProblemListStore";
 const App = () => {
-  const { isCheckingAuth, checkAuth } = useAuthStore();
+  const { isCheckingAuth, checkAuth, authUser } = useAuthStore();
+  const { getAllProblemLists } = useProblemListStore();
   useEffect(() => {
     const initializeAuth = () => {
       checkAuth();
@@ -21,6 +23,15 @@ const App = () => {
 
     initializeAuth();
   }, []);
+
+  useEffect(() => {
+    const fetchProblemLists = () => {
+      if (authUser) {
+        getAllProblemLists();
+      }
+    };
+    fetchProblemLists();
+  }, [authUser]);
   return (
     <div className="min-h-screen w-screen flex flex-col items-center relative">
       <Background />

@@ -67,7 +67,7 @@ const createProblemList = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Title and User ID are required");
   }
 
-  const newProblemList = await db.problemList.create({
+  await db.problemList.create({
     data: {
       title: title,
       description: description,
@@ -77,10 +77,9 @@ const createProblemList = asyncHandler(async (req, res) => {
 
   res
     .status(201)
-    .json(
-      new ApiResponse(201, newProblemList, "Problem list created successfully")
-    );
+    .json(new ApiResponse(201, {}, "Problem list created successfully"));
 });
+
 const updateProblemList = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { title, description } = req.body;
@@ -117,6 +116,7 @@ const updateProblemList = asyncHandler(async (req, res) => {
       )
     );
 });
+
 const deleteProblemList = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const userId = req.user.id;
@@ -141,35 +141,60 @@ const deleteProblemList = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Problem list deleted successfully"));
 });
+
 const addProblemToList = asyncHandler(async (req, res) => {
-  const { id } = req.params; // Problem list ID
-  const { problemId } = req.body; // Problem ID to add
+  const { problemListIds, problemId } = req.query; // Problem list ID
   const userId = req.user.id;
 
   // Validate input
-  if (!id || !problemId || !userId) {
+  if (!problemListIds || !problemId || !userId) {
     throw new ApiError(
       400,
       "Problem list ID, Problem ID, and User ID are required"
     );
   }
 
-  await db.problemInProblemList.create({
-    data: {
+  const ids = problemListIds.split(";").map((id) => id.trim());
+
+  // check if the problem exists in the any lists already
+  const existingProblems = await db.problemInProblemList.findMany({
+    where: {
+      problemId: problemId,
+      problemListId: {
+        in: ids,
+      },
+      userId: userId,
+    },
+    select: {
+      problemList: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
+    },
+  });
+
+  if (existingProblems && existingProblems.length > 0) {
+    const existingListTitles = existingProblems
+      .map((item) => item.problemList.title)
+      .join("', '");
+    throw new ApiError(
+      400,
+      `Problem is already in '${existingListTitles}'`
+    );
+  }
+
+  await db.problemInProblemList.createMany({
+    data: ids.map((id) => ({
       problemListId: id,
       problemId: problemId,
       userId: userId,
-    },
+    })),
   });
   res
     .status(201)
-    .json(
-      new ApiResponse(
-        200,
-        updatedProblemList,
-        "Problem added to list successfully"
-      )
-    );
+    .json(new ApiResponse(200, {}, "Problem added to list successfully"));
 });
 const removeProblemFromList = asyncHandler(async (req, res) => {});
 export {

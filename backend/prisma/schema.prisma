@@ -142,7 +142,7 @@ model ProblemsSolved {
 model ProblemList {
   id String @id @default(uuid())
 
-  name        String
+  title        String 
   description String?
   userId      String
 
@@ -160,6 +160,7 @@ model ProblemInProblemList {
   problemId     String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  userId       String
 
   problemList ProblemList @relation(fields: [problemListId], references: [id], onDelete: Cascade)
   problem     Problem     @relation(fields: [problemId], references: [id], onDelete: Cascade)

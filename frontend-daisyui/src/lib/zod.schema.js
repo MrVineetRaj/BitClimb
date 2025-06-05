@@ -100,3 +100,8 @@ export const createContestSchema = z.object({
     )
     .min(1, "At least one problem is required"),
 });
+
+export const createProblemListSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().optional(),
+});
