@@ -26,3 +26,28 @@ export const reviewCode = async (source_code, problem_description, verdict) => {
 
   return resp;
 };
+
+export const testCaseGenerator = async (constraints, examples, testCases) => {
+  let messages = [
+    {
+      role: "system",
+      content: SYSTEM_PROMPTS.TEST_CASE_GENERATOR,
+    },
+    {
+      role: "user",
+      content: JSON.stringify({
+        constraints: constraints,
+        examples: examples,
+        testCases: testCases,
+      }),
+    },
+  ];
+  const completion = await client.chat.completions.create({
+    model: "gpt-4.1-mini",
+    messages: messages,
+  });
+
+  let resp = completion.choices[0].message.content;
+
+  return resp;
+};

@@ -156,7 +156,7 @@ export const getAllProblems = asyncHandler(async (req, res) => {
   const searchQuery = req.query.search || null;
   const ref = req.query.ref || null;
 
-  if (ref.toLowerCase() === "admin") {
+  if (ref?.toLowerCase() === "admin") {
     const userId = await getUserIdIfAuthenticated(req);
 
     if (!userId) {

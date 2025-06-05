@@ -11,19 +11,24 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { createProblemSchema } from "../../lib/zod.schema";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { Editor } from "@monaco-editor/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { axiosInstance } from "../../lib/axios";
 import { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
+import { useAdminStore } from "../../store/useAdminStore";
 
 const CreateProblem = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("details");
   const [isLoading, setIsLoading] = useState(false);
   const [currentlyActiveTab, setCurrentlyActiveTab] = useState(0);
+  const [searchParams] = useSearchParams();
+
+  const { getOneProblem, isLoadingProblem } = useAdminStore();
+  const [problemId, setProblemId] = useState(searchParams?.get("problemId"));
   const tabs = [
     "details",
     "examples",
@@ -128,15 +133,70 @@ const CreateProblem = () => {
   });
 
   useEffect(() => {
-    console.log(tagFields);
-    console.log(companyFields);
-    console.log(exampleFields);
-    console.log(testCaseFields);
-  }, [tagFields, companyFields, exampleFields, testCaseFields]);
+    if (problemId) {
+      getOneProblem(problemId)
+        .then((res) => {
+          const problem = res.data;
+          console.log("Problem fetched:", problem);
+
+          if (problem) {
+            reset({
+              title: problem.title,
+              description: problem.description,
+              difficulty: problem.difficulty,
+              tags: problem.tags || [""],
+              companies: problem.companies || [""],
+              constraints: problem.constraints,
+              examples: problem.examples || [
+                { input: "", output: "", explanation: "" },
+              ],
+              hints: problem.hints || [""],
+              editorial: problem.editorial || "",
+              testCases: problem.testCases || [{ input: "", output: "" }],
+              codeSnippetsHeader: problem.codeSnippetsHeader || {
+                JAVASCRIPT: "",
+                PYTHON: "",
+                CPP: "",
+              },
+              codeSnippets: problem.codeSnippets || {
+                JAVASCRIPT: "",
+                PYTHON: "",
+                CPP: "",
+              },
+              codeSnippetsFooter: problem.codeSnippetsFooter || {
+                JAVASCRIPT: "",
+                PYTHON: "",
+                CPP: "",
+              },
+              referenceSolutionHeader: problem.referenceSolutionHeader || {
+                JAVASCRIPT: "",
+                PYTHON: "",
+                CPP: "",
+              },
+              referenceSolution: problem.referenceSolution || {
+                JAVASCRIPT: "",
+                PYTHON: "",
+                CPP: "",
+              },
+              referenceSolutionFooter: problem.referenceSolutionFooter || {
+                JAVASCRIPT: "",
+                PYTHON: "",
+                CPP: "",
+              },
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching problem details:", error);
+          toast.error("Failed to fetch problem details");
+        });
+    }
+  }, [problemId]);
+
   // useEffect
   const onSubmit = async (data) => {
     console.log("Form data:", data);
-    const toastId =  toast.loading("creating!");
+    const toastId = toast.loading("creating!");
 
     try {
       setIsLoading(true);

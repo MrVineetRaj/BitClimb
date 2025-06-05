@@ -14,6 +14,7 @@ import ProblemListsPage from "./pages/problem-lists/problem-lists-page";
 import Contests from "./pages/contests/contests";
 import { useProblemListStore } from "./store/useProblemListStore";
 import ProblemListPage from "./pages/problem-lists/problem-list-page";
+import ProblemViewForAdmin from "./pages/admin/problem-view-for-admin";
 const App = () => {
   const { isCheckingAuth, checkAuth, authUser } = useAuthStore();
   const { getAllProblemLists } = useProblemListStore();
@@ -45,6 +46,10 @@ const App = () => {
         <Route path="/admin/panel" element={<AdminPanel />} />
         <Route path="/admin/panel/create-problem" element={<CreateProblem />} />
         <Route path="/admin/panel/create-contest" element={<CreateContest />} />
+        <Route
+          path="/admin/panel/problem/:problemId"
+          element={<ProblemViewForAdmin />}
+        />
         <Route path="/" element={<HomePage />} />
         <Route path="/problem/:problemId" element={<ProblemPage />} />
         <Route path="/problem-lists" element={<ProblemListsPage />} />
