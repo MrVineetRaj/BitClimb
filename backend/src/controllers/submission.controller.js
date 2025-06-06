@@ -82,11 +82,10 @@ export const getSubmissionsByProblemForUser = asyncHandler(async (req, res) => {
 export const getSubmissionById = asyncHandler(async (req, res) => {
   const { submissionId } = req.params;
 
-  const userId = req.user.id; // Assuming user ID is available in req.user
+  // const userId = req.user.id; // Assuming user ID is available in req.user
   const submission = await db.submissions.findFirst({
     where: {
       id: submissionId,
-      userId: userId,
     },
     include: {
       problem: {

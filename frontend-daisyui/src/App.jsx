@@ -18,6 +18,8 @@ import ProblemViewForAdmin from "./pages/admin/problem-view-for-admin";
 import SubmissionPage from "./pages/submission-page";
 import ProblemListTagWise from "./pages/problem-lists/problem-list-tag-wise";
 import ProfilePage from "./pages/profile-page";
+import AdminLayout from "./layout/admin-layout";
+import UserAuthLayout from "./layout/user-auth-layout";
 const App = () => {
   const { isCheckingAuth, checkAuth, authUser } = useAuthStore();
   const { getAllProblemLists } = useProblemListStore();
@@ -42,40 +44,51 @@ const App = () => {
       <Background />
       <Navbar />
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
 
-        <Route path="/admin/panel" element={<AdminPanel />} />
-        <Route path="/admin/panel/create-problem" element={<CreateProblem />} />
-        <Route path="/admin/panel/create-contest" element={<CreateContest />} />
-        <Route
-          path="/admin/panel/problem/:problemId"
-          element={<ProblemViewForAdmin />}
-        />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/problem/:problemId" element={<ProblemPage />} />
-        <Route path="/problem-lists" element={<ProblemListsPage />} />
-        <Route
-          path="/problem-lists/:problemListId"
-          element={<ProblemListPage />}
-        />
-        <Route path="/contests" element={<Contests />} />
-        <Route path="/contests/:contestId" element={<Contests />} />
         <Route
           path="/submission/:submissionID"
           element={<SubmissionPage />} // Placeholder for SubmissionPage
         />
-        <Route
-          path="/problem-lists/topic/:tag"
-          element={<ProblemListTagWise />}
-        />
-        <Route
-          path="/problem-lists/company/:tag"
-          element={<ProblemListTagWise />}
-        />
 
         <Route path="/profile/:userId" element={<ProfilePage />} />
+
+        <Route element={<UserAuthLayout />}>
+          <Route path="/home" element={<HomePage />} />{" "}
+          <Route
+            path="/problem-lists/topic/:tag"
+            element={<ProblemListTagWise />}
+          />
+          <Route
+            path="/problem-lists/company/:tag"
+            element={<ProblemListTagWise />}
+          />{" "}
+          <Route path="/problem/:problemId" element={<ProblemPage />} />
+          <Route path="/problem-lists" element={<ProblemListsPage />} />
+          <Route
+            path="/problem-lists/:problemListId"
+            element={<ProblemListPage />}
+          />
+          <Route path="/contests" element={<Contests />} />
+          <Route path="/contests/:contestId" element={<Contests />} />
+        </Route>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/panel" element={<AdminPanel />} />
+          <Route
+            path="/admin/panel/create-problem"
+            element={<CreateProblem />}
+          />
+          <Route
+            path="/admin/panel/create-contest"
+            element={<CreateContest />}
+          />
+          <Route
+            path="/admin/panel/problem/:problemId"
+            element={<ProblemViewForAdmin />}
+          />
+        </Route>
       </Routes>
     </div>
   );

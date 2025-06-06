@@ -16,7 +16,7 @@ submissionRouter.get("/user", getAllSubmissionsOfUser);
 submissionRouter.get("/problem/:problemId",authMiddleware, getSubmissionsByProblemForUser);
 
 // Route to get a submission by its ID
-submissionRouter.get("/get-one-submission/:submissionId", authMiddleware, getSubmissionById);
+submissionRouter.get("/get-one-submission/:submissionId", getSubmissionById);
 
 submissionRouter.get("/heatmap-submission-count/:userId", getSubmissionsCntPerYearForPublicProfile);
 
