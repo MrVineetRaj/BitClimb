@@ -32,7 +32,7 @@ const Navbar = () => {
   ];
   return (
     <div
-      className={`navbar sticky top-0 left-0 transition-all duration-300  shadow-sm z-50 flex items-center ${
+      className={`navbar sticky top-0 left-0 transition-all duration-300  shadow-sm z-50 flex items-center px-8 ${
         hasScrolled ? " backdrop-blur-sm bg-base-100 " : "py-6"
       }`}
     >

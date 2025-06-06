@@ -22,9 +22,9 @@ import contestRouter from "./routes/contest.routes.js";
 import { findAndUpdateContestRatings } from "./libs/contest.conf.js";
 import { redis } from "./libs/redis.conf.js";
 import profileRouter from "./routes/profile.routes.js";
+import { updateUserRanks } from "./libs/cron.jobs.js";
 let isProduction = process.env.NODE_ENV === "production";
 const app = express();
-
 
 app.use(cookieParser());
 app.use(express.json());
@@ -95,5 +95,9 @@ setInterval(async () => {
     console.error("Error updating contest ratings:", error);
   }
 }, 1000 * 30 * 2); // Every hour
+
+setInterval(() => {
+  updateUserRanks();
+}, 1000 * 60);
 
 export default app;
