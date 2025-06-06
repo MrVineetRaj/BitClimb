@@ -6,14 +6,16 @@ import ProblemCodeContainer from "../components/porblem-page/problem-code-contai
 
 const ProblemPage = () => {
   const { problemId } = useParams();
-  const { isLoadingProblem, getProblemById } = useProblemStore();
+  const { isLoadingProblem, getProblemById, getUserSubmissionsPerProblem } =
+    useProblemStore();
   const [problem, setProblem] = useState(null);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(3);
   const [userCodeSnippet, setUserCodeSnippet] = useState(null);
   const [testCases, setTestCases] = useState([]);
   const [testResults, setTestResults] = useState([]);
   const [submittedCodeResult, setSubmittedCodeResult] = useState(null); // Add ref for test cases section
   const testCasesRef = useRef(null);
+  const [userSubmissions, setUserSubmissions] = useState([]);
 
   // Function to scroll to test cases
   const scrollToTestCases = () => {
@@ -22,6 +24,18 @@ const ProblemPage = () => {
         behavior: "smooth",
         block: "start",
       });
+    }
+  };
+
+  const fetchSubmissionsByProblem = async () => {
+    try {
+      const res = await getUserSubmissionsPerProblem(problemId);
+      if (res.success) {
+        setUserSubmissions(res.data);
+      }
+      console.log("User Submissions:", res);
+    } catch (error) {
+      console.error("Error fetching user submissions:", error);
     }
   };
 
@@ -36,7 +50,10 @@ const ProblemPage = () => {
         console.error("Failed to fetch problem:", error);
       }
     };
+
+    // const
     fetchProblem();
+    fetchSubmissionsByProblem();
   }, [problemId]);
 
   return (
@@ -47,6 +64,8 @@ const ProblemPage = () => {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           isLoadingProblem={isLoadingProblem}
+          userSubmissions={userSubmissions}
+          fetchSubmissionsByProblem={fetchSubmissionsByProblem}
         />
         <ProblemCodeContainer
           userCodeSnippet={userCodeSnippet}
@@ -55,6 +74,7 @@ const ProblemPage = () => {
           isLoadingProblem={isLoadingProblem}
           scrollToTestCases={scrollToTestCases}
           setTestResults={setTestResults}
+          setSubmittedCodeResult={setSubmittedCodeResult}
         />
       </div>
 
@@ -74,10 +94,11 @@ const ProblemPage = () => {
                 Testcase {index + 1}
                 <span
                   className={`absolute -top-2.5 -right-2.5 rounded-full size-5 z-20 ${
-                    testResults?.length > 0 &&
-                    testResults[index]?.status?.toLowerCase() === "accepted"
-                      ? "bg-green-500 text-white-600"
-                      : "bg-red-500 text-white-600"
+                    testResults?.length > 0
+                      ? testResults[index]?.status?.toLowerCase() === "accepted"
+                        ? "bg-green-500 text-white-600"
+                        : "bg-red-500 text-white-600"
+                      : ""
                   }`}
                 ></span>
               </label>
@@ -118,7 +139,7 @@ const ProblemPage = () => {
                           } p-4 rounded-lg`}
                         >
                           <code className="whitespace-pre-wrap  break-words p-2 rounded text-sm">
-                            {testResults[index]?.output}
+                            {testResults[index]?.output || "No output"}
                           </code>
                         </pre>
                       </div>

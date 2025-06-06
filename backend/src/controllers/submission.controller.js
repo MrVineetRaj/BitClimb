@@ -62,6 +62,14 @@ export const getSubmissionsByProblemForUser = asyncHandler(async (req, res) => {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      problem: {
+        select: {
+          title: true,
+          description: true,
+        },
+      },
+    },
   });
 
   res
@@ -79,6 +87,16 @@ export const getSubmissionById = asyncHandler(async (req, res) => {
     where: {
       id: submissionId,
       userId: userId,
+    },
+    include: {
+      problem: {
+        select: {
+          title: true,
+          description: true,
+          difficulty: true,
+          tags: true,
+        },
+      },
     },
   });
 

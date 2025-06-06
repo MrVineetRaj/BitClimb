@@ -440,36 +440,14 @@ export const getProblemById = asyncHandler(async (req, res) => {
       };
     }
     problem = await db.problem.findUnique(findQuery);
-    const submissionCount = await db.submissions.count({
-      where: {
-        problemId: id,
-      },
-    });
 
-    const usersAttempted = await db.submissions.findMany({
-      where: {
-        problemId: id,
-      },
-      select: {
-        userId: true,
-      },
-      distinct: ["userId"],
-    });
-
-    const acceptedCount = await db.submissions.count({
-      where: {
-        problemId: id,
-        status: "Accepted",
-      },
-    });
-
-    problem = {
-      ...problem,
-      acceptanceRate: submissionCount
-        ? (acceptedCount / submissionCount) * 100
-        : 0,
-      usersAttempted: usersAttempted.length,
-    };
+    // problem = {
+    //   ...problem,
+    //   acceptanceRate: submissionCount
+    //     ? ((acceptedCount / submissionCount) * 100).toFixed(2)
+    //     : 0,
+    //   usersAttempted: usersAttempted.length,
+    // };
 
     redis.set(
       `problem:${id}:${ref}`,
@@ -483,6 +461,35 @@ export const getProblemById = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Problem not found");
   }
 
+  const submissionCount = await db.submissions.count({
+    where: {
+      problemId: id,
+    },
+  });
+
+  const usersAttempted = await db.submissions.findMany({
+    where: {
+      problemId: id,
+    },
+    select: {
+      userId: true,
+    },
+    distinct: ["userId"],
+  });
+
+  const acceptedCount = await db.submissions.count({
+    where: {
+      problemId: id,
+      status: "Accepted",
+    },
+  });
+  problem = {
+    ...problem,
+    acceptanceRate: submissionCount
+      ? ((acceptedCount / submissionCount) * 100).toFixed(2)
+      : 0,
+    usersAttempted: usersAttempted.length,
+  };
   res
     .status(200)
     .json(new ApiResponse(200, problem, "Problem fetched successfully"));

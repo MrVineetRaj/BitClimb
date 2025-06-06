@@ -61,8 +61,6 @@ export const useProblemStore = create((set) => ({
     source_code,
     source_code_footer,
     language,
-    stdin,
-    expected_outputs,
     problemId,
     ref = "",
     contestId = "",
@@ -77,15 +75,14 @@ export const useProblemStore = create((set) => ({
           source_code,
           source_code_footer,
           language,
-          stdin,
-          expected_outputs,
         }
       );
       set({ isSubmitting: false });
-      // console.log("Submission Response:", response.data);
+      console.log("Submission Response:", response.data);
       toast.success("Submission Successful");
-      return response.data.data;
+      return response.data;
     } catch (error) {
+      console.error("Submission Error:", error);
       set({ isSubmitting: false });
       if (error instanceof AxiosError) {
         const errorMessage =
@@ -139,18 +136,16 @@ export const useProblemStore = create((set) => ({
         `/submission/problem/${problemId}`
       );
 
-      return response.data.data;
+      return response.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message || "Failed to fetch submissions";
-        toast.error("Fetch Submissions Failed", {
-          description: errorMessage,
+        toast.error(errorMessage ,{
           duration: 3000,
         });
       } else {
         toast.error("Fetch Submissions Failed", {
-          description: "An unexpected error occurred",
           duration: 3000,
         });
       }

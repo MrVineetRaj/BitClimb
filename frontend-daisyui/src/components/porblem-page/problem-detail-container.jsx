@@ -1,22 +1,78 @@
 import {
+  AlertTriangle,
   Check,
+  Clock,
   Edit,
   File,
   Lightbulb,
+  MemoryStick,
   MessageCircle,
+  Stars,
   User,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import Code from "../shared/code";
+import useAiStore from "../../store/useAiStore";
+import Markdown from "react-markdown";
+import { useNavigate } from "react-router";
 
 const ProblemDetailContainer = ({
   problem,
   activeTab,
   setActiveTab,
   isLoadingProblem,
+  userSubmissions,
+  fetchSubmissionsByProblem,
 }) => {
+  const navigate = useNavigate();
   const tabs = ["details", "discussions", "solutions", "submissions"];
+  const [showDetailedError, setShowDetailedError] = useState(-1);
+  const [showAnalysis, setShowAnalysis] = useState(-1);
+  const { reviewCode, isThinking } = useAiStore();
+  const [indexOfSubmissionToAnalyze, setIndexOfSubmissionToAnalyze] =
+    useState(-1);
 
+  const handleAnalyzeSubmission = (idx) => {
+    console.log("Analyzing submission at index:", idx);
+
+    const submission = userSubmissions[idx];
+    console.log("Analyzing submission:", submission);
+    if (!submission) {
+      return;
+    }
+    // source_code, problem_description, verdict, submission_id;
+    let error = {};
+
+    if (submission.compileOutput) {
+      error.compileOutput = submission.compileOutput;
+    }
+    if (submission.stdError) {
+      error.stdError = submission.stdError;
+    }
+    if (submission.message) {
+      error.message = submission.message;
+    }
+    reviewCode(
+      submission.sourceCode,
+      submission?.problem?.description,
+      submission.status,
+      submission.id,
+      error
+    )
+      .then((res) => {
+        console.log("Fetched User Submissions:", res);
+        if (res.success) {
+          setShowAnalysis(idx);
+          setIndexOfSubmissionToAnalyze(-1);
+          fetchSubmissionsByProblem();
+        } else {
+          console.error("Error analyzing submission:", res.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error analyzing submission:", error);
+      });
+  };
   return (
     <div className="flex-1">
       {isLoadingProblem ? (
@@ -202,8 +258,130 @@ const ProblemDetailContainer = ({
               <File className="size-4 me-2" />
               Submissions
             </label>
-            <div className="tab-content bg-base-100 border-base-300 p-6 min-h-[650px] max-h-[650px] overflow-y-scroll ">
-              Tab content 4
+            <div className="tab-content bg-base-100 border-base-300 p-6 min-h-[650px] max-h-[650px] overflow-y-scroll">
+              <h1 className="text-2xl font-bold mb-4">Your Submissions</h1>
+              <div className=" flex flex-col gap-8 ">
+                {userSubmissions && userSubmissions?.length > 0 ? (
+                  userSubmissions?.map((submission, idx) => (
+                    <div
+                      key={submission.id}
+                      className={`border-b border-base-300 py-2 px-4 rounded-md last:border-b-0 cursor-pointer ${
+                        submission.status?.toLowerCase() === "accepted"
+                          ? "bg-success/20"
+                          : "bg-error/20"
+                      }`}
+                      onClick={() => {
+                        navigate(`/submission/${submission.id}`);
+                      }}
+                    >
+                      <div className="flex items-center justify-between relative">
+                        <div className="flex flex-col items-start ">
+                          <span
+                            className={`font-extrabold ${
+                              submission.status?.toLowerCase() === "accepted"
+                                ? "text-success"
+                                : "text-error"
+                            }`}
+                          >
+                            {submission.status}
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            {new Date(submission.createdAt).toLocaleString()}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <button
+                            className="btn btn-sm btn-ghost"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (showAnalysis === idx) {
+                                setShowAnalysis(-1);
+                              } else if (submission?.codeReview) {
+                                setShowAnalysis(idx);
+                              } else {
+                                if (indexOfSubmissionToAnalyze === idx) {
+                                  setIndexOfSubmissionToAnalyze(-1);
+                                } else {
+                                  setIndexOfSubmissionToAnalyze(idx);
+                                  handleAnalyzeSubmission(idx);
+                                }
+                              }
+                            }}
+                            disabled={isThinking}
+                          >
+                            <Stars className="inline size-4 mb-1" />
+                            {indexOfSubmissionToAnalyze === idx ? (
+                              <span className="loading loading-dots loading-md"></span>
+                            ) : submission?.codeReview ? (
+                              "View Analysis"
+                            ) : (
+                              "Analyze"
+                            )}
+                          </button>
+
+                          {submission.status?.toLowerCase() === "accepted" ? (
+                            <>
+                              <span className="text-sm flex items-center gap-1">
+                                <Clock className="inline size-4 mb-1" />
+                                {submission.time}
+                              </span>
+                              <span className="text-sm flex items-center gap-1">
+                                <MemoryStick className="inline size-4 mb-1" />
+                                {submission.memory}
+                              </span>
+                            </>
+                          ) : (
+                            <button
+                              className="btn btn-sm btn-ghost"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (showDetailedError === idx) {
+                                  setShowDetailedError(-1);
+                                } else {
+                                  setShowDetailedError(idx);
+                                }
+                              }}
+                            >
+                              <AlertTriangle className="inline size-4 mb-1" />
+                              Detailed Error
+                            </button>
+                          )}
+                        </div>
+                        <span className=" badge badge-primary text-white font-bold text-xs absolute -top-5 lowercase -left-2 ">
+                          {submission.language}
+                        </span>
+                      </div>
+
+                      {showDetailedError === idx && (
+                        <div className="mt-2 p-4 bg-error/10 rounded-lg">
+                          <h3 className="text-lg font-semibold mb-2">
+                            Detailed Error
+                          </h3>
+                          <pre className="whitespace-pre-wrap break-words text-sm text-red-500">
+                            {submission.compileOutput}
+                          </pre>
+                          <pre className="whitespace-pre-wrap break-words text-sm text-red-500">
+                            {submission.stdError}
+                          </pre>{" "}
+                          <pre className="whitespace-pre-wrap break-words text-sm text-red-500">
+                            {submission.message}
+                          </pre>
+                        </div>
+                      )}
+                      {showAnalysis === idx && (
+                        <div className="mt-2 p-4 bg-error/10 rounded-lg">
+                          <Markdown>{submission?.codeReview}</Markdown>
+                        </div>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-gray-500">
+                    No submissions found for this problem.
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

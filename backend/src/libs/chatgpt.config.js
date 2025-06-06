@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import { SYSTEM_PROMPTS } from "./chatgpt-system-prompts.js";
 const client = new OpenAI();
 
-export const reviewCode = async (source_code, problem_description, verdict) => {
+export const reviewCode = async (source_code, problem_description, verdict, error) => {
   let messages = [
     {
       role: "system",
@@ -14,6 +14,7 @@ export const reviewCode = async (source_code, problem_description, verdict) => {
         problem_description: problem_description,
         source_code: source_code,
         verdict: verdict,
+        error: error,
       }),
     },
   ];

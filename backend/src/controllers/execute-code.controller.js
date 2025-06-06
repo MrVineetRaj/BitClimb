@@ -129,6 +129,21 @@ export const submitCode = asyncHandler(async (req, res) => {
     expected_outputs,
   } = req.body;
 
+  if (!problemId) {
+    return res
+      .status(400)
+      .json(new ApiResponse(400, null, "Problem ID is required"));
+  }
+
+  const testCases = await db.testCases.findMany({
+    where: {
+      problemId: problemId,
+    },
+    select: {
+      stdin: true,
+      stdout: true,
+    },
+  });
   const userId = req.user.id;
   const code =
     source_code_header.trim() +
@@ -137,20 +152,16 @@ export const submitCode = asyncHandler(async (req, res) => {
     "\n" +
     source_code_footer.trim();
 
-  if (expected_outputs.length !== stdin.length) {
-    return res.status(400).json({
-      success: false,
-      message: "Expected outputs must match the number of test cases",
-    });
-  }
-
   const submissions = {
     source_code: code,
     language_id: getJudge0LanguageId(language),
-    stdin: stdin.length + "\n" + stdin.join("\n"),
+    stdin:
+      testCases.length +
+      "\n" +
+      testCases.map((testCase) => testCase.stdin).join("\n"),
     base64_encoded: false,
     wait: false,
-    expected_output: expected_outputs.join("\n"),
+    expected_output: testCases.map((testCase) => testCase.stdout).join("\n"),
   };
 
   // ...existing code...
@@ -200,35 +211,20 @@ export const submitCode = asyncHandler(async (req, res) => {
   const outputs = results.stdout ? results.stdout.trim().split("\n") : [];
 
   let isAllPassed = results?.status?.id === 3 && outputs.length > 0;
-  const detailedResults = expected_outputs.map((expected_output, idx) => {
-    const { status, time, memory, compile_output, message, stderr } = results;
-    return {
-      input: stdin[idx],
-      expected_output: expected_output?.trim(),
-      output: outputs[idx]?.trim() || "No output",
-      status:
-        expected_output === outputs[idx] ? "Accepted" : status.description,
-      time: time,
-      memory: memory,
-      compile_output:
-        expected_output === outputs[idx]
-          ? null
-          : compile_output
-          ? compile_output
-          : null,
-      message:
-        expected_output === outputs[idx] ? null : message ? message : null,
-      stderr: expected_output === outputs[idx] ? null : stderr ? stderr : null,
-    };
+
+  const separateResults = outputs.map((output, idx) => {
+    if (output !== testCases[idx].stdout) {
+      return false;
+    }
+    return true;
   });
 
-  let firstIndexWhereFailed = detailedResults.findIndex(
-    (result) => result.status !== "Accepted"
-  );
+  let firstIndexWhereFailed =
+    results.compile_output || results.message
+      ? 0
+      : separateResults.findIndex((result) => !result);
 
-  let totalTime = 0;
-  let totalMemory = 0;
-
+      
   const problemExists = await db.problem.findUnique({
     where: {
       id: problemId,
@@ -244,11 +240,6 @@ export const submitCode = asyncHandler(async (req, res) => {
   }
 
   if (isAllPassed) {
-    detailedResults.forEach((result) => {
-      totalTime += Number(result.time);
-      totalMemory += Number(result.memory);
-    });
-
     await db.problemsSolved.upsert({
       where: {
         userId_problemId: {
@@ -272,32 +263,26 @@ export const submitCode = asyncHandler(async (req, res) => {
       userId,
       sourceCode: source_code,
       language,
-      stdin: isAllPassed ? null : stdin[firstIndexWhereFailed],
-      stdout: isAllPassed
-        ? null
-        : detailedResults[firstIndexWhereFailed]?.output
-        ? detailedResults[firstIndexWhereFailed]?.output
-        : '"No output"',
-      stdError: detailedResults[firstIndexWhereFailed]?.stderr
-        ? detailedResults[firstIndexWhereFailed]?.stderr
-        : null,
-      compileOutput: detailedResults[firstIndexWhereFailed]?.compile_output
-        ? JSON.stringify(detailedResults[firstIndexWhereFailed]?.compile_output)
-        : null,
-      status: isAllPassed
-        ? "Accepted"
-        : detailedResults[firstIndexWhereFailed]?.status
-        ? JSON.stringify(detailedResults[firstIndexWhereFailed]?.status)
-        : '"Unknown Error"',
-      time: isAllPassed ? `${totalTime.toFixed(3)} s` : null,
-      memory: isAllPassed ? `${(totalMemory / 1024).toFixed(2)} MB` : null,
-      message: detailedResults[firstIndexWhereFailed]?.message
-        ? JSON.stringify(detailedResults[firstIndexWhereFailed]?.message)
-        : null,
+      stdin: testCases?.map((testCase) => testCase.stdin).join("_"),
 
+      stdout: results?.stdout?.trim()?.split("\n").join("_") || null,
+      stdError: results?.stderr || null,
+      compileOutput: results?.compile_output || null,
+      status: results?.status?.description || "Unknown",
+      // time: isAllPassed ? `${totalTime.toFixed(3)} s` : null,
+      time: results?.time ? `${(results.time / 1000).toFixed(3)} s` : null,
+      // memory: isAllPassed ? `${(totalMemory / 1024).toFixed(2)} MB` : null,
+      memory: results?.memory
+        ? `${(results.memory / 1024).toFixed(2)} MB`
+        : null,
+      message: results?.message || null,
+      expectedOutput: testCases.map((testCase) => testCase.stdout).join("_"),
+      firstIndexWhereFailed,
       isAccepted: isAllPassed,
     },
   });
+
+  console.log("New submission created:", newSubmission);
 
   if (ref === "contest") {
     await db.contestSubmission.create({
@@ -307,6 +292,7 @@ export const submitCode = asyncHandler(async (req, res) => {
         userId,
         submissionId: newSubmission.id,
         status: isAllPassed ? "Accepted" : "Rejected",
+        firstIndexWhereFailed
       },
     });
   }

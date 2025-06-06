@@ -19,6 +19,7 @@ const ProblemCodeContainer = ({
   isLoadingProblem,
   scrollToTestCases,
   setTestResults,
+  setSubmittedCodeResult,
 }) => {
   const { runCode, isRunningCode, isSubmittingCode, submitCode } =
     useProblemStore();
@@ -44,7 +45,27 @@ const ProblemCodeContainer = ({
       }
     });
   };
-  const handleSubmitCode = () => {};
+
+  const handleSubmitCode = () => {
+    setTestResults([]);
+    submitCode({
+      source_code_header: problem?.referenceSolutionHeader[selectedLanguage],
+      source_code: userCodeSnippet[selectedLanguage],
+      source_code_footer: problem?.referenceSolutionFooter[selectedLanguage],
+      language: selectedLanguage,
+      problemId: problem?.id,
+      ref: problem?.ref || "",
+      contestId: problem?.contestId || "",
+      contestProblemId: problem?.contestProblemId || "",
+    }).then((res) => {
+        // console.log("Submitted Code Result:", res);
+      if (res?.success) {
+        setSubmittedCodeResult(res.data);
+      }
+    });
+  };
+
+  // const handleSubmitCode = () => {};
   const formatCode = () => {
     if (editorRef.current) {
       try {

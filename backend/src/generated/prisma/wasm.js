@@ -176,6 +176,8 @@ exports.Prisma.SubmissionsScalarFieldEnum = {
   timeComplexity: 'timeComplexity',
   spaceComplexity: 'spaceComplexity',
   isAccepted: 'isAccepted',
+  expectedOutput: 'expectedOutput',
+  firstIndexWhereFailed: 'firstIndexWhereFailed',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

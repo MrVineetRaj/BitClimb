@@ -1,18 +1,35 @@
 import { reviewCode, testCaseGenerator } from "../libs/chatgpt.config.js";
 import { db } from "../libs/db.js";
-import { ApiResponse, asyncHandler } from "../libs/helpers.js";
+import { ApiError, ApiResponse, asyncHandler } from "../libs/helpers.js";
 
 export const reviewCodeController = asyncHandler(async (req, res) => {
   const { submission_id } = req.params;
-  const { source_code, problem_description, verdict } = req.body;
-  if (!source_code || !problem_description || !verdict) {
+  const { source_code, problem_description, verdict, error } = req.body;
+  if (!source_code || !problem_description || !verdict || !error) {
     return res
       .status(400)
-      .json({ error: "Code,verdict and problem description are required." });
+      .json(
+        new ApiError(
+          400,
+          "Source code, problem description, and verdict are required for code review."
+        )
+      );
   }
 
+  // const error = req.body.error || null; // Optional error field
+  console.log("Received Code Review Request:", {
+    submission_id,
+    source_code,
+    problem_description,
+    verdict,
+  });
   // Simulate a code review process
-  const resp = await reviewCode(source_code, problem_description, verdict);
+  const resp = await reviewCode(
+    source_code,
+    problem_description,
+    verdict,
+    error
+  );
 
   console.log("Code Review Response:", resp);
 

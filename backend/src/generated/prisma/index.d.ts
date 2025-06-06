@@ -5052,8 +5052,18 @@ export namespace Prisma {
 
   export type AggregateSubmissions = {
     _count: SubmissionsCountAggregateOutputType | null
+    _avg: SubmissionsAvgAggregateOutputType | null
+    _sum: SubmissionsSumAggregateOutputType | null
     _min: SubmissionsMinAggregateOutputType | null
     _max: SubmissionsMaxAggregateOutputType | null
+  }
+
+  export type SubmissionsAvgAggregateOutputType = {
+    firstIndexWhereFailed: number | null
+  }
+
+  export type SubmissionsSumAggregateOutputType = {
+    firstIndexWhereFailed: number | null
   }
 
   export type SubmissionsMinAggregateOutputType = {
@@ -5074,6 +5084,8 @@ export namespace Prisma {
     timeComplexity: string | null
     spaceComplexity: string | null
     isAccepted: boolean | null
+    expectedOutput: string | null
+    firstIndexWhereFailed: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5096,6 +5108,8 @@ export namespace Prisma {
     timeComplexity: string | null
     spaceComplexity: string | null
     isAccepted: boolean | null
+    expectedOutput: string | null
+    firstIndexWhereFailed: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5118,11 +5132,21 @@ export namespace Prisma {
     timeComplexity: number
     spaceComplexity: number
     isAccepted: number
+    expectedOutput: number
+    firstIndexWhereFailed: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
+
+  export type SubmissionsAvgAggregateInputType = {
+    firstIndexWhereFailed?: true
+  }
+
+  export type SubmissionsSumAggregateInputType = {
+    firstIndexWhereFailed?: true
+  }
 
   export type SubmissionsMinAggregateInputType = {
     id?: true
@@ -5142,6 +5166,8 @@ export namespace Prisma {
     timeComplexity?: true
     spaceComplexity?: true
     isAccepted?: true
+    expectedOutput?: true
+    firstIndexWhereFailed?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5164,6 +5190,8 @@ export namespace Prisma {
     timeComplexity?: true
     spaceComplexity?: true
     isAccepted?: true
+    expectedOutput?: true
+    firstIndexWhereFailed?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5186,6 +5214,8 @@ export namespace Prisma {
     timeComplexity?: true
     spaceComplexity?: true
     isAccepted?: true
+    expectedOutput?: true
+    firstIndexWhereFailed?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5229,6 +5259,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: SubmissionsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SubmissionsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: SubmissionsMinAggregateInputType
@@ -5259,6 +5301,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: SubmissionsCountAggregateInputType | true
+    _avg?: SubmissionsAvgAggregateInputType
+    _sum?: SubmissionsSumAggregateInputType
     _min?: SubmissionsMinAggregateInputType
     _max?: SubmissionsMaxAggregateInputType
   }
@@ -5281,9 +5325,13 @@ export namespace Prisma {
     timeComplexity: string | null
     spaceComplexity: string | null
     isAccepted: boolean
+    expectedOutput: string | null
+    firstIndexWhereFailed: number | null
     createdAt: Date
     updatedAt: Date
     _count: SubmissionsCountAggregateOutputType | null
+    _avg: SubmissionsAvgAggregateOutputType | null
+    _sum: SubmissionsSumAggregateOutputType | null
     _min: SubmissionsMinAggregateOutputType | null
     _max: SubmissionsMaxAggregateOutputType | null
   }
@@ -5320,6 +5368,8 @@ export namespace Prisma {
     timeComplexity?: boolean
     spaceComplexity?: boolean
     isAccepted?: boolean
+    expectedOutput?: boolean
+    firstIndexWhereFailed?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
@@ -5347,6 +5397,8 @@ export namespace Prisma {
     timeComplexity?: boolean
     spaceComplexity?: boolean
     isAccepted?: boolean
+    expectedOutput?: boolean
+    firstIndexWhereFailed?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
@@ -5371,6 +5423,8 @@ export namespace Prisma {
     timeComplexity?: boolean
     spaceComplexity?: boolean
     isAccepted?: boolean
+    expectedOutput?: boolean
+    firstIndexWhereFailed?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
@@ -5395,11 +5449,13 @@ export namespace Prisma {
     timeComplexity?: boolean
     spaceComplexity?: boolean
     isAccepted?: boolean
+    expectedOutput?: boolean
+    firstIndexWhereFailed?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SubmissionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "problemId" | "sourceCode" | "language" | "stdin" | "stdout" | "stdError" | "compileOutput" | "message" | "status" | "memory" | "time" | "codeReview" | "timeComplexity" | "spaceComplexity" | "isAccepted" | "createdAt" | "updatedAt", ExtArgs["result"]["submissions"]>
+  export type SubmissionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "problemId" | "sourceCode" | "language" | "stdin" | "stdout" | "stdError" | "compileOutput" | "message" | "status" | "memory" | "time" | "codeReview" | "timeComplexity" | "spaceComplexity" | "isAccepted" | "expectedOutput" | "firstIndexWhereFailed" | "createdAt" | "updatedAt", ExtArgs["result"]["submissions"]>
   export type SubmissionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problem?: boolean | ProblemDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5442,6 +5498,8 @@ export namespace Prisma {
       timeComplexity: string | null
       spaceComplexity: string | null
       isAccepted: boolean
+      expectedOutput: string | null
+      firstIndexWhereFailed: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["submissions"]>
@@ -5888,6 +5946,8 @@ export namespace Prisma {
     readonly timeComplexity: FieldRef<"Submissions", 'String'>
     readonly spaceComplexity: FieldRef<"Submissions", 'String'>
     readonly isAccepted: FieldRef<"Submissions", 'Boolean'>
+    readonly expectedOutput: FieldRef<"Submissions", 'String'>
+    readonly firstIndexWhereFailed: FieldRef<"Submissions", 'Int'>
     readonly createdAt: FieldRef<"Submissions", 'DateTime'>
     readonly updatedAt: FieldRef<"Submissions", 'DateTime'>
   }
@@ -17487,6 +17547,8 @@ export namespace Prisma {
     timeComplexity: 'timeComplexity',
     spaceComplexity: 'spaceComplexity',
     isAccepted: 'isAccepted',
+    expectedOutput: 'expectedOutput',
+    firstIndexWhereFailed: 'firstIndexWhereFailed',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -18053,6 +18115,8 @@ export namespace Prisma {
     timeComplexity?: StringNullableFilter<"Submissions"> | string | null
     spaceComplexity?: StringNullableFilter<"Submissions"> | string | null
     isAccepted?: BoolFilter<"Submissions"> | boolean
+    expectedOutput?: StringNullableFilter<"Submissions"> | string | null
+    firstIndexWhereFailed?: IntNullableFilter<"Submissions"> | number | null
     createdAt?: DateTimeFilter<"Submissions"> | Date | string
     updatedAt?: DateTimeFilter<"Submissions"> | Date | string
     problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
@@ -18079,6 +18143,8 @@ export namespace Prisma {
     timeComplexity?: SortOrderInput | SortOrder
     spaceComplexity?: SortOrderInput | SortOrder
     isAccepted?: SortOrder
+    expectedOutput?: SortOrderInput | SortOrder
+    firstIndexWhereFailed?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     problem?: ProblemOrderByWithRelationInput
@@ -18108,6 +18174,8 @@ export namespace Prisma {
     timeComplexity?: StringNullableFilter<"Submissions"> | string | null
     spaceComplexity?: StringNullableFilter<"Submissions"> | string | null
     isAccepted?: BoolFilter<"Submissions"> | boolean
+    expectedOutput?: StringNullableFilter<"Submissions"> | string | null
+    firstIndexWhereFailed?: IntNullableFilter<"Submissions"> | number | null
     createdAt?: DateTimeFilter<"Submissions"> | Date | string
     updatedAt?: DateTimeFilter<"Submissions"> | Date | string
     problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
@@ -18134,11 +18202,15 @@ export namespace Prisma {
     timeComplexity?: SortOrderInput | SortOrder
     spaceComplexity?: SortOrderInput | SortOrder
     isAccepted?: SortOrder
+    expectedOutput?: SortOrderInput | SortOrder
+    firstIndexWhereFailed?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SubmissionsCountOrderByAggregateInput
+    _avg?: SubmissionsAvgOrderByAggregateInput
     _max?: SubmissionsMaxOrderByAggregateInput
     _min?: SubmissionsMinOrderByAggregateInput
+    _sum?: SubmissionsSumOrderByAggregateInput
   }
 
   export type SubmissionsScalarWhereWithAggregatesInput = {
@@ -18162,6 +18234,8 @@ export namespace Prisma {
     timeComplexity?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
     spaceComplexity?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
     isAccepted?: BoolWithAggregatesFilter<"Submissions"> | boolean
+    expectedOutput?: StringNullableWithAggregatesFilter<"Submissions"> | string | null
+    firstIndexWhereFailed?: IntNullableWithAggregatesFilter<"Submissions"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Submissions"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Submissions"> | Date | string
   }
@@ -19180,6 +19254,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
@@ -19206,6 +19282,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
@@ -19228,6 +19306,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
@@ -19254,6 +19334,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
@@ -19278,6 +19360,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19298,6 +19382,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19320,6 +19406,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20434,6 +20522,17 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type ProblemScalarRelationFilter = {
     is?: ProblemWhereInput
     isNot?: ProblemWhereInput
@@ -20462,8 +20561,14 @@ export namespace Prisma {
     timeComplexity?: SortOrder
     spaceComplexity?: SortOrder
     isAccepted?: SortOrder
+    expectedOutput?: SortOrder
+    firstIndexWhereFailed?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type SubmissionsAvgOrderByAggregateInput = {
+    firstIndexWhereFailed?: SortOrder
   }
 
   export type SubmissionsMaxOrderByAggregateInput = {
@@ -20484,6 +20589,8 @@ export namespace Prisma {
     timeComplexity?: SortOrder
     spaceComplexity?: SortOrder
     isAccepted?: SortOrder
+    expectedOutput?: SortOrder
+    firstIndexWhereFailed?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -20506,8 +20613,30 @@ export namespace Prisma {
     timeComplexity?: SortOrder
     spaceComplexity?: SortOrder
     isAccepted?: SortOrder
+    expectedOutput?: SortOrder
+    firstIndexWhereFailed?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type SubmissionsSumOrderByAggregateInput = {
+    firstIndexWhereFailed?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type TestCasesCountOrderByAggregateInput = {
@@ -20722,17 +20851,6 @@ export namespace Prisma {
     isRankingCompleted?: SortOrder
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type ContestScalarRelationFilter = {
     is?: ContestWhereInput
     isNot?: ContestWhereInput
@@ -20779,22 +20897,6 @@ export namespace Prisma {
 
   export type ContestProblemSumOrderByAggregateInput = {
     points?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -21607,6 +21709,14 @@ export namespace Prisma {
     connect?: ContestSubmissionWhereUniqueInput
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type ProblemUpdateOneRequiredWithoutSubmissionNestedInput = {
     create?: XOR<ProblemCreateWithoutSubmissionInput, ProblemUncheckedCreateWithoutSubmissionInput>
     connectOrCreate?: ProblemCreateOrConnectWithoutSubmissionInput
@@ -22003,14 +22113,6 @@ export namespace Prisma {
     connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestProblemInput | ContestSubmissionCreateOrConnectWithoutContestProblemInput[]
     createMany?: ContestSubmissionCreateManyContestProblemInputEnvelope
     connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type ContestUpdateOneRequiredWithoutProblemsNestedInput = {
@@ -22487,6 +22589,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
@@ -22511,6 +22615,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
@@ -22771,6 +22877,8 @@ export namespace Prisma {
     timeComplexity?: StringNullableFilter<"Submissions"> | string | null
     spaceComplexity?: StringNullableFilter<"Submissions"> | string | null
     isAccepted?: BoolFilter<"Submissions"> | boolean
+    expectedOutput?: StringNullableFilter<"Submissions"> | string | null
+    firstIndexWhereFailed?: IntNullableFilter<"Submissions"> | number | null
     createdAt?: DateTimeFilter<"Submissions"> | Date | string
     updatedAt?: DateTimeFilter<"Submissions"> | Date | string
   }
@@ -23014,6 +23122,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutSubmissionInput
@@ -23038,6 +23148,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
@@ -24686,6 +24798,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
@@ -24711,6 +24825,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     contestSubmission?: ContestSubmissionUncheckedCreateNestedOneWithoutSubmissionInput
@@ -24805,6 +24921,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
@@ -24830,6 +24948,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contestSubmission?: ContestSubmissionUncheckedUpdateOneWithoutSubmissionNestedInput
@@ -25510,6 +25630,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     problem: ProblemCreateNestedOneWithoutSubmissionInput
@@ -25535,6 +25657,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedCreateNestedManyWithoutSubmissionInput
@@ -25697,6 +25821,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
@@ -25722,6 +25848,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
@@ -25765,6 +25893,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25912,6 +26042,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problem?: ProblemUpdateOneRequiredWithoutSubmissionNestedInput
@@ -25936,6 +26068,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
@@ -25959,6 +26093,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26138,6 +26274,8 @@ export namespace Prisma {
     timeComplexity?: string | null
     spaceComplexity?: string | null
     isAccepted?: boolean
+    expectedOutput?: string | null
+    firstIndexWhereFailed?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26198,6 +26336,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSubmissionNestedInput
@@ -26222,6 +26362,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyChallenge?: UserDailyChallengeSubmissionUncheckedUpdateManyWithoutSubmissionNestedInput
@@ -26245,6 +26387,8 @@ export namespace Prisma {
     timeComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     spaceComplexity?: NullableStringFieldUpdateOperationsInput | string | null
     isAccepted?: BoolFieldUpdateOperationsInput | boolean
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    firstIndexWhereFailed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

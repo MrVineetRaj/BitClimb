@@ -92,23 +92,25 @@ model Problem {
 }
 
 model Submissions {
-  id              String  @id @default(uuid())
-  userId          String
-  problemId       String
-  sourceCode      String
-  language        String
-  stdin           String?
-  stdout          String?
-  stdError        String?
-  compileOutput   String?
-  message         String?
-  status          String
-  memory          String?
-  time            String?
-  codeReview      String?
-  timeComplexity  String?
-  spaceComplexity String?
-  isAccepted      Boolean @default(false)
+  id                    String  @id @default(uuid())
+  userId                String
+  problemId             String
+  sourceCode            String
+  language              String
+  stdin                 String?
+  stdout                String?
+  stdError              String?
+  compileOutput         String?
+  message               String?
+  status                String
+  memory                String?
+  time                  String?
+  codeReview            String?
+  timeComplexity        String?
+  spaceComplexity       String?
+  isAccepted            Boolean @default(false)
+  expectedOutput        String? @default("")
+  firstIndexWhereFailed Int?    @default(-1)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

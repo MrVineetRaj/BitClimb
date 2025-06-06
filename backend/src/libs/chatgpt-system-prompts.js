@@ -25,7 +25,8 @@ int search(vector<int>& arr, int x) {
     return -1;
 }
 ",
-verdict:"Accepted"}}
+verdict:"Accepted",
+error:{}}}
 
 OUTPUT:
 ## Code Review
