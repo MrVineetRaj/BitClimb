@@ -20,6 +20,8 @@ import ProblemListTagWise from "./pages/problem-lists/problem-list-tag-wise";
 import ProfilePage from "./pages/profile-page";
 import AdminLayout from "./layout/admin-layout";
 import UserAuthLayout from "./layout/user-auth-layout";
+import LandingPage from "./pages/landing-page";
+import Footer from "./components/shared/footer";
 const App = () => {
   const { isCheckingAuth, checkAuth, authUser } = useAuthStore();
   const { getAllProblemLists } = useProblemListStore();
@@ -44,7 +46,11 @@ const App = () => {
       <Background />
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {authUser ? (
+          <Route path="/" element={<HomePage />} />
+        ) : (
+          <Route path="/" element={<LandingPage />} />
+        )}
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
 
@@ -90,6 +96,7 @@ const App = () => {
           />
         </Route>
       </Routes>
+      <Footer />
     </div>
   );
 };

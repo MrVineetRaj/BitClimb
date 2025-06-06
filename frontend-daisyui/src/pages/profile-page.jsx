@@ -4,7 +4,7 @@ import TagWiseDistribution from "../components/profile-page/tag-distribution-cha
 import useProfileStore from "../store/useProfileStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useState } from "react";
 
 const ProfilePage = () => {
@@ -256,9 +256,12 @@ const ProfilePage = () => {
               Object.entries(tagWiseSolvedCount).length > 0 ? (
                 Object.entries(tagWiseSolvedCount).map(([tag, count]) => (
                   <div key={tag} className="flex items-center gap-2">
-                    <span className="badge badge-primary badge-soft">
+                    <Link
+                      to={`/problem-lists/topic/${tag}`}
+                      className="badge badge-primary badge-soft"
+                    >
                       {tag}
-                    </span>{" "}
+                    </Link>
                     x {count}
                   </div>
                 ))

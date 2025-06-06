@@ -9,7 +9,7 @@ const Heading = ({ title, subtitle, badgeText = "", highLightedText = "" }) => {
         </div>
       )}
       <h1 className="text-6xl font-extrabold">
-        {title} <span className="text-primary">{highLightedText}</span>
+        {title}<span className="text-primary">{highLightedText}</span>
       </h1>
       {subtitle && <p className="text-gray-500 text-lg italic">{subtitle}</p>}
     </div>
