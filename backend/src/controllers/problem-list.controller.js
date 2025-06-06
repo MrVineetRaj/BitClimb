@@ -1,5 +1,6 @@
 import { db } from "../libs/db.js";
 import { ApiError, ApiResponse, asyncHandler } from "../libs/helpers.js";
+import { getUserIdIfAuthenticated } from "../libs/utils.js";
 
 const getAllProblemLists = asyncHandler(async (req, res) => {
   const userId = req.user.id;
@@ -222,6 +223,7 @@ const getProblemsPerProblemList = asyncHandler(async (req, res) => {
     )
   );
 });
+
 const createProblemList = asyncHandler(async (req, res) => {
   const { title, description } = req.body;
   const userId = req.user.id;
@@ -358,6 +360,207 @@ const addProblemToList = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Problem added to list successfully"));
 });
 const removeProblemFromList = asyncHandler(async (req, res) => {});
+
+const getTagWiseProblemLists = asyncHandler(async (req, res) => {
+  const { tag } = req.params; // Tag to filter problem lists
+  const ref = req.query.ref; // Reference to filter problem lists
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+
+  let whereClause = {};
+
+  if (ref === "topic") {
+    const tagArray = Array.isArray(tag) ? tag : [tag];
+    whereClause.tags = {
+      hasSome: tagArray,
+    };
+  }
+
+  if (ref === "company") {
+    const tagArray = Array.isArray(tag) ? tag : [tag];
+    whereClause.companies = {
+      hasSome: tagArray,
+    };
+  }
+
+  const problems = await db.problem.findMany({
+    where: whereClause,
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      difficulty: true,
+      tags: true,
+      companies: true,
+    },
+    skip: (page - 1) * limit,
+    take: limit,
+  });
+
+  const totalProblemsCount = await db.problem.count({
+    where: {
+      ...whereClause,
+    },
+  });
+
+  const totalProblemPages = Math.ceil(totalProblemsCount / limit);
+
+  const userId = await getUserIdIfAuthenticated(req);
+
+  if (!userId) {
+    res.status(200).json(
+      new ApiResponse(
+        200,
+        {
+          problems,
+          totalPages: totalProblemPages,
+          currentPage: page,
+          limit,
+        },
+        "Problems fetched successfully"
+      )
+    );
+    return;
+  }
+
+  // console.log("User ID:", userId, problems);
+
+  // Get solved problems for authenticated user
+  const solvedProblems = await db.problemsSolved.findMany({
+    where: {
+      userId: userId,
+      problemId: { in: problems.map((p) => p.id) },
+    },
+    select: { problemId: true },
+  });
+
+  const solvedProblemIds = new Set(solvedProblems.map((sp) => sp.problemId));
+
+  const problemsWithSolvedStatus = problems.map((problem) => ({
+    ...problem,
+    isSolved: solvedProblemIds.has(problem.id),
+  }));
+
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        problems: problemsWithSolvedStatus,
+        totalPages: totalProblemPages,
+        currentPage: page,
+        limit,
+      },
+      "Problems fetched successfully"
+    )
+  );
+});
+
+const getTagWiseProblemListsMetrics = asyncHandler(async (req, res) => {
+  const { tag } = req.params; // Tag to filter problem lists
+  const ref = req.query.ref; // Reference to filter problem lists
+  
+  let whereClause = {};
+  if (ref === "topic") {
+    const tagArray = Array.isArray(tag) ? tag : [tag];
+    whereClause.tags = {
+      hasSome: tagArray,
+    };
+  }
+  if (ref === "company") {
+    const tagArray = Array.isArray(tag) ? tag : [tag];
+    whereClause.companies= {
+      hasSome: tagArray,
+    };
+  }
+
+  const totalProblemsCount = await db.problem.count({
+    where: {
+      ...whereClause,
+    },
+  });
+
+  const totalSolvedProblemsCount = await db.problemsSolved.count({
+    where: {
+      problem: {
+        ...whereClause,
+      },
+      userId: req.user.id,
+    },
+  });
+
+  const totalEasyProblemsCount = await db.problem.count({
+    where: {
+      ...whereClause,
+      difficulty: "EASY",
+    },
+  });
+  const totalMediumProblemsCount = await db.problem.count({
+    where: {
+      ...whereClause,
+      difficulty: "MEDIUM",
+    },
+  });
+  const totalHardProblemsCount = await db.problem.count({
+    where: {
+      ...whereClause,
+      difficulty: "HARD",
+    },
+  });
+
+  const totalSolvedEasyProblemsCount = await db.problemsSolved.count({
+    where: {
+      problem: {
+        ...whereClause,
+        difficulty: "EASY",
+      },
+      userId: req.user.id,
+    },
+  });
+
+  const totalSolvedMediumProblemsCount = await db.problemsSolved.count({
+    where: {
+      problem: {
+        ...whereClause,
+        difficulty: "MEDIUM",
+      },
+      userId: req.user.id,
+    },
+  });
+
+  const totalSolvedHardProblemsCount = await db.problemsSolved.count({
+    where: {
+      problem: {
+        ...whereClause,
+        difficulty: "HARD",
+      },
+      userId: req.user.id,
+    },
+  });
+
+  const metrics = {
+    totalProblems: totalProblemsCount,
+    totalSolvedProblems: totalSolvedProblemsCount,
+    totalEasyProblems: totalEasyProblemsCount,
+    totalMediumProblems: totalMediumProblemsCount,
+    totalHardProblems: totalHardProblemsCount,
+    totalSolvedEasyProblems: totalSolvedEasyProblemsCount,
+    totalSolvedMediumProblems: totalSolvedMediumProblemsCount,
+    totalSolvedHardProblems: totalSolvedHardProblemsCount,
+  };
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        metrics,
+        "Problem list metrics retrieved successfully"
+      )
+    );
+});
+
 export {
   getAllProblemLists,
   getProblemListMetricsById,
@@ -367,4 +570,6 @@ export {
   addProblemToList,
   removeProblemFromList,
   getProblemsPerProblemList,
+  getTagWiseProblemLists,
+  getTagWiseProblemListsMetrics,
 };

@@ -11,6 +11,8 @@ import {
   addProblemToList,
   removeProblemFromList,
   getProblemsPerProblemList,
+  getTagWiseProblemLists,
+  getTagWiseProblemListsMetrics,
 } from "../controllers/problem-list.controller.js";
 
 problemListRouter.get("/all", authMiddleware, getAllProblemLists);
@@ -34,5 +36,13 @@ problemListRouter.post(
   authMiddleware,
   removeProblemFromList
 );
+
+problemListRouter.get("/tag-wise/:tag", getTagWiseProblemLists);
+problemListRouter.get(
+  "/tag-wise/:tag/metrics",
+  authMiddleware,
+  getTagWiseProblemListsMetrics
+);
+// Export the router to be used in the main app
 
 export default problemListRouter;

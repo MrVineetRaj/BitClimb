@@ -16,6 +16,7 @@ import { useProblemListStore } from "./store/useProblemListStore";
 import ProblemListPage from "./pages/problem-lists/problem-list-page";
 import ProblemViewForAdmin from "./pages/admin/problem-view-for-admin";
 import SubmissionPage from "./pages/submission-page";
+import ProblemListTagWise from "./pages/problem-lists/problem-list-tag-wise";
 const App = () => {
   const { isCheckingAuth, checkAuth, authUser } = useAuthStore();
   const { getAllProblemLists } = useProblemListStore();
@@ -63,6 +64,14 @@ const App = () => {
         <Route
           path="/submission/:submissionID"
           element={<SubmissionPage />} // Placeholder for SubmissionPage
+        />
+        <Route
+          path="/problem-lists/topic/:tag"
+          element={<ProblemListTagWise />}
+        />
+        <Route
+          path="/problem-lists/company/:tag"
+          element={<ProblemListTagWise />}
         />
       </Routes>
     </div>

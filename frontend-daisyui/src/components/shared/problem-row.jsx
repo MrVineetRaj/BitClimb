@@ -7,7 +7,7 @@ const ProblemRow = ({ problem, idx = 0 }) => {
     <div
       className={`${
         idx % 2 == 0 ? "bg-primary/10" : ""
-      } p-4 transition-colors min-w-64 flex items-center justify-between hover:bg-primary/20 `}
+      } p-4 transition-colors min-w-64 flex items-center justify-between hover:bg-primary/20 w-full `}
     >
       <span className="flex items-center gap-2">
         {problem?.isSolved ? (

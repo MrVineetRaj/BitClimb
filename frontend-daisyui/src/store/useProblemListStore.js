@@ -150,8 +150,13 @@ export const useProblemListStore = create((set) => ({
   //   }
   // },
 
-  getProblemsPerProblemList: async (problemListId, page = 1, limit = 10, difficulty = "") => {
-    set({ isLoadingProblemListWiseProblems: true});
+  getProblemsPerProblemList: async (
+    problemListId,
+    page = 1,
+    limit = 10,
+    difficulty = ""
+  ) => {
+    set({ isLoadingProblemListWiseProblems: true });
     try {
       const response = await axiosInstance.get(
         `/problem-list/${problemListId}/problems?page=${page}&limit=${limit}&difficulty=${difficulty}`
@@ -170,6 +175,51 @@ export const useProblemListStore = create((set) => ({
       }
     } finally {
       set({ isLoadingProblemListWiseProblems: false });
+    }
+  },
+
+  getProblemsForTagWiseProblemLists: async (tag, ref, page = 1, limit = 10) => {
+    set({ isLoadingProblemListWiseProblems: true });
+    try {
+      const response = await axiosInstance.get(
+        `/problem-list/tag-wise/${tag}?ref=${ref}&page=${page}&limit=${limit}`
+      );
+      return response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data?.message ||
+            "Failed to fetch problems for tag-wise problem lists"
+        );
+      } else {
+        toast.error(
+          "An unexpected error occurred while fetching problems for tag-wise problem lists"
+        );
+      }
+    } finally {
+      set({ isLoadingProblemListWiseProblems: false });
+    }
+  },
+  getProblemsForTagWiseProblemListMetrics: async (tag, ref) => {
+    set({ isLoadingProblemListMetrics: true });
+    try {
+      const response = await axiosInstance.get(
+        `/problem-list/tag-wise/${tag}/metrics?ref=${ref}`
+      );
+      return response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data?.message ||
+            "Failed to fetch problems for tag-wise problem lists"
+        );
+      } else {
+        toast.error(
+          "An unexpected error occurred while fetching problems for tag-wise problem lists"
+        );
+      }
+    } finally {
+      set({ isLoadingProblemListMetrics: false });
     }
   },
 }));
