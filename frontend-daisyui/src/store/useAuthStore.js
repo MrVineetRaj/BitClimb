@@ -64,6 +64,9 @@ export const useAuthStore = create((set) => ({
 
   signup: async (name, email, password) => {
     set({ isSigninUp: true });
+    const toastId = toast.loading("Signing up...", {
+      duration: 3000,
+    });
     try {
       if (!name || !email || !password) {
         throw new Error("All fields are required");
@@ -76,20 +79,19 @@ export const useAuthStore = create((set) => ({
 
       set({ authUser: response.data.data, isSigninUp: false });
       toast.success("Signup Successful", {
-        description: "Verification Email Sent",
         duration: 3000,
+        id: toastId,
       });
       return response.data.success;
     } catch (error) {
       if (error instanceof AxiosError) {
         const errorMessage = error.response?.data?.message || "Signup failed";
-        toast.error("Signup Failed", {
-          description: errorMessage,
+        toast.error(errorMessage, {
           duration: 3000,
+          // description: errorMessage,
         });
       } else {
         toast.error("Signup Failed", {
-          description: "An unexpected error occurred",
           duration: 3000,
         });
       }

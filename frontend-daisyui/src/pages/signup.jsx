@@ -12,14 +12,16 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useAuthStore } from "../store/useAuthStore";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import CodeBackground from "../components/shared/auth-image-pattern";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const SignupPage = () => {
   const { isSigninUp, signup } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -35,8 +37,16 @@ const SignupPage = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    // await signup(data.name, data.email, data.password);
+    // console.log(data);
+    const res = await signup(data.name, data.email, data.password);
+    if (res) {
+      navigate("/home");
+      console.log("Signup successful");
+    } else {
+      toast.error("Signup failed", {
+        duration: 3000,
+      });
+    }
   };
 
   return (
@@ -161,7 +171,11 @@ const SignupPage = () => {
             )}
           </fieldset>
 
-          <button className="btn btn-primary w-full" type="submit">
+          <button
+            className="btn btn-primary w-full"
+            type="submit"
+            disabled={!isSubmitting && isSigninUp}
+          >
             Signup
           </button>
           {/* <Button

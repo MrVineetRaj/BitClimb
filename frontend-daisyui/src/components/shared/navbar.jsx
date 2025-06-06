@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router";
 import { useAuthStore } from "../../store/useAuthStore";
 
 const Navbar = () => {
-  const { authUser } = useAuthStore();
+  const { authUser, logout } = useAuthStore();
   const [hasScrolled, setHasScrolled] = useState(false);
   const { pathname } = useLocation();
 
@@ -81,7 +81,14 @@ const Navbar = () => {
                 </li>
               )}
               <li>
-                <button className="btn btn-soft btn-error">Logout</button>
+                <button
+                  className="btn btn-soft btn-error"
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </details>
