@@ -11,6 +11,7 @@ export const useProblemStore = create((set) => ({
   isLoadingSubmissions: false,
   isLoadingProblem: false,
   isLoadingHeatMap: false,
+  isLoadingSubmission: false,
 
   runCode: async ({
     source_code_header,
@@ -141,7 +142,7 @@ export const useProblemStore = create((set) => ({
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message || "Failed to fetch submissions";
-        toast.error(errorMessage ,{
+        toast.error(errorMessage, {
           duration: 3000,
         });
       } else {
@@ -240,6 +241,31 @@ export const useProblemStore = create((set) => ({
       throw error;
     } finally {
       set({ isLoadingHeatMap: false });
+    }
+  },
+
+  getSubmissionById: async (submissionId) => {
+    set({ isLoadingSubmission: true });
+    try {
+      const response = await axiosInstance.get(
+        `/submission/get-one-submission/${submissionId}`
+      );
+      return response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorMessage =
+          error.response?.data?.message || "Failed to fetch submission";
+        toast.error(errorMessage, {
+          duration: 3000,
+        });
+      } else {
+        toast.error("Fetch Submission Failed", {
+          duration: 3000,
+        });
+      }
+      throw error;
+    } finally {
+      set({ isLoadingSubmission: false });
     }
   },
 }));

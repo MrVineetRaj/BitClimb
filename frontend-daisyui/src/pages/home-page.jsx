@@ -3,6 +3,7 @@ import Heading from "../components/shared/heading";
 import ContestCard from "../components/contests/contest-card";
 import ProblemContainer from "../components/home-page/problem-container";
 import { useSearchParams } from "react-router";
+import { COMPANY_TAGS, DSA_TAGS } from "../lib/constants";
 
 const DUMMY_CONTESTS = [
   {
@@ -57,7 +58,6 @@ const HomePage = () => {
     setContests(DUMMY_CONTESTS);
   }, []);
 
-  
   // useEffect(() => {
   // Fetch or filter contests based on selected topics and companies
 
@@ -86,7 +86,7 @@ const HomePage = () => {
         <div className="h-full max-w-84 min-w-72">
           <h1 className="text-xl font-bold mt-8">DSA TOPICS</h1>
           <div className="flex gap-3 flex-wrap mt-4 mb-8">
-            {COMPANY_NAMES?.map((topic, idx) => {
+            {DSA_TAGS?.map((topic, idx) => {
               return (
                 <div
                   key={idx}
@@ -114,7 +114,7 @@ const HomePage = () => {
           </div>
           <h1 className="text-xl font-bold">Companies</h1>
           <div className="flex gap-3 flex-wrap mt-4 mb-8">
-            {COMPANY_NAMES?.map((comp, idx) => {
+            {COMPANY_TAGS?.map((comp, idx) => {
               return (
                 <div
                   key={idx}

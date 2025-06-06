@@ -1,26 +1,34 @@
 import { Crown, Target, User, Code } from "lucide-react";
 
 const DSA_TAGS = [
-  "Arrays",
-  "Strings",
-  "Linked Lists",
-  "Stacks",
-  "Graphs",
-  "Trees",
-  "Binary Search",
+  "Math",
+  "String",
+  "Two Pointers",
   "Dynamic Programming",
   "Recursion",
-  "Sorting",
-  "Hashing",
-  "Greedy Algorithms",
-  "Backtracking",
-  "Bit Manipulation",
-  "Heaps",
-  "Queues",
-  "Maths",
+  "Search",
+  "Array",
 ];
 
-const COMPANY_TAGS = ["Uber", "Morgan Stanley", "Zoho", "Reddit"];
+const COMPANY_TAGS = [
+  "Google",
+  "Microsoft",
+  "Facebook",
+  "Amazon",
+  "Apple",
+  "Netflix",
+  "TechCorp",
+  "IBM",
+  "Oracle",
+  "Salesforce",
+  "Adobe",
+  "Wipro",
+  "Capgemini",
+  "Uber",
+  "Spotify",
+  "Tesla",
+  "TCS",
+];
 
 const DUMMY_CONTESTS = [
   {

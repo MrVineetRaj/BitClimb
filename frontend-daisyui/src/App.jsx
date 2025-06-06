@@ -15,6 +15,7 @@ import Contests from "./pages/contests/contests";
 import { useProblemListStore } from "./store/useProblemListStore";
 import ProblemListPage from "./pages/problem-lists/problem-list-page";
 import ProblemViewForAdmin from "./pages/admin/problem-view-for-admin";
+import SubmissionPage from "./pages/submission-page";
 const App = () => {
   const { isCheckingAuth, checkAuth, authUser } = useAuthStore();
   const { getAllProblemLists } = useProblemListStore();
@@ -59,6 +60,10 @@ const App = () => {
         />
         <Route path="/contests" element={<Contests />} />
         <Route path="/contests/:contestId" element={<Contests />} />
+        <Route
+          path="/submission/:submissionID"
+          element={<SubmissionPage />} // Placeholder for SubmissionPage
+        />
       </Routes>
     </div>
   );

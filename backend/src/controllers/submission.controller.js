@@ -95,27 +95,26 @@ export const getSubmissionById = asyncHandler(async (req, res) => {
           description: true,
           difficulty: true,
           tags: true,
+          constraints: true,
+        },
+      },
+      user: {
+        select: {
+          name: true,
         },
       },
     },
   });
 
   if (!submission) {
-    return res.status(404).json(
-      new ApiResponse({
-        statusCode: 404,
-        message: "Submission not found",
-      })
-    );
+    return res
+      .status(404)
+      .json(new ApiResponse(404, {}, "Submission not found"));
   }
 
-  res.status(200).json(
-    new ApiResponse({
-      statusCode: 200,
-      message: "Submission fetched successfully",
-      data: submission,
-    })
-  );
+  res
+    .status(200)
+    .json(new ApiResponse(200, submission, "Submission fetched successfully"));
 });
 
 export const getSubmissionsCntPerYearForPublicProfile = asyncHandler(

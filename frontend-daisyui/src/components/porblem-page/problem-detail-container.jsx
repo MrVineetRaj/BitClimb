@@ -370,7 +370,7 @@ const ProblemDetailContainer = ({
                         </div>
                       )}
                       {showAnalysis === idx && (
-                        <div className="mt-2 p-4 bg-error/10 rounded-lg">
+                        <div className="mt-2 p-4 bg-error/10 rounded-lg markdown-body">
                           <Markdown>{submission?.codeReview}</Markdown>
                         </div>
                       )}
