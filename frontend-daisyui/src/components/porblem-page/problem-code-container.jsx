@@ -20,6 +20,8 @@ const ProblemCodeContainer = ({
   scrollToTestCases,
   setTestResults,
   setSubmittedCodeResult,
+  setActiveTab,
+  fetchSubmissionsByProblem,
 }) => {
   const { runCode, isRunningCode, isSubmittingCode, submitCode } =
     useProblemStore();
@@ -58,9 +60,11 @@ const ProblemCodeContainer = ({
       contestId: problem?.contestId || "",
       contestProblemId: problem?.contestProblemId || "",
     }).then((res) => {
-        // console.log("Submitted Code Result:", res);
+      // console.log("Submitted Code Result:", res);
       if (res?.success) {
         setSubmittedCodeResult(res.data);
+        setActiveTab(3);
+        fetchSubmissionsByProblem();
       }
     });
   };

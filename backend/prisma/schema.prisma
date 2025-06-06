@@ -39,6 +39,7 @@ model User {
   emailVerificationTokenExpiry DateTime?
   forgotPasswordToken          String?
   forgotPasswordTokenExpiry    DateTime?
+  rank                       Int?      @default(0)
 
   problems      Problem[]
   submission    Submissions[]
@@ -119,6 +120,7 @@ model Submissions {
   user           User                           @relation(fields: [userId], references: [id], onDelete: Cascade)
   dailyChallenge UserDailyChallengeSubmission[]
   contestSubmission ContestSubmission?
+  // problemSolved ProblemsSolved[]
 
   @@index([userId])
   @@index([problemId])
@@ -150,9 +152,11 @@ model ProblemsSolved {
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  // submissionId String? // Optional, if the problem list is associated with a submission
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  // submission Submissions? @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
   @@unique([userId, problemId])
   @@index([problemId])
@@ -170,6 +174,8 @@ model ProblemList {
   updatedAt DateTime @updatedAt
 
   problems ProblemInProblemList[]
+
+
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

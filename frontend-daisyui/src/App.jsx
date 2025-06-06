@@ -17,6 +17,7 @@ import ProblemListPage from "./pages/problem-lists/problem-list-page";
 import ProblemViewForAdmin from "./pages/admin/problem-view-for-admin";
 import SubmissionPage from "./pages/submission-page";
 import ProblemListTagWise from "./pages/problem-lists/problem-list-tag-wise";
+import ProfilePage from "./pages/profile-page";
 const App = () => {
   const { isCheckingAuth, checkAuth, authUser } = useAuthStore();
   const { getAllProblemLists } = useProblemListStore();
@@ -73,6 +74,8 @@ const App = () => {
           path="/problem-lists/company/:tag"
           element={<ProblemListTagWise />}
         />
+
+        <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
     </div>
   );

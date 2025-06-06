@@ -354,7 +354,10 @@ const ProblemDetailContainer = ({
                       </div>
 
                       {showDetailedError === idx && (
-                        <div className="mt-2 p-4 bg-error/10 rounded-lg">
+                        <div
+                          className="mt-2 p-4 bg-error/10 rounded-lg"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <h3 className="text-lg font-semibold mb-2">
                             Detailed Error
                           </h3>
@@ -367,10 +370,45 @@ const ProblemDetailContainer = ({
                           <pre className="whitespace-pre-wrap break-words text-sm text-red-500">
                             {submission.message}
                           </pre>
+                          <h3 className="text-lg font-semibold mt-4 mb-2 text-gray-500">
+                            First failed testcase
+                          </h3>
+                          <div className="p-4 bg-base-300">
+                            {
+                              submission?.stdin?.split("_")[
+                                submission?.firstIndexWhereFailed
+                              ]
+                            }
+                          </div>
+                          <div className="flex items-center justify-between my-2 gap-2">
+                            <div className="w-full flex-1 flex flex-col">
+                              <p>Your output</p>
+                              <div className="p-4 bg-base-300">
+                                {
+                                  submission?.stdout?.split("_")[
+                                    submission?.firstIndexWhereFailed
+                                  ]
+                                }
+                              </div>
+                            </div>{" "}
+                            <div className="w-full flex-1 flex flex-col">
+                              <p>Expected output</p>
+                              <div className="p-4 bg-base-300">
+                                {
+                                  submission?.expectedOutput?.split("_")[
+                                    submission?.firstIndexWhereFailed
+                                  ]
+                                }
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       )}
                       {showAnalysis === idx && (
-                        <div className="mt-2 p-4 bg-error/10 rounded-lg markdown-body">
+                        <div
+                          className="mt-2 p-4 bg-error/10 rounded-lg markdown-body"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <Markdown>{submission?.codeReview}</Markdown>
                         </div>
                       )}

@@ -9,7 +9,7 @@ const ProblemPage = () => {
   const { isLoadingProblem, getProblemById, getUserSubmissionsPerProblem } =
     useProblemStore();
   const [problem, setProblem] = useState(null);
-  const [activeTab, setActiveTab] = useState(3);
+  const [activeTab, setActiveTab] = useState(0);
   const [userCodeSnippet, setUserCodeSnippet] = useState(null);
   const [testCases, setTestCases] = useState([]);
   const [testResults, setTestResults] = useState([]);
@@ -75,6 +75,8 @@ const ProblemPage = () => {
           scrollToTestCases={scrollToTestCases}
           setTestResults={setTestResults}
           setSubmittedCodeResult={setSubmittedCodeResult}
+          setActiveTab={setActiveTab}
+          fetchSubmissionsByProblem={fetchSubmissionsByProblem}
         />
       </div>
 

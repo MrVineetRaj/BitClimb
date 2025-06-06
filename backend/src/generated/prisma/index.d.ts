@@ -2308,8 +2308,18 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    rank: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    rank: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -2326,6 +2336,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry: Date | null
     forgotPasswordToken: string | null
     forgotPasswordTokenExpiry: Date | null
+    rank: number | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2342,6 +2353,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry: Date | null
     forgotPasswordToken: string | null
     forgotPasswordTokenExpiry: Date | null
+    rank: number | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2358,9 +2370,18 @@ export namespace Prisma {
     emailVerificationTokenExpiry: number
     forgotPasswordToken: number
     forgotPasswordTokenExpiry: number
+    rank: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    rank?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    rank?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -2376,6 +2397,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: true
     forgotPasswordToken?: true
     forgotPasswordTokenExpiry?: true
+    rank?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2392,6 +2414,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: true
     forgotPasswordToken?: true
     forgotPasswordTokenExpiry?: true
+    rank?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2408,6 +2431,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: true
     forgotPasswordToken?: true
     forgotPasswordTokenExpiry?: true
+    rank?: true
     _all?: true
   }
 
@@ -2449,6 +2473,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -2479,6 +2515,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -2497,7 +2535,10 @@ export namespace Prisma {
     emailVerificationTokenExpiry: Date | null
     forgotPasswordToken: string | null
     forgotPasswordTokenExpiry: Date | null
+    rank: number | null
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -2530,6 +2571,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: boolean
     forgotPasswordToken?: boolean
     forgotPasswordTokenExpiry?: boolean
+    rank?: boolean
     problems?: boolean | User$problemsArgs<ExtArgs>
     submission?: boolean | User$submissionArgs<ExtArgs>
     testCases?: boolean | User$testCasesArgs<ExtArgs>
@@ -2555,6 +2597,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: boolean
     forgotPasswordToken?: boolean
     forgotPasswordTokenExpiry?: boolean
+    rank?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2571,6 +2614,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: boolean
     forgotPasswordToken?: boolean
     forgotPasswordTokenExpiry?: boolean
+    rank?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2587,9 +2631,10 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: boolean
     forgotPasswordToken?: boolean
     forgotPasswordTokenExpiry?: boolean
+    rank?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "avatar" | "role" | "password" | "createdAt" | "updatedAt" | "isEmailVerified" | "emailVerificationToken" | "emailVerificationTokenExpiry" | "forgotPasswordToken" | "forgotPasswordTokenExpiry", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "avatar" | "role" | "password" | "createdAt" | "updatedAt" | "isEmailVerified" | "emailVerificationToken" | "emailVerificationTokenExpiry" | "forgotPasswordToken" | "forgotPasswordTokenExpiry" | "rank", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problems?: boolean | User$problemsArgs<ExtArgs>
     submission?: boolean | User$submissionArgs<ExtArgs>
@@ -2630,6 +2675,7 @@ export namespace Prisma {
       emailVerificationTokenExpiry: Date | null
       forgotPasswordToken: string | null
       forgotPasswordTokenExpiry: Date | null
+      rank: number | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3074,6 +3120,7 @@ export namespace Prisma {
     readonly emailVerificationTokenExpiry: FieldRef<"User", 'DateTime'>
     readonly forgotPasswordToken: FieldRef<"User", 'String'>
     readonly forgotPasswordTokenExpiry: FieldRef<"User", 'DateTime'>
+    readonly rank: FieldRef<"User", 'Int'>
   }
     
 
@@ -17498,7 +17545,8 @@ export namespace Prisma {
     emailVerificationToken: 'emailVerificationToken',
     emailVerificationTokenExpiry: 'emailVerificationTokenExpiry',
     forgotPasswordToken: 'forgotPasswordToken',
-    forgotPasswordTokenExpiry: 'forgotPasswordTokenExpiry'
+    forgotPasswordTokenExpiry: 'forgotPasswordTokenExpiry',
+    rank: 'rank'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -17777,6 +17825,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ProblemDifficulty'
    */
   export type EnumProblemDifficultyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProblemDifficulty'>
@@ -17801,20 +17863,6 @@ export namespace Prisma {
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -17852,6 +17900,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     forgotPasswordToken?: StringNullableFilter<"User"> | string | null
     forgotPasswordTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
+    rank?: IntNullableFilter<"User"> | number | null
     problems?: ProblemListRelationFilter
     submission?: SubmissionsListRelationFilter
     testCases?: TestCasesListRelationFilter
@@ -17876,6 +17925,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: SortOrderInput | SortOrder
     forgotPasswordToken?: SortOrderInput | SortOrder
     forgotPasswordTokenExpiry?: SortOrderInput | SortOrder
+    rank?: SortOrderInput | SortOrder
     problems?: ProblemOrderByRelationAggregateInput
     submission?: SubmissionsOrderByRelationAggregateInput
     testCases?: TestCasesOrderByRelationAggregateInput
@@ -17903,6 +17953,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
     forgotPasswordToken?: StringNullableFilter<"User"> | string | null
     forgotPasswordTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
+    rank?: IntNullableFilter<"User"> | number | null
     problems?: ProblemListRelationFilter
     submission?: SubmissionsListRelationFilter
     testCases?: TestCasesListRelationFilter
@@ -17927,9 +17978,12 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: SortOrderInput | SortOrder
     forgotPasswordToken?: SortOrderInput | SortOrder
     forgotPasswordTokenExpiry?: SortOrderInput | SortOrder
+    rank?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -17949,6 +18003,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     forgotPasswordToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     forgotPasswordTokenExpiry?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    rank?: IntNullableWithAggregatesFilter<"User"> | number | null
   }
 
   export type ProblemWhereInput = {
@@ -18931,6 +18986,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
@@ -18955,6 +19011,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
@@ -18979,6 +19036,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
@@ -19003,6 +19061,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
@@ -19027,6 +19086,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -19043,6 +19103,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -19059,6 +19120,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ProblemCreateInput = {
@@ -20150,6 +20212,17 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type ProblemListRelationFilter = {
     every?: ProblemWhereInput
     some?: ProblemWhereInput
@@ -20249,6 +20322,11 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: SortOrder
     forgotPasswordToken?: SortOrder
     forgotPasswordTokenExpiry?: SortOrder
+    rank?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    rank?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -20265,6 +20343,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: SortOrder
     forgotPasswordToken?: SortOrder
     forgotPasswordTokenExpiry?: SortOrder
+    rank?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -20281,6 +20360,11 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: SortOrder
     forgotPasswordToken?: SortOrder
     forgotPasswordTokenExpiry?: SortOrder
+    rank?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    rank?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -20363,6 +20447,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumProblemDifficultyFilter<$PrismaModel = never> = {
@@ -20522,17 +20622,6 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type ProblemScalarRelationFilter = {
     is?: ProblemWhereInput
     isNot?: ProblemWhereInput
@@ -20621,22 +20710,6 @@ export namespace Prisma {
 
   export type SubmissionsSumOrderByAggregateInput = {
     firstIndexWhereFailed?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type TestCasesCountOrderByAggregateInput = {
@@ -21148,6 +21221,14 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type ProblemUpdateManyWithoutUserNestedInput = {
@@ -21707,14 +21788,6 @@ export namespace Prisma {
     create?: XOR<ContestSubmissionCreateWithoutSubmissionInput, ContestSubmissionUncheckedCreateWithoutSubmissionInput>
     connectOrCreate?: ContestSubmissionCreateOrConnectWithoutSubmissionInput
     connect?: ContestSubmissionWhereUniqueInput
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type ProblemUpdateOneRequiredWithoutSubmissionNestedInput = {
@@ -22313,6 +22386,17 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -22356,17 +22440,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -22415,6 +22488,33 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumProblemDifficultyFilter<$PrismaModel = never> = {
     equals?: $Enums.ProblemDifficulty | EnumProblemDifficultyFieldRefInput<$PrismaModel>
     in?: $Enums.ProblemDifficulty[] | ListEnumProblemDifficultyFieldRefInput<$PrismaModel>
@@ -22453,33 +22553,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -23069,6 +23142,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
@@ -23092,6 +23166,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
@@ -23323,6 +23398,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
@@ -23346,6 +23422,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
@@ -23560,6 +23637,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
@@ -23583,6 +23661,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
@@ -23738,6 +23817,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
@@ -23761,6 +23841,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
@@ -23890,6 +23971,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedCreateNestedManyWithoutUserInput
@@ -23913,6 +23995,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemsSolvedUncheckedCreateNestedManyWithoutUserInput
@@ -24017,6 +24100,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUpdateManyWithoutUserNestedInput
@@ -24040,6 +24124,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemsSolvedUncheckedUpdateManyWithoutUserNestedInput
@@ -24063,6 +24148,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
@@ -24086,6 +24172,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
@@ -24184,6 +24271,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
@@ -24207,6 +24295,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
@@ -24321,6 +24410,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
@@ -24344,6 +24434,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
@@ -24399,6 +24490,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
@@ -24422,6 +24514,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
@@ -24745,6 +24838,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
@@ -24768,6 +24862,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
@@ -24862,6 +24957,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
@@ -24885,6 +24981,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
@@ -25345,6 +25442,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
@@ -25368,6 +25466,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
@@ -25438,6 +25537,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
@@ -25461,6 +25561,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
@@ -25521,6 +25622,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionsCreateNestedManyWithoutUserInput
     testCases?: TestCasesCreateNestedManyWithoutUserInput
@@ -25544,6 +25646,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: Date | string | null
     forgotPasswordToken?: string | null
     forgotPasswordTokenExpiry?: Date | string | null
+    rank?: number | null
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionsUncheckedCreateNestedManyWithoutUserInput
     testCases?: TestCasesUncheckedCreateNestedManyWithoutUserInput
@@ -25694,6 +25797,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUpdateManyWithoutUserNestedInput
@@ -25717,6 +25821,7 @@ export namespace Prisma {
     emailVerificationTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     forgotPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
     forgotPasswordTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rank?: NullableIntFieldUpdateOperationsInput | number | null
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionsUncheckedUpdateManyWithoutUserNestedInput
     testCases?: TestCasesUncheckedUpdateManyWithoutUserNestedInput
