@@ -6,6 +6,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router";
 import { useState } from "react";
+import ProfilePageSubmissionContainer from "../components/profile-page/submission-container";
 
 const ProfilePage = () => {
   const { userId } = useParams();
@@ -272,6 +273,8 @@ const ProfilePage = () => {
           </div>
         </div>
       )}
+
+      <ProfilePageSubmissionContainer userId={userId} />
     </div>
   );
 };

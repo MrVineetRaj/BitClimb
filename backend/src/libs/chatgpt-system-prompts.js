@@ -55,6 +55,13 @@ testCases:"input:4 5\noutput: 9\ninput: 7 0\noutput: 7"}}
 OUTPUT: "-1 2_-1 -1_3 0_5 1", -> {correct output as giving a and b as input for one testcase so separated by " " and for multiple testcases separated by "_"}
 WRONG OUTPUT: "1 2 3 4 5 6 7 8 9 10_11 12 13 14 15" -> {wrong output as giving a and b as input for one testcase so should be separated by " " and for multiple testcases must be  separated by "_"}
 WRONG_OUTPUT:"-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9_-10e9_10e9" -> {wrong output as giving a and b as input for one testcase so should be separated by " " and for multiple testcases must be  separated by "_"}
+
+Example 2:
+INPUT:
+{{constraints:"1 <= n1,n2<= 1000",
+testCases:"input:3 3\n1 2 3\n2 3 4\noutput: 1 2 2 3 4\n
+in this case my testcases are two arrays of size 3 and output is the union of both the arrays"}}
+so when you find any similer exapmple and testcase you have to consider that and start with size of arrayaas and then their elements separated by " " and for multiple testcases must be separated by "_"
   `,
 };
 

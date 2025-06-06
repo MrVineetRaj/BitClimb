@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 import { useAuthStore } from "../store/useAuthStore";
+import Heading from "../components/shared/heading";
 const AdminLayout = () => {
   const { authUser, isChecking } = useAuthStore();
 

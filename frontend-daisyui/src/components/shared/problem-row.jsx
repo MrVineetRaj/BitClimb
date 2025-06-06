@@ -1,8 +1,14 @@
-import { CheckCircle, Circle } from "lucide-react";
+import { CheckCircle, Circle, Trash } from "lucide-react";
 import SaveProblemToPlaylistModel from "./save-problem-to-playlist-model";
 import { Link } from "react-router";
+import { axiosInstance } from "../../lib/axios";
 
-const ProblemRow = ({ problem, idx = 0 }) => {
+const ProblemRow = ({
+  problem,
+  idx = 0,
+  listId = "",
+  setProblems = () => {},
+}) => {
   return (
     <div
       className={`${
@@ -43,6 +49,24 @@ const ProblemRow = ({ problem, idx = 0 }) => {
           {problem?.difficulty}
         </div>
         <SaveProblemToPlaylistModel problemId={problem?.id} />
+        {listId && (
+          <Trash
+            className="size-4 text-red-500 cursor-pointer hover:text-red-700 transition-colors"
+            onClick={() => {
+              if (listId) {
+                axiosInstance
+                  .delete(`/problem-list/${listId}/problem/${problem.id}`)
+                  .then((response) => {
+                    if (response.data.success) {
+                      setProblems((prevProblems) =>
+                        prevProblems.filter((p) => p.problem.id !== problem.id)
+                      );
+                    }
+                  });
+              }
+            }}
+          />
+        )}
       </span>
     </div>
   );

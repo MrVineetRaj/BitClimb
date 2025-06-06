@@ -63,21 +63,6 @@ const HomePage = () => {
 
   return (
     <div className="flex flex-col items-center w-full p-4">
-      {/* {contests && contests?.length > 0 && (
-        <div className="w-full flex flex-col items-center">
-          <Heading
-            title={"Upcoming"}
-            highLightedText="Contests"
-            subtitle={"Dare to compete !"}
-            badgeText="featured"
-          />
-          <div className="w-full flex items-center justify-center gap-8 flex-wrap mt-4">
-            {contests?.map((contest, idx) => {
-              return <ContestCard contest={contest} key={idx} />;
-            })}
-          </div>
-        </div>
-      )} */}
       <div className="w-full lg:w-[80%] flex flex-row items-start min-h-[600px] gap-4 my-8">
         <ProblemContainer
           selectedTopics={selectedTopics}

@@ -112,7 +112,7 @@ export const useAdminStore = create((set) => ({
     }
   },
 
-  generateTestCases: async (constraints, examples, testCases) => {
+  generateTestCases: async (constraints, examples, testCases, title) => {
     console.log("Generating test cases with:", {
       constraints,
       examples,
@@ -124,6 +124,7 @@ export const useAdminStore = create((set) => ({
         constraints,
         examples,
         testCases,
+        title,
       });
       console.log("Problem Details:", response.data);
       return response.data;

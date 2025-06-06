@@ -56,14 +56,19 @@ export const reviewCodeController = asyncHandler(async (req, res) => {
 });
 
 export const testCaseGenerationController = asyncHandler(async (req, res) => {
-  const { constraints, examples, testCases } = req.body;
+  const { constraints, examples, testCases,title } = req.body;
   if (!constraints || !examples || !testCases) {
     return res.status(400).json({
       error: "Problem description is required for test case generation.",
     });
   }
 
-  const result = await testCaseGenerator(constraints, examples, testCases);
+  const result = await testCaseGenerator(
+    constraints,
+    examples,
+    testCases,
+    title
+  );
 
   console.log("Test Case Generation Response:", result);
 

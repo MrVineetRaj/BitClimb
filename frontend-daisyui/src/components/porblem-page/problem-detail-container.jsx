@@ -240,7 +240,7 @@ const ProblemDetailContainer = ({
                   className="tab"
                   aria-label="Python"
                 />
-                <div className="tab-content border-base-300 bg-base-100 p-6">
+                <div className="tab-content border-base-300 bg-base-100 p-6 overflow-x-scroll ">
                   <Code
                     language={"python"}
                     codeString={problem?.referenceSolution["PYTHON"]}

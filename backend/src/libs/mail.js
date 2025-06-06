@@ -43,6 +43,7 @@ const sendMail = async (options) => {
     
     return info;
   } catch (err) {
+    console.error("Error sending email:", err);
     throw new ApiError(500, "Error Sending the mail", err);
   }
 };

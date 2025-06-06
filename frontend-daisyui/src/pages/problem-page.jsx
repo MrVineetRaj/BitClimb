@@ -77,6 +77,7 @@ const ProblemPage = () => {
           setSubmittedCodeResult={setSubmittedCodeResult}
           setActiveTab={setActiveTab}
           fetchSubmissionsByProblem={fetchSubmissionsByProblem}
+          userSubmissions={userSubmissions}
         />
       </div>
 

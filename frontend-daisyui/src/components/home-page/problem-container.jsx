@@ -5,9 +5,7 @@ import { Link, useNavigate, useParams, useSearchParams } from "react-router";
 import Heading from "../shared/heading";
 import SaveProblemToPlaylistModel from "../shared/save-problem-to-playlist-model";
 import ProblemRow from "../shared/problem-row";
-
-
-
+import Pagination from "../shared/pagination";
 
 const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
   const { getAllProblems, isLoadingProblems } = useProblemStore();
@@ -15,13 +13,14 @@ const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
   const [searchParams] = useSearchParams();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
   const [searchQuery, setSearchQuery] = useState(
     searchParams.get("search") || ""
   );
   const navigate = useNavigate();
   const loadProblems = async (
     page = 1,
-    limit = 10,
+    limit,
     search = "",
     tags = "",
     company = ""
@@ -29,13 +28,26 @@ const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
     const res = await getAllProblems(limit, page, search, tags, company);
     console.log("res", res);
     setProblems(res?.problems);
+    setTotalPages(res?.totalPages);
   };
 
   useEffect(() => {
     // setTimeout(() => {
-      loadProblems();
+    loadProblems();
     // }, );
   }, []);
+
+  useEffect(() => {
+    if (page && limit) {
+      loadProblems(
+        page,
+        limit,
+        searchQuery,
+        selectedTopics.join(";"),
+        selectedCompanies.join(";")
+      );
+    }
+  }, [page, limit]);
 
   useEffect(() => {
     navigate(
@@ -50,7 +62,7 @@ const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
     setTimeout(() => {
       loadProblems(
         1,
-        10,
+        limit,
         searchQuery.length > 3 ? searchQuery : "",
         selectedTopics.join(";"),
         selectedCompanies.join(";")
@@ -98,9 +110,16 @@ const ProblemContainer = ({ selectedTopics = [], selectedCompanies = [] }) => {
             ></div>
           ))
         ) : problems && problems.length > 0 ? (
-          problems?.map((problem, idx) => {
-            return <ProblemRow problem={problem} idx={idx} key={idx} />;
-          })
+          <>
+            {problems?.map((problem, idx) => {
+              return <ProblemRow problem={problem} idx={idx} key={idx} />;
+            })}
+            <Pagination
+              currPage={page}
+              setCurrPage={setPage}
+              totalPage={totalPages}
+            />
+          </>
         ) : (
           <div className="flex items-center justify-center w-full h-full flex-col gap-4">
             <img

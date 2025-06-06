@@ -70,15 +70,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   res.cookie(process.env.JWT_TOKEN_NAME, accessToken, CookieOptions);
   // res.cookie(process.env.ACCESS_TOKEN_NAME, token, CookieOptions);
-  res.status(201).json(
-    new ApiResponse(
-      201,
-      {
-        user,
-      },
-      "Verification Mail Sent"
-    )
-  );
+  res.status(201).json(new ApiResponse(201, {}, "Verification Mail Sent"));
 });
 
 //info : done

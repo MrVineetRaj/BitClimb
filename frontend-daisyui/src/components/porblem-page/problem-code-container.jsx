@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { useProblemStore } from "../../store/useProblemStore";
+import toast from "react-hot-toast";
 
 const ProblemCodeContainer = ({
   userCodeSnippet,
@@ -22,6 +23,7 @@ const ProblemCodeContainer = ({
   setSubmittedCodeResult,
   setActiveTab,
   fetchSubmissionsByProblem,
+  userSubmissions,
 }) => {
   const { runCode, isRunningCode, isSubmittingCode, submitCode } =
     useProblemStore();
@@ -87,40 +89,40 @@ const ProblemCodeContainer = ({
     }
   };
 
-  const handleEditorMount = (editor, monaco) => {
-    setEditorLoaded(true);
-    editorRef.current = editor;
+  // const handleEditorMount = (editor, monaco) => {
+  //   setEditorLoaded(true);
+  //   editorRef.current = editor;
 
-    // Ctrl+Enter for submit
-    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
-      console.log("Submit command executed");
-    });
+  //   // Ctrl+Enter for submit
+  //   editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+  //     console.log("Submit command executed");
+  //   });
 
-    // Ctrl+' for run
-    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Quote, () => {
-      handleRunCode();
-    });
+  //   // Ctrl+' for run
+  //   editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Quote, () => {
+  //     handleRunCode();
+  //   });
 
-    // Ctrl+Shift+F for format - FIXED
-    editor.addCommand(
-      monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyF,
-      () => {
-        try {
-          console.log("Formatting via keyboard shortcut...");
-          const action = editor.getAction("editor.action.formatDocument");
-          if (action) {
-            action.run();
-          } else {
-            console.log("Format action not available, using trigger method");
-            formatCode(); // Fallback to your formatCode function
-          }
-        } catch (error) {
-          console.error("Keyboard shortcut formatting error:", error);
-          formatCode(); // Fallback
-        }
-      }
-    );
-  };
+  //   // Ctrl+Shift+F for format - FIXED
+  //   editor.addCommand(
+  //     monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyF,
+  //     () => {
+  //       try {
+  //         console.log("Formatting via keyboard shortcut...");
+  //         const action = editor.getAction("editor.action.formatDocument");
+  //         if (action) {
+  //           action.run();
+  //         } else {
+  //           console.log("Format action not available, using trigger method");
+  //           formatCode(); // Fallback to your formatCode function
+  //         }
+  //       } catch (error) {
+  //         console.error("Keyboard shortcut formatting error:", error);
+  //         formatCode(); // Fallback
+  //       }
+  //     }
+  //   );
+  // };
 
   return (
     <div className="flex-1">
@@ -130,37 +132,37 @@ const ProblemCodeContainer = ({
         <div className="flex items-center justify-between gap-4 mb-2 h-10">
           <Clock className="size-4 text-gray-500" />
           <div className="flex gap-4">
-            <div className="tooltip tooltip-bottom" data-tip="ctrl+' to run">
-              <span className="flex items-center gap-2">
-                <button
-                  className="btn "
-                  onClick={handleRunCode}
-                  disabled={isRunningCode || isSubmittingCode}
-                >
-                  {isRunningCode ? (
-                    <Loader2 className="size-4 animate-spin" />
-                  ) : (
-                    <Play className="size-4" />
-                  )}
-                  {isRunningCode ? "Running" : "Run"}
-                </button>
-              </span>
-            </div>
-            <div
+            {/* <div className="tooltip tooltip-bottom" data-tip="ctrl+' to run">
+              <span className="flex items-center gap-2"> */}
+            <button
+              className="btn "
+              onClick={handleRunCode}
+              disabled={isRunningCode || isSubmittingCode}
+            >
+              {isRunningCode ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Play className="size-4" />
+              )}
+              {isRunningCode ? "Running" : "Run"}
+            </button>
+            {/* </span> */}
+            {/* </div> */}
+            {/* <div
               className="tooltip tooltip-bottom"
               data-tip="ctrl+enter to submit"
             >
-              <span className="flex items-center gap-2">
-                <button
-                  className="btn btn-primary"
-                  onClick={handleSubmitCode}
-                  disabled={isRunningCode || isSubmittingCode}
-                >
-                  <Save className="size-4" />
-                  Submit
-                </button>
-              </span>
-            </div>
+              <span className="flex items-center gap-2"> */}
+            <button
+              className="btn btn-primary"
+              onClick={handleSubmitCode}
+              disabled={isRunningCode || isSubmittingCode}
+            >
+              <Save className="size-4" />
+              Submit
+            </button>
+            {/* </span>
+            </div> */}
           </div>
         </div>
       )}
@@ -170,14 +172,29 @@ const ProblemCodeContainer = ({
       ) : (
         <div className="tabs tabs-lift tabs-box relative">
           <div className="absolute top-2 right-2 flex items-center gap-4 hover:bg-transparent">
-            <div className="tooltip" data-tip="Formate Code">
-              <span className="flex items-center gap-2" onClick={formatCode}>
-                <AlignLeft className="size-4" />
-              </span>
-            </div>
             <div className="tooltip" data-tip="Last Submitted">
               <span className="flex items-center gap-2">
-                <RefreshCcw className="size-4" />
+                <RefreshCcw
+                  className="size-4"
+                  onClick={() => {
+                    const lastCorrectSubmissionOfUser = userSubmissions.filter(
+                      (submission) =>
+                        submission.status.toLowerCase() === "accepted" &&
+                        submission.language === selectedLanguage
+                    )[0];
+                    if (lastCorrectSubmissionOfUser) {
+                      setUserCodeSnippet((prev) => ({
+                        ...prev,
+                        [selectedLanguage]:
+                          lastCorrectSubmissionOfUser.sourceCode || "",
+                      }));
+                    } else {
+                      toast.error(
+                        `No previous submission found for this problem. For ${selectedLanguage}`
+                      );
+                    }
+                  }}
+                />
               </span>
             </div>
             <div className="tooltip" data-tip="Reset Code">
@@ -228,7 +245,7 @@ const ProblemCodeContainer = ({
                 }));
               }}
               ref={editorRef}
-              onMount={handleEditorMount}
+              // onMount={handleEditorMount}
               options={{
                 minimap: { enabled: false },
                 fontSize: 14,

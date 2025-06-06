@@ -66,7 +66,7 @@ const CreateContest = () => {
 
   return (
     <div className="w-full p-10 flex flex-col items-start">
-      <Heading title={"Create"} highLightedText="Contests" />
+      <Heading title={"Create "} highLightedText="Contests" />
       <form action="" onSubmit={onSubmit} className="w-full">
         <div className="tabs tabs-border w-full">
           <label className="tab">

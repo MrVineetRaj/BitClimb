@@ -55,6 +55,8 @@ const ProblemListProblemContainer = ({ problemListId }) => {
               key={listProblem.id || index}
               problem={listProblem.problem}
               idx={index}
+              listId={problemListId}
+              setProblems={setProblems}
             />
           )
         )

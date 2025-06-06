@@ -2321,5 +2321,3 @@ int main() {
     return 0;
 }
 ````
-
-Similar code found with 1 license type

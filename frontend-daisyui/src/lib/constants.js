@@ -60,7 +60,7 @@ const ADMIN_OPTIONS = [
     icon: Target,
     count: 0,
     path: "/admin/panel/create-contest",
-    isDisabled: false,
+    isDisabled: true,
   },
   {
     title: "Users",

@@ -10,6 +10,7 @@ import { redis } from "../libs/redis.conf.js";
 import { getUserIdIfAuthenticated } from "../libs/utils.js";
 
 export const createProblem = asyncHandler(async (req, res) => {
+  const { problemId } = req.query;
   const {
     title,
     description,
@@ -104,25 +105,67 @@ export const createProblem = asyncHandler(async (req, res) => {
   }
 
   // Save the reference solution to the database
-  const newProblem = await db.problem.create({
-    data: {
-      title,
-      description,
-      difficulty,
-      tags: tags || null,
-      companies: companies || null,
-      examples: examples || null,
-      constraints: constraints || null,
-      hints: hints || null,
-      editorial: editorial || null,
-      testCases: testCases || null,
-      codeSnippets: codeSnippets || null,
-      referenceSolutionHeader: referenceSolutionHeader || null,
-      referenceSolution: referenceSolution,
-      referenceSolutionFooter: referenceSolutionFooter || null,
-      userId: req.user.id, // Assuming the user creating the problem is the one making the request
-    },
-  });
+  let newProblem;
+  if (problemId) {
+    newProblem = await db.problem.update({
+      where: { id: problemId },
+      data: {
+        title,
+        description,
+        difficulty,
+        tags: tags || null,
+        companies: companies || null,
+        examples: examples || null,
+        constraints: constraints || null,
+        hints: hints || null,
+        editorial: editorial || null,
+        testCases: testCases || null,
+        codeSnippets: codeSnippets || null,
+        referenceSolutionHeader: referenceSolutionHeader || null,
+        referenceSolution: referenceSolution,
+        referenceSolutionFooter: referenceSolutionFooter || null,
+        userId: req.user.id, // Assuming the user creating the problem is the one making the request
+        isPublic: true, // Set to true by default, can be changed later
+      },
+    });
+    if (!newProblem) {
+      throw new ApiError(
+        404,
+        "Problem not found or you are not authorized to update it"
+      );
+    }
+    // console.log("Problem updated successfully:", newProblem);
+    res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          { problemId: newProblem.id },
+          "Problem updated successfully with reference solution"
+        )
+      );
+  } else {
+    newProblem = await db.problem.create({
+      data: {
+        title,
+        description,
+        difficulty,
+        tags: tags || null,
+        companies: companies || null,
+        examples: examples || null,
+        constraints: constraints || null,
+        hints: hints || null,
+        editorial: editorial || null,
+        testCases: testCases || null,
+        codeSnippets: codeSnippets || null,
+        referenceSolutionHeader: referenceSolutionHeader || null,
+        referenceSolution: referenceSolution,
+        referenceSolutionFooter: referenceSolutionFooter || null,
+        userId: req.user.id, // Assuming the user creating the problem is the one making the request
+        isPublic: true, // Set to true by default, can be changed later
+      },
+    });
+  }
   // Invalidate ALL cached problem pages and related data
   const problemsPattern = "problems:*"; // This will match all keys starting with 'problems:'
   const problemKeys = await redis.keys(problemsPattern);

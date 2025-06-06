@@ -13,6 +13,7 @@ const AddHiddenTestCases = ({
   constraints,
   examples,
   testCases,
+  title,
 }) => {
   const {
     addHiddenTestCases,
@@ -41,7 +42,7 @@ const AddHiddenTestCases = ({
             <Stars
               className=" absolute right-3 top-3 w-6 h-6 text-primary cursor-pointer"
               onClick={() => {
-                generateTestCases(constraints, examples, testCases).then(
+                generateTestCases(constraints, examples, testCases, title).then(
                   (res) => {
                     if (res.success) {
                       if (res.data.testCases.includes('"')) {
@@ -137,6 +138,7 @@ const ProblemViewForAdmin = () => {
             constraints={problem?.constraints || ""}
             examples={problem?.examples || []}
             testCases={problem?.testCases || []}
+            title={problem?.title || ""}
           />
         </div>
         <div className="tooltip" data-tip="Update Problem">

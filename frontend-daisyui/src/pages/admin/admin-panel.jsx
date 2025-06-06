@@ -100,7 +100,7 @@ const AdminPanel = () => {
           <div className="tab-content border-base-300 bg-base-100 p-10">
             <AdminPanelProblemContainer />
           </div>
-          <label className="tab">
+          {/* <label className="tab">
             <input type="radio" name="admin_panel_dashboard_tab" />
             <Target className="size-4 me-2" />
             <span className="text-white font-bold">Contests</span>
@@ -115,7 +115,7 @@ const AdminPanel = () => {
           </label>
           <div className="tab-content bg-base-100 border-base-300 p-6">
             Tab content 3
-          </div>
+          </div> */}
         </div>
         <div className="max-w-84 w-full h-full ">
           <h3 className="text-2xl font-semibold mb-4">Recent Registration</h3>

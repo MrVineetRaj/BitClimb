@@ -202,7 +202,10 @@ const CreateProblem = () => {
       setIsLoading(true);
 
       // Add your API call here
-      const res = await axiosInstance.post("/problem/create-problem", data);
+      const res = await axiosInstance.post(
+        `/problem/create-problem?problemId=${problemId}`,
+        data
+      );
       if (res.data.success) {
         toast.success("Problem created successfully!", {
           id: toastId,
@@ -228,7 +231,7 @@ const CreateProblem = () => {
 
   return (
     <div className="w-full p-4 flex flex-col items-start justify-start">
-      <Heading title={"Create New Problem"} />
+      <Heading title={problemId ? "Update Problem" : "Create New Problem"} />
       <form action="" className="w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="tabs tabs-border w-full">
           <label className="tab">
@@ -1101,7 +1104,7 @@ const CreateProblem = () => {
             </button>
           ) : (
             <button className="btn btn-primary" type="submit">
-              Create Problem
+              {problemId ? "Update" : "Create"} Problem
             </button>
           )}
         </div>

@@ -12,6 +12,7 @@ export const useProblemStore = create((set) => ({
   isLoadingProblem: false,
   isLoadingHeatMap: false,
   isLoadingSubmission: false,
+  isRemovingProblem: false,
 
   runCode: async ({
     source_code_header,
@@ -68,6 +69,7 @@ export const useProblemStore = create((set) => ({
     contestProblemId = "",
   }) => {
     set({ isSubmittingCode: true });
+    const toastId = toast.loading("Submitting your code...");
     try {
       const response = await axiosInstance.post(
         `/execute/submit/${problemId}?contestId=${contestId}&contestProblemId=${contestProblemId}&ref=${ref}`,
@@ -80,7 +82,10 @@ export const useProblemStore = create((set) => ({
       );
       set({ isSubmitting: false });
       console.log("Submission Response:", response.data);
-      toast.success("Submission Successful");
+      toast.success("Submission Successful", {
+        id: toastId,
+        duration: 3000,
+      });
       return response.data;
     } catch (error) {
       console.error("Submission Error:", error);
@@ -88,13 +93,13 @@ export const useProblemStore = create((set) => ({
       if (error instanceof AxiosError) {
         const errorMessage =
           error.response?.data?.message || "Code execution failed";
-        toast.error("Execution Failed", {
-          description: errorMessage,
+        toast.error(errorMessage, {
+          id: toastId,
           duration: 3000,
         });
       } else {
         toast.error("Execution Failed", {
-          description: "An unexpected error occurred",
+          id: toastId,
           duration: 3000,
         });
       }
@@ -193,14 +198,20 @@ export const useProblemStore = create((set) => ({
     }
   },
 
-  getAllUserSubmissions: async (userId, limit = 10, page = 1, isAccepted) => {
+  getAllUserSubmissions: async (
+    userId,
+    limit = 10,
+    page = 1,
+    isAccepted = ""
+  ) => {
     set({ isLoadingSubmissions: true });
+
     try {
       const response = await axiosInstance.get(
         `/submission/user?userId=${userId}&limit=${limit}&page=${page}&isAccepted=${isAccepted}`
       );
 
-      return response.data.data;
+      return response.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         const errorMessage =
@@ -266,6 +277,34 @@ export const useProblemStore = create((set) => ({
       throw error;
     } finally {
       set({ isLoadingSubmission: false });
+    }
+  },
+
+  removeProblemFromList: async (problemListId, problemId) => {
+    set({ isRemovingProblem: true });
+    try {
+      const response = await axiosInstance.delete(
+        `/submission/${problemListId}/remove-problem/${problemId}`
+      );
+      toast.success("Problem removed successfully", {
+        duration: 3000,
+      });
+      return response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorMessage =
+          error.response?.data?.message || "Failed to remove problem";
+        toast.error(errorMessage, {
+          duration: 3000,
+        });
+      } else {
+        toast.error("Remove Problem Failed", {
+          duration: 3000,
+        });
+      }
+      throw error;
+    } finally {
+      set({ isRemovingProblem: false });
     }
   },
 }));

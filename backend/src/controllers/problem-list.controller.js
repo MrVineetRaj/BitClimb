@@ -359,7 +359,41 @@ const addProblemToList = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(200, {}, "Problem added to list successfully"));
 });
-const removeProblemFromList = asyncHandler(async (req, res) => {});
+const removeProblemFromList = asyncHandler(async (req, res) => {
+  const { problemListId, problemId } = req.params; // Problem list ID
+  const userId = req.user.id;
+
+  // Validate input
+  if (!problemListId || !problemId || !userId) {
+    throw new ApiError(
+      400,
+      "Problem list ID, Problem ID, and User ID are required"
+    );
+  }
+
+  // Check if the problem exists in the specified list
+  const existingProblem = await db.problemInProblemList.findFirst({
+    where: {
+      problemListId: problemListId,
+      problemId: problemId,
+      userId: userId,
+    },
+  });
+
+  if (!existingProblem) {
+    throw new ApiError(404, "Problem not found in the specified list");
+  }
+
+  await db.problemInProblemList.delete({
+    where: {
+      id: existingProblem.id,
+    },
+  });
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Problem removed from list successfully"));
+});
 
 const getTagWiseProblemLists = asyncHandler(async (req, res) => {
   const { tag } = req.params; // Tag to filter problem lists
@@ -367,7 +401,9 @@ const getTagWiseProblemLists = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
 
-  let whereClause = {};
+  let whereClause = {
+    isPublic: true,
+  };
 
   if (ref === "topic") {
     const tagArray = Array.isArray(tag) ? tag : [tag];
@@ -460,8 +496,10 @@ const getTagWiseProblemLists = asyncHandler(async (req, res) => {
 const getTagWiseProblemListsMetrics = asyncHandler(async (req, res) => {
   const { tag } = req.params; // Tag to filter problem lists
   const ref = req.query.ref; // Reference to filter problem lists
-  
-  let whereClause = {};
+
+  let whereClause = {
+    isPublic: true, // Assuming we want to filter public problem lists
+  };
   if (ref === "topic") {
     const tagArray = Array.isArray(tag) ? tag : [tag];
     whereClause.tags = {
@@ -470,7 +508,7 @@ const getTagWiseProblemListsMetrics = asyncHandler(async (req, res) => {
   }
   if (ref === "company") {
     const tagArray = Array.isArray(tag) ? tag : [tag];
-    whereClause.companies= {
+    whereClause.companies = {
       hasSome: tagArray,
     };
   }

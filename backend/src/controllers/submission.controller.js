@@ -10,10 +10,19 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
     userId: userId,
   };
 
-  if (isAccepted === "true") {
+  if (isAccepted === "accepted") {
     whereCondition = {
       ...whereCondition,
       status: "Accepted",
+    };
+  }
+
+  if (isAccepted === "not-accepted") {
+    whereCondition = {
+      ...whereCondition,
+      status: {
+        not: "Accepted",
+      },
     };
   }
 
@@ -27,6 +36,7 @@ export const getAllSubmissionsOfUser = asyncHandler(async (req, res) => {
         select: {
           title: true,
           difficulty: true,
+          description: true,
         },
       },
     },

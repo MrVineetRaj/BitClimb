@@ -2,7 +2,12 @@ import OpenAI from "openai";
 import { SYSTEM_PROMPTS } from "./chatgpt-system-prompts.js";
 const client = new OpenAI();
 
-export const reviewCode = async (source_code, problem_description, verdict, error) => {
+export const reviewCode = async (
+  source_code,
+  problem_description,
+  verdict,
+  error
+) => {
   let messages = [
     {
       role: "system",
@@ -28,7 +33,12 @@ export const reviewCode = async (source_code, problem_description, verdict, erro
   return resp;
 };
 
-export const testCaseGenerator = async (constraints, examples, testCases) => {
+export const testCaseGenerator = async (
+  constraints,
+  examples,
+  testCases,
+  title
+) => {
   let messages = [
     {
       role: "system",
@@ -40,6 +50,7 @@ export const testCaseGenerator = async (constraints, examples, testCases) => {
         constraints: constraints,
         examples: examples,
         testCases: testCases,
+        title: title,
       }),
     },
   ];
