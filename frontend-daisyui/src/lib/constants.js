@@ -6,8 +6,11 @@ const DSA_TAGS = [
   "Two Pointers",
   "Dynamic Programming",
   "Recursion",
-  "Search",
   "Array",
+  "Sorting",
+  "Linear Search",
+  "Search",
+  "Bit Manipulation",
 ];
 
 const COMPANY_TAGS = [
@@ -18,17 +21,23 @@ const COMPANY_TAGS = [
   "Apple",
   "Netflix",
   "TechCorp",
+  "Flipkart",
+  "Paytm",
   "IBM",
   "Oracle",
   "Salesforce",
-  "Adobe",
-  "Wipro",
   "Capgemini",
-  "Uber",
-  "Spotify",
   "Tesla",
+  "Spotify",
+  "Uber",
+  "Adobe",
+  "Twitter",
+  "Wipro",
+  "Intel",
+  "Qualcomm",
   "TCS",
 ];
+
 
 const DUMMY_CONTESTS = [
   {

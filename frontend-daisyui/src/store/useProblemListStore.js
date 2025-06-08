@@ -10,6 +10,7 @@ export const useProblemListStore = create((set) => ({
   isAddingProblemToList: false,
   isLoadingProblemListMetrics: false,
   isLoadingProblemListWiseProblems: false,
+  // isDeletingProblemList: false,
 
   createProblemList: async (title, description) => {
     set({
@@ -220,6 +221,29 @@ export const useProblemListStore = create((set) => ({
       }
     } finally {
       set({ isLoadingProblemListMetrics: false });
+    }
+  },
+
+  deleteProblemList: async (id) => {
+    set({ isLoadingProblemsLists: true, error: null });
+    try {
+      const response = await axiosInstance.delete(
+        `/problem-list/delete-list/${id}`
+      );
+      toast.success("Problem list deleted successfully");
+      return response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data?.message || "Failed to delete problem list"
+        );
+      } else {
+        toast.error(
+          "An unexpected error occurred while deleting problem list"
+        );
+      }
+    } finally {
+      set({ isLoadingProblemsLists: false });
     }
   },
 }));

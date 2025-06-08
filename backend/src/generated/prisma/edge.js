@@ -312,7 +312,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/unknownbug/Desktop/startups/CodeDrill/backend/src/generated/prisma",
+      "value": "/home/unknownbug/Desktop/BitClimb/backend/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -326,7 +326,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/unknownbug/Desktop/startups/CodeDrill/backend/prisma/schema.prisma",
+    "sourceFilePath": "/home/unknownbug/Desktop/BitClimb/backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -340,11 +340,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgres://76e1086dfbabdcd1:46d5e61eac2b8c0e4f6faf7a88e10658@postgres.bitclimb.live/bitclimb"
+        "value": null
       }
     }
   },

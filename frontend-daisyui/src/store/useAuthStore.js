@@ -88,11 +88,12 @@ export const useAuthStore = create((set) => ({
         const errorMessage = error.response?.data?.message || "Signup failed";
         toast.error(errorMessage, {
           duration: 3000,
-          // description: errorMessage,
+          id: toastId,
         });
       } else {
         toast.error("Signup Failed", {
           duration: 3000,
+          id: toastId,
         });
       }
       set({ authUser: null, isSigninUp: false });

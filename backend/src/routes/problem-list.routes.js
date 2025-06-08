@@ -28,7 +28,7 @@ problemListRouter.get(
 );
 problemListRouter.post("/new-problem-list", authMiddleware, createProblemList);
 problemListRouter.put("/:id", authMiddleware, updateProblemList);
-problemListRouter.delete("/:id", authMiddleware, deleteProblemList);
+problemListRouter.delete("/delete-list/:id", authMiddleware, deleteProblemList);
 problemListRouter.post("/add-problem", authMiddleware, addProblemToList);
 
 problemListRouter.delete(

@@ -6,10 +6,11 @@ const sendMail = async (options) => {
   const mailGenerator = new Mailgen({
     theme: "default",
     product: {
-      name: "CodeDrill",
-      link: "https://codedrill.unknownbug.tech/",
+      name: "BitClimb",
+      link: "https://www.bitclimb.lib/",
     },
   });
+
   //info : Generate an HTML email with the provided contents
   const emailHTML = mailGenerator.generate(options.mailGenContent);
 
@@ -17,7 +18,7 @@ const sendMail = async (options) => {
   const emailText = mailGenerator.generatePlaintext(options.mailGenContent);
 
   const mailOptions = {
-    from: `"CodeDrill" <${process.env.MAILTRAP_SMTP_EMAIL}>`, // sender address
+    from: `"BitClimb" <${process.env.MAILTRAP_SMTP_EMAIL}>`, // sender address
     to: options.email, // list of receivers
     subject: options.subject, // Subject line
     text: emailText, // plain text body
@@ -36,11 +37,8 @@ const sendMail = async (options) => {
     },
   });
 
-  //info : Send the email using the transporter
-
   try {
     const info = await transporter.sendMail(mailOptions);
-    
     return info;
   } catch (err) {
     console.error("Error sending email:", err);
@@ -52,9 +50,9 @@ const emailVerificationMailContent = (username, verificationUrl) => {
   return {
     body: {
       name: username,
-      intro: "Welcome to CodeDrill! We're very excited to have you on board.",
+      intro: "Welcome to BitClimb! We're very excited to have you on board.",
       action: {
-        instructions: "To get started with CodeDrill, please click here:",
+        instructions: "To get started with BitClimb, please click here:",
         button: {
           color: "#22BC66", // info :Optional action button color
           text: "Verify your email",
@@ -74,7 +72,7 @@ const forgotPasswordMailContent = (username, passwordResetURL) => {
       intro: "Forgot your password? No worries we are here for you.",
       action: {
         instructions:
-          "To reset your password for CodeDrill, please click here:",
+          "To reset your password for BitClimb, please click here:",
         button: {
           color: "#22BC66", // info :Optional action button color
           text: "ResetPassword",

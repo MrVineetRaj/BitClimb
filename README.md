@@ -1,86 +1,60 @@
-Additional Features
+# BitClimb 🚀
 
-- AI Code Reviewer
-- AI Doubt Solver
-- Various Lists Representing featured Problem
-- AI interviewer
-- Contests
-- Mock Interview
+A comprehensive coding challenge platform designed to help developers improve their programming skills through AI-powered features, contests, and community engagement.
 
-# Some Sensitive Command
+## 🌟 Features
 
-## For running postgress on docker
+### 🤖 AI-Powered Learning
+- **AI Code Reviewer**: Get detailed analysis of your submissions with time/space complexity insights
+- **AI Test Case Generator**: Generate robust test cases for problems using advanced AI
+- **AI Doubt Solver**: Get help with coding concepts and problem-solving approaches
+- **AI Interviewer**: Practice mock interviews with AI-powered feedback
 
-```bash
-docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=7hnnPv2PLiLKfk2LHuhRUXfn7EhThHZI -e POSTGRES_USER=admin -d postgres
-```
+### 💻 Problem Solving
+- **Extensive Problem Library**: Curated collection of coding problems across multiple difficulty levels
+- **Multiple Programming Languages**: Support for JavaScript, Python, Java, and C++
+- **Real-time Code Execution**: Test your solutions with instant feedback using Judge0 integration
+- **Detailed Problem Analysis**: Get insights into your submission performance
 
-# Prisma Command
+### 📊 Progress Tracking
+- **User Profiles**: Comprehensive profiles showing your coding journey
+- **Progress Analytics**: Track your solved problems by difficulty, topics, and companies
+- **Submission History**: Complete history of all your code submissions
 
-npx prisma generate
-npx prisma migrate dev
-npx prisma db push
+### 🎯 Smart Features
+- **Topic-wise Organization**: Problems categorized by DSA topics and company tags
+- **Dedicated Problem Lists**: Curated lists for specific companies and topics
+- **Advanced Search**: Robust search functionality to find problems quickly
+- **Public Profiles**: Share your coding progress with the community
 
-# Judge0 Run
+### 🔐 User Management
+- **Secure Authentication**: JWT-based authentication with email verification
+- **Admin Panel**: Comprehensive admin interface for platform management
+- **Role-based Access**: Different access levels for users and administrators
+- **Password Security**: Bcrypt encryption with secure password reset
 
-```bash
-  docker compose up -d db redis
-  sleep 10s
-  docker compose up -d
-  sleep 5s
-```
+## 🛠️ Tech Stack
 
-```json
-const data = `{
-    "title": "Add Two Numbers",
-    "description": "Given two numbers a and b add them up and return the outout",
-    "difficulty": "EASY",
-    "tags": [
-        "math",
-        "operators",
-        "addition"
-    ],
-    "examples": {
-        "PYTHON": {
-            "input": "3 7",
-            "output": "10",
-            "explanation": "Adding 3 and 7 gives 10."
-        },
-        "JAVASCRIPT": {
-            "input": "-5 12",
-            "output": "7",
-            "explanation": "Adding -5 and 12 gives 7."
-        }
-    },
-    "constraints": "-10^9 ≤ a, b ≤ 10^9",
-    "testcases": [
-        {
-            "input": "100 200",
-            "output": "300"
-        },
-        {
-            "input": "-500 -600",
-            "output": "-1100"
-        },
-        {
-            "input": "0 0",
-            "output": "0"
-        }
-    ],
-    "codeSnippets": {
-        "JAVASCRIPT": "const readline = require('readline');\n\nfunction addTwoNumbers(a, b) {\n    // Write your code here\n    // Return the sum of a and b\n}\n\nconst rl = readline.createInterface({\n    input: process.stdin,\n    output: process.stdout\n});\n\nlet inputLines = [];\n\nrl.on('line', (line) => {\n    inputLines = line.split(' ');\n    rl.close();\n}).on('close', () => {\n    const a = parseInt(inputLines[0], 10);\n    const b = parseInt(inputLines[1], 10);\n    console.log(addTwoNumbers(a, b));\n});",
-        "PYTHON": "def add_two_numbers(a, b):\n    # Write your code here\n    # Return the sum of a and b\n    pass\n\nimport sys\ninput_line = sys.stdin.read()\na, b = map(int, input_line.split())\nprint(add_two_numbers(a, b))",
-        "JAVA": "import java.util.Scanner;\n\npublic class Main {\n    public static int addTwoNumbers(int a, int b) {\n        // Write your code here\n        // Return the sum of a and b\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        System.out.println(addTwoNumbers(a, b));\n    }\n}"
-    },
-    "referenceSolutions": {
-        "JAVASCRIPT": "const readline = require('readline');\n\nconst rl = readline.createInterface({\n    input: process.stdin,\n    output: process.stdout\n});\n\nlet inputLines = [];\n\nrl.on('line', (line) => {\n    inputLines = line.split(' ');\n    rl.close();\n}).on('close', () => {\n    const a = parseInt(inputLines[0], 10);\n    const b = parseInt(inputLines[1], 10);\n    console.log(a + b);\n});",
-        "PYTHON": "import sys\ninput_line = sys.stdin.read()\na, b = map(int, input_line.split())\nprint(a + b)",
-        "JAVA": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        System.out.println(a + b);\n    }\n}"
-    }
-}
-```
+### Backend
+- **Node.js** with Express.js
+- **PostgreSQL** database with Prisma ORM
+- **JWT** for authentication
+- **Judge0** for code execution
+- **OpenAI GPT** for AI features
+- **Docker** for containerization
+- **Redis** For fast caching
 
-sudo docker compose up -d db redis
-sleep 10s
-sudo docker compose up -d
-sleep 5s
+### Frontend
+- **React** with Vite
+- **DaisyUI** + **Tailwind CSS** for styling
+- **Zustand** for state management
+- **Axios** for API communication
+- **React Router** for navigation
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js (v18 or higher)
+- Docker and Docker Compose
+- PostgreSQL
+- Redis
