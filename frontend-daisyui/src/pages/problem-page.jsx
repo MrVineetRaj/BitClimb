@@ -44,7 +44,12 @@ const ProblemPage = () => {
       try {
         const fetchedProblem = await getProblemById(problemId);
         setProblem(fetchedProblem);
-        setUserCodeSnippet(fetchedProblem?.codeSnippets || {});
+
+        setUserCodeSnippet(
+          fetchedProblem?.tags?.includes("Demo")
+            ? fetchedProblem?.referenceSolution
+            : fetchedProblem?.codeSnippets || {}
+        );
         setTestCases(fetchedProblem?.testCases || []);
       } catch (error) {
         console.error("Failed to fetch problem:", error);

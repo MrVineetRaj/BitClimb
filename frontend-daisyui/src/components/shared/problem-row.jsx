@@ -12,8 +12,12 @@ const ProblemRow = ({
   return (
     <div
       className={`${
-        idx % 2 == 0 ? "bg-primary/10" : ""
-      } p-4 transition-colors min-w-64 flex items-center justify-between hover:bg-primary/20 w-full `}
+        problem?.tags.includes("Demo")
+          ? "bg-secondary/30"
+          : idx % 2 == 0
+          ? "bg-primary/10"
+          : ""
+      } p-4 transition-colors min-w-64 flex items-center justify-between hover:bg-primary/20 w-full relative`}
     >
       <span className="flex items-center gap-2">
         {problem?.isSolved ? (
@@ -25,7 +29,9 @@ const ProblemRow = ({
           {problem.title}
         </Link>
       </span>
-
+      {problem?.tags.includes("Demo") && (
+        <span className="absolute -top-2 -left-2 badge badge-soft badge-primary">Demo</span>
+      )}
       <span className="flex items-center gap-4">
         <span className="md:flex items-center gap-2 hidden ">
           {problem?.tags &&
