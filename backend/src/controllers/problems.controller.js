@@ -143,6 +143,12 @@ export const createProblem = asyncHandler(async (req, res) => {
       );
     }
     // console.log("Problem updated successfully:", newProblem);
+    let ref= ""
+    redis.set(
+      `problem:${problemId}:${ref}`,
+      JSON.stringify(newProblem),
+      60 * 60 // Cache for 1 hour
+    );
     res
       .status(200)
       .json(

@@ -39,14 +39,14 @@ const registerUser = asyncHandler(async (req, res) => {
   const { unHashedToken, hashedToken, tokenExpiry } = generateTemporaryToken();
 
 
-  await sendMail({
-    email,
-    subject: "Email Verification Mail",
-    mailGenContent: emailVerificationMailContent(
-      name,
-      `${process.env.FRONTEND_URL}/verify-email/${unHashedToken}`
-    ),
-  });
+  // await sendMail({
+  //   email,
+  //   subject: "Email Verification Mail",
+  //   mailGenContent: emailVerificationMailContent(
+  //     name,
+  //     `${process.env.FRONTEND_URL}/verify-email/${unHashedToken}`
+  //   ),
+  // });
 
   const user = await db.user.create({
     data: {
