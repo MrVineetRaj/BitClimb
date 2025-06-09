@@ -114,7 +114,11 @@ const ProfilePage = () => {
                 className="radial-progress bg-primary text-primary-content border-primary border-4  "
                 style={
                   {
-                    "--value": basicMetrics?.numberOfProblems?.solved,
+                    "--value":
+                      (
+                        basicMetrics?.numberOfProblems?.solved /
+                        basicMetrics?.numberOfProblems?.total
+                      ).toFixed(2) * 100,
                     "--size": "7rem",
                   } /* as React.CSSProperties */
                 }
