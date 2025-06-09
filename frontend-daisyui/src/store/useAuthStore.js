@@ -64,9 +64,7 @@ export const useAuthStore = create((set) => ({
 
   signup: async (name, email, password) => {
     set({ isSigninUp: true });
-    const toastId = toast.loading("Signing up...", {
-      duration: 3000,
-    });
+    const toastId = toast.loading("Signing up...");
     try {
       if (!name || !email || !password) {
         throw new Error("All fields are required");

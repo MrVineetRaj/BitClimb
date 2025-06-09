@@ -29,7 +29,7 @@ const sendMail = async (options) => {
 
 
   const { data, error } = await resend.emails.send(mailOptions);
-
+  console.log("Mail sent successfully", data);
   if (error) {
     console.error("Error sending email:", err);
     throw new ApiError(500, "Error Sending the mail", err);

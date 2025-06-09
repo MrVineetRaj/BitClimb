@@ -38,6 +38,16 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const { unHashedToken, hashedToken, tokenExpiry } = generateTemporaryToken();
 
+
+  await sendMail({
+    email,
+    subject: "Email Verification Mail",
+    mailGenContent: emailVerificationMailContent(
+      name,
+      `${process.env.FRONTEND_URL}/verify-email/${unHashedToken}`
+    ),
+  });
+
   const user = await db.user.create({
     data: {
       email,
@@ -53,15 +63,6 @@ const registerUser = asyncHandler(async (req, res) => {
   //   expiresIn: "7d",
   // });
   // await user.save();
-
-  await sendMail({
-    email,
-    subject: "Email Verification Mail",
-    mailGenContent: emailVerificationMailContent(
-      name,
-      `${process.env.FRONTEND_URL}/verify-email/${unHashedToken}`
-    ),
-  });
 
   const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     expiresIn: "7d",
