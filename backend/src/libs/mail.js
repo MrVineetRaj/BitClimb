@@ -1,6 +1,9 @@
 import Mailgen from "mailgen";
 import nodemailer from "nodemailer";
 import { ApiError } from "./helpers.js";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendMail = async (options) => {
   const mailGenerator = new Mailgen({
@@ -21,28 +24,17 @@ const sendMail = async (options) => {
     from: `"BitClimb" <${process.env.MAILTRAP_SMTP_EMAIL}>`, // sender address
     to: options.email, // list of receivers
     subject: options.subject, // Subject line
-    text: emailText, // plain text body
     html: emailHTML, // html body
   };
 
-  
 
-  const transporter = nodemailer.createTransport({
-    host: process.env.MAILTRAP_SMTP_HOST,
-    port: process.env.MAILTRAP_SMTP_PORT,
-    secure: false, // true for port 465, false for other ports
-    auth: {
-      user: process.env.MAILTRAP_SMTP_USER,
-      pass: process.env.MAILTRAP_SMTP_PASS,
-    },
-  });
+  const { data, error } = await resend.emails.send(mailOptions);
 
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    return info;
-  } catch (err) {
+  if (error) {
     console.error("Error sending email:", err);
     throw new ApiError(500, "Error Sending the mail", err);
+  } else{
+    console.log(data)
   }
 };
 
@@ -71,8 +63,7 @@ const forgotPasswordMailContent = (username, passwordResetURL) => {
       name: username,
       intro: "Forgot your password? No worries we are here for you.",
       action: {
-        instructions:
-          "To reset your password for BitClimb, please click here:",
+        instructions: "To reset your password for BitClimb, please click here:",
         button: {
           color: "#22BC66", // info :Optional action button color
           text: "ResetPassword",

@@ -10,7 +10,7 @@ import { redis } from "../libs/redis.conf.js";
 import { getUserIdIfAuthenticated } from "../libs/utils.js";
 
 export const createProblem = asyncHandler(async (req, res) => {
-  const { problemId } = req.query;
+  const problemId = req.query.problemId || "";
   const {
     title,
     description,
@@ -107,6 +107,14 @@ export const createProblem = asyncHandler(async (req, res) => {
   // Save the reference solution to the database
   let newProblem;
   if (problemId) {
+    const existingProblem = await db.problem.findUnique({
+      where: { id: problemId },
+    });
+
+    if (!existingProblem) {
+      throw new ApiError(404, `Problem with ID ${problemId} not found`);
+    }
+
     newProblem = await db.problem.update({
       where: { id: problemId },
       data: {
