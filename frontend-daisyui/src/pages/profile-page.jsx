@@ -43,10 +43,10 @@ const ProfilePage = () => {
           .then((res) => {
             if (res.success) {
               setTagWiseSolvedCount(res.data);
-              console.log(
-                "Tag-wise solved count fetched successfully:",
-                res.data
-              );
+              // console.log(
+              //   "Tag-wise solved count fetched successfully:",
+              //   res.data
+              // );
             }
           })
           .catch((error) => {
@@ -114,7 +114,7 @@ const ProfilePage = () => {
                 className="radial-progress bg-primary text-primary-content border-primary border-4  "
                 style={
                   {
-                    "--value": 70,
+                    "--value": basicMetrics?.numberOfProblems?.solved,
                     "--size": "7rem",
                   } /* as React.CSSProperties */
                 }
